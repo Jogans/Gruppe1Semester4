@@ -4,7 +4,30 @@
     ViewData["Title"] = "Home page";
 }
 
+
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<div ID="tilbud"></div>
+<div>@Model.Message</div>
+<table border="10px">
+    <tr>
+        <th>Navn</th>
+        <th>Pris</th>
+        <th>Kilopris</th>
+    <th>Billed</th>
+    </tr>
+    @foreach (var img in @Model.adverts_)
+    {
+    <tr>
+        <td>@img["title"]</td>
+        <td>@img["price"] kr.</td>
+        <td>@img["volumePrice"] kr./ kg.</td>
+        <td>
+            <img src="@img["imageUrl"]" height="100px" />
+        </td>
+    </tr>
+    }
+</table>

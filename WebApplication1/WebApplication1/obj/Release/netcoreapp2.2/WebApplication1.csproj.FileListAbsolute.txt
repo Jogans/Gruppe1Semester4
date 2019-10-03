@@ -28,3 +28,34 @@ C:\Users\marti\source\repos\WebApplication1\WebApplication1\obj\Release\netcorea
 C:\Users\marti\source\repos\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.dll
 C:\Users\marti\source\repos\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.pdb
 C:\Users\marti\source\repos\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.csproj.CopyComplete
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\bin\Release\netcoreapp2.2\Pages\Shared\json.txt
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\bin\Release\netcoreapp2.2\WebApplication1.deps.json
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\bin\Release\netcoreapp2.2\WebApplication1.runtimeconfig.json
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\bin\Release\netcoreapp2.2\WebApplication1.runtimeconfig.dev.json
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\bin\Release\netcoreapp2.2\WebApplication1.dll
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\bin\Release\netcoreapp2.2\WebApplication1.pdb
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\bin\Release\netcoreapp2.2\WebApplication1.Views.dll
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\bin\Release\netcoreapp2.2\WebApplication1.Views.pdb
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.csprojAssemblyReference.cache
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.csproj.CoreCompileInputs.cache
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.RazorAssemblyInfo.cache
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.RazorAssemblyInfo.cs
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.AssemblyInfoInputs.cache
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.AssemblyInfo.cs
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.TagHelpers.input.cache
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.TagHelpers.output.cache
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.RazorCoreGenerate.cache
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\Razor\Pages\Error.g.cshtml.cs
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\Razor\Pages\Index.g.cshtml.cs
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\Razor\Pages\Privacy.g.cshtml.cs
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\Razor\Pages\Shared\_CookieConsentPartial.g.cshtml.cs
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\Razor\Pages\Shared\_Layout.g.cshtml.cs
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\Razor\Pages\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\Razor\Pages\_ViewImports.g.cshtml.cs
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\Razor\Pages\_ViewStart.g.cshtml.cs
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.RazorTargetAssemblyInfo.cache
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.RazorTargetAssemblyInfo.cs
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.Views.pdb
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.dll
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.pdb
+C:\4. semester\PROJREP\WebApplication1\WebApplication1\obj\Release\netcoreapp2.2\WebApplication1.csproj.CopyComplete
