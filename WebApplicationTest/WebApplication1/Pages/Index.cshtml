@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<div class="border">
+    <div class="SearchBar">
+        <input style="height: 32px; width: 704px;" type="text" placeholder="Search..." required>
+        <button type="button">Søg opskrift</button>
+        <button type="button">Søg ingrediens</button>
+        <button type="button">Opret bruger</button>
+        <button type="button">Login</button>
+    </div>
+</div>
+
+<div class="Buttons2">
+    <br />
+    <button style="width: 150px; height: 75px;" type="button">Top retter</button>
+    <button style="width: 150px; height: 75px;" type="button">Nye retter</button>
+    <button style="width: 150px; height: 75px;" type="button">SU-Retter</button>
+    <button style="width: 150px; height: 75px;" type="button"><a asp-area="" asp-page="/Privacy">Vegetar retter</a></button>
+    <button style="width: 150px; height: 75px;" type="button">Klassiske retter</button>
+    <button style="width: 150px; height: 75px;" type="button">Vælg butikker</button>
+</div>
+
+<div style="font-size: 150px" class="border2">
+    Ugens tilbud
+</div>
+
+<div class="pic">
+    <img src="https://vielskermad.dk/wp-content/uploads/2018/03/lasagne.jpg" alt="Lasange" height="400" width="600">
+</div>
+
