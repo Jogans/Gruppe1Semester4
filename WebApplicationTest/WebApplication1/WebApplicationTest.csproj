@@ -4,8 +4,9 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-
   <ItemGroup>
+    <None Include="wwwroot\css\Index.css" />
+    <None Include="wwwroot\css\site.css" />
   </ItemGroup>
 
 </Project>

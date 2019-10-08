@@ -1,0 +1,157 @@
+﻿
+.btn_Top {
+    background-color: white; 
+    border: 2px solid #555555;
+    color: black;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 15px; /* Laver den runde kant */
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+    box-shadow: 0 9px #999;
+    display: block;
+    margin: 2px;
+    font-size: 20px;
+}
+    .btn_Top a {
+        display: block;
+        padding: 15px 32px;
+    }
+
+    .btn_Top:active {
+        background-color: white;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+.btn_New {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+    box-shadow: 0 9px #999;
+    font-size: 20px;
+    margin: 2px;
+}
+
+.btn_New a {
+    display: block;
+    padding: 15px 32px;
+}
+
+    .btn_New:active {
+        background-color: white;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+.btn_Su {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+    font-size: 20px;
+    margin: 2px;
+}
+
+.btn_Su a {
+    display: block;
+    padding: 15px 32px;
+}
+
+    .btn_Su:active {
+        background-color: white;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+.btn_Vegi {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+    font-size: 20px;
+    margin: 2px;
+}
+
+.btn_Vegi a {
+    display: block;
+    padding: 15px 32px;
+}
+
+    .btn_Vegi:active {
+        background-color: white;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+.btn_Classic {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+    font-size: 20px;
+    margin: 2px;
+}
+
+.btn_Classic a {
+    display: block;
+    padding: 15px 32px;
+}
+
+    .btn_Classic:active {
+        background-color: white;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+.btn_Store {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+    font-size: 20px;
+    margin: 2px;
+}
+
+.btn_Store a {
+    display: block;
+    padding: 15px 32px;
+}
+
+    .btn_Store:active {
+        background-color: white;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+a:hover {
+    cursor: pointer; /* Ændre musen når den holdes over en knap */
+}
