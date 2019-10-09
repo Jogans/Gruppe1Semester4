@@ -73,17 +73,40 @@ body {
     line-height: 60px; /* Vertically center the text there */
 }
 
+.user {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
 
+}
 
 .Login {
     display: inline-block;
+    position: center;
     float: right;
+    white-space: nowrap;
+}
+
+.Login a {
+    display: block;
+    padding: 15px 32px;
 }
 
 .Create_user {
     display: inline-block;
+    position: center;
     float: right;
+    white-space: nowrap;
 }
+
+.Create_user a {
+    display: block;
+    padding: 15px 32px;
+}
+
+
+
+
 
 
 
