@@ -78,3 +78,17 @@ body {
     line-height: 60px; /* Vertically center the text there */
 }
 
+.Login {
+    display: block;
+    position: absolute;
+    right: 390px;
+    float: right;
+}
+
+.Create_user {
+    display: block;
+    position: absolute;
+    right: 270px;
+    float: right;
+}
+
