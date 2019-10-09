@@ -13,7 +13,7 @@
     box-shadow: 0 9px #999;
     display: block;
     margin: 2px;
-    font-size: 20px;
+    font-size: 16px;
 }
     .btn_Top a {
         display: block;
@@ -33,11 +33,12 @@
     padding: 0px;
     text-align: center;
     text-decoration: none;
+    border-radius: 15px; /* Laver den runde kant */
     font-size: 16px;
     cursor: pointer;
     float: left;
     box-shadow: 0 9px #999;
-    font-size: 20px;
+    font-size: 16px;
     margin: 2px;
 }
 
@@ -59,10 +60,12 @@
     padding: 0px;
     text-align: center;
     text-decoration: none;
+    border-radius: 15px; /* Laver den runde kant */
     font-size: 16px;
     cursor: pointer;
     float: left;
-    font-size: 20px;
+    box-shadow: 0 9px #999;
+    font-size: 16px;
     margin: 2px;
 }
 
@@ -84,10 +87,12 @@
     padding: 0px;
     text-align: center;
     text-decoration: none;
+    border-radius: 15px; /* Laver den runde kant */
     font-size: 16px;
     cursor: pointer;
     float: left;
-    font-size: 20px;
+    box-shadow: 0 9px #999;
+    font-size: 16px;
     margin: 2px;
 }
 
@@ -109,10 +114,12 @@
     padding: 0px;
     text-align: center;
     text-decoration: none;
+    border-radius: 15px; /* Laver den runde kant */
     font-size: 16px;
     cursor: pointer;
     float: left;
-    font-size: 20px;
+    box-shadow: 0 9px #999;
+    font-size: 16px;
     margin: 2px;
 }
 
@@ -134,10 +141,12 @@
     padding: 0px;
     text-align: center;
     text-decoration: none;
+    border-radius: 15px; /* Laver den runde kant */
     font-size: 16px;
     cursor: pointer;
     float: left;
-    font-size: 20px;
+    box-shadow: 0 9px #999;
+    font-size: 16px;
     margin: 2px;
 }
 
@@ -155,3 +164,4 @@
 a:hover {
     cursor: pointer; /* Ændre musen når den holdes over en knap */
 }
+
