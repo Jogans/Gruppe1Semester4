@@ -76,12 +76,14 @@ body {
 
 
 .Login {
-    display: inline-block;
-    float: right;
+    display: block;
 }
 
 .Create_user {
-    display: inline-block;
+    display: block;
+}
+
+.user {
     float: right;
 }
 
