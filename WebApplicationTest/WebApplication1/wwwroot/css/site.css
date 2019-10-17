@@ -81,6 +81,14 @@ body {
 }
 
 .Login {
+    display: block;
+}
+
+.Create_user {
+    display: block;
+}
+
+.user {
     display: inline-block;
     position: center;
     float: right;
@@ -106,7 +114,244 @@ body {
 
 
 
+/*-------------------------------------------------------------------------------------------------------------*/
 
+
+
+.btn_Top {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 15px; /* Laver den runde kant */
+    font-size: 16px;
+    float: left;
+    box-shadow: 0 9px #999;
+    display: block;
+    margin: 2px;
+    font-size: 16px;
+}
+
+    .btn_Top a {
+        display: block;
+        padding: 15px 32px;
+    }
+
+    .btn_Top:active {
+        background-color: white;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+.btn_New {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 15px; /* Laver den runde kant */
+    font-size: 16px;
+    float: left;
+    box-shadow: 0 9px #999;
+    font-size: 16px;
+    margin: 2px;
+}
+
+    .btn_New a {
+        display: block;
+        padding: 15px 32px;
+    }
+
+    .btn_New:active {
+        background-color: white;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+.btn_Su {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 15px; /* Laver den runde kant */
+    font-size: 16px;
+    float: left;
+    box-shadow: 0 9px #999;
+    font-size: 16px;
+    margin: 2px;
+}
+
+    .btn_Su a {
+        display: block;
+        padding: 15px 32px;
+    }
+
+    .btn_Su:active {
+        background-color: white;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+.btn_Vegi {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 15px; /* Laver den runde kant */
+    font-size: 16px;
+    float: left;
+    box-shadow: 0 9px #999;
+    font-size: 16px;
+    margin: 2px;
+}
+
+    .btn_Vegi a {
+        display: block;
+        padding: 15px 32px;
+    }
+
+    .btn_Vegi:active {
+        background-color: white;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+.btn_Classic {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 15px; /* Laver den runde kant */
+    font-size: 16px;
+    float: left;
+    box-shadow: 0 9px #999;
+    font-size: 16px;
+    margin: 2px;
+}
+
+    .btn_Classic a {
+        display: block;
+        padding: 15px 32px;
+    }
+
+    .btn_Classic:active {
+        background-color: white;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+.btn_Store {
+    background-color: white;
+    border: 2px solid #555555;
+    color: black;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 15px; /* Laver den runde kant */
+    font-size: 16px;
+    float: left;
+    box-shadow: 0 9px #999;
+    font-size: 16px;
+    margin: 2px;
+}
+
+    .btn_Store a {
+        display: block;
+        padding: 15px 32px;
+    }
+
+    .btn_Store:active {
+        background-color: white;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+a:hover {
+    cursor: pointer; /* Ændre musen når den holdes over en knap */
+}
+
+
+
+ul {
+    list-style-type: none;
+    float: right;
+}
+
+li {
+    display: inline-block;
+}
+
+input[type="checkbox"][id^="cb"] {
+    display: none;
+}
+
+label {
+    border: 1px solid #fff;
+    padding: 6px;
+    display: block;
+    position: relative;
+    margin: 2px;
+    cursor: pointer;
+}
+
+    label:before {
+        background-color: white;
+        color: white;
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        border: 1px solid grey;
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 28px;
+        transition-duration: 0.4s;
+        transform: scale(0);
+        float: right;
+    }
+
+    label img {
+        height: 10%;
+        width: 45px;
+        transition-duration: 0.2s;
+        transform-origin: 50% 50%;
+    }
+
+:checked + label {
+    border-color: #ddd;
+}
+
+    :checked + label:before {
+        content: "✓";
+        background-color: grey;
+        transform: scale(0.6);
+    }
+
+    :checked + label img {
+        transform: scale(0.7);
+        box-shadow: 0 0 2px #333;
+        z-index: -1;
+    }
+
+.border2 {
+    float: left;
+}
+
+.antalPersoner {
+    float: right;
+}
 
 
 

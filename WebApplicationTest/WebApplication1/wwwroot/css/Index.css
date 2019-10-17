@@ -1,4 +1,4 @@
-﻿
+﻿/*
 .btn_Top {
     background-color: white; 
     border: 2px solid #555555;
@@ -6,7 +6,7 @@
     padding: 0px;
     text-align: center;
     text-decoration: none;
-    border-radius: 15px; /* Laver den runde kant */
+    border-radius: 15px; 
     font-size: 16px;
     float: left;
     box-shadow: 0 9px #999;
@@ -32,7 +32,7 @@
     padding: 0px;
     text-align: center;
     text-decoration: none;
-    border-radius: 15px; /* Laver den runde kant */
+    border-radius: 15px; 
     font-size: 16px;
     float: left;
     box-shadow: 0 9px #999;
@@ -58,7 +58,7 @@
     padding: 0px;
     text-align: center;
     text-decoration: none;
-    border-radius: 15px; /* Laver den runde kant */
+    border-radius: 15px; 
     font-size: 16px;
     float: left;
     box-shadow: 0 9px #999;
@@ -84,7 +84,7 @@
     padding: 0px;
     text-align: center;
     text-decoration: none;
-    border-radius: 15px; /* Laver den runde kant */
+    border-radius: 15px; 
     font-size: 16px;
     float: left;
     box-shadow: 0 9px #999;
@@ -110,7 +110,7 @@
     padding: 0px;
     text-align: center;
     text-decoration: none;
-    border-radius: 15px; /* Laver den runde kant */
+    border-radius: 15px; 
     font-size: 16px;
     float: left;
     box-shadow: 0 9px #999;
@@ -136,7 +136,7 @@
     padding: 0px;
     text-align: center;
     text-decoration: none;
-    border-radius: 15px; /* Laver den runde kant */
+    border-radius: 15px; 
     font-size: 16px;
     float: left;
     box-shadow: 0 9px #999;
@@ -156,8 +156,7 @@
     }
 
 a:hover {
-    cursor: pointer; /* Ændre musen når den holdes over en knap */
-}
+    cursor: pointer; 
 
 
 
@@ -228,3 +227,9 @@ label img {
 .border2 {
     float: left;
 }
+
+.antalPersoner {
+    float: right;
+}
+
+    */
