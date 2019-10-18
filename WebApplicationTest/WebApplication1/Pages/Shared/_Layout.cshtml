@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
-    
+
+
+
 <header>
     <div class="container">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -34,12 +35,85 @@
 
 </header>
 
+<style>
+    .body_class {
+        max-width: 65%;
+        margin: auto;
+    }
+</style>
 
-<div class="container">
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
-</div>
+<body class="body_class">
+    
+
+
+<div class="border">
+        <div class="SearchBar">
+            <input style="height: 32px; width: 704px;" type="text" placeholder="Search..." required>
+            <button style="height: 32px;" type="button">Søg opskrift</button>
+            <button style="height: 32px;" type="button">Søg ingrediens</button>
+
+        </div>
+    </div>
+
+
+
+    <div class="Buttons2">
+        <button class="btn_Top" type="button"><a asp-area="" asp-page="/TopPicks">Top Retter</a></button>
+        <button class="btn_New" type="button"><a asp-area="" asp-page="/NewRecipe"> Nye retter</a></button>
+        <button class="btn_Su" type="button"><a asp-area="" asp-page="/SuRecipe"> SU-retter</a></button>
+        <button class="btn_Vegi" type="button"><a asp-area="" asp-page="/Vegi">Vegetar retter</a></button>
+        <button class="btn_Classic" type="button"><a asp-area="" asp-page="/ClassicRecipe">Klassiske retter</a></button>
+        <button class="btn_Store" type="button"><a asp-area="" asp-page="/Store">Vælg Butik</a></button>
+
+    </div>
+    <ul>
+        <li>
+            <input type="checkbox" id="cb1" />
+            <label for="cb1"><img src="/Pic/Netto.png" /></label>
+        </li>
+        <li>
+            <input type="checkbox" id="cb2" />
+            <label for="cb2"><img src="/Pic/Foetex.png" /></label>
+        </li>
+        <br>
+        <li>
+            <input type="checkbox" id="cb3" />
+            <label for="cb3"><img src="/Pic/Rema.jpg" /></label>
+        </li>
+        <li>
+            <input type="checkbox" id="cb4" />
+            <label for="cb4"><img src="/Pic/Fakta.png" /></label>
+        </li>
+    </ul>
+    <p style="clear:both"><br></p>
+
+    <div class="antalPersoner">
+        <select>
+            <option value="0">Antal Personer:</option>
+            <option value="1">1 Person</option>
+            <option value="2">2 Person</option>
+            <option value="3">3 Person</option>
+            <option value="4">4 Person</option>
+            <option value="5">5 Person</option>
+            <option value="6">6 Person</option>
+            <option value="7">7 Person</option>
+            <option value="8">8 Person</option>
+            <option value="9">9 Person</option>
+            <option value="10">10 Person</option>
+
+        </select>
+    </div>
+
+    <div style="font-size: 150px" class="border2">
+
+
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+</body>
+
 
 
 <footer class="border-top footer text-muted">
@@ -53,5 +127,4 @@
 <script src="~/js/site.js" asp-append-version="true"></script>
 
 @RenderSection("Scripts", required: false)
-</body>
 </html>
