@@ -3,6 +3,71 @@
 @{
     ViewData["Title"] = "Min side";
 }
+
+<environment include="Development" >
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" / >
+    <link rel="stylesheet" href="~/css/UserPage.css" / >
+</environment >
+
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<!-- Tab links -->
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Information')" id="defaultOpen">Information</button>
+    <button class="tablinks" onclick="openCity(event, 'Opskrifter')">Mine opskrifter</button>
+    <button class="tablinks" onclick="openCity(event, 'Indstillinger')">Indstillinger</button>
+</div>
+
+<!-- Tab content -->
+<div id="Information" class="tabcontent">
+    <h3>Information</h3>
+    <div>
+        <label>Name</label>
+    </div>
+    <div>
+        <label>bo</label>
+    </div>
+    <div>
+        <label>UserId</label>
+    </div>
+    <div>
+        <label>bo1</label>
+    </div>
+    <div>
+        <label>Email</label>
+    </div>
+    <div>
+        <label>bo1@mail.org</label>
+    </div>
+</div>
+
+<div id="Opskrifter" class="tabcontent">
+    <h3>Mine opskrifter</h3>
+    <p>Her skal vi både vise de opskrifter, brugeren har oprettet, og opskrifter, som brugeren abonnerer på</p>
+</div>
+
+<div id="Indstillinger" class="tabcontent">
+    <h3>Indstillinger</h3>
+    <p>Her skal bruger kunne ændre sine indstillinger</p>
+</div> 
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+<script>
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
