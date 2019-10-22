@@ -1,6 +1,7 @@
 ﻿/*/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -23,6 +24,7 @@ a {
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -62,7 +64,7 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    margin-bottom: 200px;
 }
 
 .footer {
@@ -84,9 +86,6 @@ body {
     display: block;
 }
 
-.Create_user {
-    display: block;
-}
 
 .user {
     display: inline-block;
@@ -112,11 +111,7 @@ body {
     padding: 15px 32px;
 }
 
-
-
 /*-------------------------------------------------------------------------------------------------------------*/
-
-
 
 .btn_Top {
     background-color: white;
@@ -301,6 +296,7 @@ label {
     position: relative;
     margin: 2px;
     cursor: pointer;
+    margin-right: 10%;
 }
 
     label:before {
@@ -353,5 +349,87 @@ label {
     float: right;
 }
 
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 200px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+}
 
 
+.header {
+    width: 100%;
+    height: 120px;
+    background-color: white;
+    max-width: 65%;
+    margin: auto;
+    position: relative;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    margin: auto;
+}
+
+.logo {
+    color: black;
+    font-size: 25px;
+    font-family: verdana;
+    text-align: left;
+    margin-top: 0px;
+    float: left;
+    margin: 0px;
+    line-height: 50px;
+    padding-left: 9px;
+}
+
+.SearchBar {
+    color: black;
+    font-size: 16px;
+    font-family: verdana;
+    text-align: left;
+    margin-top: 0px;
+    float: left;
+    margin: 0px;
+    line-height: 40px;
+    padding-left: 9px;
+}
+
+.SearchBarBtn {
+    color: black;
+    font-size: 16px;
+    margin-top: 0px;
+    float: left;
+    margin: 4px;
+    padding-left: 6px;
+}
+
+.UserBtn {
+    color: black;
+    font-size: 16px;
+    margin-top: 0px;
+    float: right;
+    margin: 4px;
+    padding-left: 6px;
+    position: relative;
+}
+
+.sidenav {
+    float: right;
+    right: 0px;
+    width: 165px;
+}
+
+.antalPersoner {
+    margin-right: 15%;
+}
+
+.CheckboxDishes {
+    color: white;
+}

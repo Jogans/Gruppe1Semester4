@@ -2,10 +2,3 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your Javascript code.
-
-html {
-    position: relative;
-    min - width: 1024px;
-    min - height: 768px;
-    height: 100 %;
-}

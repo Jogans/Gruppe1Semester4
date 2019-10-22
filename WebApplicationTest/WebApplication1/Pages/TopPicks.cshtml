@@ -3,6 +3,59 @@
 @{
     ViewData["Title"] = "Top retter";
 }
+
+
+
+<style>
+    body {
+        margin: 0px;
+        padding: 0px;
+        max-width: 90;
+        margin: auto;
+    }
+    .pic {
+        position: fixed;
+    }
+    /* Bottom right text */
+    .price_block {
+        position: relative;
+        height: auto;
+        width: auto;
+        background-color: white;
+        color: black;
+        padding-left: auto;
+        padding-right: auto;
+        float: left;
+        left: 60%;
+        border: 2px;
+        border-style: solid;
+    }
+</style>
+
+
+
+<br style="clear:both" />
+
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<body>
+
+    <h2>Ugens tilbud</h2>
+    <div class="container">
+        <div class="pic">
+            <img src="https://vielskermad.dk/wp-content/uploads/2018/03/lasagne.jpg" alt="Lasange" height="400" width="600">
+        </div>
+
+        <div class="price_block">
+            <p>
+                Normal pris:   50kr
+                <br/>
+                Tilbuds pris:  30kr
+                <br/>
+                Rabat:         20kr
+            </p>
+        </div>
+    </div>
+
+
+</body>

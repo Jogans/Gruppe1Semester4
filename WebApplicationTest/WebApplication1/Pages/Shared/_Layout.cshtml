@@ -6,113 +6,123 @@
     <title>@ViewData["Title"] - WebApplication1</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-
-
 <header>
-    <div class="container">
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-
-            <a class="navbar-brand" asp-area="" asp-page="/Index">Guldtand</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
-                </ul>
-            </div>
-
-            <div class="user">
-                <button class="MyPage" type="button"><a asp-area="" asp-page="/UserPage">Min Side</a></button>
-                <button class="Create_user" type="button">Opret bruger</button>
+    <div class="header">
+        <button class="btn"><i class="fa fa-home"></i> <a asp-area="" asp-page="/Index">Guldtand</a></button>
+        <form style="float: right; display: inline-block;">
+            <div class="UserBtn">
                 <button class="Login" type="button">Login</button>
+                <button class="Create_user" type="button">Opret bruger</button>
+                <button class="MyPage" type="button"><a asp-area="" asp-page="/UserPage">Min Side</a></button>
             </div>
-        </nav>
-    </div>
+        </form>
+        <br style="clear:both" />
+        <form style="float: left; display: inline-block;">
+            <div class="SearchBar">
+                <input style="height: 32px; width: 704px;" type="text" placeholder="Search..." required>
+            </div>
+        </form>
+        <form style="float: left; display: inline-block;">
+            <div class="SearchBarBtn">
+                <button style="height: 32px;" type="button">Søg opskrift</button>
+                <button style="height: 32px;" type="button">Søg ingrediens</button>
+            </div>
+        </form>
+        <br style="clear:both" />
+
+        <div class="Buttons2">
+            <button class="btn_Top" type="button"><a asp-area="" asp-page="/TopPicks">Top Retter</a></button>
+            <button class="btn_New" type="button"><a asp-area="" asp-page="/NewRecipe"> Nye retter</a></button>
+            <button class="btn_Su" type="button"><a asp-area="" asp-page="/SuRecipe"> SU-retter</a></button>
+            <button class="btn_Vegi" type="button"><a asp-area="" asp-page="/Vegi">Vegetar retter</a></button>
+            <button class="btn_Classic" type="button"><a asp-area="" asp-page="/ClassicRecipe">Klassiske retter</a></button>
+            <button class="btn_Store" type="button"><a asp-area="" asp-page="/Store">Vælg Butik</a></button>
+
+        </div>
+
+        <br style="clear:both" />
+
+        <sidebar class="sidenav">
+            <form style="float: right; display: inline-block;">
+                <ul>
+                    <li>
+                        <input type="checkbox" id="cb1" />
+                        <label for="cb1"><img src="/Pic/Netto.png" /></label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="cb2" />
+                        <label for="cb2"><img src="/Pic/Foetex.png" /></label>
+                    </li>
+                    <br>
+                    <li>
+                        <input type="checkbox" id="cb3" />
+                        <label for="cb3"><img src="/Pic/Rema.jpg" /></label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="cb4" />
+                        <label for="cb4"><img src="/Pic/Fakta.png" /></label>
+                    </li>
+                </ul>
+            </form>
+            <br style="clear:both" />
+
+            <form style="float: right; display: inline-block;">
+                <div class="antalPersoner">
+                    <select>
+                        <option value="0">Antal Personer:</option>
+                        <option value="1">1 Person</option>
+                        <option value="2">2 Person</option>
+                        <option value="3">3 Person</option>
+                        <option value="4">4 Person</option>
+                        <option value="5">5 Person</option>
+                        <option value="6">6 Person</option>
+                        <option value="7">7 Person</option>
+                        <option value="8">8 Person</option>
+                        <option value="9">9 Person</option>
+                        <option value="10">10 Person</option>
+
+                    </select>
+                </div>
+            </form>
+
+            <form style="float: left; display: inline-block;">
+                <div class="CheckboxDishes">
+                    <br style="clear:both" />
+                    <input class="cbox" type="checkbox" id="dish1">
+                    <label for="dish1">Pasta</label>
+                    <br style="clear:both" />
+                    <input class="cbox" type="checkbox" id="dish2">
+                    <label for="dish2">Ris</label>
+                    <br style="clear:both" />
+                    <input class="cbox" type="checkbox" id="dish3">
+                    <label for="dish3">Oksekød</label>
+                    <br style="clear:both" />
+                    <input class="cbox" type="checkbox" id="dish4">
+                    <label for="dish4">Svinekød</label>
+                </div>
+            </form>
+        </sidebar>
 
 </header>
 
-<style>
-    .body_class {
-        max-width: 65%;
-        margin: auto;
-    }
-</style>
-
-<body class="body_class">
-    
-
-
-<div class="border">
-        <div class="SearchBar">
-            <input style="height: 32px; width: 704px;" type="text" placeholder="Search..." required>
-            <button style="height: 32px;" type="button">Søg opskrift</button>
-            <button style="height: 32px;" type="button">Søg ingrediens</button>
-
-        </div>
-    </div>
 
 
 
-    <div class="Buttons2">
-        <button class="btn_Top" type="button"><a asp-area="" asp-page="/TopPicks">Top Retter</a></button>
-        <button class="btn_New" type="button"><a asp-area="" asp-page="/NewRecipe"> Nye retter</a></button>
-        <button class="btn_Su" type="button"><a asp-area="" asp-page="/SuRecipe"> SU-retter</a></button>
-        <button class="btn_Vegi" type="button"><a asp-area="" asp-page="/Vegi">Vegetar retter</a></button>
-        <button class="btn_Classic" type="button"><a asp-area="" asp-page="/ClassicRecipe">Klassiske retter</a></button>
-        <button class="btn_Store" type="button"><a asp-area="" asp-page="/Store">Vælg Butik</a></button>
-
-    </div>
-    <ul>
-        <li>
-            <input type="checkbox" id="cb1" />
-            <label for="cb1"><img src="/Pic/Netto.png" /></label>
-        </li>
-        <li>
-            <input type="checkbox" id="cb2" />
-            <label for="cb2"><img src="/Pic/Foetex.png" /></label>
-        </li>
-        <br>
-        <li>
-            <input type="checkbox" id="cb3" />
-            <label for="cb3"><img src="/Pic/Rema.jpg" /></label>
-        </li>
-        <li>
-            <input type="checkbox" id="cb4" />
-            <label for="cb4"><img src="/Pic/Fakta.png" /></label>
-        </li>
-    </ul>
-    <p style="clear:both"><br></p>
-
-    <div class="antalPersoner">
-        <select>
-            <option value="0">Antal Personer:</option>
-            <option value="1">1 Person</option>
-            <option value="2">2 Person</option>
-            <option value="3">3 Person</option>
-            <option value="4">4 Person</option>
-            <option value="5">5 Person</option>
-            <option value="6">6 Person</option>
-            <option value="7">7 Person</option>
-            <option value="8">8 Person</option>
-            <option value="9">9 Person</option>
-            <option value="10">10 Person</option>
-
-        </select>
-    </div>
-
-    <div style="font-size: 150px" class="border2">
 
 
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-</body>
+
+
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+
 
 
 
