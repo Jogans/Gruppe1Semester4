@@ -8,5 +8,9 @@ namespace Transfer.KlasseInterface
 {
     class User
     {
+        public User()
+        {
+
+        }
     }
 }
