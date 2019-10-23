@@ -8,5 +8,9 @@ namespace Transfer.KlasseInterface
 {
     class Recipe
     {
+        public Recipe()
+        {
+
+        }
     }
 }
