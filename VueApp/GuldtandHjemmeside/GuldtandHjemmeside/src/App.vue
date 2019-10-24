@@ -2,22 +2,18 @@
     <div id="app">
         <Header />
         <Sidebar />
-        <Home />
-
+        <router-view />
     </div>
 </template>
 
 <script>
     import Header from './components/Header.vue';
     import Sidebar from './components/Sidebar.vue';
-    import Home from './components/Home.vue';
-
     export default { 
         name: 'app',
         components: {
             Header,
-            Sidebar,
-            Home
+            Sidebar
         }
     };
 </script>

@@ -4,7 +4,7 @@
         <div class="header">
 
             <div class="title">
-                <h1>Guldtand</h1>
+                <router-link to='/'><h1>Guldtand</h1></router-link>
             </div>
 
             <div class="UserBtn">
@@ -31,12 +31,12 @@
             <br style="clear:both" />
 
             <div class="Buttons2">
-                <button class="btn_Top" type="button">Top retter</button>
-                <button class="btn_New" type="button">Nye retter</button>
-                <button class="btn_Su" type="button">SU-retter</button>
-                <button class="btn_Vegi" type="button">Vegetar retter</button>
-                <button class="btn_Classic" type="button">Klassiske retter</button>
-                <button class="btn_Store" type="button">V&#230;lg Butik</button>
+                <router-link to="/TopPage" class="btn_Top" tag="button">Top retter</router-link>
+                <router-link to="/NewPage" class="btn_New" tag="button">Nye retter</router-link>
+                <router-link to="/SUPage" class="btn_Su" tag="button">SU-retter</router-link>
+                <router-link to="/VegiPage" class="btn_Vegi" tag="button">Vegetar retter</router-link>
+                <router-link to="/ClassicPage" class="btn_Classic" tag="button">Klassiske retter</router-link>
+                <router-link to="/StorePage" class="btn_Store" tag="button">V&#230;lg Butik</router-link>
             </div>
 
         </div>
