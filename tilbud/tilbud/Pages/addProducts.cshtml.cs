@@ -29,7 +29,49 @@ namespace tilbud.Pages
             String json = reader.ReadToEnd();
             JObject jo = JObject.Parse(json);
             var array = (JArray)jo["adverts"];
-            foreach(JObject data in array.Children<JObject>())
+
+            using (var db = new prj4databaseContext())
+            {
+                foreach (JObject data in array.Children<JObject>())
+                {
+                    Vare vare = new Vare();
+                    vare.Volumen = 500;
+                    foreach (JProperty prop in data.Properties())
+                    {
+                        string propname = prop.Name;
+                        switch (propname)
+                        {
+                            case "title":
+                                vare.Navn = (string)prop.Value;
+                                break;
+                            case "price":
+                                vare.Pris = (double)prop.Value;
+                                break;
+                            case "customerName":
+                                vare.Butik = (string)prop.Value;
+                                break;
+                            case "validFrom":
+                                vare.ValidFra = (string)prop.Value;
+                                break;
+                            case "validTo":
+                                vare.ValidTil = (string)prop.Value;
+                                break;
+                            case "volumePrice":
+                                vare.Volumenpris = (double)prop.Value;
+                                break;
+                            case "imageUrl":
+                                vare.Imgsrc = (string)prop.Value;
+                                break;
+                        }
+
+
+                    }
+                    db.Vare.Add(vare);
+                }
+                db.SaveChanges();
+            }
+
+            /*foreach(JObject data in array.Children<JObject>())
             {
                 foreach(JProperty prop in data.Properties())
                 {
@@ -40,7 +82,8 @@ namespace tilbud.Pages
                     }
                 }
                 
-            }
+            }*/
+
 
             /*using (var db = new projtestContext())
             {
@@ -70,7 +113,7 @@ namespace tilbud.Pages
             //com.Dispose();
             //con.Close();
 
-           
+
             postVar = Request.Query["tekst"];
             
         }

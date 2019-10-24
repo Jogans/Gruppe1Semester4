@@ -8,5 +8,29 @@
     <h1 class="display-4">Welcome</h1>
 
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    @Model.json
+    <table border="1">
+        <tr>
+        <th>navn</th>
+        <th>pris</th>
+        <th>butik</th>
+        <th>Valid fra</th>
+        <th>Valid til</th>
+        <th>Volumenpris</th>
+        <th>volumen</th>
+        <th>Billede</th>
+        </tr>
+        @foreach (Vare vare in Model.tilbud)
+        {
+            <tr>
+                <td>@vare.Navn</td>
+                <td>@vare.Pris</td>
+                <td>@vare.Butik</td>
+                <td>@vare.ValidFra</td>
+                <td>@vare.ValidTil</td>
+                <td>@vare.Volumenpris</td>
+                <td>@vare.Volumen</td>
+                <td><img width="100" src="@vare.Imgsrc" /></td>
+            </tr>
+        }
+    </table>
 </div>
