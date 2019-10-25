@@ -120,13 +120,17 @@
         overflow-y: auto;
         background-color: #130f40;
         position: fixed;
+        float: right;
         left: 0;
         top: 0;
         height: 100vh;
-        z-index: 999;
+        z-index: 1;
         padding: 3rem 20px 2rem 20px;
         width: 200px;
+
     }
+
+
 
     ul {
         list-style-type: none;

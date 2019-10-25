@@ -10,7 +10,8 @@
             <div class="UserBtn">
                 <button class="Login" type="button">Login</button>
                 <button class="Create_user" type="button">Opret bruger</button>
-                <button class="MyPage" type="button">Min Side</button>
+                <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
+
             </div>
 
             <br style="clear:both" />

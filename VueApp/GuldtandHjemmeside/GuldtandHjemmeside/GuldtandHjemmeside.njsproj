@@ -32,10 +32,12 @@
     <Content Include="public\favicon.ico" />
     <Content Include="public\index.html" />
     <Content Include="src\App.vue" />
+    <Content Include="src\assets\Pics\Pizza_Picture.jpg" />
     <Content Include="src\components\StorePage.vue" />
     <Content Include="src\components\Header.vue" />
     <Content Include="src\components\NewPage.vue" />
     <Content Include="src\components\ClassicPage.vue" />
+    <Content Include="src\components\ProfilePage.vue" />
     <Content Include="src\components\VegiPage.vue" />
     <Content Include="src\components\SUPage.vue" />
     <Content Include="src\components\TopPage.vue" />
