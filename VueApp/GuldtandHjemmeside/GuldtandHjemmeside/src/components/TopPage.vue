@@ -2,16 +2,67 @@
     <div class="bodyTopPage">
         <br style="clear:both" />
         <h1>Top Page</h1>
+
         <div class="viewOfRecepie">
             <div class="imageOfRecepie">
-                <img scr="" alt="billede"/>
+                <img src="@/assets/Pics/Pizza_Picture.jpg" />
             </div>
             <div class="textForPrice">
-                {{recepie.name}} <br />
-                {{recepie.priceOrginal}}
+                <div style="font-size: 25px;">
+                    {{recepie.name}} <br />
+                </div>
+                Original pris: {{recepie.priceOrginal}}kr. <br />
+                Pris med rabat: {{recepie.priceDiscount}}kr. <br />
+                Laveste mulige pris: {{recepie.priceLowest}}kr. <br />
 
             </div>
         </div>
+
+        <div class="viewOfRecepie">
+            <div class="imageOfRecepie">
+                <img src="@/assets/Pics/Pizza_Picture.jpg" />
+            </div>
+            <div class="textForPrice">
+                <div style="font-size: 25px;">
+                    {{recepie.name}} <br />
+                </div>
+                Original pris: {{recepie.priceOrginal}}kr. <br />
+                Pris med rabat: {{recepie.priceDiscount}}kr. <br />
+                Laveste mulige pris: {{recepie.priceLowest}}kr. <br />
+
+            </div>
+        </div>
+
+        <div class="viewOfRecepie">
+            <div class="imageOfRecepie">
+                <img src="@/assets/Pics/Pizza_Picture.jpg" />
+            </div>
+            <div class="textForPrice">
+                <div style="font-size: 25px;">
+                    {{recepie.name}} <br />
+                </div>
+                Original pris: {{recepie.priceOrginal}}kr. <br />
+                Pris med rabat: {{recepie.priceDiscount}}kr. <br />
+                Laveste mulige pris: {{recepie.priceLowest}}kr. <br />
+
+            </div>
+        </div>
+
+        <div class="viewOfRecepie">
+            <div class="imageOfRecepie">
+                <img src="@/assets/Pics/Pizza_Picture.jpg" />
+            </div>
+            <div class="textForPrice">
+                <div style="font-size: 25px;">
+                    {{recepie.name}} <br />
+                </div>
+                Original pris: {{recepie.priceOrginal}}kr. <br />
+                Pris med rabat: {{recepie.priceDiscount}}kr. <br />
+                Laveste mulige pris: {{recepie.priceLowest}}kr. <br />
+
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -21,9 +72,11 @@
         data() {
             return {
                 recepie: {
-                    pic: 'Pizza_Picture.jpg',
+                    pic: '@/assets/Pics/Pizza_Picture.jpg',
                     name: 'Pizza med tomatsovs, peperoni og ost',
-                    priceOrginal: 'xx kr',
+                    priceOrginal: '50',
+                    priceDiscount: '35',
+                    priceLowest: '35',
                     alt: 'Pizza',
                     info: 'Bla bla?'
                 }

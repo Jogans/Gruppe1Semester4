@@ -66,7 +66,7 @@
 
     .title {
         float: left;
-        position: fixed;
+        position: relative;
     }
 
     .UserBtn {
