@@ -1,7 +1,7 @@
 <template>
-    <div class="bodyTop">
+    <div class="bodyNewPage">
         <br style="clear:both" />
-        <h1>Top</h1>
+        <h1>Nye retter</h1>
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
@@ -17,7 +17,7 @@
 
 <script>
     export default {
-        name: 'Top',
+        name: 'NewPage',
         props: {
         }
     };
@@ -25,7 +25,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-        .bodyTop {
+        .bodyNewPage {
     width: 100%;
     max-width: 65%;
     margin: auto;
