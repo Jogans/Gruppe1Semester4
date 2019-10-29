@@ -38,6 +38,20 @@ namespace tilbud
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            
+
+           
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "Tilbud-Route",
+                    template: "{controller}/{action}"
+                    );
+                    
+                routes.MapRoute(
+                        name: "Default",
+                        template: "{controller=Home}/{action=Index}/{id?}");
+            });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -53,6 +67,12 @@ namespace tilbud
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseMvc();
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hejsa");
+            });
+
+
         }
     }
 }
