@@ -1,7 +1,9 @@
 <template>
     <div id="app">
         <Header />
-        <Sidebar />
+        <div class="sidebar-panel-nav">
+            <Sidebar />
+        </div>
         <router-view /> 
     </div>
 </template>

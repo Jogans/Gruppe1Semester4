@@ -2,23 +2,17 @@
 <template>
     <keep-alive>
         <div class="header">
+            <div class="TopPart">
+                <div class="title" style="font-size: 40px;">
+                    <router-link to='/'>Guldtand</router-link>
+                </div>
 
-            <div class="title">
-                <router-link to='/'><h1>Guldtand</h1></router-link>
+                <div class="UserBtn">
+                    <button class="Login" type="button">Login</button>
+                    <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
+                    <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
+                </div>
             </div>
-
-            <div class="UserBtn">
-                <button class="Login" type="button">Login</button>
-                <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
-                <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
-
-            </div>
-
-            <br style="clear:both" />
-            <br style="clear:both" />
-            <br style="clear:both" />
-            <br style="clear:both" />
-
             <div class="SearchBar">
                 <input style="height: 32px; width: 704px;" type="text" placeholder="Search..." required>
             </div>
@@ -28,7 +22,6 @@
                 <button style="height: 32px;" type="button">S&#248;g ingrediens</button>
             </div>
 
-            <br style="clear:both" />
             <br style="clear:both" />
 
             <div class="Buttons2">
@@ -61,6 +54,10 @@
         max-width: 65%;
         margin: auto;
         position: relative;
+    }
+
+    .TopPart{
+       padding-bottom: 50px;
     }
 
     .title {
@@ -112,6 +109,7 @@
         float: left;
         margin: 6px;
         padding-right: 15px;
+        padding-bottom: 10px;
     }
 
     .btn_Top {
