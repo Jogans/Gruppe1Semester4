@@ -6,6 +6,7 @@
         <div class="viewOfRecepie">
             <div class="imageOfRecepie">
                 <img src="@/assets/Pics/Pizza_Picture.jpg" />
+                <router-link to="/Recepies/HomemadePizza" class="recepieImg" tag="img"></router-link>
             </div>
             <div class="textForPrice">
                 <div style="font-size: 25px;">
@@ -13,10 +14,12 @@
                 </div>
                 Original pris: {{recepie.priceOrginal}}kr. <br />
                 Pris med rabat: {{recepie.priceDiscount}}kr. <br />
-                Laveste mulige pris: {{recepie.priceLowest}}kr. <br />
+                Laveste mulige pris: {{recepie.priceLowest}}kr. <br />  
 
             </div>
         </div>
+
+        <router-link to="/Recepies/HomemadePizza" class="awdwad" tag="button">Nye retter</router-link>
 
         <div class="viewOfRecepie">
             <div class="imageOfRecepie">
@@ -73,7 +76,7 @@
             return {
                 recepie: {
                     pic: '@/assets/Pics/Pizza_Picture.jpg',
-                    name: 'Pizza med tomatsovs, peperoni og ost',
+                    name: 'Hjemmelavet pizza med tomatsovs, peperoni og ost',
                     priceOrginal: '50',
                     priceDiscount: '35',
                     priceLowest: '35',
@@ -102,7 +105,7 @@ img{
 }
 
     .viewOfRecepie {
-        width: 850px;
+        width: 900px;
         height: 200px;
         border: 2px solid;
         padding: 2px;
