@@ -6,7 +6,7 @@
         <div class="viewOfRecepie">
             <div class="imageOfRecepie">
                 <img src="@/assets/Pics/Pizza_Picture.jpg" />
-                <router-link to="/Recepies/HomemadePizza" class="recepieImg" tag="img"></router-link>
+                <router-link to="/Recepie/PizzaHomemade" class="recepieImg" tag="img"></router-link>
             </div>
             <div class="textForPrice">
                 <div style="font-size: 25px;">
@@ -18,8 +18,6 @@
 
             </div>
         </div>
-
-        <router-link to="/Recepies/HomemadePizza" class="awdwad" tag="button">Nye retter</router-link>
 
         <div class="viewOfRecepie">
             <div class="imageOfRecepie">

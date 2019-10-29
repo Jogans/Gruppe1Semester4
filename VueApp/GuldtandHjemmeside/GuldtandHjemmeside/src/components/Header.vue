@@ -38,7 +38,6 @@
                 <router-link to="/VegiPage" class="btn_Vegi" tag="button">Vegetar retter</router-link>
                 <router-link to="/ClassicPage" class="btn_Classic" tag="button">Klassiske retter</router-link>
                 <router-link to="/StorePage" class="btn_Store" tag="button">V&#230;lg Butik</router-link>
-                <router-link to="/HomemadePizzaTest" class="btn_Pizza" tag="button">Test</router-link>
             </div>
         </div>
     </keep-alive>
