@@ -9,7 +9,7 @@
 
             <div class="UserBtn">
                 <button class="Login" type="button">Login</button>
-                <button class="Create_user" type="button">Opret bruger</button>
+                <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
                 <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
 
             </div>
@@ -39,7 +39,6 @@
                 <router-link to="/ClassicPage" class="btn_Classic" tag="button">Klassiske retter</router-link>
                 <router-link to="/StorePage" class="btn_Store" tag="button">V&#230;lg Butik</router-link>
             </div>
-
         </div>
     </keep-alive>
 </template>
