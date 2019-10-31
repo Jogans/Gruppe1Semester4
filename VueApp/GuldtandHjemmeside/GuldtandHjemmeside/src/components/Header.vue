@@ -3,8 +3,9 @@
     <keep-alive>
         <div class="header">
             <div class="TopPart">
-                <div class="title" style="font-size: 40px;">
-                    <router-link to='/'>Guldtand</router-link>
+                <div class="title">
+                    <!-- <router-link to='/'>Guldtand</!--router-link> -->
+                    <router-link to="/"><img src="@/assets/Pics/Guldtand.jpg" /></router-link>
                 </div>
 
                 <div class="UserBtn">
@@ -46,6 +47,15 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+  
+
+    img{
+        position: relative;
+        float: left;
+        height: 10%;
+        width: 10%;
+    }
 
     .header {
         width: 100%;

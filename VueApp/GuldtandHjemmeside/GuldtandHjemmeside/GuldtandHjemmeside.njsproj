@@ -32,6 +32,7 @@
     <Content Include="public\favicon.ico" />
     <Content Include="public\index.html" />
     <Content Include="src\App.vue" />
+    <Content Include="src\assets\Pics\Guldtand.jpg" />
     <Content Include="src\assets\Pics\Pizza_Picture.jpg" />
     <Content Include="src\components\Recepies\PizzaHomemade.vue">
       <SubType>Code</SubType>

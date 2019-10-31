@@ -21,6 +21,7 @@
 </script>
 
 <style>
+    @media only screen and (max-width: 600px) {}
      .main-nav {
    display: flex;
    justify-content: space-between;
