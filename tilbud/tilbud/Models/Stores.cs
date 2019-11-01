@@ -11,6 +11,6 @@ namespace tilbud
         public string Address { get; set; }
         public string Hours { get; set; }
 
-        public virtual RetailChains RetailChainNavigation { get; set; }
+        public virtual RetailChains RetailChainNavigation { get; set; } 
     }
 }
