@@ -26,15 +26,15 @@
                         <select>
                             <option value="0">Antal Personer:</option>
                             <option value="1">1 Person</option>
-                            <option value="2">2 Person</option>
-                            <option value="3">3 Person</option>
-                            <option value="4">4 Person</option>
-                            <option value="5">5 Person</option>
-                            <option value="6">6 Person</option>
-                            <option value="7">7 Person</option>
-                            <option value="8">8 Person</option>
-                            <option value="9">9 Person</option>
-                            <option value="10">10 Person</option>
+                            <option value="2">2 Personer</option>
+                            <option value="3">3 Personer</option>
+                            <option value="4">4 Personer</option>
+                            <option value="5">5 Personer</option>
+                            <option value="6">6 Personer</option>
+                            <option value="7">7 Personer</option>
+                            <option value="8">8 Personer</option>
+                            <option value="9">9 Personer</option>
+                            <option value="10">10 Personer</option>
 
                         </select>
                     </div>
