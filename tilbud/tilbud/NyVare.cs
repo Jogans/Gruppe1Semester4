@@ -18,6 +18,7 @@ namespace tilbud
         public DateTime ValidTil { get; set; }
         public int Volumen { get; set; }
         public double? Volumenpris { get; set; }
+        public string ImgSrc { get; set; }
 
         public virtual ICollection<VareKategori> VareKategori { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.EntityFrameworkCore.Internal;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,10 @@ namespace tilbud
             {
                 foreach (JObject data in array.Children<JObject>())
                 {
-                    Vare vare = new Vare();
+                    NyVare vare = new NyVare();
                     vare.Volumen = 500;
+
+                    string kategori = "";
                     foreach (JProperty prop in data.Properties())
                     {
                         string propname = prop.Name;
@@ -34,22 +37,43 @@ namespace tilbud
                                 vare.Butik = (string)prop.Value;
                                 break;
                             case "validFrom":
-                                vare.ValidFra = (string)prop.Value;
+                                vare.ValidFra = (DateTime)prop.Value;
                                 break;
                             case "validTo":
-                                vare.ValidTil = (string)prop.Value;
+                                vare.ValidTil = (DateTime)prop.Value;
                                 break;
                             case "volumePrice":
                                 vare.Volumenpris = (double)prop.Value;
                                 break;
                             case "imageUrl":
-                                vare.Imgsrc = (string)prop.Value;
+                                vare.ImgSrc = (string)prop.Value;
+                                break;
+                            case "category":
+                                kategori = (string)prop.Value["name"];
                                 break;
                         }
 
 
                     }
-                    db.Vare.Add(vare);
+
+                    if (!db.NyVare.Any(v => v.Navn == vare.Navn && v.Butik == vare.Butik))
+                    {
+                        db.NyVare.Add(vare);
+
+                        if (!db.Kategori.Any(k => k.Kategori1 == kategori))
+                        {
+                            db.Kategori.Add(new Kategori() { Kategori1 = kategori });
+                        }
+
+                        var vk = new VareKategori();
+                        vk.VareId = vare.VareId;
+                        vk.Kategori = kategori;
+                        db.VareKategori.Add(vk);
+                    }
+
+
+
+
                 }
                 db.SaveChanges();
             }

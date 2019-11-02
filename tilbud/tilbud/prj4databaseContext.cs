@@ -49,7 +49,7 @@ namespace tilbud
             modelBuilder.Entity<Abningstid>(entity =>
             {
                 entity.HasKey(e => e.Ugedag)
-                    .HasName("PK__Abningst__363950E8919206B7");
+                    .HasName("PK__Abningst__363950E8F57F7389");
 
                 entity.Property(e => e.Ugedag)
                     .HasColumnName("ugedag")
@@ -66,7 +66,7 @@ namespace tilbud
                 entity.HasOne(d => d.Butik)
                     .WithMany(p => p.Abningstid)
                     .HasForeignKey(d => d.ButikId)
-                    .HasConstraintName("FK__Abningsti__butik__0169315C");
+                    .HasConstraintName("FK__Abningsti__butik__0C70CFB4");
             });
 
             modelBuilder.Entity<Butik>(entity =>
@@ -91,7 +91,7 @@ namespace tilbud
                     .WithMany(p => p.ButikNavigation)
                     .HasForeignKey(d => d.VareId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Butik__vareID__7E8CC4B1");
+                    .HasConstraintName("FK__Butik__vareID__09946309");
             });
 
             modelBuilder.Entity<IngredientList>(entity =>
@@ -134,7 +134,7 @@ namespace tilbud
             modelBuilder.Entity<Kategori>(entity =>
             {
                 entity.HasKey(e => e.Kategori1)
-                    .HasName("PK__Kategori__BFBCD944A90B6363");
+                    .HasName("PK__Kategori__BFBCD94401F34AC9");
 
                 entity.Property(e => e.Kategori1)
                     .HasColumnName("kategori")
@@ -146,13 +146,18 @@ namespace tilbud
             modelBuilder.Entity<NyVare>(entity =>
             {
                 entity.HasKey(e => e.VareId)
-                    .HasName("PK__NyVare__0A039BF9D46E6C18");
+                    .HasName("PK__NyVare__0A039BF99CA62479");
 
                 entity.Property(e => e.VareId).HasColumnName("vareID");
 
                 entity.Property(e => e.Butik)
                     .HasColumnName("butik")
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ImgSrc)
+                    .HasColumnName("img_src")
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Navn)
@@ -199,7 +204,7 @@ namespace tilbud
             modelBuilder.Entity<OpskriftKategori>(entity =>
             {
                 entity.HasKey(e => new { e.OpskriftId, e.Kategori })
-                    .HasName("PK__Opskrift__869396F90FA7D6C1");
+                    .HasName("PK__Opskrift__869396F91D4CBD8D");
 
                 entity.Property(e => e.OpskriftId).HasColumnName("opskriftID");
 
@@ -211,12 +216,12 @@ namespace tilbud
                 entity.HasOne(d => d.KategoriNavigation)
                     .WithMany(p => p.OpskriftKategori)
                     .HasForeignKey(d => d.Kategori)
-                    .HasConstraintName("FK__OpskriftK__kateg__7BB05806");
+                    .HasConstraintName("FK__OpskriftK__kateg__06B7F65E");
 
                 entity.HasOne(d => d.Opskrift)
                     .WithMany(p => p.OpskriftKategori)
                     .HasForeignKey(d => d.OpskriftId)
-                    .HasConstraintName("FK__OpskriftK__opskr__7ABC33CD");
+                    .HasConstraintName("FK__OpskriftK__opskr__05C3D225");
             });
 
             modelBuilder.Entity<PrefsCategories>(entity =>
@@ -508,7 +513,7 @@ namespace tilbud
             modelBuilder.Entity<VareKategori>(entity =>
             {
                 entity.HasKey(e => new { e.VareId, e.Kategori })
-                    .HasName("PK__VareKate__51F8566D18214137");
+                    .HasName("PK__VareKate__51F8566D62A76F18");
 
                 entity.Property(e => e.VareId).HasColumnName("vareID");
 
@@ -520,12 +525,12 @@ namespace tilbud
                 entity.HasOne(d => d.KategoriNavigation)
                     .WithMany(p => p.VareKategori)
                     .HasForeignKey(d => d.Kategori)
-                    .HasConstraintName("FK__VareKateg__kateg__75F77EB0");
+                    .HasConstraintName("FK__VareKateg__kateg__00FF1D08");
 
                 entity.HasOne(d => d.Vare)
                     .WithMany(p => p.VareKategori)
                     .HasForeignKey(d => d.VareId)
-                    .HasConstraintName("FK__VareKateg__vareI__75035A77");
+                    .HasConstraintName("FK__VareKateg__vareI__000AF8CF");
             });
         }
     }
