@@ -9,4 +9,8 @@
     <ProjectReference Include="..\tilbud\tilbud.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\kategori\" />
+  </ItemGroup>
+
 </Project>
