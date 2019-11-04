@@ -7,7 +7,12 @@ namespace tilbud.Model
 {
     public class kategoriStreng
     {
+        public kategoriStreng()
+        {
+            varer = new List<NyVare>();
+        }
         public string kategori { get; set; }
         public List<string> kategories { get; set; }
+        public List<NyVare> varer {get; set;}
     }
 }

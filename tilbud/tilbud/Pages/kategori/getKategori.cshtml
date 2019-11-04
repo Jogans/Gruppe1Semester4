@@ -26,6 +26,10 @@
         <input type="submit" value="Se"/>
     </div>
 </form>
+@foreach(var vare in Model.varer)
+    {
+        <p>@vare.Navn</p>
+    }
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

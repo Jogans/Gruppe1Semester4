@@ -20,12 +20,41 @@ namespace tilbud.Controllers
         [HttpPost]
         public IActionResult getKategori(kategoriStreng str)
         {
-            return View(str);
+            str.varer.InsertRange(0,getVarer(str.kategori));
+            return View("getKategori",str);
         }
 
         public IActionResult getKategori()
         {
-            return View();
+            return View("getKategori",new kategoriStreng());
+        }
+
+        public List<NyVare> getVarer(string kategori)
+        {
+
+            List<NyVare> liste = new List<NyVare>();
+            using (var db = new prj4databaseContext())
+            {
+
+                var vk = db.VareKategori.Where(v => v.Kategori == kategori).ToList();
+                if (vk.Count != 0)
+                {
+                    foreach (var varekat in vk)
+                    {
+                        liste.Add(db.NyVare.Where(v => v.VareId == varekat.VareId).First());
+                    }
+
+                }
+
+            }
+
+            return liste;
+            //string str = "";
+            //foreach (var vare in liste)
+            //{
+            //    str += vare + "<br>";
+            //}
+            //return str;
         }
     }
 }

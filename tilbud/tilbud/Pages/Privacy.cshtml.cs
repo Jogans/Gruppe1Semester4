@@ -25,9 +25,10 @@ namespace tilbud.Pages
             }
         }
 
-        public string getVarer()
+        public string getVarer(string kategori)
         {
-            string kategori = choosenCategory;
+            if (kategori == "")
+                return "";
             List<string> liste = new List<string>();
             using (var db = new prj4databaseContext())
             {
@@ -35,9 +36,9 @@ namespace tilbud.Pages
                 var vk = db.VareKategori.Where(v => v.Kategori == kategori).ToList();
                 if (vk.Count != 0)
                 {
-                    foreach (var vare in vk)
+                    foreach (var varekat in vk)
                     {
-                        liste.Add(db.Vare.Where(v => v.VareId == vare.VareId).First().Navn);
+                        liste.Add(db.Vare.Where(v => v.VareId == varekat.VareId).First().Navn);
                     }
                     
                 }
