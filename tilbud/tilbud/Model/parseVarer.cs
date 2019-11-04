@@ -24,11 +24,16 @@ namespace tilbud
                     string kategori = "";
                     foreach (JProperty prop in data.Properties())
                     {
+
                         string propname = prop.Name;
                         switch (propname)
                         {
                             case "title":
-                                vare.Navn = (string)prop.Value;
+                                string str = (string) prop.Value;
+                                if(str.Length >= 49)
+                                    vare.Navn = str.Substring(0, 49);
+                                else
+                                    vare.Navn = str;
                                 break;
                             case "price":
                                 vare.Pris = (double)prop.Value;
@@ -37,10 +42,10 @@ namespace tilbud
                                 vare.Butik = (string)prop.Value;
                                 break;
                             case "validFrom":
-                                vare.ValidFra = (DateTime)prop.Value;
+                                vare.ValidFra = new DateTime(2019, 10, 10, 20, 10, 20);
                                 break;
                             case "validTo":
-                                vare.ValidTil = (DateTime)prop.Value;
+                                vare.ValidTil = new DateTime(2019,10,10,20,10,20);
                                 break;
                             case "volumePrice":
                                 vare.Volumenpris = (double)prop.Value;
@@ -69,13 +74,15 @@ namespace tilbud
                         vk.VareId = vare.VareId;
                         vk.Kategori = kategori;
                         db.VareKategori.Add(vk);
+
+                        db.SaveChanges();
                     }
 
 
 
 
                 }
-                db.SaveChanges();
+                
             }
         }
     }

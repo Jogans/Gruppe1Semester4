@@ -1,0 +1,32 @@
+﻿@model tilbud.Model.kategoriStreng
+
+@{
+    ViewData["Title"] = "getKategori";
+}
+@{
+    Model.kategories = new List<string>();
+    using (var db = new prj4databaseContext())
+    {
+        foreach (var kategori in db.Kategori)
+        {
+            Model.kategories.Add(kategori.Kategori1);
+        }
+
+    }
+}
+<h1>getKategori</h1>
+<form asp-action="getKategori">
+    <div class="form-group">
+        <select name="kategori">
+            @foreach (var kategori in Model.kategories)
+            {
+                <option value="@kategori">@kategori</option>
+            }
+        </select>
+        <input type="submit" value="Se"/>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
