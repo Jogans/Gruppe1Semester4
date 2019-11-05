@@ -18,10 +18,10 @@ namespace tilbud
         // GET: /<controller>/
 
         [HttpPost]
-        public ViewResult AddVare([Bind("tekst")]VareJson vare)
+        public void AddVare([Bind("tekst")]VareJson vare)
         {
             parseVarer.insertVare(vare.tekst);
-            return View(vare);
+            
         }
     }
 }

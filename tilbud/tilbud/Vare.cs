@@ -5,6 +5,11 @@ namespace tilbud
 {
     public partial class Vare
     {
+        public Vare()
+        {
+            ButikNavigation = new HashSet<Butik>();
+        }
+
         public int VareId { get; set; }
         public string Navn { get; set; }
         public double? Pris { get; set; }
@@ -14,5 +19,7 @@ namespace tilbud
         public double? Volumenpris { get; set; }
         public double? Volumen { get; set; }
         public string Imgsrc { get; set; }
+
+        public virtual ICollection<Butik> ButikNavigation { get; set; }
     }
 }
