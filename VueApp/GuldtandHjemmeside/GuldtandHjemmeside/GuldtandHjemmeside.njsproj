@@ -33,11 +33,12 @@
     <Content Include="public\index.html" />
     <Content Include="src\App.vue" />
     <Content Include="src\assets\Pics\Pizza_Picture.jpg" />
+    <Content Include="src\components\Recepies\PizzaHomemade.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\CreateUser.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\components\HomemadePizzaTest.vue" />
-    <Content Include="src\components\Recepies\HomemadePizza.vue" />
     <Content Include="src\components\StorePage.vue" />
     <Content Include="src\components\Header.vue" />
     <Content Include="src\components\NewPage.vue" />
