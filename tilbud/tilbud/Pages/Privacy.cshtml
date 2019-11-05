@@ -1,8 +1,28 @@
 ﻿@page
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
 @model PrivacyModel
 @{
     ViewData["Title"] = "Privacy Policy";
 }
+<head>
+    <script>
+        function getVare() {
+            alert("tester");
+            var select = document.getElementById("kategori");
+            var selectedValue = select.options[select.selectedIndex].value;
+            @Model.choosenCategory = selectedValue;
+        }
+    </script>
+</head>
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
+hejsa
+
+    <select name="kategori">
+        @foreach (var kategori in Model.kategories)
+        {
+            <option value="@kategori">@kategori</option>
+        }
+    </select>
+

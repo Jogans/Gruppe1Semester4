@@ -1,7 +1,9 @@
 <template>
     <div id="app">
         <Header />
-        <Sidebar />
+        <div class="sidebar-panel-nav">
+            <Sidebar />
+        </div>
         <router-view /> 
     </div>
 </template>
@@ -19,6 +21,7 @@
 </script>
 
 <style>
+    @media only screen and (max-width: 600px) {}
      .main-nav {
    display: flex;
    justify-content: space-between;

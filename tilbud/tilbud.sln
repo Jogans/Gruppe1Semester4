@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tilbud", "tilbud\tilbud.csproj", "{974EF3D6-4159-4D4A-9C17-11B9975B08C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transfer", "Transfer\Transfer.csproj", "{93E7051D-A9C5-4621-A2C4-9BB2430AD2E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testprogram", "Testprogram\Testprogram.csproj", "{564ABFD6-697D-4EDF-8093-FD20EEA6589C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{974EF3D6-4159-4D4A-9C17-11B9975B08C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{974EF3D6-4159-4D4A-9C17-11B9975B08C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{974EF3D6-4159-4D4A-9C17-11B9975B08C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{93E7051D-A9C5-4621-A2C4-9BB2430AD2E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{93E7051D-A9C5-4621-A2C4-9BB2430AD2E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{93E7051D-A9C5-4621-A2C4-9BB2430AD2E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93E7051D-A9C5-4621-A2C4-9BB2430AD2E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{564ABFD6-697D-4EDF-8093-FD20EEA6589C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564ABFD6-697D-4EDF-8093-FD20EEA6589C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564ABFD6-697D-4EDF-8093-FD20EEA6589C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564ABFD6-697D-4EDF-8093-FD20EEA6589C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
