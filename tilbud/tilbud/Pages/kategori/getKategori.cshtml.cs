@@ -24,7 +24,7 @@ namespace tilbud.Pages.kategori
             List<NyVare> liste = new List<NyVare>();
             using (var db = new prj4databaseContext())
             {
-
+                
                 var vk = db.VareKategori.Where(v => v.Kategori == kategori).ToList();
                 if (vk.Count != 0)
                 {

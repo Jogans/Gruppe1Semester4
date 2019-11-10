@@ -26,9 +26,13 @@ namespace tilbud.Controllers
 
         public IActionResult getKategori()
         {
-            return View("getKategori",new kategoriStreng());
+            return View("getKategori");
         }
 
+        public IActionResult getKategori2()
+        {
+            return View("getKategori");
+        }
         public List<NyVare> getVarer(string kategori)
         {
 
