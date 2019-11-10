@@ -4,15 +4,13 @@
         <div class="header">
             <div class="TopPart">
                 <div class="title">
-                    <!-- <router-link to='/'>Guldtand</!--router-link> -->
                     <router-link to="/"><img src="@/assets/Pics/Guldtand.jpg" /></router-link>
+                        <button class="Login" type="button">Login</button>
+                        <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
+                        <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
                 </div>
 
-                <div class="UserBtn">
-                    <button class="Login" type="button">Login</button>
-                    <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
-                    <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
-                </div>
+
             </div>
             <div class="SearchBar">
                 <input style="height: 32px; width: 704px;" type="text" placeholder="Search..." required>
@@ -32,6 +30,7 @@
                 <router-link to="/VegiPage" class="btn_Vegi" tag="button">Vegetar retter</router-link>
                 <router-link to="/ClassicPage" class="btn_Classic" tag="button">Klassiske retter</router-link>
                 <router-link to="/StorePage" class="btn_Store" tag="button">V&#230;lg Butik</router-link>
+                <router-link to="/CreateRecipe" class="btn_CreateRecipe" tag="button">Opret Opskrift</router-link>
             </div>
         </div>
     </keep-alive>
@@ -55,11 +54,13 @@
         float: left;
         height: 10%;
         width: 10%;
+        display: block;
+        overflow: auto;
     }
 
     .header {
         width: 100%;
-        height: 120px;
+        height: auto;
         background-color: white;
         max-width: 65%;
         margin: auto;
@@ -72,10 +73,15 @@
 
     .title {
         float: left;
+        display: block;
         position: relative;
     }
 
     .UserBtn {
+        display: block;
+        position: relative;
+        clear: left;
+        float: right;
     }
 
     .Login {
@@ -89,7 +95,6 @@
         display: block;
         position: relative;
         float: right;
-        top: auto;
     }
 
     .MyPage {

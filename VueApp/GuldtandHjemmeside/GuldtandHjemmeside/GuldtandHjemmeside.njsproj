@@ -34,7 +34,10 @@
     <Content Include="src\App.vue" />
     <Content Include="src\assets\Pics\Guldtand.jpg" />
     <Content Include="src\assets\Pics\Pizza_Picture.jpg" />
-    <Content Include="src\components\Recepies\PizzaHomemade.vue">
+    <Content Include="src\components\CreateRecipe.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\Recipes\PizzaHomemade.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\CreateUser.vue">
@@ -67,7 +70,7 @@
     <Folder Include="src\assets\" />
     <Folder Include="src\components\" />
     <Folder Include="src\assets\Pics\" />
-    <Folder Include="src\components\Recepies\" />
+    <Folder Include="src\components\Recipes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="babel.config.js" />

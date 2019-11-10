@@ -33,7 +33,6 @@
                         <li class="p4">1 fed hvidl&#248;g</li>
                         <li class="p4">1 ds hakkede tomater</li>
                         <li class="p4">1/2 spsk honning eller sirup</li>
-                        <li class="p4">2-3 ansjosfileter</li>
                         <li class="p4">1/2 tsk oregano</li>
                         <li class="p4">1/2 tsk basilikum</li>
                         <li class="p4">1/2 tsk chiliflager</li>
@@ -45,7 +44,7 @@
                     <ul>
                         <li class="p4">2 peberfrugter</li>
                         <li class="p4">125 g champignoner</li>
-                        <li class="p4">100 g pepperoni eller luftt&#248;rret chorizo</li>
+                        <li class="p4">100 g pepperoni</li>
                         <li class="p4">100 g ost maks. 30+</li>
                     </ul>
                 </div>
