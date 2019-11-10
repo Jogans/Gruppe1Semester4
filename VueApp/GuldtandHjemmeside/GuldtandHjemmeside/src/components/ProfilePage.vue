@@ -1,9 +1,9 @@
 <template>
     <div class="bodyProfilePage">
         <br style="clear:both" />
-        <h1>En helt fantastisk side til Rasmus hvor han kan fjolle rundt og lave en profil til os alle
+        <h1>En helt fantastisk side til Frederik hvor han kan fjolle rundt og lave en profil til os alle
         <br/>
-        RASMUS HAR MUTEXEN
+        FREDERIK HAR MUTEXEN
         </h1>
     </div>
 </template>

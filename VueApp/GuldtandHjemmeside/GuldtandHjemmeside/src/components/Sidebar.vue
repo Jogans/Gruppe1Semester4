@@ -6,16 +6,16 @@
 
                     <div class="butikkerValg">
                         <input type="checkbox" id="cb1" />
-                        <label for="cb1"><img src="@/assets/Pics/Netto.png" /></label>
+                        <label for="cb1"><img src="@/assets/Pics/Netto.png" alt="Netto" /></label>
                         <br style="clear:both" />
                         <input type="checkbox" id="cb2" />
-                        <label for="cb2"><img src="@/assets/Pics/Foetex.png" /></label>
+                        <label for="cb2"><img src="@/assets/Pics/Foetex.png" alt="Foetex" /></label>
                         <br style="clear:both" />
                         <input type="checkbox" id="cb3" />
-                        <label for="cb3"><img src="@/assets/Pics/Rema.jpg" /></label>
+                        <label for="cb3"><img src="@/assets/Pics/Rema.jpg" alt="Rema" /></label>
                         <br style="clear:both" />
                         <input type="checkbox" id="cb4" />
-                        <label for="cb4"><img src="@/assets/Pics/Fakta.png" /></label>
+                        <label for="cb4"><img src="@/assets/Pics/Fakta.png" alt="Fakta" /></label>
                     </div>
 
                     <br style="clear:both" />
