@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GuldtandMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace GuldtandMVC.Controllers
 {
@@ -51,6 +52,19 @@ namespace GuldtandMVC.Controllers
             }
 
             return liste;
+        }
+
+
+        public string getAllVarer()
+        {
+
+            using(var db = new prj4databaseContext())
+            {
+                var varer = db.NyVare.ToArray();
+
+                var json = JsonConvert.SerializeObject(varer);
+                return json; 
+            } 
         }
     }
 }
