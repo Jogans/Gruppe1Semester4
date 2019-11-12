@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using tilbud;
+using tilbud.Queries;
 using Transfer.Models;
 
 namespace Testprogram
@@ -9,6 +10,18 @@ namespace Testprogram
     {
         static void Main(string[] args)
         {
+            prj4databaseContext context = new prj4databaseContext();
+            NyRecipeQuery test = new NyRecipeQuery
+            {
+                LoadIngredientList = true,
+                LoadSubscriptions = true
+            };
+            var udskrift = test.Execute(context);
+
+            //foreach (var VARIABLE in udskrift)
+            //{
+            //    Console.WriteLine($"{VARIABLE}");
+            //}
             //Console.WriteLine("Hello World!");
 
             //prj4databaseContext context = new prj4databaseContext();
@@ -24,10 +37,11 @@ namespace Testprogram
             //var1.Volumenpris = 100;
             //var1.Volumen = 200;
             //var1.Imgsrc = "";
-            
+
             //objekt.InsertVare(var1);
             //objekt.Save();
 
+            /*
             prj4databaseContext context = new prj4databaseContext();
             RecipesRepository repo = new RecipesRepository(context);
             IngredientList liste = new IngredientList();
@@ -67,6 +81,8 @@ namespace Testprogram
 
             repo.InsertRecipe(recipe);
             repo.Save();
+            */
+
         }
     }
 }
