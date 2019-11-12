@@ -1,7 +1,7 @@
 <template>
     <div class="bodyHome">
         <br style="clear:both" />
-        <h1>Forside</h1>
+        <h1>Forside æÆøØåÅ</h1>
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
