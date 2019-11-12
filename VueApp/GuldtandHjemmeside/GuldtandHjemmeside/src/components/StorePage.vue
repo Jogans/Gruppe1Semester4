@@ -2,44 +2,49 @@
     <script src="https://unpkg.com/vue"></script>
 </head>
 <template>
-    
+
     <div class="bodyStorePage">
         <br style="clear:both" />
         <h1>Nye retter</h1>
-        <div id="StorePage">{{msg}}</div>Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
+        <div id="StorePage">
+            <button class="test_btn" @click="created">Test</button>
+            <br style="clear:both" />
+            {{msg}}
+            <br style="clear:both" />
+            {{test}}
+
+        </div>
     </div>
 </template>
 
 
-    
-    
-<script src="https://unpkg.com/vue">
+
+
+<script>
     //import Vue from 'vue';
     //Vue.msg = "tester tester";
     //document.getElementById("tilbud").innerHTML = "Tester dette!!";
-    new Vue({
-        el: '#StorePage',
-        data:{
-            msg: 'data'
-    }
-    })
+
+    //new Vue({
+    //    el: '#StorePage',
+    //    data:{
+    //        msg: 'data'
+    //}
+    //})
     export default {
         name: 'StorePage',
         props: {
         },
-        data() {
-            //console.log("Dette virker.");
+        data: function () {
             return {
-                msg: 'Det virker'
+                test: 'Det virker'
+            }
+        },
+        methods: {
+            created() {
+                this.$http.get("http://skeldekrojmand.dk/tilbud.txt").then(res => {
+                    this.msg = res.body
+                })
             }
         }
     };
