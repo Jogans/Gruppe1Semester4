@@ -5,12 +5,40 @@
             <div class="TopPart">
                 <div class="title">
                     <router-link to="/"><img src="@/assets/Pics/Guldtand.jpg" alt="Guldtand" /></router-link>
-                        <button class="Login" type="button">Login</button>
+                        <button onclick="document.getElementById('id01').style.display='block'" class="Login" style="width:auto" type="button">Login</button>
                         <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
                         <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
                 </div>
 
+                <div id="id01" class="modal">
+                    <form class="modal-content animate" action="/action_page.php" method="post">
+                        <div class="imcontainer">
+                            <span 
+                                  onclick="document.getElementById('id01').style.display='none'"
+                                  class="close" title="close Modal">&times;</span>
+                             
+                        </div>
 
+                        <div class="container">
+                            <label for="uname"><b>Username</b></label>
+                            <input type="text" placeholder="Enter Username" name="uname" required />
+
+                            <label for="psw"><b>Password</b></label>
+                            <input type="password" placeholder="Enter Password" name="psw" required />
+
+                            <button class="modla_login" type="submit">Login</button>
+                            <label>
+                                <input type="checkbox" checked="checked" name="remember"/>
+                                Remember me
+                            </label>
+                        </div>
+
+                        <div class="container" style="background-color:#f1f1f1">
+                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                            <span class="psw">Forgot <a href="#">password?</a></span>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="SearchBar">
                 <input style="height: 32px; width: 704px;" type="text" placeholder="Search..." required>
@@ -42,12 +70,128 @@
         props: {
         }
     };
+    // Get the modal 
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.taget == modal) {
+            modal.style.display = "none";
+        }
+    }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-  
+    /* Full width input fields */
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+    
+    /* Set a style for login button in the modal */
+    .modla_login {
+         background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        width: auto; 
+        padding: 10px 18px;
+        background-color: #f44336;
+    }
+
+    /* Conter the and position the close button */
+    .imcontainer {
+        text-align: center;
+        margin: 24px 0 12px 0;
+        position: relative;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    span.psw {
+        float: right; 
+        padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        right: 0;
+        top: 0; 
+        width: 50%; /* Half width */
+        height: 50%; /* Half height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        padding-top: 60px;
+    }
+
+    /* Modal Contect/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto; /* 5% from the top, 15% from the buttom and centered */
+        border: 1px solid #888;
+        width: 80%; /* Colud be more or less depending on screen size */
+    }
+
+    /* The Close Button (x) */
+    .close {
+        position: absolute; 
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px; 
+        font-weight: bold;
+    }
+
+    .close:hover, .close:focus {
+        color: red;
+        cursor: pointer;
+    }
+
+    /* Add Zoom Animation */
+    .animate {
+        -webkit-animation: animetezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animetezoom {
+        from {-webkit-transform: scale(0)}
+        to {-webkit-transform: scale(1)}
+    }
+
+    /* Change styles for span and cancel button on extra small screen */
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+
+        .cancelbtn {
+            width: 100%;
+        }
+    }
 
     img{
         position: relative;

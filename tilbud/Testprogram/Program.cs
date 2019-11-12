@@ -11,12 +11,20 @@ namespace Testprogram
         static void Main(string[] args)
         {
             prj4databaseContext context = new prj4databaseContext();
-            NyRecipeQuery test = new NyRecipeQuery
+            RecipeQuery test = new RecipeQuery
             {
                 LoadIngredientList = true,
-                LoadSubscriptions = true
+                LoadSubscriptions = true,
+                SearchRecipe = "vegetar"
             };
+
             var udskrift = test.Execute(context);
+            foreach (var VARIABLE in udskrift.Result)
+            {
+                Console.WriteLine($"{VARIABLE.Name}");
+            }
+
+            
 
             //foreach (var VARIABLE in udskrift)
             //{
