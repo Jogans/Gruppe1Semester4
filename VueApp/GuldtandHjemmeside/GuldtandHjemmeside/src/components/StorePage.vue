@@ -22,16 +22,17 @@
 
     
     
-<script src="https://unpkg.com/vue">
+<script>
     //import Vue from 'vue';
     //Vue.msg = "tester tester";
     //document.getElementById("tilbud").innerHTML = "Tester dette!!";
-    new Vue({
-        el: '#StorePage',
-        data:{
-            msg: 'data'
-    }
-    })
+
+    //new Vue({
+    //    el: '#StorePage',
+    //    data:{
+    //        msg: 'data'
+    //}
+    //})
     export default {
         name: 'StorePage',
         props: {
