@@ -62,7 +62,7 @@ namespace GuldtandMVC.Models
 
                     //FILTERING
                     //******************//
-                    //Check if name and
+                    //Check if name and store already exists
                     if (!db.NyVare.Any(v => v.Navn == vare.Navn && v.Butik == vare.Butik))
                     {
                         db.NyVare.Add(vare);
