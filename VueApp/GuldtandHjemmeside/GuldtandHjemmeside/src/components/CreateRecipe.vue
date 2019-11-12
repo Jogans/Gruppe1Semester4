@@ -53,7 +53,7 @@
             <button @click="addRow2">Tilf&#248;j ny ingrediens</button>
             <ul>
                 <li v-for="(input2, index2) in inputs2" v-bind:key="input2">
-                    <input type="text" placeholder="..." v-model="input2.one" /> 
+                    <input type="text" placeholder="..." v-model="input2.one" />
                     <input class="unit_text" type="text" v-model="input2.two" />
 
                     <select class="unit">
@@ -98,7 +98,7 @@
             deleteRow1(index1) {
                 this.inputs1.splice(index1, 1)
             },
-                        deleteRow2(index2) {
+            deleteRow2(index2) {
                 this.inputs2.splice(index2, 1)
             }
         }
@@ -120,7 +120,7 @@
         width: auto;
     }
 
-        .rows2 {
+    .rows2 {
         width: auto;
     }
 
@@ -129,14 +129,17 @@
         height: 20px;
         font-size: 18px;
     }
-    .unit_text{
+
+    .unit_text {
         width: 40px;
         margin-left: 5px;
     }
-    .unit{
-        margin-left: 5px;   
+
+    .unit {
+        margin-left: 5px;
     }
-    .btn_delete{
+
+    .btn_delete {
         margin-left: 5px;
     }
 </style>
