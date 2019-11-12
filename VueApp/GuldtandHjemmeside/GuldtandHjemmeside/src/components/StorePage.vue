@@ -9,7 +9,7 @@
         <div id="StorePage">
             <button class="test_btn" @click="created">Test</button>
             <br style="clear:both" />
-            {{msg}}
+            {{info}}
             <br style="clear:both" />
             {{test}}
 
@@ -37,14 +37,17 @@
         },
         data: function () {
             return {
-                test: 'Det virker'
+                test: 'Det virker',
+                info: null
             }
         },
         methods: {
             created() {
-                this.$http.get("http://skeldekrojmand.dk/tilbud.txt").then(res => {
-                    this.msg = res.body
-                })
+                this.$http.get('http://localhost:50400/#/Recepie/PizzaHomemade', {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }).then(response => (this.info = response))
             }
         }
     };

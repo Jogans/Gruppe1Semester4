@@ -67,6 +67,9 @@
     <Content Include="src\routes.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="vue.config.js">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="dist\" />

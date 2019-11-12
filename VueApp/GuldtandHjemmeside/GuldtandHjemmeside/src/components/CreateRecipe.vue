@@ -75,6 +75,7 @@
 </template>
 
 <script>
+
     export default {
         name: 'CreateRecepie',
         data: function () {
