@@ -31,7 +31,7 @@ namespace GuldtandMVC.Models
                 {
                     bodystring+="<tr>" +
                         "<td>"+vare.Navn+"</td>"+
-                        "<td>"+"<img src'"+vare.ImgSrc+"'/>"+"</td>" +
+                        "<td>"+"<img src='"+vare.ImgSrc+"'/>"+"</td>" +
                         "<td>"+vare.Pris+"</td>" +
                         "<td>"+"</td>" +
                         "<td>"+vare.Volumen+"</td>" +
