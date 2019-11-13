@@ -9,7 +9,8 @@
         <div id="StorePage">
             <button class="test_btn" @click="created">Test</button>
             <br style="clear:both" />
-            {{info}}
+            <span v-html="info">{{info}}</span>
+
             <br style="clear:both" />
             {{test}}
 
@@ -41,6 +42,7 @@
                 info: null
             }
         },
+        
         methods: {
             async loadPage(page) {
                 this.currentPage = page;
@@ -53,11 +55,11 @@
                 }
             },
             created() {
-                this.$http.get('https://www.example.com/', {
+                this.$http.get('https://localhost:44323/Home/searchProducts?words=fisk', {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
-                }).then(response => (this.info = response))
+                }).then(response => (this.info = response.data))
             }
         }
     };
