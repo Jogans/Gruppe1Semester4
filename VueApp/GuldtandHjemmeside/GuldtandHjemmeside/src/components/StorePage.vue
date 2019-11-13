@@ -42,6 +42,16 @@
             }
         },
         methods: {
+            async loadPage(page) {
+                this.currentPage = page;
+
+                try {
+                    let response = await this.$http.get("https://www.google.com/");
+                    window.alert(response.data);
+                } catch (err) {
+                    window.alert(err);
+                }
+            },
             created() {
                 this.$http.get('http://localhost:50400/#/Recepie/PizzaHomemade', {
                     headers: {
