@@ -43,7 +43,7 @@
         },
         methods: {
             created() {
-                this.$http.get('http://localhost:50400/#/Recepie/PizzaHomemade', {
+                this.$http.get('https://www.example.com/', {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
