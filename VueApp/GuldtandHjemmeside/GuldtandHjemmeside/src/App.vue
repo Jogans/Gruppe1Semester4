@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <Header />
+        <SearchBar />
         <div class="sidebar-panel-nav">
             <Sidebar />
         </div>
@@ -11,11 +12,14 @@
 <script>
     import Header from './components/Header.vue';
     import Sidebar from './components/Sidebar.vue';
+    import SearchBar from './components/SearchBar.vue';
+
     export default { 
         name: 'app',
         components: {
             Header,
-            Sidebar
+            Sidebar,
+            SearchBar
         }
     };
 </script>

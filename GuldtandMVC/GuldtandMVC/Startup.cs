@@ -49,6 +49,11 @@ namespace GuldtandMVC
                 app.UseHsts();
             }
 
+            app.UseCors(cors =>
+                cors.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

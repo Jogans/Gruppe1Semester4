@@ -19,7 +19,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <NodejsPort>1337</NodejsPort>
+    <NodejsPort>50400</NodejsPort>
     <StartWebBrowser>True</StartWebBrowser>
     <ScriptArguments>serve</ScriptArguments>
   </PropertyGroup>
@@ -45,6 +45,9 @@
     <Content Include="src\components\CreateUser.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\components\SearchBar.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\StorePage.vue" />
     <Content Include="src\components\Header.vue" />
     <Content Include="src\components\NewPage.vue" />
@@ -65,6 +68,9 @@
     <Content Include="src\assets\Pics\Netto.png" />
     <Content Include="src\assets\Pics\Rema.jpg" />
     <Content Include="src\routes.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="vue.config.js">
       <SubType>Code</SubType>
     </Content>
   </ItemGroup>
