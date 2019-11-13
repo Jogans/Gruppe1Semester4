@@ -16,7 +16,6 @@
                             <span 
                                   onclick="document.getElementById('id01').style.display='none'"
                                   class="close" title="close Modal">&times;</span>
-                             
                         </div>
 
                         <div class="container">
@@ -40,15 +39,6 @@
                     </form>
                 </div>
             </div>
-            <div class="SearchBar">
-                <input style="height: 32px; width: 704px;" type="text" placeholder="Search..." required>
-            </div>
-
-            <div class="SearchBarBtn">
-                <button class="SearchRecepie" style="height: 32px;" type="button">S&#248;g opskrift</button>
-                <button style="height: 32px;" type="button">S&#248;g ingrediens</button>
-            </div>
-
             <br style="clear:both" />
 
             <div class="Buttons2">
@@ -247,7 +237,7 @@
         float: right;
     }
 
-    .SearchBar {
+    /*.SearchBar {
         float: left;
         display: inline-block;
         color: black;
@@ -269,7 +259,7 @@
         margin: 6px;
         padding-right: 15px;
         padding-bottom: 10px;
-    }
+    }*/
 
     .btn_Top {
         background-color: white;

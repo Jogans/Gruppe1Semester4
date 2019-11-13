@@ -7,12 +7,14 @@
         <br style="clear:both" />
         <h1>Nye retter</h1>
         <div id="StorePage">
-            <button class="test_btn" @click="created">Test</button>
             <br style="clear:both" />
+            <div class="SearchBar">
+                <input style="height: 32px; width: 704px;" type="text" v-model="searchParameter" placeholder="Search..." required>
+            </div>
+            <button class="test_btn" @click="created">Test</button>
             <span v-html="info">{{info}}</span>
 
             <br style="clear:both" />
-            {{test}}
 
         </div>
     </div>
@@ -39,23 +41,14 @@
         data: function () {
             return {
                 test: 'Det virker',
-                info: null
+                info: null,
+                searchParameter: null
             }
         },
         
         methods: {
-            async loadPage(page) {
-                this.currentPage = page;
-
-                try {
-                    let response = await this.$http.get("https://www.google.com/");
-                    window.alert(response.data);
-                } catch (err) {
-                    window.alert(err);
-                }
-            },
             created() {
-                this.$http.get('https://localhost:44323/Home/searchProducts?words=fisk', {
+                this.$http.get('https://localhost:44323/Home/searchProducts?words=' + this.searchParameter, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
@@ -72,6 +65,9 @@
         width: 100%;
         max-width: 65%;
         margin: auto;
+    }
+    img{
+
     }
 </style>
 
