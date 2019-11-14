@@ -37,11 +37,11 @@
                     },
                 }).then(response => (this.info = response.data))
             },
-           /* computed: {
+            /*computed: {
                 filteredList() {
-                    return this.info.filter((data) => {
-                        return data.toLowerCase().includes(this.searchParameter.toLowerCase())
-                    })
+                    return this.data.filter((info) => {
+                        return info.toLowerCase().includes(this.searchParameter.toLowerCase());
+                    });
                 }
             }*/
         }
