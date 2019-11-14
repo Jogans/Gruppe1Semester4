@@ -69,7 +69,7 @@ namespace tilbud.Pages
                     db.Vare.Add(vare);
                 }
                 db.SaveChanges();
-                db.Opskrift.search
+                //db.Opskrift.search
             }
             
             /*foreach(JObject data in array.Children<JObject>())

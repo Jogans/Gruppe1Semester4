@@ -15,7 +15,8 @@ namespace Testprogram
             {
                 LoadIngredientList = true,
                 LoadSubscriptions = true,
-                SearchRecipe = "vegetar"
+                SearchRecipe = "vegetar",
+                SearchIngredient = "oksekød"
             };
 
             var udskrift = test.Execute(context);
