@@ -37,13 +37,6 @@
                     },
                 }).then(response => (this.info = response.data))
             },
-           /* computed: {
-                filteredList() {
-                    return this.info.filter((data) => {
-                        return data.toLowerCase().includes(this.searchParameter.toLowerCase())
-                    })
-                }
-            }*/
         }
 }
 </script>
