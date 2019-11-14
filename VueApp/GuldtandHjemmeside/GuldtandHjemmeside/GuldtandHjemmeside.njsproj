@@ -45,6 +45,9 @@
     <Content Include="src\components\CreateUser.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\components\SearchBar.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\StorePage.vue" />
     <Content Include="src\components\Header.vue" />
     <Content Include="src\components\NewPage.vue" />
