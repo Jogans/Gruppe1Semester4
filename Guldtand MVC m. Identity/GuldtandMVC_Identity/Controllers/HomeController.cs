@@ -5,8 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GuldtandMVC_Identity.Models;
-using iTextSharp.tool.xml.html;
-using com.sun.org.apache.xerces.@internal.parsers;
 
 namespace GuldtandMVC_Identity.Controllers
 {
@@ -20,19 +18,6 @@ namespace GuldtandMVC_Identity.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        public string searchProducts(string words)
-        {
-            var search = new Searching();
-
-            return search.searchProductsAndGetHTML(words);
-
-        }
-
-        public string searchRecipesByName(string words)
-        {
-            return "";
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

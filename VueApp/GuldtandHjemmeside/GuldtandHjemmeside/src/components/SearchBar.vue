@@ -37,6 +37,13 @@
                     },
                 }).then(response => (this.info = response.data))
             },
+            /*computed: {
+                filteredList() {
+                    return this.data.filter((info) => {
+                        return info.toLowerCase().includes(this.searchParameter.toLowerCase());
+                    });
+                }
+            }*/
         }
 }
 </script>

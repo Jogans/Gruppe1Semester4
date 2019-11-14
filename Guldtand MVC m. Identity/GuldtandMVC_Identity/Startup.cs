@@ -94,11 +94,9 @@ namespace GuldtandMVC_Identity
                 }
             });
             app.UseCookiePolicy();
-
-            app.UseCors(cors =>
-                cors.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
+            app.UseCors(cors => cors.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
 
             app.UseAuthentication();
@@ -107,7 +105,7 @@ namespace GuldtandMVC_Identity
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
             
             app.UseSpa(spa =>
