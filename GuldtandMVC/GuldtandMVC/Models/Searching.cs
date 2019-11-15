@@ -29,12 +29,14 @@ namespace GuldtandMVC.Models
 
                 foreach(var vare in result)
                 {
+                    var category = db.ProductCategory.Where(k => k.ProductId == vare.ProductId).First().CategoryName;
+                    
                     bodystring+="<tr>" +
                         "<td>"+vare.Name+"</td>"+
                         "<td>"+"<img width='10%' src='"+vare.ImgSrc+"'/>"+"</td>" +
-                        "<td>"+vare.Price+"</td>" +
-                        "<td>"+"</td>" +
-                        "<td>"+vare.Volume+"</td>" +
+                        "<td>"+vare.Price+" kr.</td>" +
+                        "<td>"+category+"</td>" +
+                        "<td>"+vare.Volume+" ml.</td>" +
                         "</tr>";
                 }
             }
