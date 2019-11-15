@@ -62,23 +62,28 @@ namespace GuldtandMVC_Identity.Models
 
                     }
 
-                    if (!db.NyVare.Any(v => v.Navn == vare.Navn && v.Butik == vare.Butik))
+                   
                     {
-                        db.NyVare.Add(vare);
-
-                        if (!db.Kategori.Any(k => k.Kategori1 == kategori))
-                        {
-                            db.Kategori.Add(new Kategori() { Kategori1 = kategori });
-                        }
-
-                        var vk = new VareKategori();
-                        vk.VareId = vare.VareId;
-                        vk.Kategori = kategori;
-                        db.VareKategori.Add(vk);
-
-                        db.SaveChanges();
+                        
                     }
+                    {
+                        if (!db.NyVare.Any(v => v.Navn == vare.Navn && v.Butik == vare.Butik))
+                        {
+                            db.NyVare.Add(vare);
 
+                            if (!db.Kategori.Any(k => k.Kategori1 == kategori))
+                            {
+                                db.Kategori.Add(new Kategori() {Kategori1 = kategori});
+                            }
+
+                            var vk = new VareKategori();
+                            vk.VareId = vare.VareId;
+                            vk.Kategori = kategori;
+                            db.VareKategori.Add(vk);
+
+                            db.SaveChanges();
+                        }
+                    }
 
 
 

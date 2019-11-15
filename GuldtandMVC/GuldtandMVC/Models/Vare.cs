@@ -19,6 +19,7 @@ namespace GuldtandMVC.Models
         public double? Volumenpris { get; set; }
         public double? Volumen { get; set; }
         public string Imgsrc { get; set; }
+        public bool UnwantedBool { get; set; }
 
         public virtual ICollection<Butik> ButikNavigation { get; set; }
     }

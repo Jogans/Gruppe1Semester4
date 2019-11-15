@@ -19,6 +19,8 @@ namespace GuldtandMVC.Models
         public int Volumen { get; set; }
         public double? Volumenpris { get; set; }
         public string ImgSrc { get; set; }
+        public bool UnwantedBool { get; set; }
+      
 
         public virtual ICollection<VareKategori> VareKategori { get; set; }
     }

@@ -12,11 +12,13 @@ namespace GuldtandMVC.Models
         {
             JObject jo = JObject.Parse(json);
             var array = (JArray)jo["adverts"];
+            List<string> Unwanted = new List<string> {"vin", "elektronik"};
 
             using (var db = new prj4databaseContext())
             {
                 foreach (JObject data in array.Children<JObject>())
                 {
+                    
                     NyVare vare = new NyVare();
                     vare.Volumen = 500;
 
@@ -25,6 +27,7 @@ namespace GuldtandMVC.Models
                     {
 
                         string propname = prop.Name;
+
                         switch (propname)
                         {
                             case "title":
@@ -54,10 +57,23 @@ namespace GuldtandMVC.Models
                                 break;
                             case "category":
                                 kategori = (string)prop.Value["name"];
+                                
+
                                 break;
                         }
 
-
+                        foreach (var Unwanted_Category in Unwanted)
+                        {
+                            if (kategori == Unwanted_Category)
+                            {
+                                vare.UnwantedBool = true;
+                            }
+                            else
+                            {
+                                vare.UnwantedBool = false;
+                            }
+                        }
+                        
                     }
 
                     //FILTERING
