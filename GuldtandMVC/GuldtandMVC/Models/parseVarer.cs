@@ -35,7 +35,7 @@ namespace GuldtandMVC.Models
                                     vare.Name = str;
                                 break;
                             case "price":
-                                vare.Price = (decimal)prop.Value;
+                                vare.Price = (double)prop.Value;
                                 break;
                             case "customerName":
                                 string retailChain = (string)prop.Value;
@@ -52,7 +52,7 @@ namespace GuldtandMVC.Models
                                 vare.ValidTo = new DateTime(2019, 10, 10, 20, 10, 20);
                                 break;
                             case "volumePrice":
-                                vare.VolumePrice = (decimal)prop.Value;
+                                vare.VolumePrice = (double)prop.Value;
                                 break;
                             case "imageUrl":
                                 vare.ImgSrc = (string)prop.Value;
@@ -73,7 +73,7 @@ namespace GuldtandMVC.Models
                     {
                         db.Product.Add(vare);
 
-                        if (!db.Category.Any(k => k.CategoryName == kategori))
+                        if (!db.Category.Any(k => k.CategoryName.Equals(kategori)))
                         {
                             db.Category.Add(new Category() { CategoryName = kategori });
                         }

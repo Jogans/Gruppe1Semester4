@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GuldtandMVC.Models
 {
-    public partial class Openhours
+    public partial class OpenHours
     {
         public string DayOfWeek { get; set; }
         public TimeSpan? OpenFrom { get; set; }
