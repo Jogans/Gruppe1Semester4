@@ -9,6 +9,6 @@ namespace GuldtandMVC.Models
         public int IngredientlistId { get; set; }
 
         public virtual Ingredient Ingredient { get; set; }
-        public virtual Ingredientlist Ingredientlist { get; set; }
+        //public virtual Ingredientlist Ingredientlist { get; set; }
     }
 }

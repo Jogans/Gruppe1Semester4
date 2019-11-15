@@ -10,7 +10,7 @@ namespace GuldtandMVC.Models
         public decimal Amount { get; set; }
         public string AmountUnit { get; set; }
 
-        public virtual Ingredientlist Ingredientlist { get; set; }
+        //public virtual Ingredientlist Ingredientlist { get; set; }
         public virtual Recipe Recipe { get; set; }
     }
 }
