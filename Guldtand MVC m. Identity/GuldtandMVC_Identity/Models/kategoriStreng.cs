@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GuldtandMVC_Identity.Data;
 
 namespace GuldtandMVC_Identity.Models
 {
@@ -9,10 +10,10 @@ namespace GuldtandMVC_Identity.Models
     {
         public KategoriStreng()
         {
-            varer = new List<NyVare>();
+            varer = new List<Product>();
         }
         public string kategori { get; set; }
         public List<string> kategories { get; set; }
-        public List<NyVare> varer { get; set; }
+        public List<Product> varer { get; set; }
     }
 }
