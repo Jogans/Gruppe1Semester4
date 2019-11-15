@@ -19,8 +19,8 @@ namespace GuldtandMVC_Identity.Models
             {
                 foreach (JObject data in array.Children<JObject>())
                 {
-                    NyVare vare = new NyVare();
-                    vare.Volumen = 500;
+                    Product vare = new Product();
+                    vare.Volume = 500;
 
                     string kategori = "";
                     foreach (JProperty prop in data.Properties())
@@ -32,24 +32,24 @@ namespace GuldtandMVC_Identity.Models
                             case "title":
                                 string str = (string)prop.Value;
                                 if (str.Length >= 49)
-                                    vare.Navn = str.Substring(0, 49);
+                                    vare.Name = str.Substring(0, 49);
                                 else
-                                    vare.Navn = str;
+                                    vare.Name = str;
                                 break;
                             case "price":
-                                vare.Pris = (double)prop.Value;
+                                vare.Price = (double)prop.Value;
                                 break;
                             case "customerName":
-                                vare.Butik = (string)prop.Value;
+                                vare.RetailChain.Name = (string)prop.Value;
                                 break;
                             case "validFrom":
-                                vare.ValidFra = new DateTime(2019, 10, 10, 20, 10, 20);
+                                vare.ValidFrom = new DateTime(2019, 10, 10, 20, 10, 20);
                                 break;
                             case "validTo":
-                                vare.ValidTil = new DateTime(2019, 10, 10, 20, 10, 20);
+                                vare.ValidTo = new DateTime(2019, 10, 10, 20, 10, 20);
                                 break;
                             case "volumePrice":
-                                vare.Volumenpris = (double)prop.Value;
+                                vare.VolumePrice = (double)prop.Value;
                                 break;
                             case "imageUrl":
                                 vare.ImgSrc = (string)prop.Value;
@@ -62,28 +62,23 @@ namespace GuldtandMVC_Identity.Models
 
                     }
 
-                   
+                    if (!db.Product.Any(v => v.Name == vare.Name && v.RetailChainId == vare.RetailChainId))
                     {
-                        
-                    }
-                    {
-                        if (!db.NyVare.Any(v => v.Navn == vare.Navn && v.Butik == vare.Butik))
+                        db.Product.Add(vare);
+
+                        if (!db.Category.Any(k => k.CategoryName == kategori))
                         {
-                            db.NyVare.Add(vare);
-
-                            if (!db.Kategori.Any(k => k.Kategori1 == kategori))
-                            {
-                                db.Kategori.Add(new Kategori() {Kategori1 = kategori});
-                            }
-
-                            var vk = new VareKategori();
-                            vk.VareId = vare.VareId;
-                            vk.Kategori = kategori;
-                            db.VareKategori.Add(vk);
-
-                            db.SaveChanges();
+                            db.Category.Add(new Category() { CategoryName = kategori });
                         }
+
+                        var vk = new ProductCategory();
+                        vk.ProductId = vare.ProductId;
+                        vk.CategoryName = kategori;
+                        db.ProductCategory.Add(vk);
+
+                        db.SaveChanges();
                     }
+
 
 
 

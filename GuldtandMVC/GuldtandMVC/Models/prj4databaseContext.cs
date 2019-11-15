@@ -15,14 +15,15 @@ namespace GuldtandMVC.Models
         {
         }
 
-        public virtual DbSet<Abningstid> Abningstid { get; set; }
-        public virtual DbSet<Butik> Butik { get; set; }
-        public virtual DbSet<Kategori> Kategori { get; set; }
-        public virtual DbSet<NyVare> NyVare { get; set; }
-        public virtual DbSet<Opskrift> Opskrift { get; set; }
-        public virtual DbSet<OpskriftKategori> OpskriftKategori { get; set; }
-        public virtual DbSet<Vare> Vare { get; set; }
-        public virtual DbSet<VareKategori> VareKategori { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Ingredient> Ingredient { get; set; }
+        public virtual DbSet<IngredientList> IngredientList { get; set; }
+        public virtual DbSet<OpenHours> OpenHours { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategory { get; set; }
+        public virtual DbSet<Recipe> Recipe { get; set; }
+        public virtual DbSet<RecipeCategory> RecipeCategory { get; set; }
+        public virtual DbSet<RetailChain> RetailChain { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -37,208 +38,213 @@ namespace GuldtandMVC.Models
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity<Abningstid>(entity =>
+            modelBuilder.Entity<Category>(entity =>
             {
-                entity.HasKey(e => e.Ugedag)
-                    .HasName("PK__Abningst__363950E8F57F7389");
+                entity.HasKey(e => e.CategoryName)
+                    .HasName("PK__category__5189E254535378E8");
 
-                entity.Property(e => e.Ugedag)
-                    .HasColumnName("ugedag")
-                    .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .ValueGeneratedNever();
+                entity.ToTable("category");
 
-                entity.Property(e => e.AbenFra).HasColumnName("aben_fra");
-
-                entity.Property(e => e.AbenTil).HasColumnName("aben_til");
-
-                entity.Property(e => e.ButikId).HasColumnName("butik_id");
-
-                entity.HasOne(d => d.Butik)
-                    .WithMany(p => p.Abningstid)
-                    .HasForeignKey(d => d.ButikId)
-                    .HasConstraintName("FK__Abningsti__butik__0C70CFB4");
-            });
-
-            modelBuilder.Entity<Butik>(entity =>
-            {
-                entity.Property(e => e.ButikId).HasColumnName("butikID");
-
-                entity.Property(e => e.Addresse)
-                    .IsRequired()
-                    .HasColumnName("addresse")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Butiknavn)
-                    .IsRequired()
-                    .HasColumnName("butiknavn")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.VareId).HasColumnName("vareID");
-
-                entity.HasOne(d => d.Vare)
-                    .WithMany(p => p.ButikNavigation)
-                    .HasForeignKey(d => d.VareId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Butik__vareID__09946309");
-            });
-
-            
-
-            modelBuilder.Entity<Kategori>(entity =>
-            {
-                entity.HasKey(e => e.Kategori1)
-                    .HasName("PK__Kategori__BFBCD94401F34AC9");
-
-                entity.Property(e => e.Kategori1)
-                    .HasColumnName("kategori")
+                entity.Property(e => e.CategoryName)
+                    .HasColumnName("category_name")
                     .HasMaxLength(50)
-                    .IsUnicode(false)
                     .ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<NyVare>(entity =>
+            modelBuilder.Entity<Ingredient>(entity =>
             {
-                entity.HasKey(e => e.VareId)
-                    .HasName("PK__NyVare__0A039BF99CA62479");
+                entity.ToTable("ingredient");
 
-                entity.Property(e => e.VareId).HasColumnName("vareID");
+                entity.HasIndex(e => e.Product)
+                    .HasName("UQ__ingredie__583517CF31C3589F")
+                    .IsUnique();
 
-                entity.Property(e => e.Butik)
-                    .HasColumnName("butik")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.IngredientId).HasColumnName("ingredient_id");
+
+                entity.Property(e => e.Amount).HasColumnName("amount");
+
+                entity.Property(e => e.AmountUnit)
+                    .HasColumnName("amount_unit")
+                    .HasMaxLength(15);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Product).HasColumnName("product");
+
+                entity.HasOne(d => d.ProductNavigation)
+                    .WithOne(p => p.Ingredient)
+                    .HasForeignKey<Ingredient>(d => d.Product)
+                    .HasConstraintName("FK__ingredien__produ__4A78EF25");
+            });
+
+            modelBuilder.Entity<IngredientList>(entity =>
+            {
+                entity.ToTable("ingredientList");
+
+                entity.HasIndex(e => e.RecipeId)
+                    .HasName("UQ__ingredie__3571ED9A29CD80B9")
+                    .IsUnique();
+
+                entity.Property(e => e.IngredientListId).HasColumnName("ingredientList_id");
+
+                entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
+
+                entity.HasOne(d => d.Recipe)
+                    .WithOne(p => p.IngredientList)
+                    .HasForeignKey<IngredientList>(d => d.RecipeId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__ingredien__recip__57D2EA43");
+            });
+
+            modelBuilder.Entity<OpenHours>(entity =>
+            {
+                entity.HasKey(e => e.DayOfWeek)
+                    .HasName("PK__open_hou__869EECA867AD9B20");
+
+                entity.ToTable("open_hours");
+
+                entity.Property(e => e.DayOfWeek)
+                    .HasColumnName("day_of_week")
+                    .HasMaxLength(15)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.OpenFrom).HasColumnName("open_from");
+
+                entity.Property(e => e.OpenTo).HasColumnName("open_to");
+
+                entity.Property(e => e.RetailChainId).HasColumnName("retail_chain_id");
+
+                entity.HasOne(d => d.RetailChain)
+                    .WithMany(p => p.OpenHours)
+                    .HasForeignKey(d => d.RetailChainId)
+                    .HasConstraintName("FK__open_hour__retai__41E3A924");
+            });
+
+            modelBuilder.Entity<Product>(entity =>
+            {
+                entity.ToTable("product");
+
+                entity.Property(e => e.ProductId).HasColumnName("product_id");
 
                 entity.Property(e => e.ImgSrc)
                     .HasColumnName("img_src")
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
+                    .HasMaxLength(255);
 
-                entity.Property(e => e.Navn)
-                    .HasColumnName("navn")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name")
+                    .HasMaxLength(100);
 
-                entity.Property(e => e.Pris).HasColumnName("pris");
+                entity.Property(e => e.Price).HasColumnName("price");
 
-                entity.Property(e => e.ValidFra)
-                    .HasColumnName("valid_fra")
+                entity.Property(e => e.RetailChainId).HasColumnName("retail_chain_id");
+
+                entity.Property(e => e.ValidFrom)
+                    .HasColumnName("valid_from")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.ValidTil)
-                    .HasColumnName("valid_til")
+                entity.Property(e => e.ValidTo)
+                    .HasColumnName("valid_to")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.Volumen).HasColumnName("volumen");
+                entity.Property(e => e.Volume).HasColumnName("volume");
 
-                entity.Property(e => e.Volumenpris).HasColumnName("volumenpris");
+                entity.Property(e => e.VolumePrice).HasColumnName("volume_price");
+
+                entity.HasOne(d => d.RetailChain)
+                    .WithMany(p => p.Product)
+                    .HasForeignKey(d => d.RetailChainId)
+                    .HasConstraintName("FK__product__retail___46A85E41");
             });
 
-            modelBuilder.Entity<Opskrift>(entity =>
+            modelBuilder.Entity<ProductCategory>(entity =>
             {
-                entity.Property(e => e.OpskriftId).HasColumnName("opskriftID");
+                entity.HasKey(e => new { e.ProductId, e.CategoryName })
+                    .HasName("PK__product___121AE3D0B94E8F57");
 
-                entity.Property(e => e.Beskrivelse)
+                entity.ToTable("product_category");
+
+                entity.Property(e => e.ProductId).HasColumnName("product_id");
+
+                entity.Property(e => e.CategoryName)
+                    .HasColumnName("category_name")
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.CategoryNameNavigation)
+                    .WithMany(p => p.ProductCategory)
+                    .HasForeignKey(d => d.CategoryName)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__product_c__categ__5031C87B");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.ProductCategory)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__product_c__produ__4F3DA442");
+            });
+
+            modelBuilder.Entity<Recipe>(entity =>
+            {
+                entity.ToTable("recipe");
+
+                entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
+
+                entity.Property(e => e.Directions)
                     .IsRequired()
-                    .HasColumnName("beskrivelse")
-                    .HasMaxLength(1000)
-                    .IsUnicode(false);
+                    .HasColumnName("directions")
+                    .HasMaxLength(4000);
 
-                entity.Property(e => e.Besparelse).HasColumnName("besparelse");
-
-                entity.Property(e => e.Navn)
+                entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasColumnName("navn")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+                    .HasColumnName("name")
+                    .HasMaxLength(255);
 
-                entity.Property(e => e.Pris).HasColumnName("pris");
+                entity.Property(e => e.Price).HasColumnName("price");
+
+                entity.Property(e => e.SavingsAbsolute).HasColumnName("savings_absolute");
+
+                entity.Property(e => e.Servings).HasColumnName("servings");
             });
 
-            modelBuilder.Entity<OpskriftKategori>(entity =>
+            modelBuilder.Entity<RecipeCategory>(entity =>
             {
-                entity.HasKey(e => new { e.OpskriftId, e.Kategori })
-                    .HasName("PK__Opskrift__869396F91D4CBD8D");
+                entity.HasKey(e => new { e.RecipeId, e.CategoryName })
+                    .HasName("PK__recipe_c__606973BEB82D8C04");
 
-                entity.Property(e => e.OpskriftId).HasColumnName("opskriftID");
+                entity.ToTable("recipe_category");
 
-                entity.Property(e => e.Kategori)
-                    .HasColumnName("kategori")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
 
-                entity.HasOne(d => d.KategoriNavigation)
-                    .WithMany(p => p.OpskriftKategori)
-                    .HasForeignKey(d => d.Kategori)
-                    .HasConstraintName("FK__OpskriftK__kateg__06B7F65E");
+                entity.Property(e => e.CategoryName)
+                    .HasColumnName("category_name")
+                    .HasMaxLength(50);
 
-                entity.HasOne(d => d.Opskrift)
-                    .WithMany(p => p.OpskriftKategori)
-                    .HasForeignKey(d => d.OpskriftId)
-                    .HasConstraintName("FK__OpskriftK__opskr__05C3D225");
+                entity.HasOne(d => d.CategoryNameNavigation)
+                    .WithMany(p => p.RecipeCategory)
+                    .HasForeignKey(d => d.CategoryName)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__recipe_ca__categ__5402595F");
+
+                entity.HasOne(d => d.Recipe)
+                    .WithMany(p => p.RecipeCategory)
+                    .HasForeignKey(d => d.RecipeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__recipe_ca__recip__530E3526");
             });
 
-            
-
-            modelBuilder.Entity<Vare>(entity =>
+            modelBuilder.Entity<RetailChain>(entity =>
             {
-                entity.Property(e => e.VareId).HasColumnName("vareID");
+                entity.ToTable("retail_chain");
 
-                entity.Property(e => e.Butik)
-                    .HasColumnName("butik")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.RetailChainId).HasColumnName("retail_chain_id");
 
-                entity.Property(e => e.Imgsrc)
-                    .HasColumnName("imgsrc")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Navn)
-                    .HasColumnName("navn")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Pris).HasColumnName("pris");
-
-                entity.Property(e => e.ValidFra)
-                    .HasColumnName("valid_fra")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ValidTil)
-                    .HasColumnName("valid_til")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Volumen).HasColumnName("volumen");
-
-                entity.Property(e => e.Volumenpris).HasColumnName("volumenpris");
-            });
-
-            modelBuilder.Entity<VareKategori>(entity =>
-            {
-                entity.HasKey(e => new { e.VareId, e.Kategori })
-                    .HasName("PK__VareKate__51F8566D62A76F18");
-
-                entity.Property(e => e.VareId).HasColumnName("vareID");
-
-                entity.Property(e => e.Kategori)
-                    .HasColumnName("kategori")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.KategoriNavigation)
-                    .WithMany(p => p.VareKategori)
-                    .HasForeignKey(d => d.Kategori)
-                    .HasConstraintName("FK__VareKateg__kateg__00FF1D08");
-
-                entity.HasOne(d => d.Vare)
-                    .WithMany(p => p.VareKategori)
-                    .HasForeignKey(d => d.VareId)
-                    .HasConstraintName("FK__VareKateg__vareI__000AF8CF");
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .HasMaxLength(100);
             });
         }
     }

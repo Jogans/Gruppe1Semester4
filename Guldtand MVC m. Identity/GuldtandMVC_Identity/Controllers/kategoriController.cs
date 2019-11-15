@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GuldtandMVC.Models;
+using GuldtandMVC_Identity.Data;
+using GuldtandMVC_Identity.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace GuldtandMVC.Controllers
+namespace GuldtandMVC_Identity.Controllers
 {
     public class kategoriController : Controller
     {
@@ -17,7 +18,7 @@ namespace GuldtandMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult getKategori(kategoriStreng str)
+        public IActionResult getKategori(KategoriStreng str)
         {
             str.varer.InsertRange(0, getVarer(str.kategori));
             return View("getKategori", str);
@@ -61,6 +62,7 @@ namespace GuldtandMVC.Controllers
             using(var db = new prj4databaseContext())
             {
                 var varer = db.Product.ToArray();
+
                 var json = JsonConvert.SerializeObject(varer);
                 return json; 
             } 

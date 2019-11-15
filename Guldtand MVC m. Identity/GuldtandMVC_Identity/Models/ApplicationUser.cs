@@ -11,9 +11,9 @@ namespace GuldtandMVC_Identity.Models
         {
             public ApplicationUser()
             {
-                PrefsCategories = new HashSet<PrefsCategories>();
-                PrefsChains = new HashSet<PrefsChains>();
-                Subscriptions = new HashSet<Subscriptions>();
+                //PrefsCategories = new HashSet<PrefsCategories>();
+                //PrefsChains = new HashSet<PrefsChains>();
+                //Subscriptions = new HashSet<Subscriptions>();
             }
             [Required]
             [PersonalData]
@@ -21,8 +21,8 @@ namespace GuldtandMVC_Identity.Models
 
             
 
-            public virtual ICollection<PrefsCategories> PrefsCategories { get; set; }
-            public virtual ICollection<PrefsChains> PrefsChains { get; set; }
-            public virtual ICollection<Subscriptions> Subscriptions { get; set; }
+            //public virtual ICollection<PrefsCategories> PrefsCategories { get; set; }
+            //public virtual ICollection<PrefsChains> PrefsChains { get; set; }
+            //public virtual ICollection<Subscriptions> Subscriptions { get; set; }
         }
     }

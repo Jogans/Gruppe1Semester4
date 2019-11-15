@@ -26,7 +26,7 @@ namespace GuldtandMVC_Identity
 
         public IConfiguration Configuration { get; }
 
-        
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -94,9 +94,11 @@ namespace GuldtandMVC_Identity
                 }
             });
             app.UseCookiePolicy();
-            app.UseCors(cors => cors.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+
+            app.UseCors(cors =>
+                cors.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
 
 
             app.UseAuthentication();
@@ -105,9 +107,9 @@ namespace GuldtandMVC_Identity
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller}/{action}/{id?}");
             });
-            
+
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "index.html";

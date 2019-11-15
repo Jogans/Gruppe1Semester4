@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GuldtandMVC_Identity.Data;
 
-namespace GuldtandMVC.Models
+namespace GuldtandMVC_Identity.Models
 {
-    public class kategoriStreng
+    public class KategoriStreng
     {
-        public kategoriStreng()
+        public KategoriStreng()
         {
             varer = new List<Product>();
         }
