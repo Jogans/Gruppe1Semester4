@@ -26,16 +26,16 @@ namespace GuldtandMVC_Identity.Models
             string bodystring = "";
             using(var db = new prj4databaseContext())
             {
-                var result = from v in db.NyVare where v.Navn.Contains(words) select v;
+                var result = from v in db.Product where v.Name.Contains(words) select v;
 
                 foreach(var vare in result)
                 {
                     bodystring+="<tr>" +
-                        "<td>"+vare.Navn+"</td>"+
+                        "<td>"+vare.Name+"</td>"+
                         "<td>"+"<img width='10%' src='"+vare.ImgSrc+"'/>"+"</td>" +
-                        "<td>"+vare.Pris+"</td>" +
+                        "<td>"+vare.Price+"</td>" +
                         "<td>"+"</td>" +
-                        "<td>"+vare.Volumen+"</td>" +
+                        "<td>"+vare.Volume+"</td>" +
                         "</tr>";
                 }
             }
