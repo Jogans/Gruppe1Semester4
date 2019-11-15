@@ -9,10 +9,10 @@ namespace GuldtandMVC.Models
     {
         public kategoriStreng()
         {
-            varer = new List<NyVare>();
+            varer = new List<Product>();
         }
         public string kategori { get; set; }
         public List<string> kategories { get; set; }
-        public List<NyVare> varer { get; set; }
+        public List<Product> varer { get; set; }
     }
 }

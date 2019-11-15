@@ -32,19 +32,19 @@ namespace GuldtandMVC.Controllers
         {
             return View("getKategori");
         }
-        public List<NyVare> getVarer(string kategori)
+        public List<Product> getVarer(string kategori)
         {
 
-            List<NyVare> liste = new List<NyVare>();
+            List<Product> liste = new List<Product>();
             using (var db = new prj4databaseContext())
             {
 
-                var vk = db.VareKategori.Where(v => v.Kategori == kategori).ToList();
+                var vk = db.ProductCategory.Where(v => v.CategoryName == kategori).ToList();
                 if (vk.Count != 0)
                 {
                     foreach (var varekat in vk)
                     {
-                        liste.Add(db.NyVare.Where(v => v.VareId == varekat.VareId).First());
+                        liste.Add(db.Product.Where(v => v.ProductId == varekat.ProductId).First());
                     }
 
                 }
@@ -60,8 +60,7 @@ namespace GuldtandMVC.Controllers
 
             using(var db = new prj4databaseContext())
             {
-                var varer = db.NyVare.ToArray();
-
+                var varer = db.Product.ToArray();
                 var json = JsonConvert.SerializeObject(varer);
                 return json; 
             } 
