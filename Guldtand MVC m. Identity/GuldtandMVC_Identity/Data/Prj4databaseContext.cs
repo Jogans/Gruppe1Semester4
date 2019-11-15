@@ -1,12 +1,10 @@
 ﻿using System;
-using GuldtandMVC_Identity.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace GuldtandMVC_Identity.Data
 {
-    public partial class prj4databaseContext : IdentityDbContext
+    public partial class prj4databaseContext : DbContext
     {
         public prj4databaseContext()
         {
@@ -17,343 +15,194 @@ namespace GuldtandMVC_Identity.Data
         {
         }
 
-        public virtual DbSet<Abningstid> Abningstid { get; set; }
-        public virtual DbSet<Butik> Butik { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Ingredient> Ingredient { get; set; }
         public virtual DbSet<IngredientList> IngredientList { get; set; }
-        public virtual DbSet<Kategori> Kategori { get; set; }
-        public virtual DbSet<NyVare> NyVare { get; set; }
-        public virtual DbSet<Opskrift> Opskrift { get; set; }
-        public virtual DbSet<OpskriftKategori> OpskriftKategori { get; set; }
-        public virtual DbSet<PrefsCategories> PrefsCategories { get; set; }
-        public virtual DbSet<PrefsChains> PrefsChains { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<Recipes> Recipes { get; set; }
-        public virtual DbSet<RetailChains> RetailChains { get; set; }
-        public virtual DbSet<Stores> Stores { get; set; }
-        public virtual DbSet<Subscriptions> Subscriptions { get; set; }
-        public virtual DbSet<Vare> Vare { get; set; }
-        public virtual DbSet<VareKategori> VareKategori { get; set; }
-
+        public virtual DbSet<OpenHours> OpenHours { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategory { get; set; }
+        public virtual DbSet<Recipe> Recipe { get; set; }
+        public virtual DbSet<RecipeCategory> RecipeCategory { get; set; }
+        public virtual DbSet<RetailChain> RetailChain { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=prj4-server.database.windows.net;Initial Catalog=prj4-database;User ID=martin;Password=sY0$*68y!N0v");
+                optionsBuilder.UseSqlServer("Data Source=prj4-server.database.windows.net;Initial Catalog=prj4-database;User ID=rasmus;Password=8AmT7#l&e&q$;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity<Abningstid>(entity =>
+            modelBuilder.Entity<Category>(entity =>
             {
-                entity.HasKey(e => e.Ugedag)
-                    .HasName("PK__Abningst__363950E8F57F7389");
+                entity.HasKey(e => e.CategoryName)
+                    .HasName("PK__category__5189E254E3CC7E3E");
 
-                entity.Property(e => e.Ugedag)
-                    .HasColumnName("ugedag")
-                    .HasMaxLength(10)
-                    .IsUnicode(false)
+                entity.ToTable("category");
+
+                entity.Property(e => e.CategoryName)
+                    .HasColumnName("category_name")
+                    .HasMaxLength(50)
                     .ValueGeneratedNever();
-
-                entity.Property(e => e.AbenFra).HasColumnName("aben_fra");
-
-                entity.Property(e => e.AbenTil).HasColumnName("aben_til");
-
-                entity.Property(e => e.ButikId).HasColumnName("butik_id");
-
-                entity.HasOne(d => d.Butik)
-                    .WithMany(p => p.Abningstid)
-                    .HasForeignKey(d => d.ButikId)
-                    .HasConstraintName("FK__Abningsti__butik__0C70CFB4");
             });
 
-            modelBuilder.Entity<Butik>(entity =>
+            modelBuilder.Entity<Ingredient>(entity =>
             {
-                entity.Property(e => e.ButikId).HasColumnName("butikID");
+                entity.ToTable("ingredient");
 
-                entity.Property(e => e.Addresse)
+                entity.HasIndex(e => e.ProductId)
+                    .HasName("UQ__ingredie__47027DF4D92C716C")
+                    .IsUnique();
+
+                entity.Property(e => e.IngredientId).HasColumnName("ingredient_id");
+
+                entity.Property(e => e.Amount).HasColumnName("amount");
+
+                entity.Property(e => e.AmountUnit)
+                    .HasColumnName("amount_unit")
+                    .HasMaxLength(15);
+
+                entity.Property(e => e.IngredientListId).HasColumnName("ingredientList_id");
+
+                entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasColumnName("addresse")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+                    .HasColumnName("name")
+                    .HasMaxLength(100);
 
-                entity.Property(e => e.Butiknavn)
-                    .IsRequired()
-                    .HasColumnName("butiknavn")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+                entity.Property(e => e.ProductId).HasColumnName("product_id");
 
-                entity.Property(e => e.VareId).HasColumnName("vareID");
+                entity.HasOne(d => d.IngredientList)
+                    .WithMany(p => p.Ingredient)
+                    .HasForeignKey(d => d.IngredientListId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__ingredien__ingre__226AFDCB");
 
-                entity.HasOne(d => d.Vare)
-                    .WithMany(p => p.ButikNavigation)
-                    .HasForeignKey(d => d.VareId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Butik__vareID__09946309");
+                entity.HasOne(d => d.Product)
+                    .WithOne(p => p.Ingredient)
+                    .HasForeignKey<Ingredient>(d => d.ProductId)
+                    .HasConstraintName("FK__ingredien__produ__2176D992");
             });
 
             modelBuilder.Entity<IngredientList>(entity =>
             {
-                entity.HasKey(e => e.IngredientId)
-                    .HasName("PK__ingredie__B0E453CF81168D6F");
+                entity.ToTable("ingredientList");
 
-                entity.ToTable("ingredient_list");
+                entity.HasIndex(e => e.RecipeId)
+                    .HasName("UQ__ingredie__3571ED9A52106FCC")
+                    .IsUnique();
 
-                entity.Property(e => e.IngredientId).HasColumnName("ingredient_id");
+                entity.Property(e => e.IngredientListId).HasColumnName("ingredientList_id");
 
-                entity.Property(e => e.Amount)
-                    .HasColumnName("amount")
-                    .HasColumnType("decimal(10, 2)");
+                entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
 
-                entity.Property(e => e.AmountUnit)
-                    .HasColumnName("amount_unit")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.IngredientName)
-                    .IsRequired()
-                    .HasColumnName("ingredient_name")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.ProductRef).HasColumnName("product_ref");
-
-                entity.Property(e => e.Recipe).HasColumnName("recipe");
-
-                entity.HasOne(d => d.ProductRefNavigation)
-                    .WithMany(p => p.IngredientList)
-                    .HasForeignKey(d => d.ProductRef)
-                    .HasConstraintName("FK_ingredients_products");
-
-                entity.HasOne(d => d.RecipeNavigation)
-                    .WithMany(p => p.IngredientList)
-                    .HasForeignKey(d => d.Recipe)
-                    .HasConstraintName("FK_ingredients_recipe");
+                entity.HasOne(d => d.Recipe)
+                    .WithOne(p => p.IngredientList)
+                    .HasForeignKey<IngredientList>(d => d.RecipeId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__ingredien__recip__1DA648AE");
             });
 
-            modelBuilder.Entity<Kategori>(entity =>
+            modelBuilder.Entity<OpenHours>(entity =>
             {
-                entity.HasKey(e => e.Kategori1)
-                    .HasName("PK__Kategori__BFBCD94401F34AC9");
+                entity.HasKey(e => e.DayOfWeek)
+                    .HasName("PK__open_hou__869EECA81B05055C");
 
-                entity.Property(e => e.Kategori1)
-                    .HasColumnName("kategori")
-                    .HasMaxLength(50)
+                entity.ToTable("open_hours");
+
+                entity.Property(e => e.DayOfWeek)
+                    .HasColumnName("day_of_week")
+                    .HasMaxLength(15)
                     .IsUnicode(false)
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.OpenFrom).HasColumnName("open_from");
+
+                entity.Property(e => e.OpenTo).HasColumnName("open_to");
+
+                entity.Property(e => e.RetailChainId).HasColumnName("retail_chain_id");
+
+                entity.HasOne(d => d.RetailChain)
+                    .WithMany(p => p.OpenHours)
+                    .HasForeignKey(d => d.RetailChainId)
+                    .HasConstraintName("FK__open_hour__retai__0A93743A");
             });
 
-            modelBuilder.Entity<NyVare>(entity =>
+            modelBuilder.Entity<Product>(entity =>
             {
-                entity.HasKey(e => e.VareId)
-                    .HasName("PK__NyVare__0A039BF99CA62479");
+                entity.ToTable("product");
 
-                entity.Property(e => e.VareId).HasColumnName("vareID");
-
-                entity.Property(e => e.Butik)
-                    .HasColumnName("butik")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ImgSrc)
-                    .HasColumnName("img_src")
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Navn)
-                    .HasColumnName("navn")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Pris).HasColumnName("pris");
-
-                entity.Property(e => e.ValidFra)
-                    .HasColumnName("valid_fra")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.ValidTil)
-                    .HasColumnName("valid_til")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.Volumen).HasColumnName("volumen");
-
-                entity.Property(e => e.Volumenpris).HasColumnName("volumenpris");
-            });
-
-            modelBuilder.Entity<Opskrift>(entity =>
-            {
-                entity.Property(e => e.OpskriftId).HasColumnName("opskriftID");
-
-                entity.Property(e => e.Beskrivelse)
-                    .IsRequired()
-                    .HasColumnName("beskrivelse")
-                    .HasMaxLength(1000)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Besparelse).HasColumnName("besparelse");
-
-                entity.Property(e => e.Navn)
-                    .IsRequired()
-                    .HasColumnName("navn")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Pris).HasColumnName("pris");
-            });
-
-            modelBuilder.Entity<OpskriftKategori>(entity =>
-            {
-                entity.HasKey(e => new { e.OpskriftId, e.Kategori })
-                    .HasName("PK__Opskrift__869396F91D4CBD8D");
-
-                entity.Property(e => e.OpskriftId).HasColumnName("opskriftID");
-
-                entity.Property(e => e.Kategori)
-                    .HasColumnName("kategori")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.KategoriNavigation)
-                    .WithMany(p => p.OpskriftKategori)
-                    .HasForeignKey(d => d.Kategori)
-                    .HasConstraintName("FK__OpskriftK__kateg__06B7F65E");
-
-                entity.HasOne(d => d.Opskrift)
-                    .WithMany(p => p.OpskriftKategori)
-                    .HasForeignKey(d => d.OpskriftId)
-                    .HasConstraintName("FK__OpskriftK__opskr__05C3D225");
-            });
-
-            modelBuilder.Entity<PrefsCategories>(entity =>
-            {
-                entity.HasKey(e => new { e.Username, e.Category })
-                    .HasName("PK_prefs_cat");
-
-                entity.ToTable("prefs_categories");
-
-                entity.Property(e => e.Username)
-                    .HasColumnName("username")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Category)
-                    .HasColumnName("category")
-                    .HasMaxLength(255);
-
-                entity.HasOne(d => d.UsernameNavigation)
-                    .WithMany(p => p.PrefsCategories)
-                    .HasForeignKey(d => d.Username)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_pref_cat_username");
-            });
-
-            modelBuilder.Entity<PrefsChains>(entity =>
-            {
-                entity.HasKey(e => new { e.Username, e.RetailChain });
-
-                entity.ToTable("prefs_chains");
-
-                entity.Property(e => e.Username)
-                    .HasColumnName("username")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.RetailChain)
-                    .HasColumnName("retail_chain")
-                    .HasMaxLength(255);
-
-                entity.HasOne(d => d.RetailChainNavigation)
-                    .WithMany(p => p.PrefsChains)
-                    .HasForeignKey(d => d.RetailChain)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_prefs_chains_chains");
-
-                entity.HasOne(d => d.UsernameNavigation)
-                    .WithMany(p => p.PrefsChains)
-                    .HasForeignKey(d => d.Username)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_prefs_chains_username");
-            });
-
-            modelBuilder.Entity<Products>(entity =>
-            {
-                entity.HasKey(e => e.ProductId)
-                    .HasName("PK__products__47027DF5D8A01FFD");
-
-                entity.ToTable("products");
+                entity.HasIndex(e => e.RetailChainId)
+                    .HasName("UQ__product__605B07AA157BDF3A")
+                    .IsUnique();
 
                 entity.Property(e => e.ProductId).HasColumnName("product_id");
 
-                entity.Property(e => e.Amount)
-                    .HasColumnName("amount")
-                    .HasColumnType("decimal(10, 2)");
-
-                entity.Property(e => e.AmountUnit)
-                    .IsRequired()
-                    .HasColumnName("amount_unit")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Category)
-                    .IsRequired()
-                    .HasColumnName("category")
+                entity.Property(e => e.ImgSrc)
+                    .HasColumnName("img_src")
                     .HasMaxLength(255);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("name")
-                    .HasMaxLength(255);
+                    .HasMaxLength(100);
 
-                entity.Property(e => e.PricePrAmount)
-                    .HasColumnName("price_pr_amount")
-                    .HasColumnType("decimal(10, 2)");
+                entity.Property(e => e.Price).HasColumnName("price");
 
-                entity.Property(e => e.PriceRegular)
-                    .HasColumnName("price_regular")
-                    .HasColumnType("decimal(10, 2)");
+                entity.Property(e => e.RetailChainId).HasColumnName("retail_chain_id");
 
-                entity.Property(e => e.PriceSale)
-                    .HasColumnName("price_sale")
-                    .HasColumnType("decimal(10, 2)");
-
-                entity.Property(e => e.RetailChain)
-                    .IsRequired()
-                    .HasColumnName("retail_chain")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.SavingsAbsolute)
-                    .HasColumnName("savings_absolute")
-                    .HasColumnType("decimal(10, 2)");
-
-                entity.Property(e => e.SavingsPercent)
-                    .HasColumnName("savings_percent")
-                    .HasColumnType("decimal(10, 2)");
-
-                entity.Property(e => e.Timestamp)
-                    .HasColumnName("timestamp")
+                entity.Property(e => e.ValidFrom)
+                    .HasColumnName("valid_from")
                     .HasColumnType("datetime");
 
-                entity.HasOne(d => d.RetailChainNavigation)
-                    .WithMany(p => p.Products)
-                    .HasForeignKey(d => d.RetailChain)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_product_chain");
+                entity.Property(e => e.ValidTo)
+                    .HasColumnName("valid_to")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Volume).HasColumnName("volume");
+
+                entity.Property(e => e.VolumePrice).HasColumnName("volume_price");
+
+                entity.HasOne(d => d.RetailChain)
+                    .WithOne(p => p.Product)
+                    .HasForeignKey<Product>(d => d.RetailChainId)
+                    .HasConstraintName("FK__product__retail___104C4D90");
             });
 
-            modelBuilder.Entity<Recipes>(entity =>
+            modelBuilder.Entity<ProductCategory>(entity =>
             {
-                entity.HasKey(e => e.RecipeId)
-                    .HasName("PK__recipes__3571ED9B43F6CF7A");
+                entity.HasKey(e => new { e.ProductId, e.CategoryName })
+                    .HasName("PK__product___121AE3D0C095018B");
 
-                entity.ToTable("recipes");
+                entity.ToTable("product_category");
+
+                entity.Property(e => e.ProductId).HasColumnName("product_id");
+
+                entity.Property(e => e.CategoryName)
+                    .HasColumnName("category_name")
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.CategoryNameNavigation)
+                    .WithMany(p => p.ProductCategory)
+                    .HasForeignKey(d => d.CategoryName)
+                    .HasConstraintName("FK__product_c__categ__160526E6");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.ProductCategory)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__product_c__produ__151102AD");
+            });
+
+            modelBuilder.Entity<Recipe>(entity =>
+            {
+                entity.ToTable("recipe");
 
                 entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
-
-                entity.Property(e => e.Category)
-                    .IsRequired()
-                    .HasColumnName("category")
-                    .HasMaxLength(255);
 
                 entity.Property(e => e.Directions)
                     .IsRequired()
@@ -365,171 +214,47 @@ namespace GuldtandMVC_Identity.Data
                     .HasColumnName("name")
                     .HasMaxLength(255);
 
-                entity.Property(e => e.Price)
-                    .HasColumnName("price")
-                    .HasColumnType("decimal(10, 2)");
+                entity.Property(e => e.Price).HasColumnName("price");
 
-                entity.Property(e => e.SavingsAbsolute)
-                    .HasColumnName("savings_absolute")
-                    .HasColumnType("decimal(10, 2)");
-
-                entity.Property(e => e.SavingsPercent)
-                    .HasColumnName("savings_percent")
-                    .HasColumnType("decimal(10, 2)");
+                entity.Property(e => e.SavingsAbsolute).HasColumnName("savings_absolute");
 
                 entity.Property(e => e.Servings).HasColumnName("servings");
-
-                entity.Property(e => e.Timestamp)
-                    .HasColumnName("timestamp")
-                    .HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<RetailChains>(entity =>
+            modelBuilder.Entity<RecipeCategory>(entity =>
             {
-                entity.HasKey(e => e.Name)
-                    .HasName("PK__retail_c__72E12F1ADAE2682D");
+                entity.HasKey(e => new { e.RecipeId, e.CategoryName })
+                    .HasName("PK__recipe_c__606973BE4732D3C2");
 
-                entity.ToTable("retail_chains");
+                entity.ToTable("recipe_category");
+
+                entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
+
+                entity.Property(e => e.CategoryName)
+                    .HasColumnName("category_name")
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.CategoryNameNavigation)
+                    .WithMany(p => p.RecipeCategory)
+                    .HasForeignKey(d => d.CategoryName)
+                    .HasConstraintName("FK__recipe_ca__categ__19D5B7CA");
+
+                entity.HasOne(d => d.Recipe)
+                    .WithMany(p => p.RecipeCategory)
+                    .HasForeignKey(d => d.RecipeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__recipe_ca__recip__18E19391");
+            });
+
+            modelBuilder.Entity<RetailChain>(entity =>
+            {
+                entity.ToTable("retail_chain");
+
+                entity.Property(e => e.RetailChainId).HasColumnName("retail_chain_id");
 
                 entity.Property(e => e.Name)
                     .HasColumnName("name")
-                    .HasMaxLength(255)
-                    .ValueGeneratedNever();
-            });
-
-            modelBuilder.Entity<Stores>(entity =>
-            {
-                entity.HasKey(e => e.StoreId)
-                    .HasName("PK__stores__A2F2A30C987F6792");
-
-                entity.ToTable("stores");
-
-                entity.Property(e => e.StoreId).HasColumnName("store_id");
-
-                entity.Property(e => e.Address)
-                    .IsRequired()
-                    .HasColumnName("address")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Hours)
-                    .HasColumnName("hours")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Name)
-                    .HasColumnName("name")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.RetailChain)
-                    .IsRequired()
-                    .HasColumnName("retail_chain")
-                    .HasMaxLength(255);
-
-                entity.HasOne(d => d.RetailChainNavigation)
-                    .WithMany(p => p.Stores)
-                    .HasForeignKey(d => d.RetailChain)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_stores_chains");
-            });
-
-            modelBuilder.Entity<Subscriptions>(entity =>
-            {
-                entity.HasKey(e => new { e.Username, e.Recipe });
-
-                entity.ToTable("subscriptions");
-
-                entity.Property(e => e.Username)
-                    .HasColumnName("username")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Recipe).HasColumnName("recipe");
-
-                entity.Property(e => e.MaxPrice)
-                    .HasColumnName("max_price")
-                    .HasColumnType("decimal(10, 2)");
-
-                entity.HasOne(d => d.RecipeNavigation)
-                    .WithMany(p => p.Subscriptions)
-                    .HasForeignKey(d => d.Recipe)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_sub_recipe");
-
-                entity.HasOne(d => d.UsernameNavigation)
-                    .WithMany(p => p.Subscriptions)
-                    .HasForeignKey(d => d.Username)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_sub_username");
-            });
-
-            modelBuilder.Entity<ApplicationUser>(entity =>
-            {
-                
-                entity.ToTable("users");
-
-                entity.Property(e => e.Username)
-                    .HasColumnName("username")
-                    .HasMaxLength(255)
-                    .ValueGeneratedNever();
-
-                
-            });
-
-            modelBuilder.Entity<Vare>(entity =>
-            {
-                entity.Property(e => e.VareId).HasColumnName("vareID");
-
-                entity.Property(e => e.Butik)
-                    .HasColumnName("butik")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Imgsrc)
-                    .HasColumnName("imgsrc")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Navn)
-                    .HasColumnName("navn")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Pris).HasColumnName("pris");
-
-                entity.Property(e => e.ValidFra)
-                    .HasColumnName("valid_fra")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ValidTil)
-                    .HasColumnName("valid_til")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Volumen).HasColumnName("volumen");
-
-                entity.Property(e => e.Volumenpris).HasColumnName("volumenpris");
-            });
-
-            modelBuilder.Entity<VareKategori>(entity =>
-            {
-                entity.HasKey(e => new { e.VareId, e.Kategori })
-                    .HasName("PK__VareKate__51F8566D62A76F18");
-
-                entity.Property(e => e.VareId).HasColumnName("vareID");
-
-                entity.Property(e => e.Kategori)
-                    .HasColumnName("kategori")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.KategoriNavigation)
-                    .WithMany(p => p.VareKategori)
-                    .HasForeignKey(d => d.Kategori)
-                    .HasConstraintName("FK__VareKateg__kateg__00FF1D08");
-
-                entity.HasOne(d => d.Vare)
-                    .WithMany(p => p.VareKategori)
-                    .HasForeignKey(d => d.VareId)
-                    .HasConstraintName("FK__VareKateg__vareI__000AF8CF");
+                    .HasMaxLength(100);
             });
         }
     }
