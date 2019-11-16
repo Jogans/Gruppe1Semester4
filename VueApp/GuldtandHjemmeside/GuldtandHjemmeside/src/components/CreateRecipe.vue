@@ -17,6 +17,7 @@
             V&#230;lg forberedelses tid
         </h2>
 
+
         <div class="antalPersoner">
             <select>
                 <option value="0">Forberedelse tid</option>
@@ -36,12 +37,19 @@
             Skriv fremgangsm&#229;de:
         </h2>
 
-
+        
         <div class="rows1">
-            <button @click="addRow1">Tilf&#248;j nyt punkt</button>
+            <!--addRow1-->
+            <button @click="addCategory">Tilf&#248;j nyt punkt</button>
+
             <ul>
+                
                 <li v-for="(input1, index1) in inputs1" v-bind:key="input1">
-                    <input type="text" placeholder="..." v-model="input1.one" />
+                    <!--<input type="text" placeholder="..." v-model="input1.one" />-->
+                    
+                    
+                    <div v-html="input1.one">{{input1.one}}</div>
+                    <!--<div v-model="input1.one"></div>-->
                     <button class="btn_delete" @click="deleteRow1(index1)">Slet</button>
                 </li>
             </ul>
@@ -81,10 +89,21 @@
         data: function () {
             return {
                 inputs1: [],
-                inputs2: []
+                inputs2: [],
+                category: ""
             }
         },
         methods: {
+            addCategory() {
+                this.$http.get('https://localhost:44323/kategori/getAllCategories', {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }).then(response => (
+                    this.inputs1.push({
+                        one: response.data
+                    })))
+            },
             addRow1() {
                 this.inputs1.push({
                     one: ''

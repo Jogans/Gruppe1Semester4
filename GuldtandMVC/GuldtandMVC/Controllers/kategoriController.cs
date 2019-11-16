@@ -32,6 +32,12 @@ namespace GuldtandMVC.Controllers
         {
             return View("getKategori");
         }
+
+        public string getAllCategories()
+        {
+            var category = new Searching();
+            return category.getCategoriesAsHTML();
+        }
         public List<Product> getVarer(string kategori)
         {
 

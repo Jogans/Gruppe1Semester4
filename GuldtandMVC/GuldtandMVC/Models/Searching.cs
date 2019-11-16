@@ -7,7 +7,26 @@ using System.Threading.Tasks;
 namespace GuldtandMVC.Models
 {
     public class Searching
+
     {
+
+        public string getCategoriesAsHTML()
+        {
+            string initString = "<select id='category'>";
+            string bodyString = "";
+
+            using(var db = new prj4databaseContext())
+            {
+                var categoryList = db.Category.ToList();
+                foreach(var category in categoryList)
+                {
+                    bodyString += "<option value='" + category.CategoryName + "'>"+category.CategoryName+"</option>";
+                }
+            }
+            string endString = "</select>";
+
+            return initString + bodyString + endString;
+        }
         public string searchProductsAndGetHTML(string words)
         {
             string initString = "" +
