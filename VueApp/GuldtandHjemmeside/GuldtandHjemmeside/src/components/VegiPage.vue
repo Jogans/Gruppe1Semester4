@@ -2,6 +2,8 @@
     <div class="bodyVegiPage">
         <br style="clear:both" />
         <h1>Vegetar fis</h1>
+        <button @click="addCategory">Find</button>
+        <div v-html="kategori">{{kategori}}</div>
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
@@ -18,7 +20,20 @@
 <script>
     export default {
         name: 'VegiPage',
-        props: {
+        data: function () {
+            return {
+                kategori: ""
+            }
+        },
+        methods: {
+            addCategory() {
+                this.$http.get('https://localhost:44323/kategori/getAllCategories', {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }).then(response => (
+                    this.kategori = response.data))
+            }
         }
     };
 </script>
