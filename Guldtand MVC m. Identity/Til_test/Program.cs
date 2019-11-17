@@ -13,12 +13,10 @@ namespace Til_test
             using (var context = new prj4databaseContext())
             {
                 insert insert = new insert(context);
-                insert.insertdataAsync();
-                System.Threading.Thread.Sleep(1000);
+                await insert.insertdataAsync();
                 RecipeRepository repo = new RecipeRepository(context);
                 RecipeQuery query = new RecipeQuery
                 {
-                    NumberOfRecipes = 1,
                     LoadIngredientList = true,
                     LoadRecipeCategory = true,
                     SearchRecipe = ""
@@ -29,12 +27,6 @@ namespace Til_test
                 {
                     System.Console.WriteLine($"{opskrift.Name}");
                     Console.WriteLine($"{opskrift.Price}");
-                }
-
-                foreach (var opskrift in context.Recipe)
-                {
-
-                    Console.WriteLine($"1111111{opskrift.Name}");
                 }
             }
         }

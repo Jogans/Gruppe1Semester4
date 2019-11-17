@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Til_test
 {
@@ -17,7 +18,7 @@ namespace Til_test
             _context = context;
         }
 
-        public async void insertdataAsync()
+        public async Task insertdataAsync()
         {
                 Recipe recipe = new Recipe
                 {
