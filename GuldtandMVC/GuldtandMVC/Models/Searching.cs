@@ -12,7 +12,8 @@ namespace GuldtandMVC.Models
 
         public string getCategoriesAsHTML()
         {
-            string initString = "<select id='category'>";
+            //<select v-model='kategoriParameter' id='category'>
+            string initString = "";
             string bodyString = "";
 
             using(var db = new prj4databaseContext())
@@ -23,7 +24,8 @@ namespace GuldtandMVC.Models
                     bodyString += "<option value='" + category.CategoryName + "'>"+category.CategoryName+"</option>";
                 }
             }
-            string endString = "</select>";
+            //</select>
+            string endString = "";
 
             return initString + bodyString + endString;
         }

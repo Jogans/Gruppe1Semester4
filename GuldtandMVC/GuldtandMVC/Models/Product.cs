@@ -7,6 +7,7 @@ namespace GuldtandMVC.Models
     {
         public Product()
         {
+            Ingredient = new HashSet<Ingredient>();
             ProductCategory = new HashSet<ProductCategory>();
         }
 
@@ -20,10 +21,9 @@ namespace GuldtandMVC.Models
         public string ImgSrc { get; set; }
         public int? RetailChainId { get; set; }
 
-        public bool UnwantedBool { get; set; }
-
         public virtual RetailChain RetailChain { get; set; }
-        public virtual Ingredient Ingredient { get; set; }
+        public virtual ICollection<Ingredient> Ingredient { get; set; }
         public virtual ICollection<ProductCategory> ProductCategory { get; set; }
+        public bool UnwantedBool { get; set; }
     }
 }
