@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GuldtandMVC_Identity.Data.Queries;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -16,9 +17,9 @@ namespace GuldtandMVC_Identity.Data.Repositories
             this.context = context;
         }
 
-        public IEnumerable<Recipe> GetRecipes()
+        public async Task<IEnumerable<Recipe>> GetRecipes(IQuery<Recipe> query)
         {
-            return context.Recipe.ToList();
+            return await query.Execute(context);
         }
 
         public void InsertRecipe(Recipe recipe)
