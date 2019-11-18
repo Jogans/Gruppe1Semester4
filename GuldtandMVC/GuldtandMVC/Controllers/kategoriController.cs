@@ -23,6 +23,12 @@ namespace GuldtandMVC.Controllers
             return View("getKategori", str);
         }
 
+
+        public string insertAndGetBlacklist(string category)
+        {
+            var blacklist = new blacklistModel();
+            return blacklist.insertandgetBlackList(category);
+        }
         public IActionResult getKategori()
         {
             return View("getKategori");
