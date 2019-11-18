@@ -22,19 +22,39 @@ namespace Til_test
         {
                 Recipe recipe = new Recipe
                 {
-                    Directions = "bim bam bum",
-                    Name = "test1",
-                    Price = 75,
-                    Servings = 4,
-                    SavingsAbsolute = 10
+                    Name = "Flæskesteg a la Marcus",
+                    Price = 420,
+                    Servings = 1,
+                    SavingsAbsolute = 69,
+                    CookTime = 600,
+                    ImgSrc = "https://www.valdemarsro.dk/wp-content/2011/12/flaeskesteg-abrikos-1.jpg"
+
                 };
                 _context.Recipe.Add(recipe);
+                _context.SaveChanges();
+
+                var directions = new Directions[]
+                {
+                    new Directions{Description = "Rør ingredienserne sammen", RecipeId = recipe.RecipeId},
+                    new Directions{Description = "Spis maden", RecipeId = recipe.RecipeId}
+                };
+
+                foreach (var dir in directions)
+                {
+                    _context.Directions.Add(dir);
+                }
+
+                _context.SaveChanges();
+
+                Category category = new Category {CategoryName = "Dansk klassisk"};
+
+                _context.Category.Add(category);
                 _context.SaveChanges();
 
                 RecipeCategory recipeCategory = new RecipeCategory
                 {
                     RecipeId = recipe.RecipeId,
-                    CategoryName = "æg"
+                    CategoryName = "Dansk klassisk"
                 };
                 _context.RecipeCategory.Add(recipeCategory);
                 _context.SaveChanges();
@@ -48,9 +68,9 @@ namespace Til_test
                 var produkt = await _context.Set<Product>().Where(p => p.Name.Contains("a")).Take(1).ToListAsync();
                 var ingredients = new Ingredient[]
                 {
-                    new Ingredient{Amount = 50, AmountUnit = "g", Name = "ing1", ProductId = produkt[0].ProductId, IngredientListId = ingList.IngredientListId},
-                    new Ingredient{Amount = 50, AmountUnit = "g", Name = "ing1", ProductId = produkt[0].ProductId, IngredientListId = ingList.IngredientListId},
-                    new Ingredient{Amount = 50, AmountUnit = "g", Name = "ing1", ProductId = produkt[0].ProductId, IngredientListId = ingList.IngredientListId}
+                    new Ingredient{Amount = 50, AmountUnit = "g", Name = "Tomat", ProductId = _context.Product.Where(p => p.Name.Contains("tomat")).Take(1).ToList()[0].ProductId, IngredientListId = ingList.IngredientListId},
+                    new Ingredient{Amount = 1000, AmountUnit = "g", Name = "Feta", ProductId = _context.Product.Where(p => p.Name.Contains("ost")).Take(1).ToList()[0].ProductId, IngredientListId = ingList.IngredientListId},
+                    new Ingredient{Amount = 2, AmountUnit = "mL", Name = "Oliven olie", ProductId = _context.Product.Where(p => p.Name.Contains("olie")).Take(1).ToList()[0].ProductId, IngredientListId = ingList.IngredientListId}
                 };
                 foreach (Ingredient i in ingredients)
                 {
