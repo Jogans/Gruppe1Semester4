@@ -45,7 +45,7 @@
                 searchParameter: null
             }
         },
-        
+
         methods: {
             created() {
                 this.$http.get('https://localhost:44324/Home/searchProducts?words=' + this.searchParameter, {

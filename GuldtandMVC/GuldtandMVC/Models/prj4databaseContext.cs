@@ -15,6 +15,7 @@ namespace GuldtandMVC.Models
         {
         }
 
+        public virtual DbSet<Blacklist> Blacklist { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Ingredient> Ingredient { get; set; }
         public virtual DbSet<IngredientList> IngredientList { get; set; }
@@ -38,6 +39,20 @@ namespace GuldtandMVC.Models
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
+            modelBuilder.Entity<Blacklist>(entity =>
+            {
+                entity.HasKey(e => e.Category)
+                    .HasName("PK__blacklis__F7F53CC351A434DF");
+
+                entity.ToTable("blacklist");
+
+                entity.Property(e => e.Category)
+                    .HasColumnName("category")
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+            });
+
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.HasKey(e => e.CategoryName)
@@ -55,10 +70,6 @@ namespace GuldtandMVC.Models
             {
                 entity.ToTable("ingredient");
 
-                entity.HasIndex(e => e.Product)
-                    .HasName("UQ__ingredie__583517CF31C3589F")
-                    .IsUnique();
-
                 entity.Property(e => e.IngredientId).HasColumnName("ingredient_id");
 
                 entity.Property(e => e.Amount).HasColumnName("amount");
@@ -67,17 +78,25 @@ namespace GuldtandMVC.Models
                     .HasColumnName("amount_unit")
                     .HasMaxLength(15);
 
+                entity.Property(e => e.IngredientListId).HasColumnName("ingredientList_id");
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("name")
                     .HasMaxLength(100);
 
-                entity.Property(e => e.Product).HasColumnName("product");
+                entity.Property(e => e.ProductId).HasColumnName("product_id");
 
-                entity.HasOne(d => d.ProductNavigation)
-                    .WithOne(p => p.Ingredient)
-                    .HasForeignKey<Ingredient>(d => d.Product)
-                    .HasConstraintName("FK__ingredien__produ__4A78EF25");
+                entity.HasOne(d => d.IngredientList)
+                    .WithMany(p => p.Ingredient)
+                    .HasForeignKey(d => d.IngredientListId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__ingredien__ingre__60683044");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Ingredient)
+                    .HasForeignKey(d => d.ProductId)
+                    .HasConstraintName("FK__ingredien__produ__5F740C0B");
             });
 
             modelBuilder.Entity<IngredientList>(entity =>

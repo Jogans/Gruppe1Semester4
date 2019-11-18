@@ -7,7 +7,28 @@ using System.Threading.Tasks;
 namespace GuldtandMVC.Models
 {
     public class Searching
+
     {
+
+        public string getCategoriesAsHTML()
+        {
+            //<select v-model='kategoriParameter' id='category'>
+            string initString = "";
+            string bodyString = "";
+
+            using(var db = new prj4databaseContext())
+            {
+                var categoryList = db.Category.ToList();
+                foreach(var category in categoryList)
+                {
+                    bodyString += "<option value='" + category.CategoryName + "'>"+category.CategoryName+"</option>";
+                }
+            }
+            //</select>
+            string endString = "";
+
+            return initString + bodyString + endString;
+        }
         public string searchProductsAndGetHTML(string words)
         {
             string initString = "" +
@@ -29,12 +50,14 @@ namespace GuldtandMVC.Models
 
                 foreach(var vare in result)
                 {
+                    var category = db.ProductCategory.Where(k => k.ProductId == vare.ProductId).First().CategoryName;
+                    
                     bodystring+="<tr>" +
                         "<td>"+vare.Name+"</td>"+
                         "<td>"+"<img width='10%' src='"+vare.ImgSrc+"'/>"+"</td>" +
-                        "<td>"+vare.Price+"</td>" +
-                        "<td>"+"</td>" +
-                        "<td>"+vare.Volume+"</td>" +
+                        "<td>"+vare.Price+" kr.</td>" +
+                        "<td>"+category+"</td>" +
+                        "<td>"+vare.Volume+" ml.</td>" +
                         "</tr>";
                 }
             }

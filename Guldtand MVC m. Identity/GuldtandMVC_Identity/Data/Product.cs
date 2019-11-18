@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GuldtandMVC_Identity.Data
+namespace GuldtandMVC_Identity.Models
 {
     public partial class Product
     {
         public Product()
         {
+            Ingredient = new HashSet<Ingredient>();
             ProductCategory = new HashSet<ProductCategory>();
         }
 
@@ -21,7 +22,7 @@ namespace GuldtandMVC_Identity.Data
         public int? RetailChainId { get; set; }
 
         public virtual RetailChain RetailChain { get; set; }
-        public virtual Ingredient Ingredient { get; set; }
+        public virtual ICollection<Ingredient> Ingredient { get; set; }
         public virtual ICollection<ProductCategory> ProductCategory { get; set; }
     }
 }

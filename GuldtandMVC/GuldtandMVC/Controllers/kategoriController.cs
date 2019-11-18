@@ -23,6 +23,12 @@ namespace GuldtandMVC.Controllers
             return View("getKategori", str);
         }
 
+
+        public string insertAndGetBlacklist(string category)
+        {
+            var blacklist = new blacklistModel();
+            return blacklist.insertandgetBlackList(category);
+        }
         public IActionResult getKategori()
         {
             return View("getKategori");
@@ -31,6 +37,12 @@ namespace GuldtandMVC.Controllers
         public IActionResult getKategori2()
         {
             return View("getKategori");
+        }
+
+        public string getAllCategories()
+        {
+            var category = new Searching();
+            return category.getCategoriesAsHTML();
         }
         public List<Product> getVarer(string kategori)
         {
