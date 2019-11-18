@@ -13,7 +13,7 @@ namespace GuldtandMVC.Models
 
         }
 
-        public string insertandgetBlackList(string category)
+        public string[] insertandgetBlackList(string category)
         {
             string initString = "<table border='1'><th>Blacklist</th>";
             string bodyString = "";
@@ -26,15 +26,18 @@ namespace GuldtandMVC.Models
                     db.Blacklist.Add(new Blacklist { Category = category });
                 }
 
-                var blacklist = db.Blacklist.ToList();
+                var blacklist = (from c in db.Blacklist select c.Category).ToArray();
+                return blacklist;
 
-                foreach(var categoryElement in blacklist)
-                {
-                    bodyString += "<td>" +categoryElement.Category+ "</td>";
-                }
+                //var blacklist = db.Blacklist.ToList();
+
+                //foreach(var categoryElement in blacklist)
+                //{
+                //    bodyString += "<td>" +categoryElement.Category+ "</td>";
+                //}
 
             }
-                return initString + bodyString + endString;
+                //return initString + bodyString + endString;
 
         }
     }

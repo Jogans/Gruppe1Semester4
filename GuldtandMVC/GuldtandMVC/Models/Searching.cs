@@ -12,20 +12,22 @@ namespace GuldtandMVC.Models
 
         public string getCategoriesAsHTML()
         {
-            //<select v-model='kategoriParameter' id='category'>
-            string initString = "";
+            //
+            string initString = "<select v-model='kategoriParameter' id='category'>";
             string bodyString = "";
 
+            //string[] categoryArray;
             using(var db = new prj4databaseContext())
             {
-                var categoryList = db.Category.ToList();
-                foreach(var category in categoryList)
+                var categoryList = (from c in db.Category select c.CategoryName).ToList();
+
+                foreach (var category in categoryList)
                 {
-                    bodyString += "<option value='" + category.CategoryName + "'>"+category.CategoryName+"</option>";
+                    bodyString += "<option value='" + category + "'>" + category + "</option>";
                 }
             }
             //</select>
-            string endString = "";
+            string endString = "</select>";
 
             return initString + bodyString + endString;
         }
