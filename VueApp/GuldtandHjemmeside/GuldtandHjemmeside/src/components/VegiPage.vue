@@ -9,7 +9,7 @@
         </select>
         <button @click="addToBlackList">Send til blacklist</button><p />
 
-        <div v-html="blacklist">{{blacklist}}</div>
+        <div v-html="blacklist">{{blacklist}}</div><!---->
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
