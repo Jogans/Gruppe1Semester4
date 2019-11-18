@@ -22,11 +22,11 @@ namespace GuldtandMVC_Identity.Models
             int steps = 1;
             using (var db = new prj4databaseContext())
             {
-                var result = from v in db.OpenHours select v;
+                var result = from v in db.Recipe where v.Name.Contains(words) select v;
 
                 foreach (var recipe in result)
                 {
-                    bodystring += "<h1>" + recipe.RetailChain + "</h1>";
+                    bodystring += "<h1>" + recipe.Name + "</h1>";
                     //              "<div class='recepie'>" +
                     //              "<div class='ingredienser'>" +
                     //              "<p class='p2'><span class='s1'>" + recipe.CookTime + " min tilberednings tid" +
