@@ -31,6 +31,7 @@
         
         methods: {
             created() {
+                this.$router.push({name:'Searchsite'})
                 this.$http.get('https://localhost:44324/Home/searchProducts?words=' + this.searchParameter, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
