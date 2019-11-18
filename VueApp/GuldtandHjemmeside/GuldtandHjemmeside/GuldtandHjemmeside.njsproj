@@ -59,6 +59,9 @@
     <Content Include="src\components\Test.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\components\TestCalculator.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\VegiPage.vue" />
     <Content Include="src\components\SUPage.vue" />
     <Content Include="src\components\TopPage.vue" />
