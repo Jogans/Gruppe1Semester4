@@ -9,4 +9,8 @@
     <ProjectReference Include="..\GuldtandMVC_Identity\GuldtandMVC_Identity.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>
