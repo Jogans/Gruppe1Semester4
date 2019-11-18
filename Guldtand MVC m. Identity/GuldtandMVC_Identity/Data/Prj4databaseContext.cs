@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace GuldtandMVC_Identity.Models
+namespace GuldtandMVC_Identity.Data
 {
     public partial class prj4databaseContext : DbContext
     {
