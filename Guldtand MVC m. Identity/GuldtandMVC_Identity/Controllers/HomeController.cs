@@ -38,6 +38,14 @@ namespace GuldtandMVC_Identity.Controllers
 
         }
 
+        public string viewTotalPrice(string words)
+        {
+            var totalPrice = new HTMLCalculator();
+
+            return totalPrice.totalPrice(words);
+
+        }
+
         public string searchRecipesByName(string words)
         {
             return "";
