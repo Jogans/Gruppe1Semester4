@@ -5,7 +5,7 @@
 
     <div class="bodyStorePage">
         <br style="clear:both" />
-        <h1>Nye retter</h1>
+        <h1>Test søgefelt</h1>
         <div id="StorePage">
             <br style="clear:both" />
             <div class="SearchBar">
@@ -20,20 +20,7 @@
     </div>
 </template>
 
-
-
-
 <script>
-    //import Vue from 'vue';
-    //Vue.msg = "tester tester";
-    //document.getElementById("tilbud").innerHTML = "Tester dette!!";
-
-    //new Vue({
-    //    el: '#StorePage',
-    //    data:{
-    //        msg: 'data'
-    //}
-    //})
     export default {
         name: 'StorePage',
         props: {

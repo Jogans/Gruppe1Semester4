@@ -24,7 +24,7 @@ namespace GuldtandMVC.Controllers
         }
 
 
-        public string insertAndGetBlacklist(string category)
+        public string[] insertAndGetBlacklist(string category)
         {
             var blacklist = new blacklistModel();
             return blacklist.insertandgetBlackList(category);

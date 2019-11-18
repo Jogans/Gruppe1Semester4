@@ -31,7 +31,7 @@
         
         methods: {
             created() {
-                this.$http.get('https://localhost:44323/Home/searchProducts?words=' + this.searchParameter, {
+                this.$http.get('https://localhost:44324/Home/searchProducts?words=' + this.searchParameter, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
