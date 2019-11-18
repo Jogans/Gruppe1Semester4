@@ -45,6 +45,9 @@
     <Content Include="src\components\CreateUser.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\components\Recipes\ShowRecipe.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\SearchBar.vue">
       <SubType>Code</SubType>
     </Content>
@@ -54,6 +57,9 @@
     <Content Include="src\components\ClassicPage.vue" />
     <Content Include="src\components\ProfilePage.vue" />
     <Content Include="src\components\Test.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\TestCalculator.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\VegiPage.vue" />

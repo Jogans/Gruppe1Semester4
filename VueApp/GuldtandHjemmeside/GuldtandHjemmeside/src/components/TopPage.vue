@@ -6,7 +6,7 @@
         <div class="viewOfRecepie">
             <div class="imageOfRecepie">
                 <img src="@/assets/Pics/Pizza_Picture.jpg" />
-                <router-link to="/Recepie/PizzaHomemade" class="recepieImg" tag="img"></router-link>
+                <router-link to="/Recepie/ShowRecipe" class="recepieImg" tag="img"></router-link>
             </div>
             <div class="textForPrice">
                 <div style="font-size: 25px;">

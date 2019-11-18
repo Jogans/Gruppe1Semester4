@@ -7,8 +7,10 @@ import ClassicPage from './components/ClassicPage.vue';
 import StorePage from './components/StorePage.vue';
 import ProfilePage from './components/ProfilePage.vue';
 import PizzaHomemade from './components/Recipes/PizzaHomemade.vue';
+import ShowRecipe from './components/Recipes/ShowRecipe.vue';
 import CreateUser from './components/CreateUser.vue';
 import CreateRecipe from './components/CreateRecipe.vue';
+import TestCalculator from './components/TestCalculator.vue';
 
 
 
@@ -23,7 +25,10 @@ const routes = [
     { path: '/ProfilePage', component: ProfilePage },
     { path: '/CreateUser', component: CreateUser },
     { path: '/CreateRecipe', component: CreateRecipe },
-    { path: '/Recepie/PizzaHomemade', component: PizzaHomemade }
+    { path: '/Recepie/PizzaHomemade', component: PizzaHomemade },
+    { path: '/Recepie/ShowRecipe', component: ShowRecipe },
+    { path: '/TestCalculator', component: TestCalculator }
+
 
 
 ];
