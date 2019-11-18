@@ -30,6 +30,14 @@ namespace GuldtandMVC_Identity.Controllers
 
         }
 
+        public string viewASpeceficRecipe(string words)
+        {
+            var recipe = new AddHTMLToRecipe();
+
+            return recipe.ShowRecipe(words);
+
+        }
+
         public string searchRecipesByName(string words)
         {
             return "";

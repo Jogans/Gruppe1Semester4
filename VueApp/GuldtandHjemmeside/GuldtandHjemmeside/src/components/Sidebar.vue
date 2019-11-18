@@ -93,6 +93,7 @@
     input[type='checkbox'] {
         float: left;
         width: 10px;
+        position: relative;
     }
 
     .slide-enter-active,
@@ -127,9 +128,7 @@
         z-index: 1;
         padding: 3rem 20px 2rem 20px;
         width: 200px;
-
     }
-
 
 
     ul {
@@ -146,13 +145,14 @@
     }
 
     label {
-        border: 1px solid #fff;
+        border: 1px;
         padding: 6px;
         display: block;
         position: relative;
         margin: 2px;
         cursor: pointer;
         margin-right: 10%;
+        outline: 4px solid white;
     }
 
         label:before {

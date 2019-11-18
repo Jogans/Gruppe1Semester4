@@ -1,11 +1,7 @@
-<head>
-    <script src="https://unpkg.com/vue"></script>
-</head>
 <template>
-
-    <div class="bodyStorePage">
+    <div class="showRecipePage">
         <br style="clear:both" />
-        <h1>Nye retter</h1>
+        <h1>Test af vis opskrift</h1>
         <div id="StorePage">
             <br style="clear:both" />
             <div class="SearchBar">
@@ -18,37 +14,23 @@
 
         </div>
     </div>
+
 </template>
 
-
-
-
 <script>
-    //import Vue from 'vue';
-    //Vue.msg = "tester tester";
-    //document.getElementById("tilbud").innerHTML = "Tester dette!!";
-
-    //new Vue({
-    //    el: '#StorePage',
-    //    data:{
-    //        msg: 'data'
-    //}
-    //})
     export default {
-        name: 'StorePage',
+        name: 'ShowRecipe',
         props: {
         },
         data: function () {
             return {
-                test: 'Det virker',
                 info: null,
                 searchParameter: null
             }
         },
-        
         methods: {
             created() {
-                this.$http.get('https://localhost:44324/Home/searchProducts?words=' + this.searchParameter, {
+                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=' + this.searchParameter, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
@@ -58,16 +40,10 @@
     };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-    .bodyStorePage {
-        width: 100%;
-        max-width: 65%;
-        margin: auto;
-    }
-    img{
-
-    }
+                .showRecipePage {
+    width: 100%;
+    max-width: 65%;
+    margin: auto;
+}
 </style>
-
