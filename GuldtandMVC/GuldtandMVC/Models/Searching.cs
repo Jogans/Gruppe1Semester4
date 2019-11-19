@@ -10,6 +10,14 @@ namespace GuldtandMVC.Models
 
     {
 
+        public string[] getCategoryList()
+        {
+            using (var db = new prj4databaseContext())
+            {
+                var categoryList = (from c in db.Category select c.CategoryName).ToArray();
+                return categoryList;
+            }
+        }
         public string getCategoriesAsHTML()
         {
             //

@@ -2,14 +2,17 @@
     <div class="bodyVegiPage">
         <br style="clear:both" />
         <h1>Vegetar fis</h1>
-        <button @click="addCategory">Find</button>
+        <button @click="addCategory" style="margin: 10px">Find</button>   
 
-        <select v-model='kategoriParameter' id='category'>
-        <div v-html="kategori">{{kategori}}</div>
+        <select v-model='selected' id='category' style="margin: 10px">
+        <option v-bind:key="kategoriElement" v-for="kategoriElement in kategori">{{kategoriElement}}</option>
         </select>
-        <button @click="addToBlackList">Send til blacklist</button><p />
+        <button @click="addToBlackList" style="margin: 10px">Send til blacklist</button><p />
 
-        <div v-html="blacklist">{{blacklist}}</div><!---->
+        <table border="1">
+            <th>Blacklist</th>
+            <tr v-bind:key="blacklistElement" v-for="blacklistElement in blacklist"><td>{{blacklistElement}}</td></tr><!---->
+        </table>
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
@@ -28,9 +31,9 @@
         name: 'VegiPage',
         data: function () {
             return {
-                kategori: "",
+                kategori:[],
                 blacklist: "",
-                kategoriParameter: null
+                selected: ""
             }
         },
         methods: {
@@ -44,7 +47,7 @@
             },
             addToBlackList() {
                 this.kategoriParameter = document.getElementById("category").nodeValue;
-                this.$http.get('https://localhost:44323/kategori/insertAndGetBlacklist?category=' + this.kategoriParameter, {
+                this.$http.get('https://localhost:44323/kategori/insertAndGetBlacklist?category=' + this.selected, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
