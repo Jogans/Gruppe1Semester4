@@ -4,11 +4,7 @@
             <h1 class="text-primary text-center">{{title}}</h1>
         </div>
     </div>
-    <!-- <div class="bodySearchsite">
-        <br style="clear:both" />
-        <h1>Search</h1>
-
-    </div> -->
+    
 
 </template>
 
@@ -24,7 +20,7 @@
 </script>
 
 <style scoped>
-    .bodyClassicPage {
+    .bodySearchsite {
         width: 100%;
         max-width: 65%;
         margin: auto;

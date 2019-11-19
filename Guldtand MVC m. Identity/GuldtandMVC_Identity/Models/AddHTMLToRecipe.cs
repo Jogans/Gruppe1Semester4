@@ -26,14 +26,17 @@ namespace GuldtandMVC_Identity.Models
 
                 foreach (var recipe in result)
                 {
+                    bodystring = "";
+                    ingrediensstring = "";
+                    directionsstring = "";
                     bodystring += "<h1>" + recipe.Name + "</h1>" +
                     "<div class='recepie'>" +
                         "<div class='ingredienser'>" +
                         "<p class='p2'><span class='s1'>" + recipe.CookTime + " min tilberednings tid" +
-                        "<br></span>Til 4 personer</p>" +
+                    "<br></span>Til 4 personer</p>" +
                         "<div class='image'>" +
-                        "< img src = '" + recipe.ImgSrc + "' />" +
-                        "</div>" +
+                        "<img src = '" + recipe.ImgSrc + "' />" +
+                    "</div>" +
                         "<br style='clear: both' />" +
                         "<p class='p3'><strong>Ingredienser</strong></p>" +
                     "<div class='i1'>" +
@@ -48,14 +51,17 @@ namespace GuldtandMVC_Identity.Models
                                   "</div>" +
                                   "<br style='clear:both' />" +
                                   "<div class='f1'>" +
-                                  "<h3>Fremgangsmåde</h3>";
-                    foreach (var direction in recipe.Directions)
+                                  "<h3>Fremgangsmåde</h3>" +
+                                  "<div class='i2'>" +
+                                  "<ul";
+                    foreach (var direction in db.Directions.Where(d => d.RecipeId == recipe.RecipeId))
                     {
-                        directionsstring += "<p>" + steps++ + "." + direction.Description + "</p>";
+                        directionsstring += "<li class='p5'>" + direction.Description + "</li>";
                     }
 
                     bodystring += directionsstring;
-                    bodystring += "</div>" +
+                    bodystring += "</ul>" +
+                                  "</div>" +
                                   "</div>" +
                                   "</div>";
                 }

@@ -46,4 +46,33 @@
     max-width: 65%;
     margin: auto;
 }
+                        img{
+    display: block;
+    position: relative;
+    width: 525px;
+    height: 300px;
+    float: left;
+}
+
+    .i1 {
+        float: left;
+        position: relative;
+    }
+
+    .i2 {
+        float: left;
+        position: relative;
+        padding-left: 10px;
+    }
+
+    .i3 {
+        float: left;
+        position: relative;
+        padding-left: 10px;
+    }
+            .bodyStorePage {
+    width: 100%;
+    max-width: 65%;
+    margin: auto;
+}
 </style>
