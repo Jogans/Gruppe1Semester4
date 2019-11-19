@@ -3,6 +3,7 @@ using GuldtandMVC_Identity.Data.Queries;
 using GuldtandMVC_Identity.Data.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Til_test
 {
@@ -23,7 +24,7 @@ namespace Til_test
                 };
                 var opskrifter = await repo.GetRecipes(query);
 
-                foreach (var opskrift in opskrifter)
+                foreach (var opskrift in opskrifter.Where(o => o.Name.Contains("marcus")))
                 {
                     System.Console.WriteLine($"{opskrift.Name}");
                     Console.WriteLine($"{opskrift.Price}");
