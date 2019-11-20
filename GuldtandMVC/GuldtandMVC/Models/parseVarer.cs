@@ -49,10 +49,10 @@ namespace GuldtandMVC.Models
                                 
                                 break;
                             case "validFrom":
-                                vare.ValidFrom = DateTime.Parse((string)prop.Value);
+                                vare.ValidFrom = DateTime.ParseExact((string)prop.Value,"MM/dd/yyyy HH:mm:ss",null);
                                 break;
                             case "validTo":
-                                vare.ValidTo = DateTime.Parse((string)prop.Value);
+                                vare.ValidTo = DateTime.ParseExact((string)prop.Value, "MM/dd/yyyy HH:mm:ss", null);
                                 break;
                             case "volumePrice":
                                 vare.VolumePrice = (double)prop.Value;
@@ -67,10 +67,10 @@ namespace GuldtandMVC.Models
                                 break;
                         }
 
-                        foreach (var unwantedCategory in Unwanted)
-                        {
-                            vare.UnwantedBool = kategori == unwantedCategory;
-                        }
+                        //foreach (var unwantedCategory in Unwanted)
+                        //{
+                        //    vare.UnwantedBool = kategori == unwantedCategory;
+                        //}
                         
                     }
 
@@ -82,7 +82,7 @@ namespace GuldtandMVC.Models
                     //filter based on Black list
                     if (db.Blacklist.Where(b => b.Category.Equals(kategori)).Any()) continue;
                     
-                    if (vare.UnwantedBool != false) continue;
+                    //if (vare.UnwantedBool != false) continue;
                     
                     if (!db.Product.Any(v => v.Name == vare.Name && v.RetailChainId == vare.RetailChainId))
                     {
