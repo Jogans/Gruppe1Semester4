@@ -24,6 +24,7 @@ namespace GuldtandMVC.Models
                 if(!db.Blacklist.Any(b => b.Category.Equals(category)))
                 {
                     db.Blacklist.Add(new Blacklist { Category = category });
+                    db.SaveChanges();
                 }
 
                 var blacklist = (from c in db.Blacklist select c.Category).ToArray();

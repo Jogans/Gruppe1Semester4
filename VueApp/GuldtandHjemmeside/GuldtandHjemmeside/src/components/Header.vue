@@ -4,7 +4,7 @@
         <div class="header">
             <div class="TopPart">
                 <div class="title">
-                    <router-link to="/"><img src="@/assets/Pics/Guldtand.jpg" alt="Guldtand" /></router-link>
+                    <router-link to="/"><img src="@/assets/Pics/Guldtand.jpg" alt="Guldtand" tag="button" /></router-link>
                         <button onclick="document.getElementById('id01').style.display='block'" class="Login" style="width:auto" type="button">Login</button>
                         <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
                         <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>

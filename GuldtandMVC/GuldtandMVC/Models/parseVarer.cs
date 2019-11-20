@@ -49,10 +49,10 @@ namespace GuldtandMVC.Models
                                 
                                 break;
                             case "validFrom":
-                                vare.ValidFrom = new DateTime(2019, 10, 10, 20, 10, 20);
+                                vare.ValidFrom = DateTime.Parse((string)prop.Value);
                                 break;
                             case "validTo":
-                                vare.ValidTo = new DateTime(2019, 10, 10, 20, 10, 20);
+                                vare.ValidTo = DateTime.Parse((string)prop.Value);
                                 break;
                             case "volumePrice":
                                 vare.VolumePrice = (double)prop.Value;
@@ -79,6 +79,9 @@ namespace GuldtandMVC.Models
                     //Check if name and store already exists
 
 
+                    //filter based on Black list
+                    if (db.Blacklist.Where(b => b.Category.Equals(kategori)).Any()) continue;
+                    
                     if (vare.UnwantedBool != false) continue;
                     
                     if (!db.Product.Any(v => v.Name == vare.Name && v.RetailChainId == vare.RetailChainId))

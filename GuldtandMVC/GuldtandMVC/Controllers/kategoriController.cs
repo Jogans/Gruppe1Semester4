@@ -39,10 +39,10 @@ namespace GuldtandMVC.Controllers
             return View("getKategori");
         }
 
-        public string getAllCategories()
+        public string[] getAllCategories()
         {
             var category = new Searching();
-            return category.getCategoriesAsHTML();
+            return category.getCategoryList();
         }
         public List<Product> getVarer(string kategori)
         {
