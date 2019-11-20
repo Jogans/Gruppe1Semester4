@@ -24,6 +24,6 @@ namespace GuldtandMVC.Models
         public virtual RetailChain RetailChain { get; set; }
         public virtual ICollection<Ingredient> Ingredient { get; set; }
         public virtual ICollection<ProductCategory> ProductCategory { get; set; }
-        public bool UnwantedBool { get; set; }
+        //public bool UnwantedBool { get; set; }
     }
 }

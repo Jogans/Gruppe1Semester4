@@ -2,7 +2,6 @@
     <div class="showRecipePage">
         <br style="clear:both" />
         <h1>Test af vis opskrift</h1>
-        <div id="StorePage">
             <br style="clear:both" />
             <div class="SearchBar">
                 <input style="height: 32px; width: 704px;" type="text" v-model="searchParameter" placeholder="Search..." required>
@@ -12,9 +11,7 @@
 
             <br style="clear:both" />
 
-        </div>
     </div>
-
 </template>
 
 <script>
@@ -70,9 +67,5 @@
         position: relative;
         padding-left: 10px;
     }
-            .bodyStorePage {
-    width: 100%;
-    max-width: 65%;
-    margin: auto;
-}
+
 </style>

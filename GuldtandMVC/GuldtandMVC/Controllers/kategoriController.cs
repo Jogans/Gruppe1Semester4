@@ -34,10 +34,6 @@ namespace GuldtandMVC.Controllers
             return View("getKategori");
         }
 
-        public IActionResult getKategori2()
-        {
-            return View("getKategori");
-        }
 
         public string[] getAllCategories()
         {

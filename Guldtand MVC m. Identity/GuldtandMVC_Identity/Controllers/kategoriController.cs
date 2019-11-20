@@ -24,14 +24,22 @@ namespace GuldtandMVC_Identity.Controllers
             return View("getKategori", str);
         }
 
+
+        public string[] insertAndGetBlacklist(string category)
+        {
+            var blacklist = new blacklistModel();
+            return blacklist.insertandgetBlackList(category);
+        }
         public IActionResult getKategori()
         {
             return View("getKategori");
         }
 
-        public IActionResult getKategori2()
+
+        public string[] getAllCategories()
         {
-            return View("getKategori");
+            var category = new Searching();
+            return category.getCategoryList();
         }
         public List<Product> getVarer(string kategori)
         {
@@ -59,13 +67,12 @@ namespace GuldtandMVC_Identity.Controllers
         public string getAllVarer()
         {
 
-            using(var db = new prj4databaseContext())
+            using (var db = new prj4databaseContext())
             {
                 var varer = db.Product.ToArray();
-
                 var json = JsonConvert.SerializeObject(varer);
-                return json; 
-            } 
+                return json;
+            }
         }
     }
 }
