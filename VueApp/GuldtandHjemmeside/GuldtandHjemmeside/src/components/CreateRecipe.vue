@@ -46,9 +46,10 @@
                 
                 <li v-for="(input1, index1) in inputs1" v-bind:key="input1">
                     <!--<input type="text" placeholder="..." v-model="input1.one" />-->
+
                     
-                    
-                    <div v-html="input1.one">{{input1.one}}</div>
+
+                    <!--<div v-html="input1.one"></div>-->
                     <!--<div v-model="input1.one"></div>-->
                     <button class="btn_delete" @click="deleteRow1(index1)">Slet</button>
                 </li>
@@ -58,10 +59,15 @@
             Skriv ingredienser:
         </h2>
         <div class="rows2">
-            <button @click="addRow2">Tilf&#248;j ny ingrediens</button>
+            <button @click="addCategory">Tilf&#248;j ny ingrediens</button>
             <ul>
                 <li v-for="(input2, index2) in inputs2" v-bind:key="input2">
-                    <input type="text" placeholder="..." v-model="input2.one" />
+                    <!--<input type="text" placeholder="..." v-model="input2.one" />-->
+
+                    <select v-model='selected' id='category' style="margin: 10px">
+                        <option v-bind:key="kategoriElement" v-for="kategoriElement in input2.one">{{kategoriElement}}</option>
+                    </select>
+
                     <input class="unit_text" type="text" v-model="input2.two" />
 
                     <select class="unit">
@@ -100,7 +106,7 @@
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (
-                    this.inputs1.push({
+                    this.inputs2.push({
                         one: response.data
                     })))
             },
