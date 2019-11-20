@@ -7,11 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using GuldtandMVC_Identity.Models;
 using iTextSharp.tool.xml.html;
 using com.sun.org.apache.xerces.@internal.parsers;
+using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
+using Microsoft.AspNetCore.Identity;
+using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
+using Microsoft.Extensions.Logging;
 
 namespace GuldtandMVC_Identity.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ILogger<LoginModel> _logger;
+
         public IActionResult Index()
         {
             return View();
@@ -30,21 +37,34 @@ namespace GuldtandMVC_Identity.Controllers
 
         }
 
+        //public string loginTest(string email, string password)
+        //{
+        //    HTMLCalculator test = new HTMLCalculator();
+
+        //    return test.testLoginFunc(email, password);
+        //}
+
         public string viewASpeceficRecipe(string words)
         {
             var recipe = new AddHTMLToRecipe();
 
-            return recipe.ShowRecipe(words);
-
+            return recipe.ShowRecipeFullView(words);
         }
 
-        public string viewTotalPrice(string words)
+        public string viewForSmallRecipe(string words)
         {
-            var totalPrice = new HTMLCalculator();
+            var recipe = new AddHTMLToRecipe();
 
-            return totalPrice.totalPrice(words);
-
+            return recipe.ShowRecipeSmallView(words);
         }
+
+        //public string viewTotalPrice(string words)
+        //{
+        //    var totalPrice = new HTMLCalculator();
+
+        //    return totalPrice.totalPrice(words);
+
+        //}
 
         public string searchRecipesByName(string words)
         {

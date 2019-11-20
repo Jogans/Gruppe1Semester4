@@ -28,7 +28,6 @@
                 searchParameter: null
             }
         },
-        
         methods: {
             created() {
                 this.$router.push({name:'Searchsite'})
