@@ -5,29 +5,28 @@
             <div class="TopPart">
                 <div class="title">
                     <router-link to="/"><img src="@/assets/Pics/Guldtand.jpg" alt="Guldtand" tag="button" /></router-link>
-                        <button onclick="document.getElementById('id01').style.display='block'" class="Login" style="width:auto" type="button">Login</button>
-                        <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
-                        <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
+                    <button onclick="document.getElementById('id01').style.display='block'" class="Login" style="width:auto" type="button">Login</button>
+                    <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
+                    <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
                 </div>
 
                 <div id="id01" class="modal">
                     <form class="modal-content animate" action="/action_page.php" method="post">
                         <div class="imcontainer">
-                            <span 
-                                  onclick="document.getElementById('id01').style.display='none'"
+                            <span onclick="document.getElementById('id01').style.display='none'"
                                   class="close" title="close Modal">&times;</span>
                         </div>
 
                         <div class="container">
                             <label for="uname"><b>Username</b></label>
-                            <input type="text" placeholder="Enter Username" name="uname" required />
+                            <input type="text" placeholder="Enter Username" v-model="email" name="uname" required />
 
                             <label for="psw"><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="psw" required />
+                            <input type="password" placeholder="Enter Password" v-model="password" name="psw" required />
 
                             <button class="modla_login" type="submit">Login</button>
                             <label>
-                                <input type="checkbox" checked="checked" name="remember"/>
+                                <input type="checkbox" checked="checked" name="remember" />
                                 Remember me
                             </label>
                         </div>
@@ -40,13 +39,12 @@
                 </div>
             </div>
             <br style="clear:both" />
-
             <div class="Buttons2">
                 <router-link to="/TopPage" class="btn_Top" tag="button">Top retter</router-link>
                 <router-link to="/NewPage" class="btn_New" tag="button">Nye retter</router-link>
                 <router-link to="/SUPage" class="btn_Su" tag="button">SU-retter</router-link>
                 <router-link to="/VegiPage" class="btn_Vegi" tag="button">Vegetar retter</router-link>
-                <router-link to="/ClassicPage" class="btn_Classic" tag="button">Klassiske retter</router-link>
+                <router-link to="/Recipe/ShowRecipe" class="btn_Classic" tag="button">Klassiske retter</router-link>
                 <router-link to="/StorePage" class="btn_Store" tag="button">V&#230;lg Butik</router-link>
                 <router-link to="/CreateRecipe" class="btn_CreateRecipe" tag="button">Opret Opskrift</router-link>
                 <router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>
@@ -60,9 +58,26 @@
     export default {
         name: 'Header',
         props: {
+        },
+        data: function () {
+            return {
+                email: null,
+                password: null,
+                info: null
+
+            }
+        },
+                methods: {
+            created() {
+                this.$http.get('https://localhost:44324/Home/loginTest?email=' +this.email+ '&password=' +this.password,  {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }).then(response => (this.info = response.data))
+            },
         }
     };
-    // Get the modal 
+    // Get the modal
     var modal = document.getElementById('id01');
 
     // When the user clicks anywhere outside of the modal, close it
@@ -85,10 +100,10 @@
         border: 1px solid #ccc;
         box-sizing: border-box;
     }
-    
+
     /* Set a style for login button in the modal */
     .modla_login {
-         background-color: #4CAF50;
+        background-color: #4CAF50;
         color: white;
         padding: 14px 20px;
         margin: 8px 0;
@@ -103,7 +118,7 @@
 
     /* Extra styles for the cancel button */
     .cancelbtn {
-        width: auto; 
+        width: auto;
         padding: 10px 18px;
         background-color: #f44336;
     }
@@ -120,7 +135,7 @@
     }
 
     span.psw {
-        float: right; 
+        float: right;
         padding-top: 16px;
     }
 
@@ -130,7 +145,7 @@
         position: fixed; /* Stay in place */
         z-index: 1; /* Sit on top */
         right: 0;
-        top: 0; 
+        top: 0;
         width: 50%; /* Half width */
         height: 50%; /* Half height */
         overflow: auto; /* Enable scroll if needed */
@@ -149,18 +164,18 @@
 
     /* The Close Button (x) */
     .close {
-        position: absolute; 
+        position: absolute;
         right: 25px;
         top: 0;
         color: #000;
-        font-size: 35px; 
+        font-size: 35px;
         font-weight: bold;
     }
 
-    .close:hover, .close:focus {
-        color: red;
-        cursor: pointer;
-    }
+        .close:hover, .close:focus {
+            color: red;
+            cursor: pointer;
+        }
 
     /* Add Zoom Animation */
     .animate {
@@ -169,8 +184,13 @@
     }
 
     @-webkit-keyframes animetezoom {
-        from {-webkit-transform: scale(0)}
-        to {-webkit-transform: scale(1)}
+        from {
+            -webkit-transform: scale(0)
+        }
+
+        to {
+            -webkit-transform: scale(1)
+        }
     }
 
     /* Change styles for span and cancel button on extra small screen */
@@ -185,7 +205,7 @@
         }
     }
 
-    img{
+    img {
         position: relative;
         float: left;
         height: 10%;
@@ -203,8 +223,8 @@
         position: relative;
     }
 
-    .TopPart{
-       padding-bottom: 50px;
+    .TopPart {
+        padding-bottom: 50px;
     }
 
     .title {
