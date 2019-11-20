@@ -13,22 +13,38 @@ namespace Til_test
         {
             using (var context = new prj4databaseContext())
             {
-                insert insert = new insert(context);
-                await insert.insertdataAsync();
-                RecipeRepository repo = new RecipeRepository(context);
-                RecipeQuery query = new RecipeQuery
-                {
-                    LoadIngredientList = true,
-                    LoadRecipeCategory = true,
-                    SearchRecipe = ""
-                };
-                var opskrifter = await repo.GetRecipes(query);
+                //insert insert = new insert(context);
+                //await insert.insertdataAsync();
+                //RecipeRepository repo = new RecipeRepository(context);
+                //RecipeQuery query = new RecipeQuery
+                //{
+                //    LoadIngredientList = true,
+                //    LoadRecipeCategory = true,
+                //    SearchRecipe = ""
+                //};
+                //var opskrifter = await repo.GetRecipes(query);
 
-                foreach (var opskrift in opskrifter.Where(o => o.Name.Contains("marcus")))
+                //foreach (var opskrift in opskrifter.Where(o => o.Name.Contains("marcus")))
+                //{
+                //    System.Console.WriteLine($"{opskrift.Name}");
+                //    Console.WriteLine($"{opskrift.Price}");
+                //}
+
+                ProductQuery test = new ProductQuery
                 {
-                    System.Console.WriteLine($"{opskrift.Name}");
-                    Console.WriteLine($"{opskrift.Price}");
+                    LoadRetailChain = true,
+                    LoadProductCategory = true,
+                    SearchCategory = "fisk"
+                };
+
+                var udskrift = test.Execute(context);
+                foreach (var VARIABLE in udskrift.Result)
+                {
+                    Console.WriteLine($"{VARIABLE.Name}");
+
                 }
+
+
             }
         }
     }
