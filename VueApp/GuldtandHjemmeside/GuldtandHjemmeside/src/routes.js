@@ -28,7 +28,7 @@ const routes = [
     { path: '/CreateUser', component: CreateUser },
     { path: '/CreateRecipe', component: CreateRecipe },
     { path: '/Recepie/PizzaHomemade', component: PizzaHomemade },
-    { path: '/Recepie/ShowRecipe', component: ShowRecipe },
+    { path: '/Recipe/ShowRecipe', component: ShowRecipe },
     { path: '/TestCalculator', component: TestCalculator }
 
 

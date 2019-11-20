@@ -11,41 +11,70 @@ namespace Til_test
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
-            using (var context = new prj4databaseContext())
+
+
+
+
+            using (var db = new prj4databaseContext())
             {
-                //insert insert = new insert(context);
-                //await insert.insertdataAsync();
-                //RecipeRepository repo = new RecipeRepository(context);
-                //RecipeQuery query = new RecipeQuery
-                //{
-                //    LoadIngredientList = true,
-                //    LoadRecipeCategory = true,
-                //    SearchRecipe = ""
-                //};
-                //var opskrifter = await repo.GetRecipes(query);
+                var result = from v in db.Recipe where v.Name.Contains("marcus") select v;
 
-                //foreach (var opskrift in opskrifter.Where(o => o.Name.Contains("marcus")))
-                //{
-                //    System.Console.WriteLine($"{opskrift.Name}");
-                //    Console.WriteLine($"{opskrift.Price}");
-                //}
-
-                ProductQuery test = new ProductQuery
+                foreach (var recipe in result)
                 {
-                    LoadRetailChain = true,
-                    LoadProductCategory = true,
-                    SearchCategory = "fisk"
-                };
+                    foreach (var ingredient in db.Ingredient.Where(i => i.IngredientList.RecipeId == recipe.RecipeId))
+                    {
 
-                var udskrift = test.Execute(context);
-                foreach (var VARIABLE in udskrift.Result)
-                {
-                    Console.WriteLine($"{VARIABLE.Name}");
+                        foreach (var product in db.Product.Where(p => p.ProductId == ingredient.ProductId))
+                        {
+                            Console.WriteLine($"{product.Price}");
+                        }
 
+
+                    }
                 }
-
-
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //using (var context = new prj4databaseContext())
+            //{
+            //    insert insert = new insert(context);
+            //    await insert.insertdataAsync();
+            //    RecipeRepository repo = new RecipeRepository(context);
+            //    RecipeQuery query = new RecipeQuery
+            //    {
+            //        LoadIngredientList = true,
+            //        LoadRecipeCategory = true,
+            //        SearchRecipe = ""
+            //    };
+            //    var opskrifter = await repo.GetRecipes(query);
+
+            //    foreach (var opskrift in opskrifter.Where(o => o.Name.Contains("marcus")))
+            //    {
+            //        System.Console.WriteLine($"{opskrift.Name}");
+            //        Console.WriteLine($"{opskrift.Price}");
+            //    }
+            //}
         }
     }
 }

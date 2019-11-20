@@ -4,7 +4,7 @@
             <transition name="slide">
                 <div v-if="isPanelOpen" class="sidebar-panel">
 
-                    <div class="butikkerValg">
+                    <div class="butikkerValg1">
                         <input type="checkbox" id="cb1" />
                         <label for="cb1"><img src="@/assets/Pics/Netto.png" alt="Netto" /></label>
                         <br style="clear:both" />
@@ -18,6 +18,19 @@
                         <label for="cb4"><img src="@/assets/Pics/Fakta.png" alt="Fakta" /></label>
                     </div>
 
+                    <div class="butikkerValg2">
+                        <input type="checkbox" id="cb5" />
+                        <label for="cb5"><img src="@/assets/Pics/Bilka.jpg" alt="Bilka" /></label>
+                        <br style="clear:both" />
+                        <input type="checkbox" id="cb6" />
+                        <label for="cb6"><img src="@/assets/Pics/Aldi.png" alt="Aldi" /></label>
+                        <br style="clear:both" />
+                        <input type="checkbox" id="cb7" />
+                        <label for="cb7"><img src="@/assets/Pics/Kvickly.png" alt="Kvickly" /></label>
+                        <br style="clear:both" />
+                        <input type="checkbox" id="cb8" />
+                        <label for="cb8"><img src="@/assets/Pics/Lidl.png" alt="Lidl" /></label>
+                    </div>
                     <br style="clear:both" />
 
                     <br style="clear:both" />
@@ -77,7 +90,14 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-    .butikkerValg {
+    .butikkerValg1 {
+        display: inline-block;
+        width: 75px;
+        height: 75px;
+        position: relative;
+    }
+
+    .butikkerValg2 {
         display: inline-block;
         width: 75px;
         height: 75px;
