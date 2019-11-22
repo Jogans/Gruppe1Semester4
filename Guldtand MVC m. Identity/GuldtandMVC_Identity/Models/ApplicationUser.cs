@@ -19,7 +19,7 @@ namespace GuldtandMVC_Identity.Models
             [PersonalData]
             public string Username { get; set; }
 
-            
+        
 
             //public virtual ICollection<PrefsCategories> PrefsCategories { get; set; }
             //public virtual ICollection<PrefsChains> PrefsChains { get; set; }
