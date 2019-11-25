@@ -1,32 +1,30 @@
 <template>
     <div class="Login">
-        <form action="/action_page.php" style="border:1px solid #ccc">
-            <div class="container">
-                <h1>Tilmeld</h1>
-                <p> Udfyld venligst denne formular for at oprette en konto.</p>
-                <hr>
+        <div class="container">
+            <h1>Tilmeld</h1>
+            <p> Udfyld venligst denne formular for at oprette en konto.</p>
+            <hr>
 
-                <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Skriv Email" name="email" required>
+            <label for="email"><b>Email</b></label>
+            <input type="text" v-model="email" placeholder="Skriv Email" name="email" required>
 
-                <label for="psw"><b>Adgangskode</b></label>
-                <input type="password" placeholder="Kriv Adgangskode" name="psw" required>
+            <label for="psw"><b>Adgangskode</b></label>
+            <input type="password" v-model="password" placeholder="Kriv Adgangskode" name="psw" required>
 
-                <label for="psw-repeat"><b>Gentag Adgangskode</b></label>
-                <input type="password" placeholder="Gentag Adgangskode" name="psw-repeat" required>
+            <label for="psw-repeat"><b>Gentag Adgangskode</b></label>
+    <input type="password" placeholder="Gentag Adgangskode" name="psw-repeat" required>
 
-                <label>
-                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Husk mig
-                </label>
+            <label>
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Husk mig
+            </label>
 
-                <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+            <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
-                <div class="clearfix">
-                    <button type="button" class="cancelbtn">Annuler</button>
-                    <button type="submit" class="signupbtn">Tilmeld</button>
-                </div>
+            <div class="clearfix">
+                <button type="button" class="cancelbtn">Annuler</button>
+                <button class="signupbtn" @click="created">Tilmeld</button>
             </div>
-        </form>
+        </div>
     </div>
 
 </template>
@@ -35,86 +33,120 @@
     export default {
         name: 'CreateUser',
         props: {
+        },
+        data: function () {
+            return {
+                email: null,
+                name: null,
+                password: null,
+                info: null
+            }
+        },
+        methods: {
+            HandleErrors: function(response) {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response;
+            },
+            created() {
+               fetch('https://localhost:44324/api/Account/Register', {
+                    method: 'POST',
+                   body: JSON.stringify({
+                        Email: this.email,
+                        Password: this.password
+                    }),
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
+               }).then(this.HandleErrors)
+                    .then(response => console.log(response))
+                    .catch(error => console.log(error));
+            },
         }
     };
 
 </script>
 
 <style scoped>
- body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box}
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
 
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
+    * {
+        box-sizing: border-box
+    }
 
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
+    /* Full-width input fields */
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
 
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
+        input[type=text]:focus, input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
 
-/* Set a style for all buttons */
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
 
-button:hover {
-  opacity:1;
-}
+    /* Set a style for all buttons */
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
 
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-}
+        button:hover {
+            opacity: 1;
+        }
 
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
-  width: 50%;
-}
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        padding: 14px 20px;
+        background-color: #f44336;
+    }
 
-/* Add padding to container elements */
-.container {
-  padding: 16px;
-}
+    /* Float cancel and signup buttons and add an equal width */
+    .cancelbtn, .signupbtn {
+        float: left;
+        width: 50%;
+    }
 
-/* Clear floats */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+    /* Add padding to container elements */
+    .container {
+        padding: 16px;
+    }
 
-.Login {
-    width: 100%;
-    max-width: 65%;
-    margin: auto;
-    padding-top: 150px;
-}
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
 
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-     width: 100%;
-  }
-}
+    .Login {
+        width: 100%;
+        max-width: 65%;
+        margin: auto;
+    }
+
+    /* Change styles for cancel button and signup button on extra small screens */
+    @media screen and (max-width: 300px) {
+        .cancelbtn, .signupbtn {
+            width: 100%;
+        }
+    }
 </style>

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GuldtandMVC_Identity.Migrations
 {
-    public partial class TestForIdentity : Migration
+    public partial class removedUser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,10 @@ namespace GuldtandMVC_Identity.Migrations
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true)
                 },
-                constraints: table => { table.PrimaryKey("PK_AspNetRoles", x => x.Id); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
@@ -39,7 +42,10 @@ namespace GuldtandMVC_Identity.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false)
                 },
-                constraints: table => { table.PrimaryKey("PK_AspNetUsers", x => x.Id); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
 
             //migrationBuilder.CreateTable(
             //    name: "blacklist",
@@ -99,8 +105,7 @@ namespace GuldtandMVC_Identity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -121,8 +126,7 @@ namespace GuldtandMVC_Identity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -149,7 +153,7 @@ namespace GuldtandMVC_Identity.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new {x.LoginProvider, x.ProviderKey});
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
                         name: "FK_AspNetUserLogins_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -167,7 +171,7 @@ namespace GuldtandMVC_Identity.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new {x.UserId, x.RoleId});
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
                         column: x => x.RoleId,
@@ -193,7 +197,7 @@ namespace GuldtandMVC_Identity.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new {x.UserId, x.LoginProvider, x.Name});
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -402,7 +406,6 @@ namespace GuldtandMVC_Identity.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-        }
 
         //    migrationBuilder.CreateIndex(
         //        name: "IX_directions_recipe_id",
@@ -445,63 +448,11 @@ namespace GuldtandMVC_Identity.Migrations
         //        name: "IX_recipe_category_category_name",
         //        table: "recipe_category",
         //        column: "category_name");
-        //}
+        }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            //migrationBuilder.DropTable(
-            //    name: "AspNetRoleClaims");
-
-            //migrationBuilder.DropTable(
-            //    name: "AspNetUserClaims");
-
-            //migrationBuilder.DropTable(
-            //    name: "AspNetUserLogins");
-
-            //migrationBuilder.DropTable(
-            //    name: "AspNetUserRoles");
-
-            //migrationBuilder.DropTable(
-            //    name: "AspNetUserTokens");
-
-            //migrationBuilder.DropTable(
-            //    name: "blacklist");
-
-            //migrationBuilder.DropTable(
-            //    name: "directions");
-
-            //migrationBuilder.DropTable(
-            //    name: "ingredient");
-
-            //migrationBuilder.DropTable(
-            //    name: "open_hours");
-
-            //migrationBuilder.DropTable(
-            //    name: "product_category");
-
-            //migrationBuilder.DropTable(
-            //    name: "recipe_category");
-
-            //migrationBuilder.DropTable(
-            //    name: "AspNetRoles");
-
-            //migrationBuilder.DropTable(
-            //    name: "AspNetUsers");
-
-            //migrationBuilder.DropTable(
-            //    name: "ingredientList");
-
-            //migrationBuilder.DropTable(
-            //    name: "product");
-
-            //migrationBuilder.DropTable(
-            //    name: "category");
-
-            //migrationBuilder.DropTable(
-            //    name: "recipe");
-
-            //migrationBuilder.DropTable(
-            //    name: "retail_chain");
+    
         }
     }
 }

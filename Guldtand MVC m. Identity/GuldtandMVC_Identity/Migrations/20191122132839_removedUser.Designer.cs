@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuldtandMVC_Identity.Migrations
 {
     [DbContext(typeof(prj4databaseContext))]
-    [Migration("20191122090857_TestForIdentity")]
-    partial class TestForIdentity
+    [Migration("20191122132839_removedUser")]
+    partial class removedUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

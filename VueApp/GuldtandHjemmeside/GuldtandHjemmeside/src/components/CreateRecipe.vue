@@ -40,30 +40,15 @@
 
         <div class="rows1">
             <!--addRow1-->
-            <button @click="addRow1">Tilf&#248;j nyt over punkt</button>
+            <button @click="addRow1">Tilf&#248;j beskrivelse</button>
             <br />
             <br />
-          
+
 
             <ul>
                 <li v-for="(input1, index1) in inputs1" v-bind:key="input1">
-
                     <input type="text" placeholder="..." v-model="input1.one" />
                     <button class="btn_delete" @click="deleteRow1(index1)">Slet</button>
-                    <br />
-                    <br />
-                    
-                    <button @click="addRow2">Tilf&#248;j nyt under punkt</button>
-
-                    <ul>
-                        <br />
-                        <li v-for="(input2, index2) in inputs2" v-bind:key="input2">
-                            <input type="text" placeholder="..." v-model="input2.one" />
-                            <button class="btn_delete" @click="deleteRow2(index2)">Slet</button>
-                        </li>
-                        <br />
-
-                    </ul>
                 </li>
             </ul>
         </div>
@@ -80,23 +65,29 @@
                     </select>
 
                     <input class="unit_text" type="text" v-model="inputIng.two" />
-                        <select class="units" v-bind="unit" id="unit_id">
-                            <option value="g">g</option>
-                            <option value="kg">kg</option>
-                            <option value="ml">ml</option>
-                            <option value="dl">dl</option>
-                            <option value="l">l</option>
-                            <option value="tsk">tsk</option>
-                            <option value="spsk">spsk</option>
-                            <option value="knsp">knsp</option>
-                        </select>
+                    <select class="units" v-bind="unit" id="unit_id">
+                        <option value="g">g</option>
+                        <option value="kg">kg</option>
+                        <option value="ml">ml</option>
+                        <option value="dl">dl</option>
+                        <option value="l">l</option>
+                        <option value="tsk">tsk</option>
+                        <option value="spsk">spsk</option>
+                        <option value="knsp">knsp</option>
+                    </select>
                     <button class="btn_delete" @click="deleteRowIng(indexIng)">Slet</button>
                 </li>
             </ul>
+            <br style="clear:both" />
+            <h2>
+                Tilføj billede
+            </h2>
+            <input type="text" placeholder="Indtast link til billede" v-model="imgUrl" />
         </div>
+        <br style="clear:both" />
 
         <button class="test_btn" @click="created">Test</button>
-
+        {{i}}
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
 
@@ -109,7 +100,7 @@
         name: 'CreateRecepie',
         data: function () {
             return {
-                inputs1: [],
+                inputs1: [],                
                 inputs2: [],
                 inputsIng: [],
                 inputs4: [],
@@ -118,8 +109,10 @@
                 recipeName: null,
                 timeValue: null,
                 ingridiens: null,
+                imgUrl: null,
                 unit: "",
-                selected: ""
+                selected: "",
+                i: 0,
             }
         },
         methods: {
@@ -134,26 +127,30 @@
                     })))
             },
             addRow1() {
-                this.inputs1.push({
-                    one: ''
-                })
-            },
-            addRow2() {
-                this.inputs2.push({
-                    one: ''
-                })
+                if (this.inputs1.length < 7) {
+                    this.i++
+                    this.inputs1.push({
+                        one: null,
+                    })
+                }
             },
             deleteRow1(index1) {
+                this.i--
                 this.inputs1.splice(index1, 1)
-            },
-            deleteRow2(index2) {
-                this.inputs2.splice(index2, 1)
             },
             deleteRowIng(indexIng) {
                 this.inputsIng.splice(indexIng, 1)
             },
+            description() {
+                var j;
+                for (j = 0; j < this.inputs1.length; j++) {
+                   this.inputs1[j].one;
+                }
+            },
             created() {
-                this.$http.get('https://localhost:44324/Home/recepieCreateTest?name=' + this.recipeName + '&prepareTime=' + this.timeValue + '&unit=' + this.unit, {
+
+                this.$http.get('https://localhost:44324/Home/recepieCreateTest?name=' + this.recipeName + '&prepareTime=' + this.timeValue + '&description=' +
+                    this.inputs1[0].one + '&description=' + this.inputs1[1].one + '&imgUrl=' + this, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

@@ -4,6 +4,16 @@
         <div class="header">
             <div class="TopPart">
                 <div class="title">
+
+
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" v-model="email" name="uname" required />
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" v-model="password" name="psw" required />
+
+                    <button class="modla_login" @click="created">Login</button>
+
                     <router-link to="/"><img src="@/assets/Pics/Guldtand.jpg" alt="Guldtand" tag="button" /></router-link>
                     <button onclick="document.getElementById('id01').style.display='block'" class="Login" style="width:auto" type="button">Login</button>
                     <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
@@ -11,25 +21,21 @@
                 </div>
 
                 <div id="id01" class="modal">
-                    <form class="modal-content animate" action="/action_page.php" method="post">
+                    <form class="modal-content animate">
                         <div class="imcontainer">
                             <span onclick="document.getElementById('id01').style.display='none'"
                                   class="close" title="close Modal">&times;</span>
                         </div>
 
-                        <div class="container">
+                        <!--<div class="container">
                             <label for="uname"><b>Username</b></label>
                             <input type="text" placeholder="Enter Username" v-model="email" name="uname" required />
 
                             <label for="psw"><b>Password</b></label>
                             <input type="password" placeholder="Enter Password" v-model="password" name="psw" required />
 
-                            <button class="modla_login" type="submit">Login</button>
-                            <label>
-                                <input type="checkbox" checked="checked" name="remember" />
-                                Remember me
-                            </label>
-                        </div>
+                            <button class="modla_login" @click="created">Login</button>
+                        </div>-->
 
                         <div class="container" style="background-color:#f1f1f1">
                             <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
@@ -64,28 +70,40 @@
                 email: null,
                 password: null,
                 info: null
-
             }
         },
-                methods: {
+        methods: {
+                        HandleErrors: function(response) {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response;
+            },
             created() {
-                this.$http.get('https://localhost:44324/Home/loginTest?email=' +this.email+ '&password=' +this.password,  {
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                }).then(response => (this.info = response.data))
+                fetch('https://localhost:44324/api/Account/Login', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        Email: this.email,
+                        Password: this.password
+                    }),
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
+                }).then(this.HandleErrors)
+                    .then(response => console.log(response))
+                    .catch(error => console.log(error));
             },
         }
     };
     // Get the modal
     var modal = document.getElementById('id01');
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
+        window.onclick = function (event) {
         if (event.taget == modal) {
             modal.style.display = "none";
         }
     }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
