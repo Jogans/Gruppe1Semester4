@@ -142,12 +142,13 @@
                 this.inputsIng.splice(indexIng, 1)
             },
             description() {
+                var j;
                 for (j = 0; j < this.inputs1.length; j++) {
                    this.inputs1[j].one;
                 }
             },
             created() {
-                var j;
+
                 this.$http.get('https://localhost:44324/Home/recepieCreateTest?name=' + this.recipeName + '&prepareTime=' + this.timeValue + '&description=' +
                     this.inputs1[0].one + '&description=' + this.inputs1[1].one + '&imgUrl=' + this, {
                     headers: {
