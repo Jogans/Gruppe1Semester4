@@ -68,7 +68,7 @@
             </ul>
         </div>
         <h2>
-            Skriv ingredienser:
+            Skriv ingredienser: 
         </h2>
         <div class="rows2">
             <button @click="addCategory">Tilf&#248;j ny ingrediens</button>
