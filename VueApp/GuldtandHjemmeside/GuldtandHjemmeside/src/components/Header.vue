@@ -20,14 +20,14 @@
                     <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
                 </div>
 
-                <!--<div id="id01" class="modal">
+                <div id="id01" class="modal">
                     <form class="modal-content animate">
                         <div class="imcontainer">
                             <span onclick="document.getElementById('id01').style.display='none'"
                                   class="close" title="close Modal">&times;</span>
                         </div>
 
-                        <div class="container">
+                        <!--<div class="container">
                             <label for="uname"><b>Username</b></label>
                             <input type="text" placeholder="Enter Username" v-model="email" name="uname" required />
 
@@ -35,14 +35,14 @@
                             <input type="password" placeholder="Enter Password" v-model="password" name="psw" required />
 
                             <button class="modla_login" @click="created">Login</button>
-                        </div>
+                        </div>-->
 
                         <div class="container" style="background-color:#f1f1f1">
                             <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
                             <span class="psw">Forgot <a href="#">password?</a></span>
                         </div>
                     </form>
-                </div>-->
+                </div>
             </div>
             <br style="clear:both" />
             <div class="Buttons2">
@@ -97,6 +97,12 @@
     };
     // Get the modal
     var modal = document.getElementById('id01');
+
+        window.onclick = function (event) {
+        if (event.taget == modal) {
+            modal.style.display = "none";
+        }
+    }
 
 </script>
 
