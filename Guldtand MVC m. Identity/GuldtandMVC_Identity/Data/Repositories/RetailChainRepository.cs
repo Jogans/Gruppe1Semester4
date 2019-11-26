@@ -6,54 +6,53 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GuldtandMVC_Identity.Data.Repositories
 {
-    public class RetailChainRepository : IDisposable
+    public class RetailChainRepository : IRepository<RetailChain>, IDisposable
     {
-        private prj4databaseContext context;
+        private readonly prj4databaseContext _context;
 
         public RetailChainRepository(prj4databaseContext context)
         {
-            this.context = context;
+            this._context = context;
         }
 
-        public async Task<IEnumerable<RetailChain>> GetRetailChains(IQuery<RetailChain> query)
+        public async Task<IEnumerable<RetailChain>> Get(IQuery<RetailChain> query)
         {
-            return await query.Execute(context);
+            return await query.Execute(_context);
         }
 
 
-        public void InsertRetailChain(RetailChain retailChain)
+        public void Insert(RetailChain retailChain)
         {
-            context.RetailChain.Add(retailChain);
+            _context.RetailChain.Add(retailChain);
         }
 
-        public void DeleteRetailChain(int retailChainId)
+        public void Delete(int retailChainId)
         {
-            RetailChain retailChain = context.RetailChain.Find(retailChainId);
-            context.RetailChain.Remove(retailChain);
+            RetailChain retailChain = _context.RetailChain.Find(retailChainId);
+            _context.RetailChain.Remove(retailChain);
         }
 
-        public void UpdateRetailChain(RetailChain retailChain)
+        public void Update(RetailChain retailChain)
         {
-            context.Entry(retailChain).State = EntityState.Modified;
+            _context.Entry(retailChain).State = EntityState.Modified;
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
-        private bool disposed = false;
-
+        private bool _disposed = false;
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!this._disposed)
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    _context.Dispose();
                 }
             }
-            this.disposed = true;
+            this._disposed = true;
         }
 
         public void Dispose()
