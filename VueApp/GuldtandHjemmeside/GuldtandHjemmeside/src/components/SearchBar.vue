@@ -7,8 +7,8 @@
         </div>
 
         <div class="SearchBarBtn">
-            <button class="SearchRecepie" style="height: 32px;" type="button">S&#248;g opskrift</button>
-            <button style="height: 32px;" @click="created" type="button">S&#248;g ingrediens</button>
+            <button class="SearchRecepie" @click="searchRecepie" style="height: 32px;" type="button">S&#248;g opskrift</button>
+            <button style="height: 32px;" @click="searchIngridient" type="button">S&#248;g ingrediens</button>
         </div>
         <br style="clear:both" />
 
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-        export default {
+    export default {
         name: 'SearchBar',
         props: {
         },
@@ -29,14 +29,20 @@
             }
         },
         methods: {
-            created() {
-                this.$router.push({name:'Searchsite'})
+            searchIngridient() {
                 this.$http.get('https://localhost:44324/Home/searchProducts?words=' + this.searchParameter, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             },
+            searchRecepie() {
+                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=' + this.searchParameter, {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }).then(response => (this.info = response.data))
+            }
             /*computed: {
                 filteredList() {
                     return this.data.filter((info) => {

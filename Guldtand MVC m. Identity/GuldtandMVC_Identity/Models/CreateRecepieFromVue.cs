@@ -9,11 +9,24 @@ namespace GuldtandMVC_Identity.Models
     public class CreateRecepieFromVue
     {
 
-        public string testCreateRecepieFunc(string name, int prepareTime, string[] description, string imgUrl)
+        public string testCreateRecepieFunc(string name, int prepareTime, string description, string imgUrl)
         {
-            
+
             string initString = "" +
                                 "<html>";
+
+            string style = "<head>" +
+                           "<style>" +
+
+                           ".img1{" +
+                           "display: block;" +
+                           "position: absolute;" +
+                           "width: 700px;" +
+                           "height: 400px;}" +
+
+                           "</style>" +
+                           "</head> ";
+
             string endString = "</html>";
 
             string bodystring = "";
@@ -25,17 +38,21 @@ namespace GuldtandMVC_Identity.Models
                           "<br/>" +
                           " Fremgangsmåde: " + "<br/>";
 
-                        for (int i = 0; i < description.Length; i++)
-                        {
-                            bodystring += 1 + i + ". " + description[i] + "<br/>";
-                        }
-
+            string[] descriptionData = description.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            int counter = 1;
+            foreach (var index in descriptionData)
+            {
+                if (index != "null")
+                {
+                    bodystring += counter++ + ". " + index + "<br/>";
+                }
+            }
 
             bodystring += "<br/>" +
-                          "<img src = '" + imgUrl + "' />" +
+                          "<img class='img1' src = '" + imgUrl + "' />" +
                 "</p>";
 
-            return initString + bodystring + endString; ;
+            return initString + style + bodystring + endString; ;
         }
 
     }
