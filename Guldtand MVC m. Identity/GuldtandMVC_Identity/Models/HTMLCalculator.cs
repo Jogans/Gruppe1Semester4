@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 using com.sun.org.apache.bcel.@internal.generic;
 using GuldtandMVC_Identity.Data;
 using jdk.nashorn.@internal.ir;
+using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
+using Microsoft.AspNetCore.Identity;
+using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
+using Microsoft.Extensions.Logging;
 
 namespace GuldtandMVC_Identity.Models
 {
     public class HTMLCalculator
     {
-        public string totalPrice(string word)
+        public double totalPrice(string word)
         {
             string initString = "" + "<html>";
             string endString = "</html>";
@@ -26,19 +30,21 @@ namespace GuldtandMVC_Identity.Models
 
                 foreach (var recipe in result)
                 {
-                    foreach (var ingredient in db.Ingredient.Where(i => i.IngredientListId == recipe.RecipeId))
+                    foreach (var ingredient in db.Ingredient.Where(i => i.IngredientList.RecipeId == recipe.RecipeId))
                     {
                         foreach (var product in db.Product.Where(p => p.ProductId == ingredient.ProductId))
                         {
                             totalPrice += product.Price;
                         }
                     }
-
-                    bodyString += "<h1>" + totalPrice + "</h1>";
                 }
-
-                return initString + bodyString + endString;
+                return totalPrice;
             }
         }
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ILogger<LoginModel> _logger;
+
     }
+
+
 }

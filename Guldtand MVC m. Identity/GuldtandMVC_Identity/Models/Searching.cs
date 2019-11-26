@@ -9,6 +9,36 @@ namespace GuldtandMVC_Identity.Models
 {
     public class Searching
     {
+
+        public string[] getCategoryList()
+        {
+            using (var db = new prj4databaseContext())
+            {
+                var categoryList = (from c in db.Category select c.CategoryName).ToArray();
+                return categoryList;
+            }
+        }
+        public string getCategoriesAsHTML()
+        {
+            //
+            string initString = "<select v-model='kategoriParameter' id='category'>";
+            string bodyString = "";
+
+            //string[] categoryArray;
+            using (var db = new prj4databaseContext())
+            {
+                var categoryList = (from c in db.Category select c.CategoryName).ToList();
+
+                foreach (var category in categoryList)
+                {
+                    bodyString += "<option value='" + category + "'>" + category + "</option>";
+                }
+            }
+            //</select>
+            string endString = "</select>";
+
+            return initString + bodyString + endString;
+        }
         public string searchProductsAndGetHTML(string words)
         {
             string initString = "" +
@@ -24,24 +54,24 @@ namespace GuldtandMVC_Identity.Models
                 "</html>";
 
             string bodystring = "";
-            using(var db = new prj4databaseContext())
+            using (var db = new prj4databaseContext())
             {
                 var result = from v in db.Product where v.Name.Contains(words) select v;
 
-                foreach(var vare in result)
+                foreach (var vare in result)
                 {
-                    bodystring+="<tr>" +
-                        "<td>"+vare.Name+"</td>"+
-                        "<td>"+"<img width='10%' src='"+vare.ImgSrc+"'/>"+"</td>" +
-                        "<td>"+vare.Price+"</td>" +
-                        "<td>"+"</td>" +
-                        "<td>"+vare.Volume+"</td>" +
+                    var category = db.ProductCategory.Where(k => k.ProductId == vare.ProductId).First().CategoryName;
+
+                    bodystring += "<tr>" +
+                        "<td>" + vare.Name + "</td>" +
+                        "<td>" + "<img width='10%' src='" + vare.ImgSrc + "'/>" + "</td>" +
+                        "<td>" + vare.Price + " kr.</td>" +
+                        "<td>" + category + "</td>" +
+                        "<td>" + vare.Volume + " ml.</td>" +
                         "</tr>";
                 }
             }
-            return initString+bodystring+endString;
+            return initString + bodystring + endString;
         }
-
-        
     }
 }

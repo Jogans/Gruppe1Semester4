@@ -1,6 +1,7 @@
 import Home from './components/Home.vue';
 import TopPage from './components/TopPage.vue';
 import NewPage from './components/NewPage.vue';
+import SearchBar from './components/SearchBar.vue';
 import Searchsite from './components/Searchsite.vue';
 import SUPage from './components/SUPage.vue';
 import VegiPage from './components/VegiPage.vue';
@@ -21,6 +22,7 @@ const routes = [
     { path: '/TopPage', component: TopPage },
     { path: '/NewPage', component: NewPage },
     { path: '/SUPage', component: SUPage },
+    { path: '/SearchBar', component: SearchBar },
     { path: '/Searchsite', component: Searchsite },
     { path: '/VegiPage', component: VegiPage },
     { path: '/ClassicPage', component: ClassicPage },

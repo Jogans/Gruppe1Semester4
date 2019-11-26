@@ -19,471 +19,255 @@ namespace GuldtandMVC_Identity.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Abningstid", b =>
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.Blacklist", b =>
                 {
-                    b.Property<string>("Ugedag")
-                        .HasColumnName("ugedag")
-                        .HasMaxLength(10)
+                    b.Property<string>("Category")
+                        .HasColumnName("category")
+                        .HasMaxLength(255)
                         .IsUnicode(false);
 
-                    b.Property<TimeSpan?>("AbenFra")
-                        .HasColumnName("aben_fra");
+                    b.HasKey("Category")
+                        .HasName("PK__blacklis__F7F53CC351A434DF");
 
-                    b.Property<TimeSpan?>("AbenTil")
-                        .HasColumnName("aben_til");
-
-                    b.Property<int>("ButikId")
-                        .HasColumnName("butik_id");
-
-                    b.HasKey("Ugedag")
-                        .HasName("PK__Abningst__363950E8F57F7389");
-
-                    b.HasIndex("ButikId");
-
-                    b.ToTable("Abningstid");
+                    b.ToTable("blacklist");
                 });
 
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Butik", b =>
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.Category", b =>
                 {
-                    b.Property<int>("ButikId")
+                    b.Property<string>("CategoryName")
+                        .HasColumnName("category_name")
+                        .HasMaxLength(50);
+
+                    b.HasKey("CategoryName")
+                        .HasName("PK__category__5189E254535378E8");
+
+                    b.ToTable("category");
+                });
+
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.Directions", b =>
+                {
+                    b.Property<int>("DirectionsId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("butikID")
+                        .HasColumnName("directions_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Addresse")
+                    b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnName("addresse")
-                        .HasMaxLength(255)
-                        .IsUnicode(false);
+                        .HasColumnName("description")
+                        .HasMaxLength(255);
 
-                    b.Property<string>("Butiknavn")
-                        .IsRequired()
-                        .HasColumnName("butiknavn")
-                        .HasMaxLength(255)
-                        .IsUnicode(false);
+                    b.Property<int?>("RecipeId")
+                        .HasColumnName("recipe_id");
 
-                    b.Property<int>("VareId")
-                        .HasColumnName("vareID");
+                    b.HasKey("DirectionsId");
 
-                    b.HasKey("ButikId");
+                    b.HasIndex("RecipeId");
 
-                    b.HasIndex("VareId");
-
-                    b.ToTable("Butik");
+                    b.ToTable("directions");
                 });
 
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.IngredientList", b =>
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.Ingredient", b =>
                 {
                     b.Property<int>("IngredientId")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ingredient_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnName("amount")
-                        .HasColumnType("decimal(10, 2)");
+                    b.Property<double?>("Amount")
+                        .HasColumnName("amount");
 
                     b.Property<string>("AmountUnit")
                         .HasColumnName("amount_unit")
-                        .HasMaxLength(255);
+                        .HasMaxLength(15);
 
-                    b.Property<string>("IngredientName")
+                    b.Property<int?>("IngredientListId")
+                        .HasColumnName("ingredientList_id");
+
+                    b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnName("ingredient_name")
-                        .HasMaxLength(255);
+                        .HasColumnName("name")
+                        .HasMaxLength(100);
 
-                    b.Property<int?>("ProductRef")
-                        .HasColumnName("product_ref");
+                    b.Property<int?>("ProductId")
+                        .HasColumnName("product_id");
 
-                    b.Property<int?>("Recipe")
-                        .HasColumnName("recipe");
+                    b.HasKey("IngredientId");
 
-                    b.HasKey("IngredientId")
-                        .HasName("PK__ingredie__B0E453CF81168D6F");
+                    b.HasIndex("IngredientListId");
 
-                    b.HasIndex("ProductRef");
+                    b.HasIndex("ProductId");
 
-                    b.HasIndex("Recipe");
-
-                    b.ToTable("ingredient_list");
+                    b.ToTable("ingredient");
                 });
 
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Kategori", b =>
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.IngredientList", b =>
                 {
-                    b.Property<string>("Kategori1")
-                        .HasColumnName("kategori")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.HasKey("Kategori1")
-                        .HasName("PK__Kategori__BFBCD94401F34AC9");
-
-                    b.ToTable("Kategori");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.NyVare", b =>
-                {
-                    b.Property<int>("VareId")
+                    b.Property<int>("IngredientListId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("vareID")
+                        .HasColumnName("ingredientList_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Butik")
-                        .HasColumnName("butik")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
+                    b.Property<int?>("RecipeId")
+                        .HasColumnName("recipe_id");
 
-                    b.Property<string>("ImgSrc")
-                        .HasColumnName("img_src")
-                        .HasMaxLength(200)
-                        .IsUnicode(false);
+                    b.HasKey("IngredientListId");
 
-                    b.Property<string>("Navn")
-                        .HasColumnName("navn")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
+                    b.HasIndex("RecipeId")
+                        .IsUnique()
+                        .HasName("UQ__ingredie__3571ED9A29CD80B9")
+                        .HasFilter("[recipe_id] IS NOT NULL");
 
-                    b.Property<double?>("Pris")
-                        .HasColumnName("pris");
-
-                    b.Property<DateTime>("ValidFra")
-                        .HasColumnName("valid_fra")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("ValidTil")
-                        .HasColumnName("valid_til")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("Volumen")
-                        .HasColumnName("volumen");
-
-                    b.Property<double?>("Volumenpris")
-                        .HasColumnName("volumenpris");
-
-                    b.HasKey("VareId")
-                        .HasName("PK__NyVare__0A039BF99CA62479");
-
-                    b.ToTable("NyVare");
+                    b.ToTable("ingredientList");
                 });
 
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Opskrift", b =>
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.OpenHours", b =>
                 {
-                    b.Property<int>("OpskriftId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("opskriftID")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Beskrivelse")
-                        .IsRequired()
-                        .HasColumnName("beskrivelse")
-                        .HasMaxLength(1000)
+                    b.Property<string>("DayOfWeek")
+                        .HasColumnName("day_of_week")
+                        .HasMaxLength(15)
                         .IsUnicode(false);
 
-                    b.Property<double>("Besparelse")
-                        .HasColumnName("besparelse");
+                    b.Property<TimeSpan?>("OpenFrom")
+                        .HasColumnName("open_from");
 
-                    b.Property<string>("Navn")
-                        .IsRequired()
-                        .HasColumnName("navn")
-                        .HasMaxLength(255)
-                        .IsUnicode(false);
+                    b.Property<TimeSpan?>("OpenTo")
+                        .HasColumnName("open_to");
 
-                    b.Property<double>("Pris")
-                        .HasColumnName("pris");
+                    b.Property<int>("RetailChainId")
+                        .HasColumnName("retail_chain_id");
 
-                    b.HasKey("OpskriftId");
+                    b.HasKey("DayOfWeek")
+                        .HasName("PK__open_hou__869EECA867AD9B20");
 
-                    b.ToTable("Opskrift");
+                    b.HasIndex("RetailChainId");
+
+                    b.ToTable("open_hours");
                 });
 
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.OpskriftKategori", b =>
-                {
-                    b.Property<int>("OpskriftId")
-                        .HasColumnName("opskriftID");
-
-                    b.Property<string>("Kategori")
-                        .HasColumnName("kategori")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.HasKey("OpskriftId", "Kategori")
-                        .HasName("PK__Opskrift__869396F91D4CBD8D");
-
-                    b.HasIndex("Kategori");
-
-                    b.ToTable("OpskriftKategori");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.PrefsCategories", b =>
-                {
-                    b.Property<string>("Username")
-                        .HasColumnName("username")
-                        .HasMaxLength(255);
-
-                    b.Property<string>("Category")
-                        .HasColumnName("category")
-                        .HasMaxLength(255);
-
-                    b.HasKey("Username", "Category")
-                        .HasName("PK_prefs_cat");
-
-                    b.ToTable("prefs_categories");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.PrefsChains", b =>
-                {
-                    b.Property<string>("Username")
-                        .HasColumnName("username")
-                        .HasMaxLength(255);
-
-                    b.Property<string>("RetailChain")
-                        .HasColumnName("retail_chain")
-                        .HasMaxLength(255);
-
-                    b.HasKey("Username", "RetailChain");
-
-                    b.HasIndex("RetailChain");
-
-                    b.ToTable("prefs_chains");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Products", b =>
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("product_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnName("amount")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.Property<string>("AmountUnit")
-                        .IsRequired()
-                        .HasColumnName("amount_unit")
-                        .HasMaxLength(255);
-
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnName("category")
+                    b.Property<string>("ImgSrc")
+                        .HasColumnName("img_src")
                         .HasMaxLength(255);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("name")
-                        .HasMaxLength(255);
+                        .HasMaxLength(100);
 
-                    b.Property<decimal?>("PricePrAmount")
-                        .HasColumnName("price_pr_amount")
-                        .HasColumnType("decimal(10, 2)");
+                    b.Property<double>("Price")
+                        .HasColumnName("price");
 
-                    b.Property<decimal>("PriceRegular")
-                        .HasColumnName("price_regular")
-                        .HasColumnType("decimal(10, 2)");
+                    b.Property<int?>("RetailChainId")
+                        .HasColumnName("retail_chain_id");
 
-                    b.Property<decimal?>("PriceSale")
-                        .HasColumnName("price_sale")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.Property<string>("RetailChain")
-                        .IsRequired()
-                        .HasColumnName("retail_chain")
-                        .HasMaxLength(255);
-
-                    b.Property<decimal?>("SavingsAbsolute")
-                        .HasColumnName("savings_absolute")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.Property<decimal?>("SavingsPercent")
-                        .HasColumnName("savings_percent")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnName("timestamp")
+                    b.Property<DateTime>("ValidFrom")
+                        .HasColumnName("valid_from")
                         .HasColumnType("datetime");
 
-                    b.HasKey("ProductId")
-                        .HasName("PK__products__47027DF5D8A01FFD");
+                    b.Property<DateTime>("ValidTo")
+                        .HasColumnName("valid_to")
+                        .HasColumnType("datetime");
 
-                    b.HasIndex("RetailChain");
+                    b.Property<double>("Volume")
+                        .HasColumnName("volume");
 
-                    b.ToTable("products");
+                    b.Property<double?>("VolumePrice")
+                        .HasColumnName("volume_price");
+
+                    b.HasKey("ProductId");
+
+                    b.HasIndex("RetailChainId");
+
+                    b.ToTable("product");
                 });
 
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Recipes", b =>
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.ProductCategory", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnName("product_id");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnName("category_name")
+                        .HasMaxLength(50);
+
+                    b.HasKey("ProductId", "CategoryName")
+                        .HasName("PK__product___121AE3D0B94E8F57");
+
+                    b.HasIndex("CategoryName");
+
+                    b.ToTable("product_category");
+                });
+
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.Recipe", b =>
                 {
                     b.Property<int>("RecipeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("recipe_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnName("category")
-                        .HasMaxLength(255);
+                    b.Property<int>("CookTime")
+                        .HasColumnName("cook_time");
 
-                    b.Property<string>("Directions")
-                        .IsRequired()
-                        .HasColumnName("directions")
-                        .HasMaxLength(4000);
+                    b.Property<string>("ImgSrc")
+                        .HasColumnName("img_src")
+                        .HasMaxLength(255);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("name")
                         .HasMaxLength(255);
 
-                    b.Property<decimal?>("Price")
-                        .HasColumnName("price")
-                        .HasColumnType("decimal(10, 2)");
+                    b.Property<double?>("Price")
+                        .HasColumnName("price");
 
-                    b.Property<decimal?>("SavingsAbsolute")
-                        .HasColumnName("savings_absolute")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.Property<decimal?>("SavingsPercent")
-                        .HasColumnName("savings_percent")
-                        .HasColumnType("decimal(10, 2)");
+                    b.Property<double?>("SavingsAbsolute")
+                        .HasColumnName("savings_absolute");
 
                     b.Property<int?>("Servings")
                         .HasColumnName("servings");
 
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnName("timestamp")
-                        .HasColumnType("datetime");
+                    b.HasKey("RecipeId");
 
-                    b.HasKey("RecipeId")
-                        .HasName("PK__recipes__3571ED9B43F6CF7A");
-
-                    b.ToTable("recipes");
+                    b.ToTable("recipe");
                 });
 
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.RetailChains", b =>
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.RecipeCategory", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnName("name")
-                        .HasMaxLength(255);
+                    b.Property<int>("RecipeId")
+                        .HasColumnName("recipe_id");
 
-                    b.HasKey("Name")
-                        .HasName("PK__retail_c__72E12F1ADAE2682D");
+                    b.Property<string>("CategoryName")
+                        .HasColumnName("category_name")
+                        .HasMaxLength(50);
 
-                    b.ToTable("retail_chains");
+                    b.HasKey("RecipeId", "CategoryName")
+                        .HasName("PK__recipe_c__606973BEB82D8C04");
+
+                    b.HasIndex("CategoryName");
+
+                    b.ToTable("recipe_category");
                 });
 
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Stores", b =>
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.RetailChain", b =>
                 {
-                    b.Property<int>("StoreId")
+                    b.Property<int>("RetailChainId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("store_id")
+                        .HasColumnName("retail_chain_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnName("address")
-                        .HasMaxLength(255);
-
-                    b.Property<string>("Hours")
-                        .HasColumnName("hours")
-                        .HasMaxLength(255);
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
-                        .HasMaxLength(255);
+                        .HasMaxLength(100);
 
-                    b.Property<string>("RetailChain")
-                        .IsRequired()
-                        .HasColumnName("retail_chain")
-                        .HasMaxLength(255);
+                    b.HasKey("RetailChainId");
 
-                    b.HasKey("StoreId")
-                        .HasName("PK__stores__A2F2A30C987F6792");
-
-                    b.HasIndex("RetailChain");
-
-                    b.ToTable("stores");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Subscriptions", b =>
-                {
-                    b.Property<string>("Username")
-                        .HasColumnName("username")
-                        .HasMaxLength(255);
-
-                    b.Property<int>("Recipe")
-                        .HasColumnName("recipe");
-
-                    b.Property<decimal>("MaxPrice")
-                        .HasColumnName("max_price")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.HasKey("Username", "Recipe");
-
-                    b.HasIndex("Recipe");
-
-                    b.ToTable("subscriptions");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Vare", b =>
-                {
-                    b.Property<int>("VareId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("vareID")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Butik")
-                        .HasColumnName("butik")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Imgsrc")
-                        .HasColumnName("imgsrc")
-                        .HasMaxLength(255)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Navn")
-                        .HasColumnName("navn")
-                        .HasMaxLength(255)
-                        .IsUnicode(false);
-
-                    b.Property<double?>("Pris")
-                        .HasColumnName("pris");
-
-                    b.Property<string>("ValidFra")
-                        .HasColumnName("valid_fra")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.Property<string>("ValidTil")
-                        .HasColumnName("valid_til")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.Property<double?>("Volumen")
-                        .HasColumnName("volumen");
-
-                    b.Property<double?>("Volumenpris")
-                        .HasColumnName("volumenpris");
-
-                    b.HasKey("VareId");
-
-                    b.ToTable("Vare");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.VareKategori", b =>
-                {
-                    b.Property<int>("VareId")
-                        .HasColumnName("vareID");
-
-                    b.Property<string>("Kategori")
-                        .HasColumnName("kategori")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
-
-                    b.HasKey("VareId", "Kategori")
-                        .HasName("PK__VareKate__51F8566D62A76F18");
-
-                    b.HasIndex("Kategori");
-
-                    b.ToTable("VareKategori");
+                    b.ToTable("retail_chain");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -540,9 +324,6 @@ namespace GuldtandMVC_Identity.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -582,8 +363,6 @@ namespace GuldtandMVC_Identity.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -656,128 +435,79 @@ namespace GuldtandMVC_Identity.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.ApplicationUser", b =>
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.Directions", b =>
                 {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnName("username")
-                        .HasMaxLength(255);
-
-                    b.ToTable("users");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Abningstid", b =>
-                {
-                    b.HasOne("GuldtandMVC_Identity.Models.Butik", "Butik")
-                        .WithMany("Abningstid")
-                        .HasForeignKey("ButikId")
-                        .HasConstraintName("FK__Abningsti__butik__0C70CFB4")
+                    b.HasOne("GuldtandMVC_Identity.Data.Recipe", "Recipe")
+                        .WithMany("Directions")
+                        .HasForeignKey("RecipeId")
+                        .HasConstraintName("FK__direction__recip__6621099A")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Butik", b =>
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.Ingredient", b =>
                 {
-                    b.HasOne("GuldtandMVC_Identity.Models.Vare", "Vare")
-                        .WithMany("ButikNavigation")
-                        .HasForeignKey("VareId")
-                        .HasConstraintName("FK__Butik__vareID__09946309");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.IngredientList", b =>
-                {
-                    b.HasOne("GuldtandMVC_Identity.Models.Products", "ProductRefNavigation")
-                        .WithMany("IngredientList")
-                        .HasForeignKey("ProductRef")
-                        .HasConstraintName("FK_ingredients_products");
-
-                    b.HasOne("GuldtandMVC_Identity.Models.Recipes", "RecipeNavigation")
-                        .WithMany("IngredientList")
-                        .HasForeignKey("Recipe")
-                        .HasConstraintName("FK_ingredients_recipe");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.OpskriftKategori", b =>
-                {
-                    b.HasOne("GuldtandMVC_Identity.Models.Kategori", "KategoriNavigation")
-                        .WithMany("OpskriftKategori")
-                        .HasForeignKey("Kategori")
-                        .HasConstraintName("FK__OpskriftK__kateg__06B7F65E")
+                    b.HasOne("GuldtandMVC_Identity.Data.IngredientList", "IngredientList")
+                        .WithMany("Ingredient")
+                        .HasForeignKey("IngredientListId")
+                        .HasConstraintName("FK__ingredien__ingre__60683044")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GuldtandMVC_Identity.Models.Opskrift", "Opskrift")
-                        .WithMany("OpskriftKategori")
-                        .HasForeignKey("OpskriftId")
-                        .HasConstraintName("FK__OpskriftK__opskr__05C3D225")
+                    b.HasOne("GuldtandMVC_Identity.Data.Product", "Product")
+                        .WithMany("Ingredient")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("FK__ingredien__produ__5F740C0B");
+                });
+
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.IngredientList", b =>
+                {
+                    b.HasOne("GuldtandMVC_Identity.Data.Recipe", "Recipe")
+                        .WithOne("IngredientList")
+                        .HasForeignKey("GuldtandMVC_Identity.Data.IngredientList", "RecipeId")
+                        .HasConstraintName("FK__ingredien__recip__57D2EA43")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.PrefsCategories", b =>
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.OpenHours", b =>
                 {
-                    b.HasOne("GuldtandMVC_Identity.Models.ApplicationUser", "UsernameNavigation")
-                        .WithMany("PrefsCategories")
-                        .HasForeignKey("Username")
-                        .HasConstraintName("FK_pref_cat_username");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.PrefsChains", b =>
-                {
-                    b.HasOne("GuldtandMVC_Identity.Models.RetailChains", "RetailChainNavigation")
-                        .WithMany("PrefsChains")
-                        .HasForeignKey("RetailChain")
-                        .HasConstraintName("FK_prefs_chains_chains");
-
-                    b.HasOne("GuldtandMVC_Identity.Models.ApplicationUser", "UsernameNavigation")
-                        .WithMany("PrefsChains")
-                        .HasForeignKey("Username")
-                        .HasConstraintName("FK_prefs_chains_username");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Products", b =>
-                {
-                    b.HasOne("GuldtandMVC_Identity.Models.RetailChains", "RetailChainNavigation")
-                        .WithMany("Products")
-                        .HasForeignKey("RetailChain")
-                        .HasConstraintName("FK_product_chain");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Stores", b =>
-                {
-                    b.HasOne("GuldtandMVC_Identity.Models.RetailChains", "RetailChainNavigation")
-                        .WithMany("Stores")
-                        .HasForeignKey("RetailChain")
-                        .HasConstraintName("FK_stores_chains");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.Subscriptions", b =>
-                {
-                    b.HasOne("GuldtandMVC_Identity.Models.Recipes", "RecipeNavigation")
-                        .WithMany("Subscriptions")
-                        .HasForeignKey("Recipe")
-                        .HasConstraintName("FK_sub_recipe");
-
-                    b.HasOne("GuldtandMVC_Identity.Models.ApplicationUser", "UsernameNavigation")
-                        .WithMany("Subscriptions")
-                        .HasForeignKey("Username")
-                        .HasConstraintName("FK_sub_username");
-                });
-
-            modelBuilder.Entity("GuldtandMVC_Identity.Models.VareKategori", b =>
-                {
-                    b.HasOne("GuldtandMVC_Identity.Models.Kategori", "KategoriNavigation")
-                        .WithMany("VareKategori")
-                        .HasForeignKey("Kategori")
-                        .HasConstraintName("FK__VareKateg__kateg__00FF1D08")
+                    b.HasOne("GuldtandMVC_Identity.Data.RetailChain", "RetailChain")
+                        .WithMany("OpenHours")
+                        .HasForeignKey("RetailChainId")
+                        .HasConstraintName("FK__open_hour__retai__41E3A924")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
 
-                    b.HasOne("GuldtandMVC_Identity.Models.NyVare", "Vare")
-                        .WithMany("VareKategori")
-                        .HasForeignKey("VareId")
-                        .HasConstraintName("FK__VareKateg__vareI__000AF8CF")
-                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.Product", b =>
+                {
+                    b.HasOne("GuldtandMVC_Identity.Data.RetailChain", "RetailChain")
+                        .WithMany("Product")
+                        .HasForeignKey("RetailChainId")
+                        .HasConstraintName("FK__product__retail___46A85E41");
+                });
+
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.ProductCategory", b =>
+                {
+                    b.HasOne("GuldtandMVC_Identity.Data.Category", "CategoryNameNavigation")
+                        .WithMany("ProductCategory")
+                        .HasForeignKey("CategoryName")
+                        .HasConstraintName("FK__product_c__categ__5031C87B");
+
+                    b.HasOne("GuldtandMVC_Identity.Data.Product", "Product")
+                        .WithMany("ProductCategory")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("FK__product_c__produ__4F3DA442");
+                });
+
+            modelBuilder.Entity("GuldtandMVC_Identity.Data.RecipeCategory", b =>
+                {
+                    b.HasOne("GuldtandMVC_Identity.Data.Category", "CategoryNameNavigation")
+                        .WithMany("RecipeCategory")
+                        .HasForeignKey("CategoryName")
+                        .HasConstraintName("FK__recipe_ca__categ__5402595F");
+
+                    b.HasOne("GuldtandMVC_Identity.Data.Recipe", "Recipe")
+                        .WithMany("RecipeCategory")
+                        .HasForeignKey("RecipeId")
+                        .HasConstraintName("FK__recipe_ca__recip__530E3526");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

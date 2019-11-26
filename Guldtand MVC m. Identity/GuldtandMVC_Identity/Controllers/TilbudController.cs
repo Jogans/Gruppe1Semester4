@@ -7,12 +7,14 @@ using GuldtandMVC_Identity.Models;
 
 namespace GuldtandMVC_Identity.Controllers
 {
+    public class VareJson
+    {
+        public string Tekst { get; set; }
+    }
+
     public class TilbudController
     {
-        public class VareJson
-        {
-            public string Tekst { get; set; }
-        }
+        
 
         public class tilbudController : Controller
         {
@@ -22,8 +24,17 @@ namespace GuldtandMVC_Identity.Controllers
             public void AddVare([Bind("tekst")]VareJson vare)
             {
                 ParseVarer.InsertVare(vare.Tekst);
-                }
+            }
         }
+
+        public void update(int kode)
+        {
+            var au = new ApplicationUser();
+            
+            if (kode == 5555)
+                UpdateVarer.Update();
+        }
+
     }
 
 }

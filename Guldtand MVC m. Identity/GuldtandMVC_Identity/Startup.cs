@@ -63,7 +63,9 @@ namespace GuldtandMVC_Identity
             services.AddDbContext<prj4databaseContext>();
 
 
-            services.AddIdentityCore<ApplicationUser>();
+            services.AddIdentityCore<ApplicationUser>()
+                .AddEntityFrameworkStores<prj4databaseContext>()
+                .AddDefaultTokenProviders();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
