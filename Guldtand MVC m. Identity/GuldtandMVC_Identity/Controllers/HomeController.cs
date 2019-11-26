@@ -37,7 +37,7 @@ namespace GuldtandMVC_Identity.Controllers
 
         }
 
-        public string recepieCreateTest(string name, int prepareTime, string[] description, string imgUrl)
+        public string recepieCreateTest(string name, int prepareTime, string description, string imgUrl)
         {
             var testCreate = new CreateRecepieFromVue();
 

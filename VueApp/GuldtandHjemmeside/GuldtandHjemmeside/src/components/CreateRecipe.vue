@@ -113,6 +113,7 @@
                 unit: "",
                 selected: "",
                 i: 0,
+                descriptionString: "",
             }
         },
         methods: {
@@ -128,14 +129,14 @@
             },
             addRow1() {
                 if (this.inputs1.length < 7) {
-                    this.i++
+                    this.i++;
                     this.inputs1.push({
                         one: null,
                     })
                 }
             },
             deleteRow1(index1) {
-                this.i--
+                this.i--;
                 this.inputs1.splice(index1, 1)
             },
             deleteRowIng(indexIng) {
@@ -143,14 +144,23 @@
             },
             description() {
                 var j;
-                for (j = 0; j < this.inputs1.length; j++) {
-                   this.inputs1[j].one;
+                this.descriptionString = "";
+                for (j = 0; j < this.i; j++) {
+                 this.descriptionString += this.inputs1[j].one + ";";
                 }
+                return this.descriptionString;
             },
             created() {
 
-                this.$http.get('https://localhost:44324/Home/recepieCreateTest?name=' + this.recipeName + '&prepareTime=' + this.timeValue + '&description=' +
-                    this.inputs1[0].one + '&description=' + this.inputs1[1].one + '&imgUrl=' + this, {
+                this.$http.get('https://localhost:44324/Home/recepieCreateTest?name=' + this.recipeName + '&prepareTime=' + this.timeValue +
+                    '&description=' + this.description() +
+                    //this.inputs1[1].one + '&description=' +
+                    //this.inputs1[2].one + '&description=' + 
+                    //this.inputs1[3].one + '&description=' +
+                    //this.inputs1[4].one + '&description=' + 
+                    //this.inputs1[5].one + '&description=' + 
+                    //this.inputs1[6].one + '&description=' +
+                    '&imgUrl=' + this.imgUrl, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
