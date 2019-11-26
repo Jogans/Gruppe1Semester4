@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using GuldtandMVC_Identity.Data.Queries;
 using Microsoft.EntityFrameworkCore;
@@ -8,54 +7,52 @@ using System.Data;
 
 namespace GuldtandMVC_Identity.Data.Repositories
 {
-    public class RecipeCategoryRepository : IDisposable
+    public class RecipeCategoryRepository : IRepository<RecipeCategory>, IDisposable
     {
-        private prj4databaseContext context;
+        private readonly prj4databaseContext _context;
 
         public RecipeCategoryRepository(prj4databaseContext context)
         {
-            this.context = context;
+            this._context = context;
         }
 
-        public async Task<IEnumerable<RecipeCategory>> GetRecipeCategorys(IQuery<RecipeCategory> query)
+        public async Task<IEnumerable<RecipeCategory>> Get(IQuery<RecipeCategory> query)
         {
-            return await query.Execute(context);
+            return await query.Execute(_context);
         }
 
-
-        public void InsertRecipeCategory(RecipeCategory recipeCategory)
+        public void Insert(RecipeCategory recipeCategory)
         {
-            context.RecipeCategory.Add(recipeCategory);
+            _context.RecipeCategory.Add(recipeCategory);
         }
 
-        public void DeleteRecipeCategory(int recipeCategoryId)
+        public void Delete(int recipeCategoryId)
         {
-            RecipeCategory recipeCategory = context.RecipeCategory.Find(recipeCategoryId);
-            context.RecipeCategory.Remove(recipeCategory);
+            RecipeCategory recipeCategory = _context.RecipeCategory.Find(recipeCategoryId);
+            _context.RecipeCategory.Remove(recipeCategory);
         }
 
-        public void UpdateRecipeCategory(RecipeCategory recipeCategory)
+        public void Update(RecipeCategory recipeCategory)
         {
-            context.Entry(recipeCategory).State = EntityState.Modified;
+            _context.Entry(recipeCategory).State = EntityState.Modified;
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
-        private bool disposed = false;
-
+        private bool _disposed = false;
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!this._disposed)
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    _context.Dispose();
                 }
             }
-            this.disposed = true;
+            this._disposed = true;
         }
 
         public void Dispose()

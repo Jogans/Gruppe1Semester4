@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using GuldtandMVC_Identity.Data.Queries;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 namespace GuldtandMVC_Identity.Data.Repositories
 {
