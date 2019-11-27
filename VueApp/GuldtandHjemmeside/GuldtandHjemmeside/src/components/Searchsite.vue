@@ -19,7 +19,7 @@
 
 <script>
     //import Searchbar from './components/Searchbar.vue';
-    export default {
+   
         //components: {
         // Searchbar
         // },
@@ -35,7 +35,7 @@
 
         // components: { Searchbar  }
 
-    }
+    
         
     
 </script>
