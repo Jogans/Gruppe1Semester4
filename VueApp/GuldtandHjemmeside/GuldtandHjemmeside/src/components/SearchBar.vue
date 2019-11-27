@@ -4,12 +4,17 @@
         <br style="clear:both" />
         <div class="SearchBar">
             <input style="height: 32px; width: 704px;" type="text" v-model="searchParameter" placeholder="Search..." required>
+
+            <!-- <autocomplete :suggestions="searchvalg" :selection.sync="value"> </autocomplete>  -->
         </div>
 
+
         <div class="SearchBarBtn">
-            <button class="SearchRecepie" @click="searchRecepie" style="height: 32px;" type="button">S&#248;g opskrift</button>
-            <button style="height: 32px;" @click="searchIngridient" type="button">S&#248;g ingrediens</button>
+            <button class="SearchRecepie" style="height: 32px;" type="button">S&#248;g opskrift</button>
+            <button style="height: 32px;" @click="mounted" type="button">S&#248;g ingrediens</button>
+            <!--<button style="height: 32px;" @click="$emit('triggerEvent')" type="button">S&#248;g ingrediens</button> -->
         </div>
+
         <br style="clear:both" />
 
         <span v-html="info">{{info}}</span>
@@ -17,45 +22,60 @@
 </template>
 
 <script>
+
+    //import Typeahead from './components/Typeahead.vue'
     export default {
         name: 'SearchBar',
+        // components: { Typeahead },
+
         props: {
         },
-                data: function () {
-            return {
-                test: 'Det virker',
-                info: null,
-                searchParameter: null
-            }
-        },
+
+            /*searchvalg : [
+         'kød','grønsager','agurk','D','K','M'
+             ],
+
+             value: '',
+             */
+        data: function () {
+                return {
+                    test: 'Det virker',
+                    info: null,
+                    searchParameter: null
+                }
+            },
+
+
         methods: {
-            searchIngridient() {
+            mounted() {
+                //this.$router.push({ name: 'Searchsite' })
+                //this.$router.go({ path: 'Searchsite' })
+
                 this.$http.get('https://localhost:44324/Home/searchProducts?words=' + this.searchParameter, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
-                }).then(response => (this.info = response.data))
-            },
-            searchRecepie() {
-                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=' + this.searchParameter, {
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                }).then(response => (this.info = response.data))
+                }).then(response => {
+                    this.info = response.data;
+                    this.$router.push('/Searchsite');
+                })
             }
-            /*computed: {
-                filteredList() {
-                    return this.data.filter((info) => {
-                        return info.toLowerCase().includes(this.searchParameter.toLowerCase());
-                    });
-                }
-            }*/
+
+
+
+
+
+
+
+
         }
-}
+    }
+
+
 </script>
 
 <style scoped>
-        .SearchBar {
+    .SearchBar {
         float: left;
         display: inline-block;
         color: black;
@@ -78,9 +98,10 @@
         padding-right: 15px;
         padding-bottom: 10px;
     }
-            .bodySearchBar {
-    width: 100%;
-    max-width: 65%;
-    margin: auto;
-}
+
+    .bodySearchBar {
+        width: 100%;
+        max-width: 65%;
+        margin: auto;
+    }
 </style>

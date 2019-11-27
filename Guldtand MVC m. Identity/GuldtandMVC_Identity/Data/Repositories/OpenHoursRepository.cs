@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using GuldtandMVC_Identity.Data.Queries;
 using Microsoft.EntityFrameworkCore;
@@ -8,54 +7,53 @@ using System.Data;
 
 namespace GuldtandMVC_Identity.Data.Repositories
 {
-    public class OpenHoursRepository : IDisposable
+    public class OpenHoursRepository : IRepository<OpenHours>, IDisposable
     {
-        private prj4databaseContext context;
+        private readonly prj4databaseContext _context;
 
         public OpenHoursRepository(prj4databaseContext context)
         {
-            this.context = context;
+            this._context = context;
         }
 
-        public async Task<IEnumerable<OpenHours>> GetOpenHours(IQuery<OpenHours> query)
+        public async Task<IEnumerable<OpenHours>> Get(IQuery<OpenHours> query)
         {
-            return await query.Execute(context);
+            return await query.Execute(_context);
         }
 
 
-        public void InsertOpenHours(OpenHours openHours)
+        public void Insert(OpenHours openHours)
         {
-            context.OpenHours.Add(openHours);
+            _context.OpenHours.Add(openHours);
         }
 
-        public void DeleteOpenHours(int openHoursId)
+        public void Delete(int openHoursId)
         {
-            OpenHours openHours = context.OpenHours.Find(openHoursId);
-            context.OpenHours.Remove(openHours);
+            OpenHours openHours = _context.OpenHours.Find(openHoursId);
+            _context.OpenHours.Remove(openHours);
         }
 
-        public void UpdateOpenHours(OpenHours openHours)
+        public void Update(OpenHours openHours)
         {
-            context.Entry(openHours).State = EntityState.Modified;
+            _context.Entry(openHours).State = EntityState.Modified;
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
-        private bool disposed = false;
-
+        private bool _disposed = false;
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!this._disposed)
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    _context.Dispose();
                 }
             }
-            this.disposed = true;
+            this._disposed = true;
         }
 
         public void Dispose()

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using GuldtandMVC_Identity.Data.Queries;
 using Microsoft.EntityFrameworkCore;
@@ -8,54 +7,53 @@ using System.Data;
 
 namespace GuldtandMVC_Identity.Data.Repositories
 {
-    public class ProductCategoryRepository : IDisposable
+    public class ProductCategoryRepository : IRepository<ProductCategory>, IDisposable
     {
-        private prj4databaseContext context;
+        private readonly prj4databaseContext _context;
 
         public ProductCategoryRepository(prj4databaseContext context)
         {
-            this.context = context;
+            this._context = context;
         }
 
-        public async Task<IEnumerable<ProductCategory>> GetProductCategorys(IQuery<ProductCategory> query)
+        public async Task<IEnumerable<ProductCategory>> Get(IQuery<ProductCategory> query)
         {
-            return await query.Execute(context);
+            return await query.Execute(_context);
         }
 
 
-        public void InsertProductCategory(ProductCategory productCategory)
+        public void Insert(ProductCategory productCategory)
         {
-            context.ProductCategory.Add(productCategory);
+            _context.ProductCategory.Add(productCategory);
         }
 
-        public void DeleteProductCategory(int productCategoryId)
+        public void Delete(int productCategoryId)
         {
-            ProductCategory productCategory = context.ProductCategory.Find(productCategoryId);
-            context.ProductCategory.Remove(productCategory);
+            ProductCategory productCategory = _context.ProductCategory.Find(productCategoryId);
+            _context.ProductCategory.Remove(productCategory);
         }
 
-        public void UpdateProductCategory(ProductCategory productCategory)
+        public void Update(ProductCategory productCategory)
         {
-            context.Entry(productCategory).State = EntityState.Modified;
+            _context.Entry(productCategory).State = EntityState.Modified;
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
-        private bool disposed = false;
-
+        private bool _disposed = false;
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!this._disposed)
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    _context.Dispose();
                 }
             }
-            this.disposed = true;
+            this._disposed = true;
         }
 
         public void Dispose()
