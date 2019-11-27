@@ -37,11 +37,11 @@ namespace GuldtandMVC_Identity.Controllers
 
         }
 
-        public string recepieCreateTest(string name, int prepareTime, string description, string imgUrl)
+        public string recepieCreateTest(string name, int prepareTime, string description, string ingridients, string imgUrl)
         {
             var testCreate = new CreateRecepieFromVue();
 
-            return testCreate.testCreateRecepieFunc(name, prepareTime, description, imgUrl);
+            return testCreate.testCreateRecepieFunc(name, prepareTime, description, ingridients, imgUrl);
         }
 
         public string viewASpeceficRecipe(string words)
