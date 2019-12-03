@@ -10,6 +10,7 @@
         </h2>
 
         <div class="recipeName">
+             <Typeahead :suggestions="searchvalg" :selection.sync="value"> </Typeahead>  
             <input style="height: 28px; width: 250px;" type="text" v-model="recipeName" placeholder="Indtast navn" required>
         </div>
 
@@ -69,13 +70,14 @@
                     <input class="unit_text" type="text" v-model="inputIng.two" />
                     <select class="units" v-bind="unit" v-model="inputIng.three" id="unit_id">
                         <option value="g">g</option>
-                        <!--<option value="kg">kg</option>
+                        <option value="kg">kg</option>
                         <option value="ml">ml</option>
                         <option value="dl">dl</option>
                         <option value="l">l</option>
                         <option value="tsk">tsk</option>
                         <option value="spsk">spsk</option>
-                        <option value="knsp">knsp</option>-->
+                        <option value="knsp">knsp</option>
+                        <option value="knsp">stk</option>
                     </select>
                     <button class="btn_delete" @click="deleteRowIng(indexIng)">Slet</button>
                 </li>
@@ -97,7 +99,7 @@
 </template>
 
 <script>
-
+    import Typeahead from './Typeahead.vue';
     export default {
         name: 'CreateRecepie',
         data: function () {
@@ -119,6 +121,7 @@
                 g: "g",
             }
         },
+        components: {Typeahead},
         methods: {
             addCategory() {
                 //this.$http.get('', {
@@ -159,7 +162,7 @@
                 var k = 0;
                 this.ingridientString = "";
                 for (k = 0; k < this.m; k++) {
-                 this.ingridientString += "Kategori: " + this.inputsIng[k].one + "Amount: " + this.indexIng[k].two + "Unit: " + this.indexIng[k].three + ";";
+                 this.ingridientString += "Kategori: " + this.inputsIng[k].one + " Amount: " + this.inputsIng[k].two + " Unit: " + this.inputsIng[k].three + ";";
                 }
                 return this.ingridientString;
             },
