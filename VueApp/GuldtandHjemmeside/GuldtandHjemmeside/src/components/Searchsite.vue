@@ -1,7 +1,8 @@
 <template>
     <!--  <SearchBar :triggerEvent="mounted" />  -->
-    <div style="position:relative" v-bind:class="{'open':openSuggestion}">
-        <input class="form-control" type="text" v-model="selection"
+    <div class="searchsite">
+    <!--<div style="position:relative" v-bind:class="{'open':openSuggestion}">-->
+        <!--<input class="form-control" type="text" v-model="selection"
                @keydown.enter='enter'
                @keydown.down='down'
                @keydown.up='up'
@@ -10,9 +11,9 @@
             <li v-for="suggestion in matches"
                 v-bind:class="{'active': isActive($index)}"
                 @click="suggestionClick($index)">
-                <a href="#">{{ suggestion }}</a>
+                <a href="#">{ suggestion }}</a>
             </li>
-        </ul>
+        </ul>-->
     </div>
 
 </template>
