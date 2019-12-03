@@ -26,12 +26,12 @@ namespace Guldtand_UnitTests
                 CookTime = 25,
                 ImgSrc = "https://tinyurl.com/usevcle"
             };
-            _uut.InsertRecipe(recipe);
+            _uut.Insert(recipe);
             _uut.Save();
 
             Assert.That(_context.Recipe.Contains(recipe), Is.True);
 
-            _uut.DeleteRecipe(recipe.RecipeId);
+            _uut.Delete(recipe.RecipeId);
             _uut.Save();
         }
     }
