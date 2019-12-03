@@ -11,7 +11,7 @@ namespace GuldtandMVC_Identity.Models
     {
         public string ShowRecipeFullView(string words)
         {
-
+    
             string initString = "" +
                                 "<html>";
             string endString = "</html>";

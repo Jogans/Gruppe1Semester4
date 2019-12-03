@@ -10,7 +10,9 @@ using com.sun.org.apache.xerces.@internal.parsers;
 using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
 using Microsoft.AspNetCore.Identity;
 using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Identity;
 
 namespace GuldtandMVC_Identity.Controllers
 {
@@ -37,11 +39,11 @@ namespace GuldtandMVC_Identity.Controllers
 
         }
 
-        public string recepieCreateTest(string name, int prepareTime, string description, string imgUrl)
+        public string recepieCreateTest(string name, int prepareTime, string description, string ingridients, string imgUrl)
         {
             var testCreate = new CreateRecepieFromVue();
 
-            return testCreate.testCreateRecepieFunc(name, prepareTime, description, imgUrl);
+            return testCreate.testCreateRecepieFunc(name, prepareTime, description, ingridients, imgUrl);
         }
 
         public string viewASpeceficRecipe(string words)

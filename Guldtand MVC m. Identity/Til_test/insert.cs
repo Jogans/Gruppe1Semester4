@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Til_test
 {
-    public class insert
+    public class InsertRecipeDirectionsCategoryIngredients
     {
         private readonly prj4databaseContext _context;
-        public insert(prj4databaseContext context)
+        public InsertRecipeDirectionsCategoryIngredients(prj4databaseContext context)
         {
             _context = context;
         }
@@ -47,9 +47,11 @@ namespace Til_test
                 _context.SaveChanges();
 
                 Category category = new Category {CategoryName = "Dansk klassisk"};
-
-                _context.Category.Add(category);
-                _context.SaveChanges();
+                if (!_context.Category.Contains(category))
+                {
+                    _context.Category.Add(category);
+                    _context.SaveChanges();
+                }
 
                 RecipeCategory recipeCategory = new RecipeCategory
                 {

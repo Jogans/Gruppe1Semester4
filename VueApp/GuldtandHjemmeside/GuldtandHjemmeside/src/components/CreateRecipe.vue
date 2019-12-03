@@ -10,6 +10,7 @@
         </h2>
 
         <div class="recipeName">
+             <Typeahead :suggestions="searchvalg" :selection.sync="value"> </Typeahead>  
             <input style="height: 28px; width: 250px;" type="text" v-model="recipeName" placeholder="Indtast navn" required>
         </div>
 
@@ -52,6 +53,7 @@
                 </li>
             </ul>
         </div>
+
         <h2>
             Skriv ingredienser:
         </h2>
@@ -60,12 +62,13 @@
             <ul>
                 <li v-for="(inputIng, indexIng) in inputsIng" v-bind:key="inputIng">
 
-                    <select v-model='selected' id='category' style="margin: 10px">
-                        <option v-bind:key="kategoriElement" v-for="kategoriElement in inputIng.one">{{kategoriElement}}</option>
-                    </select>
+                    <input type="text" placeholder="..." v-model="inputIng.one" />
+                    <!--<select v-model='selected' id='category' style="margin: 10px">
+        <option v-for="kategoriElement in inputIng.one" v-bind:key="kategoriElement" v-bind:id="indexIng" >{kategoriElement}}</option>
+    </select>-->
 
                     <input class="unit_text" type="text" v-model="inputIng.two" />
-                    <select class="units" v-bind="unit" id="unit_id">
+                    <select class="units" v-bind="unit" v-model="inputIng.three" id="unit_id">
                         <option value="g">g</option>
                         <option value="kg">kg</option>
                         <option value="ml">ml</option>
@@ -74,6 +77,7 @@
                         <option value="tsk">tsk</option>
                         <option value="spsk">spsk</option>
                         <option value="knsp">knsp</option>
+                        <option value="knsp">stk</option>
                     </select>
                     <button class="btn_delete" @click="deleteRowIng(indexIng)">Slet</button>
                 </li>
@@ -90,21 +94,19 @@
         {{i}}
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
-
+        
     </div>
 </template>
 
 <script>
-
+    import Typeahead from './Typeahead.vue';
     export default {
         name: 'CreateRecepie',
         data: function () {
             return {
                 inputs1: [],                
-                inputs2: [],
                 inputsIng: [],
-                inputs4: [],
-                category: "",
+                category: [],
                 info: null,
                 recipeName: null,
                 timeValue: null,
@@ -113,20 +115,33 @@
                 unit: "",
                 selected: "",
                 i: 0,
+                m: 0,
                 descriptionString: "",
+                ingridientString: "",
+                g: "g",
             }
         },
+        components: {Typeahead},
         methods: {
             addCategory() {
-                this.$http.get('https://localhost:44324/kategori/getAllCategories', {
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                }).then(response => (
+                //this.$http.get('', {
+                //    headers: {
+                //        'Access-Control-Allow-Origin': '*',
+                //    },
+                //}).then(response => (
+                    this.m++;
                     this.inputsIng.push({
-                        one: response.data
-                    })))
+                        one: null,/*response.data,*/
+                        two: null,
+                        three: null,
+                    })
+                //))
             },
+            addRow2() {
+                    this.inputsIng.push({
+                        one: null,
+                    })
+                },
             addRow1() {
                 if (this.inputs1.length < 7) {
                     this.i++;
@@ -140,26 +155,29 @@
                 this.inputs1.splice(index1, 1)
             },
             deleteRowIng(indexIng) {
+                this.m--;
                 this.inputsIng.splice(indexIng, 1)
             },
+            descriptionIngridients() {
+                var k = 0;
+                this.ingridientString = "";
+                for (k = 0; k < this.m; k++) {
+                 this.ingridientString += "Kategori: " + this.inputsIng[k].one + " Amount: " + this.inputsIng[k].two + " Unit: " + this.inputsIng[k].three + ";";
+                }
+                return this.ingridientString;
+            },
             description() {
-                var j;
+                var j = 0;
                 this.descriptionString = "";
                 for (j = 0; j < this.i; j++) {
-                 this.descriptionString += this.inputs1[j].one + ";";
+                    this.descriptionString += this.inputs1[j].one + ";";
                 }
                 return this.descriptionString;
             },
             created() {
-
                 this.$http.get('https://localhost:44324/Home/recepieCreateTest?name=' + this.recipeName + '&prepareTime=' + this.timeValue +
                     '&description=' + this.description() +
-                    //this.inputs1[1].one + '&description=' +
-                    //this.inputs1[2].one + '&description=' + 
-                    //this.inputs1[3].one + '&description=' +
-                    //this.inputs1[4].one + '&description=' + 
-                    //this.inputs1[5].one + '&description=' + 
-                    //this.inputs1[6].one + '&description=' +
+                    '&ingridients=' + this.descriptionIngridients() +
                     '&imgUrl=' + this.imgUrl, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',

@@ -9,7 +9,7 @@ namespace GuldtandMVC_Identity.Models
     public class CreateRecepieFromVue
     {
 
-        public string testCreateRecepieFunc(string name, int prepareTime, string description, string imgUrl)
+        public string testCreateRecepieFunc(string name, int prepareTime, string description, string ingridients, string imgUrl)
         {
 
             string initString = "" +
@@ -45,6 +45,18 @@ namespace GuldtandMVC_Identity.Models
                 if (index != "null")
                 {
                     bodystring += counter++ + ". " + index + "<br/>";
+                }
+            }
+
+            bodystring += " Ingridiens liste: " + "<br/>";
+
+            string[] ingridientData = ingridients.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            int counterIngridient = 1;
+            foreach (var indexIngridient in ingridientData)
+            {
+                if (indexIngridient != "null")
+                {
+                    bodystring += counterIngridient++ + ". Ingridient: " + indexIngridient + "<br/>";
                 }
             }
 

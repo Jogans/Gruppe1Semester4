@@ -24,6 +24,7 @@ namespace GuldtandMVC_Identity.Controllers
             _signInManager = signInManager;
         }
 
+
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] DtoUser dtoUser)
         {

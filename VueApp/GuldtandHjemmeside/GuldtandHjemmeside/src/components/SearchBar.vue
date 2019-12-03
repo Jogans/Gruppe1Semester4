@@ -3,9 +3,9 @@
         <br style="clear:both" />
         <br style="clear:both" />
         <div class="SearchBar">
+            <typeahead :suggestions="searchoptions" :selection.sync="value"> </typeahead>
             <input style="height: 32px; width: 704px;" type="text" v-model="searchParameter" placeholder="Search..." required>
-
-            <!-- <autocomplete :suggestions="searchvalg" :selection.sync="value"> </autocomplete>  -->
+            
         </div>
 
 
@@ -26,24 +26,33 @@
     //import Typeahead from './components/Typeahead.vue'
     export default {
         name: 'SearchBar',
-        // components: { Typeahead },
+        //components: { Typeahead },
 
         props: {
+            //['searchoptions', 'value']
+
+
+            //searchoptions: ['kød', 'grønsager', 'agurk'],
+            //value: ''
         },
 
-            /*searchvalg : [
-         'kød','grønsager','agurk','D','K','M'
-             ],
-
-             value: '',
-             */
+        
+             
         data: function () {
-                return {
-                    test: 'Det virker',
-                    info: null,
-                    searchParameter: null
-                }
-            },
+            return {
+                test: 'Det virker',
+                info: null,
+                searchParameter: null
+                //searchoptions: ['kød', 'grønsager', 'agurk'],
+                //value: ''
+            }
+               /* {
+                    searchoptions: [
+                        'kød', 'grønsager', 'agurk', 'D', 'K', 'M'
+                    ],
+                    value: ''
+                }*/
+            },   
 
 
         methods: {
