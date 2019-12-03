@@ -10,13 +10,16 @@ using jdk.nashorn.@internal.ir;
 using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
 using Microsoft.AspNetCore.Identity;
 using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
+using GuldtandMVC_Identity.Data.Queries;
+using GuldtandMVC_Identity.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace GuldtandMVC_Identity.Models
 {
     public class HTMLCalculator
     {
-        public double totalPrice(string word)
+        public async Task<double> totalPrice(string word)
         {
             string initString = "" + "<html>";
             string endString = "</html>";
@@ -26,16 +29,24 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new prj4databaseContext())
             {
-                var result = from v in db.Recipe where v.Name.Contains(word) select v;
+                RecipeQuery recipequery = new RecipeQuery
+                {
+                    SearchRecipe = word,
+                    LoadIngredientList = true,
+                    NumberOfRecipes = 1
+                };
+                RecipeRepository inReciperepository = new RecipeRepository(db);
+                var result = await inReciperepository.Get(recipequery);
 
                 foreach (var recipe in result)
                 {
-                    foreach (var ingredient in db.Ingredient.Where(i => i.IngredientList.RecipeId == recipe.RecipeId))
+                    //take all ingredients in the ingredientlist
+                    foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
-                        foreach (var product in db.Product.Where(p => p.ProductId == ingredient.ProductId))
-                        {
-                            totalPrice += product.Price;
-                        }
+                        //foreach (var product in )
+                        //{
+                        //    totalPrice += product.Price;
+                        //}
                     }
                 }
                 return totalPrice;
