@@ -29,6 +29,8 @@ namespace GuldtandMVC_Identity.Controllers
 
         public void update(int kode)
         {
+            var au = new ApplicationUser();
+            
             if (kode == 5555)
                 UpdateVarer.Update();
         }

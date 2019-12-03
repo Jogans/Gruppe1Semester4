@@ -44,23 +44,6 @@ namespace GuldtandMVC_Identity.Models
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        //public string testLoginFunc(string login, string password)
-        //{
-        //    //LoginModel test = new LoginModel(_signInManager, _logger);
-        //    //test.Input.Email = login;
-        //    //test.Input.Password = password;
-
-        //    string initString = "" +
-        //                        "<html>";
-        //    string endString = "</html>";
-
-        //    string bodystring = "";
-
-        //    bodystring += "<h1>" + "Teststring output: " + login + "</h1>";
-
-        //    return initString + bodystring + endString;;
-        //}
-
     }
 
 

@@ -37,12 +37,12 @@ namespace GuldtandMVC_Identity.Controllers
 
         }
 
-        //public string loginTest(string email, string password)
-        //{
-        //    HTMLCalculator test = new HTMLCalculator();
+        public string recepieCreateTest(string name, int prepareTime, string description, string ingridients, string imgUrl)
+        {
+            var testCreate = new CreateRecepieFromVue();
 
-        //    return test.testLoginFunc(email, password);
-        //}
+            return testCreate.testCreateRecepieFunc(name, prepareTime, description, ingridients, imgUrl);
+        }
 
         public string viewASpeceficRecipe(string words)
         {

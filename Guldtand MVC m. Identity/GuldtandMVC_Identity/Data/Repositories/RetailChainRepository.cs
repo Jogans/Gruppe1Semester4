@@ -4,37 +4,37 @@ using System.Threading.Tasks;
 using GuldtandMVC_Identity.Data.Queries;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace GuldtandMVC_Identity.Data.Repositories
 {
-    public class RecipeRepository : IRepository<Recipe>, IDisposable
+    public class RetailChainRepository : IRepository<RetailChain>, IDisposable
     {
         private readonly prj4databaseContext _context;
 
-        public RecipeRepository(prj4databaseContext context)
+        public RetailChainRepository(prj4databaseContext context)
         {
             this._context = context;
         }
 
-        public async Task<IEnumerable<Recipe>> Get(IQuery<Recipe> query)
+        public async Task<IEnumerable<RetailChain>> Get(IQuery<RetailChain> query)
         {
             return await query.Execute(_context);
         }
 
-        public void Insert(Recipe recipe)
+
+        public void Insert(RetailChain retailChain)
         {
-            _context.Recipe.Add(recipe);
+            _context.RetailChain.Add(retailChain);
         }
 
-        public void Delete(int recipeId)
+        public void Delete(int retailChainId)
         {
-            Recipe recipe = _context.Recipe.Find(recipeId);
-            _context.Recipe.Remove(recipe);
+            RetailChain retailChain = _context.RetailChain.Find(retailChainId);
+            _context.RetailChain.Remove(retailChain);
         }
 
-        public void Update(Recipe recipe)
+        public void Update(RetailChain retailChain)
         {
-            _context.Entry(recipe).State = EntityState.Modified;
+            _context.Entry(retailChain).State = EntityState.Modified;
         }
 
         public void Save()

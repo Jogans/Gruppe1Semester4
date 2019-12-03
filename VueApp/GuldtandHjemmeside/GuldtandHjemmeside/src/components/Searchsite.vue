@@ -1,26 +1,37 @@
 <template>
-    <div class="bodySearchsite">
-        <div class="container">
-            <h1 class="text-primary text-center">{{title}}</h1>
-        </div>
+    <!--  <SearchBar :triggerEvent="mounted" />  -->
+    <div>
     </div>
-    
 
 </template>
 
 <script>
-    export default {
-        name: 'Searchsite',
-        data() {
-            return {
-                title: "Searchsite"
+    /*
+    import Searchbar from './components/Searchbar.vue';
+   
+        components: {
+        Searchbar
+    }
+
+        methods: {
+            callFunction() {
+                callFunction.Searchbar;
+                }
             }
         }
-    }
+
+
+
+
+        // components: { Searchbar  }
+
+    */
+        
+    
 </script>
 
 <style scoped>
-    .bodySearchsite {
+    .searchsite {
         width: 100%;
         max-width: 65%;
         margin: auto;

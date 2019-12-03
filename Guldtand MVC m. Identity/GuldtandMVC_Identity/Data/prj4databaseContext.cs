@@ -1,10 +1,11 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace GuldtandMVC_Identity.Data
 {
-    public partial class prj4databaseContext : DbContext
+    public partial class prj4databaseContext : IdentityDbContext
     {
         public prj4databaseContext()
         {
@@ -38,6 +39,8 @@ namespace GuldtandMVC_Identity.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
             modelBuilder.Entity<Blacklist>(entity =>

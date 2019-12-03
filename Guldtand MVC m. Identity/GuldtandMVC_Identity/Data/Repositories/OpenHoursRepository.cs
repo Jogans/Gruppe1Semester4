@@ -3,38 +3,39 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GuldtandMVC_Identity.Data.Queries;
 using Microsoft.EntityFrameworkCore;
-
+using System.Data;
 
 namespace GuldtandMVC_Identity.Data.Repositories
 {
-    public class RecipeRepository : IRepository<Recipe>, IDisposable
+    public class OpenHoursRepository : IRepository<OpenHours>, IDisposable
     {
         private readonly prj4databaseContext _context;
 
-        public RecipeRepository(prj4databaseContext context)
+        public OpenHoursRepository(prj4databaseContext context)
         {
             this._context = context;
         }
 
-        public async Task<IEnumerable<Recipe>> Get(IQuery<Recipe> query)
+        public async Task<IEnumerable<OpenHours>> Get(IQuery<OpenHours> query)
         {
             return await query.Execute(_context);
         }
 
-        public void Insert(Recipe recipe)
+
+        public void Insert(OpenHours openHours)
         {
-            _context.Recipe.Add(recipe);
+            _context.OpenHours.Add(openHours);
         }
 
-        public void Delete(int recipeId)
+        public void Delete(int openHoursId)
         {
-            Recipe recipe = _context.Recipe.Find(recipeId);
-            _context.Recipe.Remove(recipe);
+            OpenHours openHours = _context.OpenHours.Find(openHoursId);
+            _context.OpenHours.Remove(openHours);
         }
 
-        public void Update(Recipe recipe)
+        public void Update(OpenHours openHours)
         {
-            _context.Entry(recipe).State = EntityState.Modified;
+            _context.Entry(openHours).State = EntityState.Modified;
         }
 
         public void Save()

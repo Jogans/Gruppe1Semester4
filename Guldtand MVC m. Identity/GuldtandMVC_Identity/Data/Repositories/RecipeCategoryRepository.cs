@@ -3,38 +3,38 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GuldtandMVC_Identity.Data.Queries;
 using Microsoft.EntityFrameworkCore;
-
+using System.Data;
 
 namespace GuldtandMVC_Identity.Data.Repositories
 {
-    public class RecipeRepository : IRepository<Recipe>, IDisposable
+    public class RecipeCategoryRepository : IRepository<RecipeCategory>, IDisposable
     {
         private readonly prj4databaseContext _context;
 
-        public RecipeRepository(prj4databaseContext context)
+        public RecipeCategoryRepository(prj4databaseContext context)
         {
             this._context = context;
         }
 
-        public async Task<IEnumerable<Recipe>> Get(IQuery<Recipe> query)
+        public async Task<IEnumerable<RecipeCategory>> Get(IQuery<RecipeCategory> query)
         {
             return await query.Execute(_context);
         }
 
-        public void Insert(Recipe recipe)
+        public void Insert(RecipeCategory recipeCategory)
         {
-            _context.Recipe.Add(recipe);
+            _context.RecipeCategory.Add(recipeCategory);
         }
 
-        public void Delete(int recipeId)
+        public void Delete(int recipeCategoryId)
         {
-            Recipe recipe = _context.Recipe.Find(recipeId);
-            _context.Recipe.Remove(recipe);
+            RecipeCategory recipeCategory = _context.RecipeCategory.Find(recipeCategoryId);
+            _context.RecipeCategory.Remove(recipeCategory);
         }
 
-        public void Update(Recipe recipe)
+        public void Update(RecipeCategory recipeCategory)
         {
-            _context.Entry(recipe).State = EntityState.Modified;
+            _context.Entry(recipeCategory).State = EntityState.Modified;
         }
 
         public void Save()
