@@ -10,7 +10,7 @@
             <li v-for="suggestion in matches"
                 v-bind:class="{'active': isActive($index)}"
                 @click="suggestionClick($index)">
-                <a href="#">{{ suggestion }}</a>
+                <a href="#">{{ suggestions }}</a>
             </li>
         </ul>
     </div>

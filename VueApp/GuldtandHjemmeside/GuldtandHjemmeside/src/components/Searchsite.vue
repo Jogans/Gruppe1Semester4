@@ -1,41 +1,31 @@
 <template>
     <!--  <SearchBar :triggerEvent="mounted" />  -->
-    <div style="position:relative" v-bind:class="{'open':openSuggestion}">
-        <input class="form-control" type="text" v-model="selection"
-               @keydown.enter='enter'
-               @keydown.down='down'
-               @keydown.up='up'
-               @input='change' />
-        <ul class="dropdown-menu" style="width:100%">
-            <li v-for="suggestion in matches"
-                v-bind:class="{'active': isActive($index)}"
-                @click="suggestionClick($index)">
-                <a href="#">{{ suggestion }}</a>
-            </li>
-        </ul>
+    <div>
     </div>
 
 </template>
 
 <script>
-    //import Searchbar from './components/Searchbar.vue';
+    /*
+    import Searchbar from './components/Searchbar.vue';
    
-        //components: {
-        // Searchbar
-        // },
-        /*methods: {
+        components: {
+        Searchbar
+    }
+
+        methods: {
             callFunction() {
                 callFunction.Searchbar;
                 }
             }
-        }*/
+        }
 
 
 
 
         // components: { Searchbar  }
 
-    
+    */
         
     
 </script>
