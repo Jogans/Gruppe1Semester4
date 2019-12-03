@@ -47,13 +47,16 @@ namespace GuldtandMVC_Identity.Models
                     bodystring += counter++ + ". " + index + "<br/>";
                 }
             }
-            string[] ingridientData = description.Split(';', StringSplitOptions.RemoveEmptyEntries);
+
+            bodystring += " Ingridiens liste: " + "<br/>";
+
+            string[] ingridientData = ingridients.Split(';', StringSplitOptions.RemoveEmptyEntries);
             int counterIngridient = 1;
-            foreach (var index in ingridientData)
+            foreach (var indexIngridient in ingridientData)
             {
-                if (index != "null")
+                if (indexIngridient != "null")
                 {
-                    bodystring += counterIngridient++ + ". Ingridient: " + index + "<br/>";
+                    bodystring += counterIngridient++ + ". Ingridient: " + indexIngridient + "<br/>";
                 }
             }
 
