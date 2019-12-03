@@ -10,6 +10,7 @@
         </h2>
 
         <div class="recipeName">
+             <Typeahead :suggestions="searchvalg" :selection.sync="value"> </Typeahead>  
             <input style="height: 28px; width: 250px;" type="text" v-model="recipeName" placeholder="Indtast navn" required>
         </div>
 
@@ -98,7 +99,7 @@
 </template>
 
 <script>
-
+    import Typeahead from './Typeahead.vue';
     export default {
         name: 'CreateRecepie',
         data: function () {
@@ -120,6 +121,7 @@
                 g: "g",
             }
         },
+        components: {Typeahead},
         methods: {
             addCategory() {
                 //this.$http.get('', {
