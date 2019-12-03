@@ -7,34 +7,35 @@ using System.Data;
 
 namespace GuldtandMVC_Identity.Data.Repositories
 {
-    public class RecipeCategoryRepository : IRepository<RecipeCategory>, IDisposable
+    public class CategoryRepository : IRepository<Category>, IDisposable
     {
         private readonly prj4databaseContext _context;
 
-        public RecipeCategoryRepository(prj4databaseContext context)
+        public CategoryRepository(prj4databaseContext context)
         {
             this._context = context;
         }
 
-        public async Task<IEnumerable<RecipeCategory>> Get(IQuery<RecipeCategory> query)
+        public async Task<IEnumerable<Category>> Get(IQuery<Category> query)
         {
             return await query.Execute(_context);
         }
 
-        public void Insert(RecipeCategory recipeCategory)
+
+        public void Insert(Category category)
         {
-            _context.RecipeCategory.Add(recipeCategory);
+            _context.Category.Add(category);
         }
 
-        public void Delete(int recipeCategoryId)
+        public void Delete(int categoryId)
         {
-            RecipeCategory recipeCategory = _context.RecipeCategory.Find(recipeCategoryId);
-            _context.RecipeCategory.Remove(recipeCategory);
+            Category category = _context.Category.Find(categoryId);
+            _context.Category.Remove(category);
         }
 
-        public void Update(RecipeCategory recipeCategory)
+        public void Update(Category category)
         {
-            _context.Entry(recipeCategory).State = EntityState.Modified;
+            _context.Entry(category).State = EntityState.Modified;
         }
 
         public void Save()
