@@ -25,7 +25,7 @@ namespace Til_test
                 };
                 RecipeRepository repo = new RecipeRepository(db);
 
-                var data = await repo.GetRecipes(query);
+                var data = await repo.Get(query);
 
                 foreach (var VARIABLE in data)
                 {
