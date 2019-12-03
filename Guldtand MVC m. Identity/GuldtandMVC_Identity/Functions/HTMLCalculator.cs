@@ -14,6 +14,7 @@ using GuldtandMVC_Identity.Data.Queries;
 using GuldtandMVC_Identity.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using GuldtandMVC_Identity.Data;
 
 namespace GuldtandMVC_Identity.Models
 {
@@ -27,7 +28,7 @@ namespace GuldtandMVC_Identity.Models
 
             double totalPrice = 0;
 
-            using (var db = new prj4databaseContext())
+            using (var db = new Data.prj4databaseContext())
             {
                 RecipeQuery recipequery = new RecipeQuery
                 {
