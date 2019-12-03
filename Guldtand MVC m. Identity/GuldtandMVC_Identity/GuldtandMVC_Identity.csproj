@@ -6,6 +6,13 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Services\**" />
+    <Content Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="IKVM" Version="8.1.5717" />
@@ -23,12 +30,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="Models\NewFolder\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
