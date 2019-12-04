@@ -20,6 +20,36 @@ namespace GuldtandMVC_Identity.Models
 {
     public class HTMLCalculator
     {
+        //public async Task<double> normalPrice(string word)
+        //{
+        //    string initString = "" + "<html>";
+        //    string endString = "</html>";
+        //    string bodyString = "";
+
+        //    double normalPrice = 0;
+
+        //    using (var db = new prj4databaseContext())
+        //    {
+        //        RecipeQuery recipequery = new RecipeQuery
+        //        {
+        //            SearchRecipe = word,
+        //            LoadIngredientList = true,
+        //            NumberOfRecipes = 1
+        //        };
+
+        //        RecipeRepository reciperepository = new RecipeRepository(db);
+        //        var recepylist = await reciperepository.Get(recipequery);
+        //        ProductRepository productRepository = new ProductRepository(db);
+        //        var products = await productRepository.Get(new ProductQuery());
+                
+        //        var product = new Product();
+                
+               
+        //    }
+
+        //    return normalPrice;
+        //}
+
         public async Task<double> totalPrice(string word)
         {
             string initString = "" + "<html>";
@@ -50,6 +80,7 @@ namespace GuldtandMVC_Identity.Models
                         foreach (var product in products)
                         {
                             totalPrice += product.Price;
+                            
                         }
                     }
                 }
