@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GuldtandMVC_Identity;
 using GuldtandMVC_Identity.Data;
 using GuldtandMVC_Identity.Data.Queries;
 using GuldtandMVC_Identity.Data.Repositories;
@@ -22,28 +23,24 @@ namespace Guldtand_UnitTests
         }
 
         [Test]
-        public async Task ÉxecuteQuery_ValidDateSet20501201_OnlyProdutsFromDateReturned()
+        public async Task ExecuteQuery_ValidDateSet20501201_OnlyProductsFromDateReturned()
         {
-            _uut.ValidToDate = "2050-12-01";
+            _uut.ValidToDate = "2050";
             var products = await _uut.Execute(_context);
             foreach (var product in products)
             {
-                Assert.That(product.ValidTo.Year == 2050
-                            && product.ValidTo.Month == 12
-                            && product.ValidTo.Day == 01);
+                Assert.That(product.ValidTo.Year == 2050);
             }
         }
 
         [Test]
-        public async Task ÉxecuteQuery_ValidDateSet20191204_OnlyProdutsFromDateReturned()
+        public async Task ExecuteQuery_ValidDateSet20191204_OnlyProductsFromDateReturned()
         {
             _uut.ValidToDate = "2019-12-04";
             var products = await _uut.Execute(_context);
             foreach (var product in products)
             {
-                Assert.That(product.ValidTo.Year == 2050
-                            && product.ValidTo.Month == 12
-                            && product.ValidTo.Day == 01);
+                Assert.That(product.ValidTo.Year == 2050);
             }
         }
     }

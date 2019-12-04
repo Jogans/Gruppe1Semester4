@@ -5,7 +5,7 @@
 
     <div class="bodyStorePage">
         <br style="clear:both" />
-        <h1>Test søgefelt</h1>
+        <h1>Test søgefelt opskrift</h1>
         <div id="StorePage">
             <br style="clear:both" />
             <div class="SearchBar">
@@ -35,7 +35,7 @@
 
         methods: {
             created() {
-                this.$http.get('https://localhost:44324/Home/searchProducts?words=' + this.searchParameter, {
+                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=' + this.searchParameter, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

@@ -29,8 +29,10 @@ namespace GuldtandMVC_Identity.Data.Queries
                         case true:
                             return await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
-                                .Include(r => r.IngredientList)
+                                .Include(r => r.IngredientList.Ingredient)
                                 .Include(r => r.RecipeCategory)
+                                .Include(r => r.Directions)
+                                .OrderBy(r => r.Price)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                         //return await context.Set<Recipe>()
@@ -45,11 +47,13 @@ namespace GuldtandMVC_Identity.Data.Queries
                             return await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
                                 .Include(r => r.IngredientList)
+                                .OrderBy(r => r.Price)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                         default:
                             return await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
+                                .OrderBy(r => r.Price)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                     }
@@ -60,22 +64,26 @@ namespace GuldtandMVC_Identity.Data.Queries
                             return await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
                                 .Include(r => r.RecipeCategory)
+                                .OrderBy(r => r.Price)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                         case false:
                             return await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
+                                .OrderBy(r => r.Price)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                         default:
                             return await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
+                                .OrderBy(r => r.Price)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                     }
                 default:
                     return await context.Set<Recipe>()
                         .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
+                                .OrderBy(r => r.Price)
                                 .Take(NumberOfRecipes)
                         .ToListAsync();
             }

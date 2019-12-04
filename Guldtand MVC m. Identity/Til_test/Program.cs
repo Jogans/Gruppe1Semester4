@@ -1,9 +1,9 @@
-﻿using GuldtandMVC_Identity.Data;
-using GuldtandMVC_Identity.Data.Queries;
+﻿using GuldtandMVC_Identity.Data.Queries;
 using GuldtandMVC_Identity.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GuldtandMVC_Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Til_test
@@ -15,11 +15,11 @@ namespace Til_test
             using (var db = new prj4databaseContext())
             {
                 ProductQuery query = new ProductQuery();
-                query.ValidToDate = "2050-01-12";
+                query.ValidToDate = "2050";
                 var result = await query.Execute(db);
                 foreach (var VARIABLE in result)
                 {
-                    Console.WriteLine($"{VARIABLE.ValidTo}");
+                    Console.WriteLine($"{VARIABLE.ValidTo.ToString()}");
                 }
                 //RecipeQuery query = new RecipeQuery
                 //{

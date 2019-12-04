@@ -46,18 +46,18 @@ namespace GuldtandMVC_Identity.Controllers
             return testCreate.testCreateRecepieFunc(name, prepareTime, description, ingridients, imgUrl);
         }
 
-        public string viewASpeceficRecipe(string words)
+        public Task<string> viewASpeceficRecipe(string words)
         {
             var recipe = new AddHTMLToRecipe();
 
             return recipe.ShowRecipeFullView(words);
         }
 
-        public string viewForSmallRecipe(string words)
+        public Task<string> viewForSmallRecipe()
         {
             var recipe = new AddHTMLToRecipe();
 
-            return recipe.ShowRecipeSmallView(words).Result;
+            return recipe.ShowRecipeSmallViewAsync();
         }
 
         public Task<double> viewTotalPrice(string words)
