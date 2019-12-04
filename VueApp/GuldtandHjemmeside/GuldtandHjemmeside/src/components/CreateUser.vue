@@ -8,8 +8,18 @@
             <label for="email"><b>Email</b></label>
             <input type="text" v-model="email" placeholder="Skriv Email" name="email" required>
 
-            <label for="psw"><b>Adgangskode</b></label>
-            <input type="password" v-model="password" placeholder="Kriv Adgangskode" name="psw" required>
+
+
+            <label for="psw">
+                <b>Adgangskode</b><br />
+                Adgangskoden skal indeholde mindst et tal, <br />
+                Adgangskoden skal indeholde mindst en karakter med sm&#229; bogstav, <br />
+                Adgangskoden skal indeholde mindst en karakter med stort bogstav, <br />
+                Adgangskoden skal indeholde mindst have en l&#230;ngde p&#229; mindst 6 karakterer, <br />
+                Adgangskoden skal indeholde mindst en unik karakter
+            </label>
+
+            <input type="password" v-model="password" placeholder="Skriv Adgangskode" name="psw" required>
 
             <label for="psw-repeat"><b>Gentag Adgangskode</b></label>
     <input type="password" placeholder="Gentag Adgangskode" name="psw-repeat" required>
@@ -43,11 +53,12 @@
             }
         },
         methods: {
-            HandleErrors: function(response) {
+            HandleErrors: function (response) {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-                return response;
+                VueRouter.push()
+                
             },
             created() {
                fetch('https://localhost:44324/api/Account/Register', {

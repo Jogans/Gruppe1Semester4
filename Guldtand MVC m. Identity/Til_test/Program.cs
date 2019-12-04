@@ -4,6 +4,7 @@ using GuldtandMVC_Identity.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GuldtandMVC_Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Til_test
