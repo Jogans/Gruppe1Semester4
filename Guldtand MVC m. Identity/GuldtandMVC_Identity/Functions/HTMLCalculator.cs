@@ -28,7 +28,7 @@ namespace GuldtandMVC_Identity.Models
 
             double totalPrice = 0;
 
-            using (var db = new Data.prj4databaseContext())
+            using (var db = new prj4databaseContext())
             {
                 RecipeQuery recipequery = new RecipeQuery
                 {

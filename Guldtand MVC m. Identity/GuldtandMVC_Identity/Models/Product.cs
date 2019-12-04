@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GuldtandMVC_Identity.Data
+namespace GuldtandMVC_Identity
 {
     public partial class Product
     {
