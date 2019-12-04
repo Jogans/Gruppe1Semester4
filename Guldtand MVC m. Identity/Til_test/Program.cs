@@ -19,7 +19,7 @@ namespace Til_test
                 var result = await query.Execute(db);
                 foreach (var VARIABLE in result)
                 {
-                    Console.WriteLine($"{VARIABLE.ValidTo}");
+                    Console.WriteLine($"{VARIABLE.ValidTo.ToString()}");
                 }
                 //RecipeQuery query = new RecipeQuery
                 //{
