@@ -1,5 +1,4 @@
-﻿using GuldtandMVC_Identity.Data;
-using GuldtandMVC_Identity.Data.Queries;
+﻿using GuldtandMVC_Identity.Data.Queries;
 using GuldtandMVC_Identity.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ namespace Til_test
             using (var db = new prj4databaseContext())
             {
                 ProductQuery query = new ProductQuery();
-                query.ValidToDate = "2050-01-12";
+                query.ValidToDate = "2050";
                 var result = await query.Execute(db);
                 foreach (var VARIABLE in result)
                 {
