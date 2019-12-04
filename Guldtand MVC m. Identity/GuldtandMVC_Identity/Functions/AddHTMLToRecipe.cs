@@ -109,10 +109,10 @@ namespace GuldtandMVC_Identity.Models
                         "<br style='clear: both' />" +
                         "<p class='p3'><strong>Ingredienser</strong></p>" +
                     "<div class='i1'>" +
-                    "<ul";
+                    "<ul>";
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
-                        ingrediensstring += "<li class='p4'>" + ingredient.Amount + ingredient.AmountUnit + " " + ingredient.Name + "</li>";
+                        ingrediensstring += "<li>" + ingredient.Amount + ingredient.AmountUnit + " " + ingredient.Name + "</li>";
                     }
 
                     bodystring += ingrediensstring;
@@ -122,7 +122,7 @@ namespace GuldtandMVC_Identity.Models
                                   "<div class='f1'>" +
                                   "<h3>Fremgangsmåde</h3>" +
                                   "<div class='i2'>" +
-                                  "<ul";
+                                  "<ul>";
                     foreach (var direction in recipe.Directions)
                     {
                         directionsstring += "<li class='p5'>" + direction.Description + "</li>";
