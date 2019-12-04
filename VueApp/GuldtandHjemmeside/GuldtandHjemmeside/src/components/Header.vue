@@ -48,7 +48,7 @@
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-                return response;
+                return this.$router.push(this.$route.query.redirect || '/ProfilePage');
             },
             created() {
                 fetch('https://localhost:44324/api/Account/Login', {

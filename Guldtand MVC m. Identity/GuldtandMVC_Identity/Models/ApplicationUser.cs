@@ -9,19 +9,10 @@ namespace GuldtandMVC_Identity.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public ApplicationUser()
-        {
-            //PrefsCategories = new HashSet<PrefsCategories>();
-            //PrefsChains = new HashSet<PrefsChains>();
-            //Subscriptions = new HashSet<Subscriptions>();
-        }
-        [Required]
-        [PersonalData]
-        public string Username { get; set; }
+        
+        
+        public string Name { get; set; }
 
 
-        //public virtual ICollection<PrefsCategories> PrefsCategories { get; set; }
-        //public virtual ICollection<PrefsChains> PrefsChains { get; set; }
-        //public virtual ICollection<Subscriptions> Subscriptions { get; set; }
     }
 }

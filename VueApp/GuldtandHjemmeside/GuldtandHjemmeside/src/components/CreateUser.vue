@@ -57,7 +57,8 @@
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-                VueRouter.push()
+                return this.$router.push(this.$route.query.redirect || '/')
+                
                 
             },
             created() {
