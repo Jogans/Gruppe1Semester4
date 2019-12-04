@@ -14,12 +14,18 @@ namespace Til_test
         {
             using (var db = new prj4databaseContext())
             {
-                ProductQuery query = new ProductQuery();
+                ProductQuery query = new ProductQuery
+                {
+                    LoadRetailChain = true
+                };
                 query.ValidToDate = "2050";
                 var result = await query.Execute(db);
                 foreach (var VARIABLE in result)
                 {
-                    Console.WriteLine($"{VARIABLE.ValidTo.ToString()}");
+                    //Console.WriteLine($"{VARIABLE.ValidTo.ToString()}");
+                    Console.WriteLine($"{VARIABLE.RetailChain.Name}");
+                    Console.WriteLine($"{VARIABLE.Name}");
+                    Console.WriteLine($"{VARIABLE.Price + "kr"}");
                 }
                 //RecipeQuery query = new RecipeQuery
                 //{
