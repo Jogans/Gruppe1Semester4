@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using GuldtandMVC_Identity;
 using GuldtandMVC_Identity.Data;
 using GuldtandMVC_Identity.Data.Queries;
 using NUnit.Framework;
