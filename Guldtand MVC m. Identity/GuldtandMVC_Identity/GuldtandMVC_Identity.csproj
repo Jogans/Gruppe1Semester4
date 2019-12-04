@@ -6,6 +6,13 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Services\**" />
+    <Content Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="IKVM" Version="8.1.5717" />
@@ -28,8 +35,7 @@
 
 
   <ItemGroup>
-    <Folder Include="Models\NewFolder\" />
-    <Folder Include="Services\" />
+    <Folder Include="Models\Identity\" />
   </ItemGroup>
 
 </Project>

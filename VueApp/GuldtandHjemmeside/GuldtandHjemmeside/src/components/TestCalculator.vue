@@ -21,7 +21,8 @@
         },
         methods: {
             created() {
-                this.$http.get('https://localhost:44324/Home/viewTotalPrice?words=marcus', {
+                this.$http.get('https://localhost:44324/Home/viewTotalPrice?words=marcus'
+                    , {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

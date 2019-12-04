@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GuldtandMVC_Identity.Data
+namespace GuldtandMVC_Identity
 {
-    public partial class RecipeCategory
+    public partial class ProductCategory
     {
-        public int RecipeId { get; set; }
+        public int ProductId { get; set; }
         public string CategoryName { get; set; }
 
         public virtual Category CategoryNameNavigation { get; set; }
-        public virtual Recipe Recipe { get; set; }
+        public virtual Product Product { get; set; }
     }
 }
