@@ -175,7 +175,8 @@
                 return this.descriptionString;
             },
             created() {
-                this.$http.get('https://localhost:44324/Home/recepieCreateTest?name=' + this.recipeName + '&prepareTime=' + this.timeValue +
+                this.$http.get('https://localhost:44324/Home/recepieCreateTest?name=' + this.recipeName +
+                    '&prepareTime=' + this.timeValue +
                     '&description=' + this.description() +
                     '&ingridients=' + this.descriptionIngridients() +
                     '&imgUrl=' + this.imgUrl, {

@@ -1,9 +1,9 @@
-﻿using GuldtandMVC_Identity.Data;
-using GuldtandMVC_Identity.Data.Queries;
+﻿using GuldtandMVC_Identity.Data.Queries;
 using GuldtandMVC_Identity.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GuldtandMVC_Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Til_test
@@ -12,25 +12,28 @@ namespace Til_test
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
-
-
-
-
             using (var db = new prj4databaseContext())
             {
-                RecipeQuery query = new RecipeQuery
+                ProductQuery query = new ProductQuery();
+                query.ValidToDate = "2050";
+                var result = await query.Execute(db);
+                foreach (var VARIABLE in result)
                 {
-                    LoadIngredientList = true,
-                    SearchIngredient = "feta"
-                };
-                RecipeRepository repo = new RecipeRepository(db);
-
-                var data = await repo.Get(query);
-
-                foreach (var VARIABLE in data)
-                {
-                    Console.WriteLine($"{VARIABLE.Name} - {VARIABLE.Price}");
+                    Console.WriteLine($"{VARIABLE.ValidTo.ToString()}");
                 }
+                //RecipeQuery query = new RecipeQuery
+                //{
+                //    LoadIngredientList = true,
+                //    SearchIngredient = "feta"
+                //};
+                //RecipeRepository repo = new RecipeRepository(db);
+
+                //var data = await repo.GetRecipes(query);
+
+                //foreach (var VARIABLE in data)
+                //{
+                //    Console.WriteLine($"{VARIABLE.Name} - {VARIABLE.Price}");
+                //}
                 //Recipe recipe = new Recipe
                 //{
                 //    Name = "One Pot Pasta med chorizo",
@@ -91,28 +94,6 @@ namespace Til_test
                 //}
                 //db.SaveChanges();
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             //using (var context = new prj4databaseContext())
             //{

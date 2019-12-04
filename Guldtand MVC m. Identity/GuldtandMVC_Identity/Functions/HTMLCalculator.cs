@@ -14,6 +14,7 @@ using GuldtandMVC_Identity.Data.Queries;
 using GuldtandMVC_Identity.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using GuldtandMVC_Identity.Data;
 
 namespace GuldtandMVC_Identity.Models
 {
@@ -35,18 +36,21 @@ namespace GuldtandMVC_Identity.Models
                     LoadIngredientList = true,
                     NumberOfRecipes = 1
                 };
-                RecipeRepository inReciperepository = new RecipeRepository(db);
-                var result = await inReciperepository.Get(recipequery);
+         
+                RecipeRepository reciperepository = new RecipeRepository(db);
+                var recepylist = await reciperepository.Get(recipequery);
+                ProductRepository productRepository = new ProductRepository(db);
+                var products = await productRepository.Get(new ProductQuery());
 
-                foreach (var recipe in result)
+                foreach (var recipe in recepylist)
                 {
                     //take all ingredients in the ingredientlist
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
-                        //foreach (var product in )
-                        //{
-                        //    totalPrice += product.Price;
-                        //}
+                        foreach (var product in products)
+                        {
+                            totalPrice += product.Price;
+                        }
                     }
                 }
                 return totalPrice;

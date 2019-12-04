@@ -1,10 +1,9 @@
 <template>
     <div class='bodyTopPage'>
-        <br style="clear:both" />
-        <h1>Test af lille opskriftvisning</h1>
+
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
-
+        <br style="clear:both" />
         <br style="clear:both" />
 
     </div>
@@ -22,16 +21,16 @@
             }
         },
         methods: {
-            created() {
-                this.$http.get('https://localhost:44324/Home/viewForSmallRecipe?words=marcus', {
+            smallView() {
+                this.$http.get('https://localhost:44324/Home/viewForSmallRecipe?words=', {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
-                }).then(response => (this.info = response.data))
+                }).then(response => this.info = response.data)
             }
         },
         beforeMount() {
-            this.created()
+            this.smallView()
         }
     };
 </script>

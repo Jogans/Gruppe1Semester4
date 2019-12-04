@@ -46,27 +46,27 @@ namespace GuldtandMVC_Identity.Controllers
             return testCreate.testCreateRecepieFunc(name, prepareTime, description, ingridients, imgUrl);
         }
 
-        public string viewASpeceficRecipe(string words)
+        public Task<string> viewASpeceficRecipe(string words)
         {
             var recipe = new AddHTMLToRecipe();
 
             return recipe.ShowRecipeFullView(words);
         }
 
-        public string viewForSmallRecipe(string words)
+        public Task<string> viewForSmallRecipe()
         {
             var recipe = new AddHTMLToRecipe();
 
-            return recipe.ShowRecipeSmallView(words);
+            return recipe.ShowRecipeSmallViewAsync();
         }
 
-        //public string viewTotalPrice(string words)
-        //{
-        //    var totalPrice = new HTMLCalculator();
+        public Task<double> viewTotalPrice(string words)
+        {
+            var totalPrice = new HTMLCalculator();
 
-        //    return totalPrice.totalPrice(words);
+            return totalPrice.totalPrice(words);
 
-        //}
+        }
 
         public string searchRecipesByName(string words)
         {

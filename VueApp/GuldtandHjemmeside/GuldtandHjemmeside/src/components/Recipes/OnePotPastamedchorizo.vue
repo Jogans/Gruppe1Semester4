@@ -1,16 +1,15 @@
 <template>
-    <div class="calculatorTestHome">
+    <div class='bodyTopPage'>
         <br style="clear:both" />
-        <h1>Calculator Test Site</h1>
-        <button class="test_btn" @click="created">Test</button>
         <span v-html="info">{{info}}</span>
+        <br style="clear:both" />
 
     </div>
 </template>
 
 <script>
     export default {
-        name: 'TestCalculator',
+        name: 'OnePotPastamedchorizo',
         props: {
         },
         data: function () {
@@ -20,21 +19,23 @@
             }
         },
         methods: {
-            created() {
-                this.$http.get('https://localhost:44324/Home/viewTotalPrice?words=marcus'
-                    , {
+            fullView() {
+                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=Pot', {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             }
+        },
+        beforeMount() {
+            this.fullView()
         }
     };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-    .calculatorTestHome {
+    .bodyTopPage {
         width: 100%;
         max-width: 65%;
         margin: auto;

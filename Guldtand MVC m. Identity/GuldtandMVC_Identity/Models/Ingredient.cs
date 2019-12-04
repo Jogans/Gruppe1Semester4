@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GuldtandMVC_Identity.Data
+namespace GuldtandMVC_Identity
 {
     public partial class Ingredient
     {
@@ -13,6 +13,7 @@ namespace GuldtandMVC_Identity.Data
         public int? IngredientListId { get; set; }
 
         public virtual IngredientList IngredientList { get; set; }
+        public virtual Category NameNavigation { get; set; }
         public virtual Product Product { get; set; }
     }
 }

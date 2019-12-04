@@ -21,7 +21,7 @@ namespace GuldtandMVC_Identity.Models
                 foreach (JObject data in array.Children<JObject>())
                 {
                     Product vare = new Product();
-                    vare.Volume = 500;
+                   
 
 
                     string kategori = "";
@@ -59,6 +59,12 @@ namespace GuldtandMVC_Identity.Models
                                 break;
                             case "volumePrice":
                                 vare.VolumePrice = (double)prop.Value;
+                                if (vare.VolumePrice != 0)
+                                vare.Volume = (double)vare.Price / (double)vare.VolumePrice;
+                                else
+                                {
+                                    vare.Volume = 0;
+                                }
                                 break;
                             case "imageUrl":
                                 vare.ImgSrc = (string)prop.Value;

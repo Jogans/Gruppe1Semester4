@@ -1,9 +1,10 @@
 ﻿using System;
+using GuldtandMVC_Identity.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace GuldtandMVC_Identity.Data
+namespace GuldtandMVC_Identity
 {
     public partial class prj4databaseContext : IdentityDbContext
     {
@@ -28,12 +29,14 @@ namespace GuldtandMVC_Identity.Data
         public virtual DbSet<RecipeCategory> RecipeCategory { get; set; }
         public virtual DbSet<RetailChain> RetailChain { get; set; }
 
+        public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=prj4-server.database.windows.net;Initial Catalog=prj4-database;User ID=rasmus;Password=8AmT7#l&e&q$;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer("Data Source=prj4-server.database.windows.net;Initial Catalog=prj4-database;User ID=maloudt;Password=Mldt1160");
             }
         }
 
@@ -86,8 +89,7 @@ namespace GuldtandMVC_Identity.Data
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.Directions)
                     .HasForeignKey(d => d.RecipeId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__direction__recip__6621099A");
+                    .HasConstraintName("FK__direction__recip__67152DD3");
             });
 
             modelBuilder.Entity<Ingredient>(entity =>
@@ -107,7 +109,7 @@ namespace GuldtandMVC_Identity.Data
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("name")
-                    .HasMaxLength(100);
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.ProductId).HasColumnName("product_id");
 
@@ -116,6 +118,12 @@ namespace GuldtandMVC_Identity.Data
                     .HasForeignKey(d => d.IngredientListId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__ingredien__ingre__60683044");
+
+                entity.HasOne(d => d.NameNavigation)
+                    .WithMany(p => p.Ingredient)
+                    .HasForeignKey(d => d.Name)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CategoryName");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Ingredient)
