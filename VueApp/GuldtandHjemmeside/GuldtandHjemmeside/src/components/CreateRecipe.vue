@@ -10,7 +10,7 @@
         </h2>
 
         <div class="recipeName">
-             <Typeahead :suggestions="searchvalg" :selection.sync="value"> </Typeahead>  
+            <Typeahead :suggestions="searchvalg" :selection.sync="value"> </Typeahead>
             <input style="height: 28px; width: 250px;" type="text" v-model="recipeName" placeholder="Indtast navn" required>
         </div>
 
@@ -64,8 +64,8 @@
 
                     <input type="text" placeholder="..." v-model="inputIng.one" />
                     <!--<select v-model='selected' id='category' style="margin: 10px">
-        <option v-for="kategoriElement in inputIng.one" v-bind:key="kategoriElement" v-bind:id="indexIng" >{kategoriElement}}</option>
-    </select>-->
+                        <option v-for="kategoriElement in inputIng.one" v-bind:key="kategoriElement" v-bind:id="indexIng" >{kategoriElement}}</option>
+                    </select>-->
 
                     <input class="unit_text" type="text" v-model="inputIng.two" />
                     <select class="units" v-bind="unit" v-model="inputIng.three" id="unit_id">
@@ -94,7 +94,7 @@
         {{i}}
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
-        
+
     </div>
 </template>
 
@@ -104,7 +104,7 @@
         name: 'CreateRecepie',
         data: function () {
             return {
-                inputs1: [],                
+                inputs1: [],
                 inputsIng: [],
                 category: [],
                 info: null,
@@ -117,11 +117,13 @@
                 i: 0,
                 m: 0,
                 descriptionString: "",
-                ingridientString: "",
+                ingridientNameString: "",
+                ingridientAmountString: "",
+                ingridientUnitString: "",
                 g: "g",
             }
         },
-        components: {Typeahead},
+        components: { Typeahead },
         methods: {
             addCategory() {
                 //this.$http.get('', {
@@ -129,19 +131,19 @@
                 //        'Access-Control-Allow-Origin': '*',
                 //    },
                 //}).then(response => (
-                    this.m++;
-                    this.inputsIng.push({
-                        one: null,/*response.data,*/
-                        two: null,
-                        three: null,
-                    })
+                this.m++;
+                this.inputsIng.push({
+                    one: null,/*response.data,*/
+                    two: null,
+                    three: null,
+                })
                 //))
             },
             addRow2() {
-                    this.inputsIng.push({
-                        one: null,
-                    })
-                },
+                this.inputsIng.push({
+                    one: null,
+                })
+            },
             addRow1() {
                 if (this.inputs1.length < 7) {
                     this.i++;
@@ -158,13 +160,29 @@
                 this.m--;
                 this.inputsIng.splice(indexIng, 1)
             },
-            descriptionIngridients() {
+            nameIngridients() {
                 var k = 0;
-                this.ingridientString = "";
+                this.ingridientNameString = "";
                 for (k = 0; k < this.m; k++) {
-                 this.ingridientString += "Kategori: " + this.inputsIng[k].one + " Amount: " + this.inputsIng[k].two + " Unit: " + this.inputsIng[k].three + ";";
+                    this.ingridientNameString += this.inputsIng[k].one + ";";
                 }
-                return this.ingridientString;
+                return this.ingridientNameString;
+            },
+            amountIngridients() {
+                var k = 0;
+                this.ingridientAmountString = "";
+                for (k = 0; k < this.m; k++) {
+                    this.ingridientAmountString += this.inputsIng[k].two + ";";
+                }
+                return this.ingridientAmountString;
+            },
+            unitIngridients() {
+                var k = 0;
+                this.ingridientUnitString = "";
+                for (k = 0; k < this.m; k++) {
+                    this.ingridientUnitString += this.inputsIng[k].three + ";";
+                }
+                return this.ingridientUnitString;
             },
             description() {
                 var j = 0;
@@ -178,7 +196,9 @@
                 this.$http.get('https://localhost:44324/Home/recepieCreateTest?name=' + this.recipeName +
                     '&prepareTime=' + this.timeValue +
                     '&description=' + this.description() +
-                    '&ingridients=' + this.descriptionIngridients() +
+                    '&ingridientName=' + this.nameIngridients() +
+                    '&ingridientAmount=' + this.amountIngridients() +
+                    '&ingridientUnit=' + this.unitIngridients() +
                     '&imgUrl=' + this.imgUrl, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',

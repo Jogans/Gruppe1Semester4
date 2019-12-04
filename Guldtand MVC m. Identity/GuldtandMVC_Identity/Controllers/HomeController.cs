@@ -39,11 +39,11 @@ namespace GuldtandMVC_Identity.Controllers
 
         }
 
-        public string recepieCreateTest(string name, int prepareTime, string description, string ingridients, string imgUrl)
+        public Task<string> recepieCreateTest(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl)
         {
             var testCreate = new CreateRecepieFromVue();
 
-            return testCreate.testCreateRecepieFunc(name, prepareTime, description, ingridients, imgUrl);
+            return testCreate.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
         }
 
         public Task<string> viewASpeceficRecipe(string words)
