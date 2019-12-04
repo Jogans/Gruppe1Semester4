@@ -40,6 +40,9 @@
     <Content Include="src\assets\Pics\Kvickly.png" />
     <Content Include="src\assets\Pics\Lidl.png" />
     <Content Include="src\assets\Pics\Pizza_Picture.jpg" />
+    <Content Include="src\components\autocomplete.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\CreateRecipe.vue">
       <SubType>Code</SubType>
     </Content>

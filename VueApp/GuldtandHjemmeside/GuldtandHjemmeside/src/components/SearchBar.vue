@@ -3,10 +3,27 @@
         <br style="clear:both" />
         <br style="clear:both" />
         <div class="SearchBar">
-            <typeahead :suggestions="searchoptions" :selection.sync="value"> </typeahead>
+            <!-- <typeahead :suggestions="searchoptions" :selection.sync="value"> </typeahead>  -->
             <input style="height: 32px; width: 704px;" type="text" v-model="searchParameter" placeholder="Search..." required>
-            
+            <autocomplete :items="[ 'Apple', 'Banana', 'Orange', 'Mango', 'Pear', 'Peach', 'Grape', 'Tangerine', 'Pineapple']" />
+        
+            <script type="text/x-template" id="autocomplete">
+                <div class="autocomplete">
+                    <input type="text" @input="onChange" v-model="search" @keyup.down="onArrowDown" @keyup.up="onArrowUp" @keyup.enter="onEnter" />
+                    <ul id="autocomplete-results" v-show="isOpen" class="autocomplete-results">
+                        <li class="loading" v-if="isLoading">
+                            Loading results...
+                        </li>
+                        <li v-else v-for="(result, i) in results" :key="i" @click="setResult(result)" class="autocomplete-result" :class="{ 'is-active': i === arrowCounter }">
+                            {{ result }}
+                        </li>
+                    </ul>
+
+                </div>
+            </script>
+
         </div>
+        
 
 
         <div class="SearchBarBtn">
