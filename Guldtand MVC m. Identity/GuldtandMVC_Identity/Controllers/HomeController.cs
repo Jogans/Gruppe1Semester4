@@ -10,6 +10,7 @@ using com.sun.org.apache.xerces.@internal.parsers;
 using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
 using Microsoft.AspNetCore.Identity;
 using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
+using jdk.nashorn.@internal.ir;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
@@ -66,6 +67,13 @@ namespace GuldtandMVC_Identity.Controllers
 
             return totalPrice.totalPrice(words);
 
+        }
+
+        public Task<double> viewNormalPrice(string words)
+        {
+            var normalPrice = new HTMLCalculator();
+
+            return normalPrice.normalPrice(words);
         }
 
         public string searchRecipesByName(string words)

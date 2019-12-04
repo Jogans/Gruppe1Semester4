@@ -20,35 +20,52 @@ namespace GuldtandMVC_Identity.Models
 {
     public class HTMLCalculator
     {
-        //public async Task<double> normalPrice(string word)
-        //{
-        //    string initString = "" + "<html>";
-        //    string endString = "</html>";
-        //    string bodyString = "";
+        public async Task<double> normalPrice(string word)
+        {
+            string initString = "" + "<html>";
+            string endString = "</html>";
+            string bodyString = "";
 
-        //    double normalPrice = 0;
+            double normalPrice = 0;
 
-        //    using (var db = new prj4databaseContext())
-        //    {
-        //        RecipeQuery recipequery = new RecipeQuery
-        //        {
-        //            SearchRecipe = word,
-        //            LoadIngredientList = true,
-        //            NumberOfRecipes = 1
-        //        };
+            using (var db = new prj4databaseContext())
+            {
+                RecipeQuery recipequery = new RecipeQuery
+                {
+                    SearchRecipe = word,
+                    LoadIngredientList = true,
+                    NumberOfRecipes = 1
+                };
 
-        //        RecipeRepository reciperepository = new RecipeRepository(db);
-        //        var recepylist = await reciperepository.Get(recipequery);
-        //        ProductRepository productRepository = new ProductRepository(db);
-        //        var products = await productRepository.Get(new ProductQuery());
-                
-        //        var product = new Product();
-                
-               
-        //    }
+                RecipeRepository recipeRepository = new RecipeRepository(db);
+                var recepylist = await recipeRepository.Get(recipequery);
+                ProductRepository productRepository = new ProductRepository(db);
+                var products = await productRepository.Get(new ProductQuery());
 
-        //    return normalPrice;
-        //}
+                ProductQuery query = new ProductQuery();
+                int productLifeTime = Int32.Parse(query.ValidToDate);
+                if (productLifeTime > 2049)
+                {
+                    foreach (var recipe in recepylist)
+                    {
+                        //take all ingredients in the ingredientlist
+                        foreach (var ingredient in recipe.IngredientList.Ingredient)
+                        {
+                            foreach (var product in products)
+                            {
+                                normalPrice += product.Price;
+
+                            }
+                        }
+                    }
+                    return normalPrice;
+                }
+                else
+                {
+                    return 0.0;
+                }
+            }
+        }
 
         public async Task<double> totalPrice(string word)
         {
@@ -67,8 +84,8 @@ namespace GuldtandMVC_Identity.Models
                     NumberOfRecipes = 1
                 };
          
-                RecipeRepository reciperepository = new RecipeRepository(db);
-                var recepylist = await reciperepository.Get(recipequery);
+                RecipeRepository recipeRepository = new RecipeRepository(db);
+                var recepylist = await recipeRepository.Get(recipequery);
                 ProductRepository productRepository = new ProductRepository(db);
                 var products = await productRepository.Get(new ProductQuery());
 
