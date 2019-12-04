@@ -1,9 +1,7 @@
 <template>
     <div class='bodyTopPage'>
-
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
-        <br style="clear:both" />
         <br style="clear:both" />
 
     </div>
@@ -11,7 +9,7 @@
 
 <script>
     export default {
-        name: 'TopPage',
+        name: 'OnePotPastamedchorizo',
         props: {
         },
         data: function () {
@@ -21,16 +19,16 @@
             }
         },
         methods: {
-            smallView() {
-                this.$http.get('https://localhost:44324/Home/viewForSmallRecipe?words=', {
+            fullView() {
+                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=Pot', {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
-                }).then(response => this.info = response.data)
+                }).then(response => (this.info = response.data))
             }
         },
         beforeMount() {
-            this.smallView()
+            this.fullView()
         }
     };
 </script>
@@ -41,15 +39,6 @@
         width: 100%;
         max-width: 65%;
         margin: auto;
-    }
-
-
-    .textForPrice {
-        display: block;
-        position: relative;
-        float: left;
-        margin-left: 355px;
-        font-size: 20px;
     }
 </style>
 

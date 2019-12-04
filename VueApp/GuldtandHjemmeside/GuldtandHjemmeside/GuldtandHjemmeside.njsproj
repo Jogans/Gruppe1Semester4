@@ -43,6 +43,10 @@
     <Content Include="src\components\CreateRecipe.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\components\Recipes\FlskestegalaMarcus.vue" />
+    <Content Include="src\components\Recipes\OnePotPastamedchorizo.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\Recipes\PizzaHomemade.vue">
       <SubType>Code</SubType>
     </Content>
