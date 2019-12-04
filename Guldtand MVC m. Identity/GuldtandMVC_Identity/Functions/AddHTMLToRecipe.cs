@@ -69,7 +69,7 @@ namespace GuldtandMVC_Identity.Models
             return initString + bodystring + endString;
         }
 
-        public string ShowRecipeSmallView(string words)
+        public async Task<string> ShowRecipeSmallView(string words)
         {
 
             string initString = "" + "<html>";
@@ -122,7 +122,7 @@ namespace GuldtandMVC_Identity.Models
                                   recipe.Name + "<br />" +
                                   "</div>" +
                                   "Original pris: " + recipe.Price + "kr." + "<br />" +
-                                  "Pris med rabat: " + RabatPris.totalPrice("marcus") + "kr." + "<br />" +
+                                  "Pris med rabat: " + await RabatPris.totalPrice("marcus") + "kr." + "<br />" +
                                   "Laveste mulige pris: " + recipe.Price + "kr." + "<br />" +
                                   "</div>" +
                                   "</div>";
