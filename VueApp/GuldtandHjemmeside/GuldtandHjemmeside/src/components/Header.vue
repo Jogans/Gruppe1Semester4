@@ -108,12 +108,23 @@
         float: right;
     }
 
-    .Login {
+    .login {
         display: block;
         position: relative;
         float: right;
     }
 
+    .usernameinput {
+        display: block;
+        position: relative;
+        float: right;
+    }
+
+    .passwordinput {
+        display: block;
+        position: relative;
+        float: right;
+    }
 
     .Create_user {
         display: block;

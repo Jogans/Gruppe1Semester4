@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using GuldtandMVC_Identity;
 using GuldtandMVC_Identity.Data;
 using GuldtandMVC_Identity.Data.Queries;
 using NUnit.Framework;
@@ -47,10 +48,10 @@ namespace Guldtand_UnitTests
                 CookTime = 25,
                 ImgSrc = "https://tinyurl.com/usevcle"
             };
-            _uut.InsertRecipe(recipe);
+            _uut.Insert(recipe);
             _uut.Save();
 
-            _uut.DeleteRecipe(recipe.RecipeId);
+            _uut.Delete(recipe.RecipeId);
             _uut.Save();
             Assert.That(_context.Recipe.Contains(recipe), Is.False);
 
@@ -69,12 +70,12 @@ namespace Guldtand_UnitTests
             InsertRecipeDirectionsCategoryIngredients insert = new InsertRecipeDirectionsCategoryIngredients(_context);
             await insert.insertdataAsync();
 
-            var data = await _uut.GetRecipes(testQuery);
+            var data = await _uut.Get(testQuery);
 
             Assert.That(data.Count() == 1);
             foreach (var VARIABLE in data)
             {
-                _uut.DeleteRecipe(VARIABLE.RecipeId);
+                _uut.Delete(VARIABLE.RecipeId);
             }
         }
 
@@ -91,16 +92,16 @@ namespace Guldtand_UnitTests
             InsertRecipeDirectionsCategoryIngredients insert = new InsertRecipeDirectionsCategoryIngredients(_context);
             await insert.insertdataAsync();
 
-            var data = await _uut.GetRecipes(testQuery);
+            var data = await _uut.Get(testQuery);
 
             Assert.That(data.Count() == 3);
             foreach (var VARIABLE in data)
             {
-                _uut.DeleteRecipe(VARIABLE.RecipeId);
+                _uut.Delete(VARIABLE.RecipeId);
             }
         }
 
-        [Test]
+        //[Test]
         //public async Task TestRecipeQuery3()
         //{
         //    RecipeQuery testQuery = new RecipeQuery

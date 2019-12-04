@@ -10,8 +10,10 @@ namespace GuldtandMVC_Identity.Data.Queries
     {
         public bool LoadRetailChain { get; set; } = false;
         public bool LoadProductCategory { get; set; } = false;
-        public string SearchCategory { get; set; } = "";
+        public string SearchName { get; set; } = "";
         public int NumberOfRecipes { get; set; } = 20;
+        public string ValidToDate { get; set; } = "";
+
 
         public async Task<IEnumerable<Product>> Execute(prj4databaseContext context)
         {
@@ -19,7 +21,8 @@ namespace GuldtandMVC_Identity.Data.Queries
             if (LoadProductCategory == true && LoadRetailChain == false)
             {
                 return await context.Set<Product>()
-                    .Where(r => r.Name.Contains(SearchCategory))
+                    .Where(r => r.Name.Contains(SearchName)
+                     && r.ValidTo.Year.ToString() == ValidToDate)
                     .Include(r => r.ProductCategory)
                     .Take(NumberOfRecipes)
                     .ToListAsync();
@@ -28,7 +31,8 @@ namespace GuldtandMVC_Identity.Data.Queries
             else if (LoadRetailChain == true && LoadProductCategory == false)
             {
                 return await context.Set<Product>()
-                    .Where(r => r.Name.Contains(SearchCategory))
+                    .Where(r => r.Name.Contains(SearchName)
+                     && r.ValidTo.Year.ToString() == ValidToDate)
                     .Include(r => r.RetailChain)
                     .Take(NumberOfRecipes)
                     .ToListAsync();
@@ -37,7 +41,8 @@ namespace GuldtandMVC_Identity.Data.Queries
             else if (LoadProductCategory == true && LoadRetailChain == true)
             {
                 return await context.Set<Product>()
-                    .Where(r => r.Name.Contains(SearchCategory))
+                    .Where(r => r.Name.Contains(SearchName)
+                    && r.ValidTo.Year.ToString() == ValidToDate)
                     .Include(r => r.RetailChain)
                     .Include(r => r.ProductCategory)
                     .Take(NumberOfRecipes)
@@ -47,7 +52,8 @@ namespace GuldtandMVC_Identity.Data.Queries
             else
             {
                 return await context.Set<Product>()
-                    .Where(r => r.Name.Contains(SearchCategory))
+                    .Where(r => r.Name.Contains(SearchName)
+                    && r.ValidTo.Year.ToString() == ValidToDate)
                     .Take(NumberOfRecipes)
                     .ToListAsync();
             }

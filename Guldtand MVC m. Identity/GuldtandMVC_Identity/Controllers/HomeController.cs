@@ -60,7 +60,7 @@ namespace GuldtandMVC_Identity.Controllers
             return recipe.ShowRecipeSmallViewAsync();
         }
 
-        public double viewTotalPrice(string words)
+        public Task<double> viewTotalPrice(string words)
         {
             var totalPrice = new HTMLCalculator();
 

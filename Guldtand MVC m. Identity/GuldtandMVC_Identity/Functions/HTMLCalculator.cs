@@ -10,13 +10,17 @@ using jdk.nashorn.@internal.ir;
 using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
 using Microsoft.AspNetCore.Identity;
 using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
+using GuldtandMVC_Identity.Data.Queries;
+using GuldtandMVC_Identity.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using GuldtandMVC_Identity.Data;
 
 namespace GuldtandMVC_Identity.Models
 {
     public class HTMLCalculator
     {
-        public double totalPrice(string word)
+        public async Task<double> totalPrice(string word)
         {
             string initString = "" + "<html>";
             string endString = "</html>";
@@ -26,13 +30,24 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new prj4databaseContext())
             {
-                var result = from v in db.Recipe where v.Name.Contains(word) select v;
-
-                foreach (var recipe in result)
+                RecipeQuery recipequery = new RecipeQuery
                 {
-                    foreach (var ingredient in db.Ingredient.Where(i => i.IngredientList.RecipeId == recipe.RecipeId))
+                    SearchRecipe = word,
+                    LoadIngredientList = true,
+                    NumberOfRecipes = 1
+                };
+         
+                RecipeRepository reciperepository = new RecipeRepository(db);
+                var recepylist = await reciperepository.Get(recipequery);
+                ProductRepository productRepository = new ProductRepository(db);
+                var products = await productRepository.Get(new ProductQuery());
+
+                foreach (var recipe in recepylist)
+                {
+                    //take all ingredients in the ingredientlist
+                    foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
-                        foreach (var product in db.Product.Where(p => p.ProductId == ingredient.ProductId))
+                        foreach (var product in products)
                         {
                             totalPrice += product.Price;
                         }
