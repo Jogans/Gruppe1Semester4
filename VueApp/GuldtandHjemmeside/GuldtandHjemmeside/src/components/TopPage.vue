@@ -23,7 +23,8 @@
         },
         methods: {
             created() {
-                this.$http.get('https://localhost:44324/Home/viewForSmallRecipe?words=marcus', {
+                this.$http.get('https://localhost:44324/Home/viewForSmallRecipe?words=marcus'
+                    , {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
