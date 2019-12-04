@@ -27,7 +27,7 @@
 
 
         <div class="SearchBarBtn">
-            <button class="SearchRecepie" style="height: 32px;" type="button">S&#248;g opskrift</button>
+            <button class="SearchRecepie" style="height: 32px;" @click="recipemade" type="button">S&#248;g opskrift</button>
             <button style="height: 32px;" @click="mounted" type="button">S&#248;g ingrediens</button>
             <!--<button style="height: 32px;" @click="$emit('triggerEvent')" type="button">S&#248;g ingrediens</button> -->
         </div>
@@ -85,6 +85,14 @@
                     this.info = response.data;
                     this.$router.push('/Searchsite');
                 })
+            },
+            recipemade() {
+                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=' + this.searchParameter, {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }).then(response => (this.info = response.data))
+           
             }
 
 
