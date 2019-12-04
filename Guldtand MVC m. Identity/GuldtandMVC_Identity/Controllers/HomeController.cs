@@ -57,16 +57,16 @@ namespace GuldtandMVC_Identity.Controllers
         {
             var recipe = new AddHTMLToRecipe();
 
-            return recipe.ShowRecipeSmallView(words);
+            return recipe.ShowRecipeSmallView(words).Result;
         }
 
-        //public string viewTotalPrice(string words)
-        //{
-        //    var totalPrice = new HTMLCalculator();
+        public Task<double> viewTotalPrice(string words)
+        {
+            var totalPrice = new HTMLCalculator();
 
-        //    return totalPrice.totalPrice(words);
+            return totalPrice.totalPrice(words);
 
-        //}
+        }
 
         public string searchRecipesByName(string words)
         {
