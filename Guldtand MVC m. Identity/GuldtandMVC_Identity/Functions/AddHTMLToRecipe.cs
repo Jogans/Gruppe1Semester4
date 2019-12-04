@@ -172,6 +172,7 @@ namespace GuldtandMVC_Identity.Models
             string bodystring = "";
 
             HTMLCalculator RabatPris = new HTMLCalculator();
+            HTMLCalculator NormalPris = new HTMLCalculator();
 
             using (var db = new prj4databaseContext())
             {
@@ -196,7 +197,8 @@ namespace GuldtandMVC_Identity.Models
                                   "</a>" +
                                   "<br />" +
                                   "</div>" +
-                                  "Original pris: " + recipe.Price + "kr." + "<br />" +
+                                  //"Original pris: " + recipe.Price + "kr." + "<br />"
+                                  "Original pris: " + await NormalPris.normalPrice("marcus") + "kr." +" <br />" +
                                   "Pris med rabat: " + await RabatPris.totalPrice("marcus") + "kr." + "<br />" +
                                   "Laveste mulige pris: " + recipe.Price + "kr." + "<br />" +
                                   "</div>" +
