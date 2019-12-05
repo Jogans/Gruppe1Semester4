@@ -56,21 +56,39 @@ namespace GuldtandMVC_Identity.Controllers
                 dtoUser.Password, isPersistent: false, lockoutOnFailure: false);
             if (passwordSignInResult.Succeeded)
             {
-
-                //HttpContext.Response.Cookies.Append(
-                //         dtoUser.Email,
-                //         DateTime.Now.ToString(),
-                //         new CookieOptions()
-                //         {
-                //             Expires = DateTime.Now.AddHours(1),
-                //             HttpOnly = false,
-                //             Secure = false
-                //         }
-                //     );
                 HttpContext.Response.Cookies.Append(
                     dtoUser.Email,
-                    DateTime.Now.ToString()
-                   );
+                         DateTime.Now.ToString(),
+                         new CookieOptions()
+                         {
+                             Expires = DateTime.Now.AddHours(1),
+                             HttpOnly = false,
+                             Secure = false,
+                             IsEssential = true
+                         }
+                     );
+                //HttpContext.Response.Cookies.Append(
+                //    dtoUser.Email,
+                //    DateTime.Now.ToString()
+                //   );
+                //HttpCookie aCookie = new HttpCookie("lastVisit", DateTime.Now.ToString());
+                //aCookie.setValue(DateTime.Now.ToString());
+                //aCookie.setMaxAge(DateTime.Now.AddDays(1).ToFileTime());
+                //Response.Cookies.Append(aCookie.toString(), aCookie.getValue());
+
+                //HttpCookie aCookie = new HttpCookie("lastVisit", DateTime.Now.ToString());
+
+                //var option = new CookieOptions();
+                //option.Expires = DateTimeOffset.Now.AddMinutes(10);
+                //option.HttpOnly = false;
+                //option.Secure = false;
+                //option.MaxAge = TimeSpan.MaxValue;
+                //option.IsEssential = true;
+                //Response.Cookies.Append("EmailOption", "true", option);
+
+                //HttpContext.Response.Cookies.Delete("EmailOption");
+                //HttpContext.Response.Cookies.Delete("lastVisit");
+                //HttpContext.Response.Cookies.Delete(aCookie.ToString());
 
                 return Ok();
             }
@@ -82,6 +100,11 @@ namespace GuldtandMVC_Identity.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
+            if (HttpContext.Request.Cookies.Keys.Any())
+            {
+                var aCookie = HttpContext.Request.Cookies.Keys.Last();
+                HttpContext.Response.Cookies.Delete(aCookie);
+            }
             return Ok();
         }
 

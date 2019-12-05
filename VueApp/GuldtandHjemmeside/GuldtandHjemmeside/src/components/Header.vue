@@ -16,7 +16,7 @@
             </div>
             <br style="clear:both" />
             <div class="Buttons2">
-                <router-link to="/SearchBar" class="btn_Top" tag="button">Søg</router-link>
+                <router-link to="/SearchBar" class="btn_Top" tag="button">S&#248;g</router-link>
                 <router-link to="/TopPage" class="btn_Top" tag="button">Top retter</router-link>
                 <router-link to="/NewPage" class="btn_New" tag="button">Nye retter</router-link>
                 <router-link to="/SUPage" class="btn_Su" tag="button">SU-retter</router-link>
