@@ -199,8 +199,8 @@ namespace GuldtandMVC_Identity.Models
                                   "<br />" +
                                   "</div>" +
                                   //"Original pris: " + recipe.Price + "kr." + "<br />"
-                                  "Original pris: " + await NormalPris.normalPrice(recipe.Name) + "kr." +" <br />" +
-                                  "Pris med rabat: " + await RabatPris.totalPrice(recipe.Name) + "kr." + "<br />" +
+                                  "Original pris: " + await NormalPris.NormalPrice(recipe.Name) + "kr." +" <br />" +
+                                  "Pris med rabat: " + await RabatPris.TotalPrice(recipe.Name) + "kr." + "<br />" +
                                   "Laveste mulige pris: " + recipe.Price + "kr." + "<br />" +
                                   "</div>" +
                                   "</div>";
