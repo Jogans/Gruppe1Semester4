@@ -67,10 +67,14 @@ namespace GuldtandMVC_Identity.Controllers
                 //             Secure = false
                 //         }
                 //     );
-                HttpContext.Response.Cookies.Append(
-                    dtoUser.Email,
-                    DateTime.Now.ToString()
-                   );
+                //HttpContext.Response.Cookies.Append(
+                //    dtoUser.Email,
+                //    DateTime.Now.ToString()
+                //   );
+                HttpCookie aCookie = new HttpCookie("lastVisit", DateTime.Now.ToString());
+                aCookie.setValue(DateTime.Now.ToString());
+                aCookie.setMaxAge(DateTime.Now.AddDays(1).ToFileTime());
+                Response.Cookies.Append(aCookie.toString(), aCookie.getValue());
 
                 return Ok();
             }
