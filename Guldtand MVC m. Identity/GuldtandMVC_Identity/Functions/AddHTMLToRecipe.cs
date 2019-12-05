@@ -89,7 +89,8 @@ namespace GuldtandMVC_Identity.Models
                     LoadIngredientList = true,
                     LoadRecipeCategory = true,
                     SearchRecipe = words,
-                    NumberOfRecipes = 1
+                    NumberOfRecipes = 1,
+                    
                 };
                 var result = await query.Execute(db);
 
@@ -121,12 +122,16 @@ namespace GuldtandMVC_Identity.Models
                                   "<ul>";
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
-                        ingrediensstring += "<li>" + ingredient.Amount + ingredient.AmountUnit + " " + ingredient.Name + "</li>";
+                        ingrediensstring += "<li>" + ingredient.Amount + ingredient.AmountUnit + " " + ingredient.Name +
+                                            " Købes i - " + ingredient.Product.RetailChain.Name + " for " +
+                                            ingredient.Product.Price + " kr. " + "Test: " + ingredient.Product.Name +
+                                            "<li/>";
                     }
 
                     bodystring += ingrediensstring;
                     bodystring += "</ul>" +
                                   "</div>" +
+                                  "<h3><strong>Indkøbsliste</strong></h3>" +
                                   "<br style='clear:both' />" +
                                   "<div class='f1'>" +
                                   "<div class='i2'>" +
@@ -199,8 +204,8 @@ namespace GuldtandMVC_Identity.Models
                                   "<br />" +
                                   "</div>" +
                                   //"Original pris: " + recipe.Price + "kr." + "<br />"
-                                  "Original pris: " + await NormalPris.normalPrice(recipe.Name) + "kr." +" <br />" +
-                                  "Pris med rabat: " + await RabatPris.totalPrice(recipe.Name) + "kr." + "<br />" +
+                                  "Original pris: " + await NormalPris.NormalPrice(recipe.Name) + "kr." +" <br />" +
+                                  "Pris med rabat: " + await RabatPris.TotalPrice(recipe.Name) + "kr." + "<br />" +
                                   "Laveste mulige pris: " + recipe.Price + "kr." + "<br />" +
                                   "</div>" +
                                   "</div>";
