@@ -14,19 +14,38 @@ namespace Til_test
         {
             using (var db = new prj4databaseContext())
             {
-                ProductQuery query = new ProductQuery
+                RecipeQuery recipeQuery = new RecipeQuery
                 {
-                    LoadRetailChain = true
+                    SearchRecipe = "lasagne",
+                    LoadIngredientList = true,
+                    LoadRecipeCategory = true
                 };
-                query.ValidToDate = "2050";
-                var result = await query.Execute(db);
-                foreach (var VARIABLE in result)
+                var recipes = await recipeQuery.Execute(db);
+                foreach (var recipe in recipes)
                 {
-                    //Console.WriteLine($"{VARIABLE.ValidTo.ToString()}");
-                    Console.WriteLine($"{VARIABLE.RetailChain.Name}");
-                    Console.WriteLine($"{VARIABLE.Name}");
-                    Console.WriteLine($"{VARIABLE.Price + "kr"}");
+                    Console.WriteLine($"{recipe.Name}");
+                    foreach (var ingredient in recipe.IngredientList.Ingredient)
+                    {
+                        Console.WriteLine($"{ingredient.Name} - {ingredient.Product.Name} - {ingredient.Product.Price} - {ingredient.Product.RetailChain.Name}");
+                    }
                 }
+
+
+                //ProductQuery query = new ProductQuery
+                //{
+                //    LoadRetailChain = true
+                //};
+                //query.ValidToDate = "2050";
+                //var result = await query.Execute(db);
+                //foreach (var VARIABLE in result)
+                //{
+                //    //Console.WriteLine($"{VARIABLE.ValidTo.ToString()}");
+                //    Console.WriteLine($"{VARIABLE.RetailChain.Name}");
+                //    Console.WriteLine($"{VARIABLE.Name}");
+                //    Console.WriteLine($"{VARIABLE.Price + "kr"}");
+                //}
+
+
                 //RecipeQuery query = new RecipeQuery
                 //{
                 //    LoadIngredientList = true,

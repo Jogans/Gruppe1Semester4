@@ -23,6 +23,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                 return await context.Set<Product>()
                     .Where(r => r.Name.Contains(SearchName)
                      && r.ValidTo.ToString().Contains(ValidToDate))
+                    .OrderBy(p => p.Price)
                     .Include(r => r.ProductCategory)
                     .Take(NumberOfRecipes)
                     .ToListAsync();
@@ -33,6 +34,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                 return await context.Set<Product>()
                     .Where(r => r.Name.Contains(SearchName)
                      && r.ValidTo.ToString().Contains(ValidToDate))
+                    .OrderBy(p => p.Price)
                     .Include(r => r.RetailChain)
                     .Take(NumberOfRecipes)
                     .ToListAsync();
@@ -43,6 +45,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                 return await context.Set<Product>()
                     .Where(r => r.Name.Contains(SearchName)
                      && r.ValidTo.ToString().Contains(ValidToDate))
+                    .OrderBy(p => p.Price)
                     .Include(r => r.RetailChain)
                     .Include(r => r.ProductCategory)
                     .Take(NumberOfRecipes)
@@ -54,6 +57,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                 return await context.Set<Product>()
                     .Where(r => r.Name.Contains(SearchName)
                      && r.ValidTo.ToString().Contains(ValidToDate))
+                    .OrderBy(p => p.Price)
                     .Take(NumberOfRecipes)
                     .ToListAsync();
             }
