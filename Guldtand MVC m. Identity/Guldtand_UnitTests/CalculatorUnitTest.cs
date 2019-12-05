@@ -8,6 +8,7 @@ using GuldtandMVC_Identity.Data.Queries;
 using GuldtandMVC_Identity.Data.Repositories;
 using GuldtandMVC_Identity.Models;
 using NUnit.Framework;
+using sun.security.pkcs10;
 
 
 namespace Guldtand_UnitTests
@@ -60,8 +61,7 @@ namespace Guldtand_UnitTests
             //normalpris kun tages med hvis den er validto over 2049. didnotrecieve kald.
             var word = "ovnbagt pasta";
             //int productLifeTime = Int32.Parse(_query.ValidToDate);
-            //_uut.
-                Assert.That(word.Contains("pasta"));
+            Assert.That(word.Contains("pasta"));
             
 
         }
@@ -71,10 +71,18 @@ namespace Guldtand_UnitTests
             //forventet udregning
             //normalpris kun tages med hvis den er validto over 2049. didnotrecieve kald.
             var uut = new HTMLCalculator();
+            Product p1 = new Product();
+            Product p2 = new Product();
+
+            //uut.normalPrice(0);
+            p1.Price = 10;
+            p2.Price = 12;
+            var products = (p1,p2);
+            //normalPrice() += p1.Price;
 
 
-
-            //Assert.AreEqual<int>(25, result);
+            //Assert.That(p1).AreEqual<int>(25, result);
+            Assert.That(products,Is.EqualTo(22));
 
         }
     }

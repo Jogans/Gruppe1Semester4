@@ -6,8 +6,8 @@ using GuldtandMVC_Identity.Models;
 
 namespace GuldtandMVC_Identity.Functions
 {
-    public class IHTMLCalculator<T>
+    public interface IHTMLCalculator
     {
-       // Task<IEnumerable<int>> Normalprice(string product) { };
+       
     }
 }
