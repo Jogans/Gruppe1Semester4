@@ -13,16 +13,31 @@ namespace GuldtandMVC_Identity.Data.Queries
         public string SearchName { get; set; } = "";
         public int NumberOfRecipes { get; set; } = 20;
         public string ValidToDate { get; set; } = "";
+        public string[] Stores { get; set; } = new string[8];
+
 
 
         public async Task<IEnumerable<Product>> Execute(prj4databaseContext context)
         {
+            List<RetailChain> irrelevantStores = new List<RetailChain>();
+            foreach (var store in Stores)
+            {
+                var dbStore = await context.Set<RetailChain>()
+                    .Where(rc => rc.Name.Contains(store))
+                    .Take(1)
+                    .ToListAsync();
+                if (dbStore.Any())
+                {
+                    irrelevantStores.Add(dbStore.First());
+                }
+            }
 
             if (LoadProductCategory == true && LoadRetailChain == false)
             {
                 return await context.Set<Product>()
                     .Where(r => r.Name.Contains(SearchName)
                      && r.ValidTo.ToString().Contains(ValidToDate))
+                    .OrderBy(p => p.Price)
                     .Include(r => r.ProductCategory)
                     .Take(NumberOfRecipes)
                     .ToListAsync();
@@ -32,7 +47,9 @@ namespace GuldtandMVC_Identity.Data.Queries
             {
                 return await context.Set<Product>()
                     .Where(r => r.Name.Contains(SearchName)
-                     && r.ValidTo.ToString().Contains(ValidToDate))
+                     && r.ValidTo.ToString().Contains(ValidToDate)
+                     && !irrelevantStores.Contains(r.RetailChain))
+                    .OrderBy(p => p.Price)
                     .Include(r => r.RetailChain)
                     .Take(NumberOfRecipes)
                     .ToListAsync();
@@ -42,7 +59,9 @@ namespace GuldtandMVC_Identity.Data.Queries
             {
                 return await context.Set<Product>()
                     .Where(r => r.Name.Contains(SearchName)
-                     && r.ValidTo.ToString().Contains(ValidToDate))
+                     && r.ValidTo.ToString().Contains(ValidToDate)
+                     && !irrelevantStores.Contains(r.RetailChain))
+                    .OrderBy(p => p.Price)
                     .Include(r => r.RetailChain)
                     .Include(r => r.ProductCategory)
                     .Take(NumberOfRecipes)
@@ -54,12 +73,10 @@ namespace GuldtandMVC_Identity.Data.Queries
                 return await context.Set<Product>()
                     .Where(r => r.Name.Contains(SearchName)
                      && r.ValidTo.ToString().Contains(ValidToDate))
+                    .OrderBy(p => p.Price)
                     .Take(NumberOfRecipes)
                     .ToListAsync();
             }
-
-                    
         }
-
     }
 }
