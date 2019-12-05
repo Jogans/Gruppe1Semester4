@@ -9,7 +9,7 @@
 
 <script>
     export default {
-        name: 'FlæskestegalaMarcus',
+        name: 'Hjemmelavetlasagne',
         props: {
         },
         data: function () {
@@ -20,7 +20,7 @@
         },
         methods: {
             fullView() {
-                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=marcus', {
+                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=lasagne', {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
