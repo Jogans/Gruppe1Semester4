@@ -74,7 +74,7 @@
 <style scoped>
 
     img {
-        position: relative;
+        position: static;
         float: left;
         height: 10%;
         width: 10%;

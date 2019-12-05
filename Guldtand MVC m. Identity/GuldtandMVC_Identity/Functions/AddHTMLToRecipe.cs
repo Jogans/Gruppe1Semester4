@@ -13,7 +13,7 @@ namespace GuldtandMVC_Identity.Models
     {
         //public string ShowRecipeFullView(string words)
         //{
-    
+
         //    string initString = "" +
         //                        "<html>";
         //    string endString = "</html>";
@@ -73,7 +73,7 @@ namespace GuldtandMVC_Identity.Models
 
         public async Task<string> ShowRecipeFullView(string words)
         {
-    
+
             string initString = "" +
                                 "<html>";
             string endString = "</html>";
@@ -104,12 +104,21 @@ namespace GuldtandMVC_Identity.Models
                         "<p class='p2'><span class='s1'>" + recipe.CookTime + " min tilberednings tid" +
                     "<br></span>Til 4 personer</p>" +
                         "<div class='image'>" +
-                        "<img src = '" + recipe.ImgSrc + "' />" +
+                        "<img src = '" + recipe.ImgSrc + "' height='400' width='700'/>" +
                     "</div>" +
                         "<br style='clear: both' />" +
-                        "<p class='p3'><strong>Ingredienser</strong></p>" +
-                    "<div class='i1'>" +
-                    "<ul>";
+                        "<h3 class='p3'><strong>Fremgangsmåde</strong></h3>" +
+                    "<div class='i1'>" + "<ul>";
+
+                    foreach (var direction in recipe.Directions)
+                    {
+                        directionsstring += "<li class='p5'>" + direction.Description + "</li>";
+                    }
+
+                    bodystring += directionsstring;
+                    bodystring += "</ul>" +
+                                  "<h3><strong>Ingredienser</strong></h3>" +
+                                  "<ul>";
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
                         ingrediensstring += "<li>" + ingredient.Amount + ingredient.AmountUnit + " " + ingredient.Name + "</li>";
@@ -120,16 +129,8 @@ namespace GuldtandMVC_Identity.Models
                                   "</div>" +
                                   "<br style='clear:both' />" +
                                   "<div class='f1'>" +
-                                  "<h3>Fremgangsmåde</h3>" +
                                   "<div class='i2'>" +
-                                  "<ul>";
-                    foreach (var direction in recipe.Directions)
-                    {
-                        directionsstring += "<li class='p5'>" + direction.Description + "</li>";
-                    }
-
-                    bodystring += directionsstring;
-                    bodystring += "</ul>" +
+                                  "<ul>" +
                                   "</div>" +
                                   "</div>" +
                                   "</div>";
@@ -177,7 +178,7 @@ namespace GuldtandMVC_Identity.Models
             {
                 RecipeQuery query = new RecipeQuery
                 {
-                    NumberOfRecipes = 2
+                    NumberOfRecipes = 5
                 };
 
                 var result = await query.Execute(db);
@@ -192,7 +193,7 @@ namespace GuldtandMVC_Identity.Models
                                   "<div class='textForPrice'>" +
                                   "<div style='font-size: 25px;'>" +
                                   "<a href='/#/Recepie/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
-                                  recipe.Name + 
+                                  recipe.Name +
                                   "</a>" +
                                   "<br />" +
                                   "</div>" +
