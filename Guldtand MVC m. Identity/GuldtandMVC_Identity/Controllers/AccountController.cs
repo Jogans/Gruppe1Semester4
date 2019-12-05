@@ -57,8 +57,8 @@ namespace GuldtandMVC_Identity.Controllers
             if (passwordSignInResult.Succeeded)
             {
                 HttpContext.Response.Cookies.Append(
-                    dtoUser.Email,
-                         DateTime.Now.ToString(),
+                    "userName",
+                         dtoUser.Email,
                          new CookieOptions()
                          {
                              Expires = DateTime.Now.AddHours(1),
@@ -100,11 +100,13 @@ namespace GuldtandMVC_Identity.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            if (HttpContext.Request.Cookies.Keys.Any())
-            {
-                var aCookie = HttpContext.Request.Cookies.Keys.Last();
-                HttpContext.Response.Cookies.Delete(aCookie);
-            }
+
+            Response.Cookies.Delete("userName");
+            //if (HttpContext.Request.Cookies.Keys.Any())
+            //{
+            //    var aCookie = HttpContext.Request.Cookies.Keys.Last();
+            //    HttpContext.Response.Cookies.Delete(aCookie);
+            //}
             return Ok();
         }
 
