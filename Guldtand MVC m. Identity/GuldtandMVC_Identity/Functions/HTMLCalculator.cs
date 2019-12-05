@@ -15,12 +15,13 @@ using GuldtandMVC_Identity.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using GuldtandMVC_Identity.Data;
+using GuldtandMVC_Identity.Functions;
 
 namespace GuldtandMVC_Identity.Models
 {
-    public class HTMLCalculator
+    public class HTMLCalculator : IHTMLCalculator
     {
-        public async Task<double> normalPrice(string word)
+        public async Task<double> NormalPrice(string word)
         {
             string initString = "" + "<html>";
             string endString = "</html>";
@@ -67,7 +68,7 @@ namespace GuldtandMVC_Identity.Models
             }
         }
 
-        public async Task<double> totalPrice(string word)
+        public async Task<double> TotalPrice(string word)
         {
             string initString = "" + "<html>";
             string endString = "</html>";
