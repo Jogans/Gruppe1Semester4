@@ -26,19 +26,19 @@ namespace Guldtand_UnitTests
         }
 
         [Test]
-        public async  Task CalculatorCalculating()
+        public async  Task TestTotalPri(string word)
         {
             //forventet udregning
-            //normalpris kun tages med hvis den er validto over 2049. didnotrecieve kald.
-            /*var products = 20;
+            //normalpris kun tages med hvis den er validto over 2049.didnotrecieve kald.
+            //var products = 20;
 
-            foreach (var product in products)
-            {
-                Assert.That(products.CompareTo(20) == 20);
-            }
-            */
+            //foreach (var product in products)
+            //{
+            //    Assert.That(products.CompareTo(20) == 20);
+            //}
+
         }
-        
+
         [Test]
         public async Task CalculatorReturningNormalpriceIfdateExceed2049()
         {
@@ -46,11 +46,11 @@ namespace Guldtand_UnitTests
             //normalpris kun tages med hvis den er validto over 2049. didnotrecieve kald.
             //var products = await _uut.normalPrice();
             //_uut.totalPrice()
-           // int productLifeTime = Int32.Parse(_product.ValidToDate);
+            //int productLifeTime = Int32.Parse(_product.ValidToDate);
             //foreach (var product in products)
             //{
-              //  Assert.That(product.ValidTo.Year == 2050);
-           // }
+            //    Assert.That(product.ValidTo.Year == 2050);
+            //}
 
         }
 
@@ -59,7 +59,7 @@ namespace Guldtand_UnitTests
         {
             //forventet udregning
             //normalpris kun tages med hvis den er validto over 2049. didnotrecieve kald.
-            var word = "ovnbagt pasta";
+            //var word = "ovnbagt pasta";
             //int productLifeTime = Int32.Parse(_query.ValidToDate);
             Assert.That(word.Contains("pasta"));
             

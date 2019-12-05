@@ -8,6 +8,8 @@ namespace GuldtandMVC_Identity.Functions
 {
     public interface IHTMLCalculator
     {
-       
+        Task<double> NormalPrice(string word);
+
+        Task<double> TotalPrice(string word);
     }
 }
