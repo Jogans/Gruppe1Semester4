@@ -15,12 +15,13 @@ using GuldtandMVC_Identity.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using GuldtandMVC_Identity.Data;
+using GuldtandMVC_Identity.Functions;
 
 namespace GuldtandMVC_Identity.Models
 {
-    public class HTMLCalculator
+    public class HTMLCalculator : IHTMLCalculator
     {
-        public async Task<double> normalPrice(string word)
+        public async Task<double> NormalPrice(string word)
         {
             string initString = "" + "<html>";
             string endString = "</html>";
@@ -36,16 +37,18 @@ namespace GuldtandMVC_Identity.Models
                     LoadIngredientList = true,
                     NumberOfRecipes = 1
                 };
+                ProductQuery query = new ProductQuery
+                {
+                    ValidToDate = "2050"
+                };
+                var listProduct = await query.Execute(db);
 
                 RecipeRepository recipeRepository = new RecipeRepository(db);
                 var recepylist = await recipeRepository.Get(recipequery);
                 ProductRepository productRepository = new ProductRepository(db);
-                var products = await productRepository.Get(new ProductQuery());
+                var products = await productRepository.Get(query);
 
-                ProductQuery query = new ProductQuery();
-                int productLifeTime = Int32.Parse(query.ValidToDate);
-                if (productLifeTime > 2049)
-                {
+
                     foreach (var recipe in recepylist)
                     {
                         //take all ingredients in the ingredientlist
@@ -54,20 +57,14 @@ namespace GuldtandMVC_Identity.Models
                             foreach (var product in products)
                             {
                                 normalPrice += product.Price;
-
                             }
                         }
                     }
                     return normalPrice;
-                }
-                else
-                {
-                    return 0.0;
-                }
             }
         }
 
-        public async Task<double> totalPrice(string word)
+        public async Task<double> TotalPrice(string word)
         {
             string initString = "" + "<html>";
             string endString = "</html>";
