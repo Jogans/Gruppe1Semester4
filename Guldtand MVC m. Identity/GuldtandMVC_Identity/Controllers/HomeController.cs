@@ -65,7 +65,7 @@ namespace GuldtandMVC_Identity.Controllers
         {
             var totalPrice = new HTMLCalculator();
 
-            return totalPrice.totalPrice(words);
+            return totalPrice.TotalPrice(words);
 
         }
 
@@ -73,7 +73,7 @@ namespace GuldtandMVC_Identity.Controllers
         {
             var normalPrice = new HTMLCalculator();
 
-            return normalPrice.normalPrice(words);
+            return normalPrice.NormalPrice(words);
         }
 
         public string searchRecipesByName(string words)
