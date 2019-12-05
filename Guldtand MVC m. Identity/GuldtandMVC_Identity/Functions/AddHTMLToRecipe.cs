@@ -13,7 +13,7 @@ namespace GuldtandMVC_Identity.Models
     {
         //public string ShowRecipeFullView(string words)
         //{
-    
+
         //    string initString = "" +
         //                        "<html>";
         //    string endString = "</html>";
@@ -73,7 +73,7 @@ namespace GuldtandMVC_Identity.Models
 
         public async Task<string> ShowRecipeFullView(string words)
         {
-    
+
             string initString = "" +
                                 "<html>";
             string endString = "</html>";
@@ -89,7 +89,8 @@ namespace GuldtandMVC_Identity.Models
                     LoadIngredientList = true,
                     LoadRecipeCategory = true,
                     SearchRecipe = words,
-                    NumberOfRecipes = 1
+                    NumberOfRecipes = 1,
+                    
                 };
                 var result = await query.Execute(db);
 
@@ -104,25 +105,12 @@ namespace GuldtandMVC_Identity.Models
                         "<p class='p2'><span class='s1'>" + recipe.CookTime + " min tilberednings tid" +
                     "<br></span>Til 4 personer</p>" +
                         "<div class='image'>" +
-                        "<img src = '" + recipe.ImgSrc + "' />" +
+                        "<img src = '" + recipe.ImgSrc + "' height='400' width='700'/>" +
                     "</div>" +
                         "<br style='clear: both' />" +
-                        "<p class='p3'><strong>Ingredienser</strong></p>" +
-                    "<div class='i1'>" +
-                    "<ul>";
-                    foreach (var ingredient in recipe.IngredientList.Ingredient)
-                    {
-                        ingrediensstring += "<li>" + ingredient.Amount + ingredient.AmountUnit + " " + ingredient.Name + "</li>";
-                    }
+                        "<h3 class='p3'><strong>Fremgangsmåde</strong></h3>" +
+                    "<div class='i1'>" + "<ul>";
 
-                    bodystring += ingrediensstring;
-                    bodystring += "</ul>" +
-                                  "</div>" +
-                                  "<br style='clear:both' />" +
-                                  "<div class='f1'>" +
-                                  "<h3>Fremgangsmåde</h3>" +
-                                  "<div class='i2'>" +
-                                  "<ul>";
                     foreach (var direction in recipe.Directions)
                     {
                         directionsstring += "<li class='p5'>" + direction.Description + "</li>";
@@ -130,6 +118,24 @@ namespace GuldtandMVC_Identity.Models
 
                     bodystring += directionsstring;
                     bodystring += "</ul>" +
+                                  "<h3><strong>Ingredienser</strong></h3>" +
+                                  "<ul>";
+                    foreach (var ingredient in recipe.IngredientList.Ingredient)
+                    {
+                        ingrediensstring += "<li>" + ingredient.Amount + ingredient.AmountUnit + " " + ingredient.Name +
+                                            " Købes i - " + ingredient.Product.RetailChain.Name + " for " +
+                                            ingredient.Product.Price + " kr. " + "Test: " + ingredient.Product.Name +
+                                            "<li/>";
+                    }
+
+                    bodystring += ingrediensstring;
+                    bodystring += "</ul>" +
+                                  "</div>" +
+                                  "<h3><strong>Indkøbsliste</strong></h3>" +
+                                  "<br style='clear:both' />" +
+                                  "<div class='f1'>" +
+                                  "<div class='i2'>" +
+                                  "<ul>" +
                                   "</div>" +
                                   "</div>" +
                                   "</div>";
@@ -178,7 +184,7 @@ namespace GuldtandMVC_Identity.Models
             {
                 RecipeQuery query = new RecipeQuery
                 {
-                    NumberOfRecipes = 2
+                    NumberOfRecipes = 5
                 };
 
                 var result = await query.Execute(db);
@@ -193,13 +199,13 @@ namespace GuldtandMVC_Identity.Models
                                   "<div class='textForPrice'>" +
                                   "<div style='font-size: 25px;'>" +
                                   "<a href='/#/Recepie/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
-                                  recipe.Name + 
+                                  recipe.Name +
                                   "</a>" +
                                   "<br />" +
                                   "</div>" +
                                   //"Original pris: " + recipe.Price + "kr." + "<br />"
-                                  "Original pris: " + await NormalPris.normalPrice("marcus") + "kr." +" <br />" +
-                                  "Pris med rabat: " + await RabatPris.totalPrice("marcus") + "kr." + "<br />" +
+                                  "Original pris: " + await NormalPris.NormalPrice(recipe.Name) + "kr." +" <br />" +
+                                  "Pris med rabat: " + await RabatPris.TotalPrice(recipe.Name) + "kr." + "<br />" +
                                   "Laveste mulige pris: " + recipe.Price + "kr." + "<br />" +
                                   "</div>" +
                                   "</div>";

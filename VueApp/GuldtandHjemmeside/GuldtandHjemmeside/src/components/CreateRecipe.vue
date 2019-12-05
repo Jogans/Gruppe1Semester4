@@ -10,7 +10,6 @@
         </h2>
 
         <div class="recipeName">
-            <Typeahead :suggestions="searchvalg" :selection.sync="value"> </Typeahead>
             <input style="height: 28px; width: 250px;" type="text" v-model="recipeName" placeholder="Indtast navn" required>
         </div>
 
@@ -63,9 +62,6 @@
                 <li v-for="(inputIng, indexIng) in inputsIng" v-bind:key="inputIng">
 
                     <input type="text" placeholder="..." v-model="inputIng.one" />
-                    <!--<select v-model='selected' id='category' style="margin: 10px">
-                        <option v-for="kategoriElement in inputIng.one" v-bind:key="kategoriElement" v-bind:id="indexIng" >{kategoriElement}}</option>
-                    </select>-->
 
                     <input class="unit_text" type="text" v-model="inputIng.two" />
                     <select class="units" v-bind="unit" v-model="inputIng.three" id="unit_id">
@@ -77,7 +73,7 @@
                         <option value="tsk">tsk</option>
                         <option value="spsk">spsk</option>
                         <option value="knsp">knsp</option>
-                        <option value="knsp">stk</option>
+                        <option value="stk">stk</option>
                     </select>
                     <button class="btn_delete" @click="deleteRowIng(indexIng)">Slet</button>
                 </li>
@@ -90,8 +86,7 @@
         </div>
         <br style="clear:both" />
 
-        <button class="test_btn" @click="created">Test</button>
-        {{i}}
+        <button class="test_btn" @click="created">Opret opskrift</button>
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
 
@@ -99,7 +94,6 @@
 </template>
 
 <script>
-    import Typeahead from './Typeahead.vue';
     export default {
         name: 'CreateRecepie',
         data: function () {
@@ -120,32 +114,19 @@
                 ingridientNameString: "",
                 ingridientAmountString: "",
                 ingridientUnitString: "",
-                g: "g",
             }
         },
-        components: { Typeahead },
         methods: {
             addCategory() {
-                //this.$http.get('', {
-                //    headers: {
-                //        'Access-Control-Allow-Origin': '*',
-                //    },
-                //}).then(response => (
                 this.m++;
                 this.inputsIng.push({
-                    one: null,/*response.data,*/
+                    one: null,
                     two: null,
                     three: null,
                 })
-                //))
-            },
-            addRow2() {
-                this.inputsIng.push({
-                    one: null,
-                })
             },
             addRow1() {
-                if (this.inputs1.length < 7) {
+                if (this.inputs1.length < 10000) {
                     this.i++;
                     this.inputs1.push({
                         one: null,
