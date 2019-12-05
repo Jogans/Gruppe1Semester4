@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using GuldtandMVC_Identity.Data.Repositories;
 
 namespace GuldtandMVC_Identity.Data.Queries
 {
@@ -27,14 +28,36 @@ namespace GuldtandMVC_Identity.Data.Queries
                     switch (LoadRecipeCategory)
                     {
                         case true:
-                            return await context.Set<Recipe>()
+                            var recipes = await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
+                                .OrderBy(r => r.Price)
                                 .Include(r => r.IngredientList.Ingredient)
+                                .ThenInclude(i => i.Product)
                                 .Include(r => r.RecipeCategory)
                                 .Include(r => r.Directions)
-                                .OrderBy(r => r.Price)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
+                            IngredientRepository ingredientRepository = new IngredientRepository(context);
+                            foreach (var recipe in recipes)
+                            {
+                                foreach (var ingredient in recipe.IngredientList.Ingredient)
+                                {
+                                    ProductQuery productQuery = new ProductQuery
+                                    {
+                                        SearchName = ingredient.Name,
+                                        NumberOfRecipes = 1,
+                                        LoadRetailChain = true
+                                    };
+                                    var product = await productQuery.Execute(context);
+                                    if (product.Any())
+                                    {
+                                        ingredient.ProductId = product.First().ProductId;
+                                        ingredientRepository.Update(ingredient);
+                                    }
+                                }
+                            ingredientRepository.Save();
+                            }
+                            return recipes;
                         //return await context.Set<Recipe>()
                         //    .Join(context.Ingredient, recipe => recipe.RecipeId, ing => ing.IngredientList.RecipeId,
                         //        (recipe, ing) => new {Recipe = recipe, Ingredient = ing})
@@ -46,8 +69,8 @@ namespace GuldtandMVC_Identity.Data.Queries
                         case false:
                             return await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
-                                .Include(r => r.IngredientList)
                                 .OrderBy(r => r.Price)
+                                .Include(r => r.IngredientList)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                         default:
@@ -63,8 +86,8 @@ namespace GuldtandMVC_Identity.Data.Queries
                         case true:
                             return await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
-                                .Include(r => r.RecipeCategory)
                                 .OrderBy(r => r.Price)
+                                .Include(r => r.RecipeCategory)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                         case false:
