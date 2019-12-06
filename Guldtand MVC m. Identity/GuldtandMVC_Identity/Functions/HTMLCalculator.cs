@@ -73,11 +73,24 @@ namespace GuldtandMVC_Identity.Models
                     //take all ingredients in the ingredientlist
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
-                        DateTime dt = DateTime.Parse("2050");
-                        if (ingredient.Product.ValidTo == dt)
+                        
+                        ProductQuery productQuery = new ProductQuery
                         {
+                            SearchName = ingredient.Name,
+                            NumberOfProducts = 1,
+                            LoadRetailChain = true,
+                            ValidToDate = "2050"
+                        };
+                        var product = await productQuery.Execute(db);
+                        if (product.Any())
+                        {
+                            ingredient.ProductId = product.First().ProductId;
                             normalPrice += ingredient.Product.Price;
                         }
+                        //if (ingredient.Product.ValidTo.Year.ToString() == "2050")
+                        //{
+                            
+                        //}
                     }
                 }
                 return normalPrice;
