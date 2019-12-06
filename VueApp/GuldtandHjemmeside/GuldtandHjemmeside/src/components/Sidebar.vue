@@ -5,30 +5,30 @@
                 <div v-if="isPanelOpen" class="sidebar-panel">
 
                     <div class="butikkerValg1">
-                        <input type="checkbox" id="cb1" />
+                        <input type="checkbox" id="cb1" value="Netto" v-model="checkedNetto" />
                         <label for="cb1"><img src="@/assets/Pics/Netto.png" alt="Netto" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb2" />
+                        <input type="checkbox" id="cb2" v-model="checkedFoetex"/>
                         <label for="cb2"><img src="@/assets/Pics/Foetex.png" alt="Foetex" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb3" />
+                        <input type="checkbox" id="cb3" v-model="checkedRema"/>
                         <label for="cb3"><img src="@/assets/Pics/Rema.jpg" alt="Rema" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb4" />
+                        <input type="checkbox" id="cb4" v-model="checkedFakta"/>
                         <label for="cb4"><img src="@/assets/Pics/Fakta.png" alt="Fakta" /></label>
                     </div>
 
                     <div class="butikkerValg2">
-                        <input type="checkbox" id="cb5" />
+                        <input type="checkbox" id="cb5" v-model="checkedBilka"/>
                         <label for="cb5"><img src="@/assets/Pics/Bilka.jpg" alt="Bilka" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb6" />
+                        <input type="checkbox" id="cb6" v-model="checkedAldi"/>
                         <label for="cb6"><img src="@/assets/Pics/Aldi.png" alt="Aldi" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb7" />
+                        <input type="checkbox" id="cb7" v-model="checkedKvickly"/>
                         <label for="cb7"><img src="@/assets/Pics/Kvickly.png" alt="Kvickly" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb8" />
+                        <input type="checkbox" id="cb8" v-model="checkedLidl"/>
                         <label for="cb8"><img src="@/assets/Pics/Lidl.png" alt="Lidl" /></label>
                     </div>
                     <br style="clear:both" />
@@ -66,7 +66,9 @@
                         <input class="cbox" type="checkbox" id="dish4">
                         <label for="dish4">Svinek&#248;d</label>
                     </div>
-
+                    <br />
+                    <button class="test_btn" @click="stores">Test</button>
+                    <span v-html="info">{{info}}</span>
                 </div>
             </transition>
 
@@ -76,12 +78,53 @@
 <script>
 
     export default {
-        data: () => ({
-            isPanelOpen: true
-        }),
+
+        data: function () {
+            return {
+                isPanelOpen: true,
+                info: null,
+                checkedNetto: null,
+                checkedString: "",
+            }
+        },
         methods: {
             closeSidebarPanel() {
                 this.isPanelOpen = false
+            },
+            createStoreString() {
+                this.checkedString = "";
+                if (this.checkedNetto == true) {
+                    this.checkedString += "Netto;";
+                }
+                if (this.checkedFoetex == true) {
+                    this.checkedString += "Foetex;";
+                }
+                if (this.checkedRema == true) {
+                    this.checkedString += "Rema;";
+                }
+                if (this.checkedFakta == true) {
+                    this.checkedString += "Fakta;";
+                }
+                if (this.checkedBilka == true) {
+                    this.checkedString += "Bilka;";
+                }
+                if (this.checkedAldi == true) {
+                    this.checkedString += "Aldi;";
+                }
+                if (this.checkedKvickly == true) {
+                    this.checkedString += "Kvickly;";
+                }
+                if (this.checkedLidl == true) {
+                    this.checkedString += "Lidl;";
+                }
+                return this.checkedString;
+            },
+            stores() {
+                this.$http.get('https://localhost:44324/Home/chooseStoresFromSidebar?stores=' + this.createStoreString(), {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }).then(response => (this.info = response.data))
             }
         }
     }
@@ -89,6 +132,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    span {
+        color: white;
+    }
 
     .butikkerValg1 {
         display: inline-block;
@@ -131,7 +177,7 @@
         background-color: rgba(0,0,0,.5);
         width: 100vw;
         height: 100vh;
-        position: static;
+        position: fixed;
         top: 0;
         left: 0;
         cursor: pointer;
@@ -145,7 +191,7 @@
         left: 0;
         top: 0;
         height: 100vh;
-        z-index: -1;
+        z-index: 1;
         padding: 3rem 20px 2rem 20px;
         width: 200px;
     }

@@ -6,26 +6,35 @@
                 <div class="title">
 
                     <router-link to="/"><img src="@/assets/Pics/Guldtand.jpg" alt="Guldtand" tag="button" /></router-link>
-                    <input class="usernameinput" type="text" placeholder="Enter Username" v-model="email" name="uname" required />
-                    <input class="passwordinput" type="password" placeholder="Enter Password" v-model="password" name="psw" required />
-                    <button class="login" @click="created">Login</button>
-                    <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
-                    <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
+
+                    <template v-if="checkIfLogin">
+                        <input class="usernameinput" type="text" placeholder="Enter Username" v-model="email" name="uname" required />
+                        <input class="passwordinput" type="password" placeholder="Enter Password" v-model="password" name="psw" required />
+                        <button class="login" @click="Login">Login</button>
+                        <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
+                    </template>
+                    <template v-if="!checkIfLogin">
+                        <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
+                        <button class="logout" @click="Logout">Logout</button>
+                    </template>
+
                 </div>
+                <br style="clear:both" />
+                <div class="Buttons2">
+                    <router-link to="/SearchBar" class="btn_Top" tag="button">S&#248;g</router-link>
+                    <router-link to="/TopPage" class="btn_Top" tag="button">Top retter</router-link>
+                    <router-link to="/NewPage" class="btn_New" tag="button">Nye retter</router-link>
+                    <router-link to="/SUPage" class="btn_Su" tag="button">SU-retter</router-link>
+                    <router-link to="/VegiPage" class="btn_Vegi" tag="button">Vegetar retter</router-link>
+                    <router-link to="/Recipe/ShowRecipe" class="btn_Classic" tag="button">Klassiske retter</router-link>
+                    <router-link to="/StorePage" class="btn_Store" tag="button">V&#230;lg Butik</router-link>
 
-            </div>
-            <br style="clear:both" />
-            <div class="Buttons2">
-                <router-link to="/SearchBar" class="btn_Top" tag="button">S&#248;g</router-link>
-                <router-link to="/TopPage" class="btn_Top" tag="button">Top retter</router-link>
-                <router-link to="/NewPage" class="btn_New" tag="button">Nye retter</router-link>
-                <router-link to="/SUPage" class="btn_Su" tag="button">SU-retter</router-link>
-                <router-link to="/VegiPage" class="btn_Vegi" tag="button">Vegetar retter</router-link>
-                <router-link to="/Recipe/ShowRecipe" class="btn_Classic" tag="button">Klassiske retter</router-link>
-                <router-link to="/StorePage" class="btn_Store" tag="button">V&#230;lg Butik</router-link>
-                <router-link to="/CreateRecipe" class="btn_CreateRecipe" tag="button">Opret Opskrift</router-link>
-                <router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>
+                    <template v-if="checkIfLogin">
+                        <router-link to="/CreateRecipe" class="btn_CreateRecipe" tag="button">Opret Opskrift</router-link>
+                    </template>
+                    <router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>
 
+                </div>
             </div>
         </div>
     </keep-alive>
@@ -44,13 +53,39 @@
             }
         },
         methods: {
-                        HandleErrors: function(response) {
+            HandleErrors: function (response) {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
                 return this.$router.push(this.$route.query.redirect || '/ProfilePage');
             },
-            created() {
+            getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            },
+
+            checkIfLogin() {
+                var user = this.getCookie(".AspNet.Consent");
+                if (user != ""){
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+
+
+            Login() {
                 fetch('https://localhost:44324/api/Account/Login', {
                     method: 'POST',
                     body: JSON.stringify({
@@ -63,7 +98,11 @@
                 }).then(this.HandleErrors)
                     .then(response => console.log(response))
                     .catch(error => console.log(error));
+                this.checkIfLogin();
             },
+        },
+        beforeMount() {
+            this.checkIfLogin()
         }
     };
 
