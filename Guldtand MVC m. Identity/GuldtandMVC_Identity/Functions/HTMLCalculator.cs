@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -42,7 +43,7 @@ namespace GuldtandMVC_Identity.Models
                 ProductQuery query = new ProductQuery
                 {
                     ValidToDate = "2050",
-                    NumberOfRecipes = 1
+                    NumberOfProducts = 1
                 };
                 var listProduct = await query.Execute(db);
 
@@ -67,18 +68,18 @@ namespace GuldtandMVC_Identity.Models
                 //        }
                 //    }
 
-                //foreach (var recipe in recepylist)
-                //{
-                //    //take all ingredients in the ingredientlist
-                //    foreach (var ingredient in recipe.IngredientList.Ingredient)
-                //    {
-                //        if (ingredient.Product.ValidTo = "2050")
-                //        {
-                //            normalPrice += ingredient.Product.Price;
-                //        }
-
-                //    }
-                //}
+                foreach (var recipe in recepylist)
+                {
+                    //take all ingredients in the ingredientlist
+                    foreach (var ingredient in recipe.IngredientList.Ingredient)
+                    {
+                        DateTime dt = DateTime.Parse("2050");
+                        if (ingredient.Product.ValidTo == dt)
+                        {
+                            normalPrice += ingredient.Product.Price;
+                        }
+                    }
+                }
                 return normalPrice;
 
             }
