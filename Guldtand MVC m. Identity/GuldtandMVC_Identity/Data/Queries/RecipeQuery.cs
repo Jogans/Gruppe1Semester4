@@ -14,6 +14,7 @@ namespace GuldtandMVC_Identity.Data.Queries
         public string SearchRecipe { get; set; } = "";
         public string SearchIngredient { get; set; } = "";
         public int NumberOfRecipes { get; set; } = 20;
+        public string[] Stores { get; set; } = new string[8];
 
         public async Task<IEnumerable<Recipe>> Execute(prj4databaseContext context)
         {
@@ -28,17 +29,17 @@ namespace GuldtandMVC_Identity.Data.Queries
                     switch (LoadRecipeCategory)
                     {
                         case true:
-                            var recipes = await context.Set<Recipe>()
+                            var recipes1 = await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
-                                .OrderBy(r => r.Price)
                                 .Include(r => r.IngredientList.Ingredient)
-                                .ThenInclude(i => i.Product)
+                                    .ThenInclude(i => i.Product)
                                 .Include(r => r.RecipeCategory)
                                 .Include(r => r.Directions)
+                                .OrderBy(r => r.Price)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
-                            IngredientRepository ingredientRepository = new IngredientRepository(context);
-                            foreach (var recipe in recipes)
+                            IngredientRepository ingredientRepository1 = new IngredientRepository(context);
+                            foreach (var recipe in recipes1)
                             {
                                 foreach (var ingredient in recipe.IngredientList.Ingredient)
                                 {
@@ -46,18 +47,19 @@ namespace GuldtandMVC_Identity.Data.Queries
                                     {
                                         SearchName = ingredient.Name,
                                         NumberOfRecipes = 1,
-                                        LoadRetailChain = true
+                                        LoadRetailChain = true,
+                                        Stores = Stores
                                     };
                                     var product = await productQuery.Execute(context);
                                     if (product.Any())
                                     {
                                         ingredient.ProductId = product.First().ProductId;
-                                        ingredientRepository.Update(ingredient);
+                                        ingredientRepository1.Update(ingredient);
                                     }
                                 }
-                            ingredientRepository.Save();
                             }
-                            return recipes;
+                            ingredientRepository1.Save();
+                            return recipes1;
                         //return await context.Set<Recipe>()
                         //    .Join(context.Ingredient, recipe => recipe.RecipeId, ing => ing.IngredientList.RecipeId,
                         //        (recipe, ing) => new {Recipe = recipe, Ingredient = ing})
@@ -67,49 +69,112 @@ namespace GuldtandMVC_Identity.Data.Queries
                         //    .Take(NumberOfRecipes)
                         //    .ToListAsync();
                         case false:
-                            return await context.Set<Recipe>()
+                            var recipes2 = await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
+                                .Include(r => r.IngredientList.Ingredient)
+                                .ThenInclude(i => i.Product)
+                                .Include(r => r.Directions)
                                 .OrderBy(r => r.Price)
-                                .Include(r => r.IngredientList)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
+                            IngredientRepository ingredientRepository2 = new IngredientRepository(context);
+                            foreach (var recipe in recipes2)
+                            {
+                                foreach (var ingredient in recipe.IngredientList.Ingredient)
+                                {
+                                    ProductQuery productQuery = new ProductQuery
+                                    {
+                                        SearchName = $"{ingredient.Name}",
+                                        NumberOfRecipes = 1,
+                                        LoadRetailChain = true,
+                                        Stores = Stores
+                                    };
+                                    var product = await productQuery.Execute(context);
+                                    if (product.Any())
+                                    {
+                                        ingredient.ProductId = product.First().ProductId;
+                                        ingredientRepository2.Update(ingredient);
+                                    }
+                                }
+                            }
+                            ingredientRepository2.Save();
+                            return recipes2;
                         default:
-                            return await context.Set<Recipe>()
+                            var recipes6 = await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
+                                .Include(r => r.IngredientList.Ingredient)
+                                .ThenInclude(i => i.Product)
+                                .Include(r => r.Directions)
                                 .OrderBy(r => r.Price)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
+                            IngredientRepository ingredientRepository6 = new IngredientRepository(context);
+                            foreach (var recipe in recipes6)
+                            {
+                                foreach (var ingredient in recipe.IngredientList.Ingredient)
+                                {
+                                    ProductQuery productQuery = new ProductQuery
+                                    {
+                                        SearchName = $"{ingredient.Name}",
+                                        NumberOfRecipes = 1,
+                                        LoadRetailChain = true
+                                    };
+                                    var product = await productQuery.Execute(context);
+                                    if (product.Any())
+                                    {
+                                        ingredient.ProductId = product.First().ProductId;
+                                        ingredientRepository6.Update(ingredient);
+                                    }
+                                }
+                            }
+                            ingredientRepository6.Save();
+                            return recipes6;
                     }
                 case false:
                     switch (LoadRecipeCategory)
                     {
                         case true:
-                            return await context.Set<Recipe>()
+                            var recipes3 = await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
-                                .OrderBy(r => r.Price)
                                 .Include(r => r.RecipeCategory)
+                                .Include(r => r.Directions)
+                                .OrderBy(r => r.Price)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
+                            return recipes3;
                         case false:
-                            return await context.Set<Recipe>()
+                            var recipes4 = await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
+                                .Include(r => r.Directions)
                                 .OrderBy(r => r.Price)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
+                            return recipes4;
                         default:
-                            return await context.Set<Recipe>()
+                            var recipes7 = await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
+                                .Include(r => r.Directions)
                                 .OrderBy(r => r.Price)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
+                            return recipes7;
                     }
                 default:
-                    return await context.Set<Recipe>()
+                    var recipes8 = await context.Set<Recipe>()
                         .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
-                                .OrderBy(r => r.Price)
-                                .Take(NumberOfRecipes)
+                        .Include(r => r.Directions)
+                        .OrderBy(r => r.Price)
+                        .Take(NumberOfRecipes)
                         .ToListAsync();
+                    return recipes8;
             }
+            var recipes5 = await context.Set<Recipe>()
+                .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
+                .Include(r => r.Directions)
+                .OrderBy(r => r.Price)
+                .Take(NumberOfRecipes)
+                .ToListAsync();
+            return recipes5;
         }
 
         //public async Task<IEnumerable<Recipe>> Execute<Recipe>(prj4databaseContext context)

@@ -18,7 +18,7 @@ namespace Til_test
                 {
                     SearchRecipe = "lasagne",
                     LoadIngredientList = true,
-                    LoadRecipeCategory = true
+                    Stores = new string[] {"Netto"}
                 };
                 var recipes = await recipeQuery.Execute(db);
                 foreach (var recipe in recipes)

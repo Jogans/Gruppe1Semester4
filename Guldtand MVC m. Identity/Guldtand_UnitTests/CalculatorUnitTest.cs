@@ -26,7 +26,7 @@ namespace Guldtand_UnitTests
         }
 
         [Test]
-        public async  Task TestTotalPri(string word)
+        public async  Task TestTotalPrice(string word)
         {
             //forventet udregning
             //normalpris kun tages med hvis den er validto over 2049.didnotrecieve kald.
@@ -51,7 +51,7 @@ namespace Guldtand_UnitTests
             //{
             //    Assert.That(product.ValidTo.Year == 2050);
             //}
-
+            
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace Guldtand_UnitTests
         {
             //forventet udregning
             //normalpris kun tages med hvis den er validto over 2049. didnotrecieve kald.
-            //var word = "ovnbagt pasta";
+            var word = "ovnbagt pasta";
             //int productLifeTime = Int32.Parse(_query.ValidToDate);
             Assert.That(word.Contains("pasta"));
             
@@ -73,11 +73,12 @@ namespace Guldtand_UnitTests
             var uut = new HTMLCalculator();
             Product p1 = new Product();
             Product p2 = new Product();
-
+            
             //uut.normalPrice(0);
             p1.Price = 10;
             p2.Price = 12;
             var products = (p1,p2);
+            //var product = await _uut.NormalPrice();
             //normalPrice() += p1.Price;
 
 

@@ -26,7 +26,7 @@ namespace GuldtandMVC_Identity.Models
             string initString = "" + "<html>";
             string endString = "</html>";
             string bodyString = "";
-
+            
             double normalPrice = 0;
 
             using (var db = new prj4databaseContext())
@@ -35,6 +35,7 @@ namespace GuldtandMVC_Identity.Models
                 {
                     SearchRecipe = word,
                     LoadIngredientList = true,
+                    LoadRecipeCategory = true,
                     NumberOfRecipes = 1
                 };
                 ProductQuery query = new ProductQuery
@@ -46,22 +47,27 @@ namespace GuldtandMVC_Identity.Models
                 RecipeRepository recipeRepository = new RecipeRepository(db);
                 var recepylist = await recipeRepository.Get(recipequery);
                 ProductRepository productRepository = new ProductRepository(db);
-                var products = await productRepository.Get(query);
 
 
-                    foreach (var recipe in recepylist)
+                foreach (var recipe in recepylist)
                     {
                         //take all ingredients in the ingredientlist
                         foreach (var ingredient in recipe.IngredientList.Ingredient)
                         {
-                            foreach (var product in products)
+                            foreach (var product in listProduct)
+                            {
+                            if (product.Name.Contains(ingredient.Name))
                             {
                                 normalPrice += product.Price;
                             }
                         }
+                            
+                        }
                     }
                     return normalPrice;
+
             }
+            
         }
 
         public async Task<double> TotalPrice(string word)
@@ -80,26 +86,37 @@ namespace GuldtandMVC_Identity.Models
                     LoadIngredientList = true,
                     NumberOfRecipes = 1
                 };
-         
+                ProductQuery query = new ProductQuery
+                {
+                    ValidToDate = "2019"
+                };
+
                 RecipeRepository recipeRepository = new RecipeRepository(db);
                 var recepylist = await recipeRepository.Get(recipequery);
                 ProductRepository productRepository = new ProductRepository(db);
                 var products = await productRepository.Get(new ProductQuery());
+                var listProduct = await query.Execute(db);
 
                 foreach (var recipe in recepylist)
                 {
                     //take all ingredients in the ingredientlist
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
-                        foreach (var product in products)
+                        foreach (var product in listProduct)
                         {
-                            totalPrice += product.Price;
-                            
+                            if (product.Name.Contains(ingredient.Name))
+                            {
+                                totalPrice += product.Price;
+                            }
                         }
+
                     }
                 }
                 return totalPrice;
             }
+
+            
+            
         }
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
