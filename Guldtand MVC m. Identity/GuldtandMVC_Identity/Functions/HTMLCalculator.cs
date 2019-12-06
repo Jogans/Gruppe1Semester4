@@ -36,11 +36,13 @@ namespace GuldtandMVC_Identity.Models
                     SearchRecipe = word,
                     LoadIngredientList = true,
                     LoadRecipeCategory = true,
-                    NumberOfRecipes = 1
+                    NumberOfRecipes = 1, 
+                    
                 };
                 ProductQuery query = new ProductQuery
                 {
-                    ValidToDate = "2050"
+                    ValidToDate = "2050",
+                    NumberOfRecipes = 1
                 };
                 var listProduct = await query.Execute(db);
 
@@ -49,22 +51,35 @@ namespace GuldtandMVC_Identity.Models
                 ProductRepository productRepository = new ProductRepository(db);
 
 
-                foreach (var recipe in recepylist)
-                    {
-                        //take all ingredients in the ingredientlist
-                        foreach (var ingredient in recipe.IngredientList.Ingredient)
-                        {
-                            foreach (var product in listProduct)
-                            {
-                            if (product.Name.Contains(ingredient.Name))
-                            {
-                                normalPrice += product.Price;
-                            }
-                        }
-                            
-                        }
-                    }
-                    return normalPrice;
+                //foreach (var recipe in recepylist)
+                //    {
+                //        //take all ingredients in the ingredientlist
+                //        foreach (var ingredient in recipe.IngredientList.Ingredient)
+                //        {
+                //            foreach (var product in listProduct)
+                //            {
+                //            if (product.Name.Contains(ingredient.Name))
+                //            {
+                //                normalPrice += ingredient.Product.Price;
+                //            }
+                //        }
+
+                //        }
+                //    }
+
+                //foreach (var recipe in recepylist)
+                //{
+                //    //take all ingredients in the ingredientlist
+                //    foreach (var ingredient in recipe.IngredientList.Ingredient)
+                //    {
+                //        if (ingredient.Product.ValidTo = "2050")
+                //        {
+                //            normalPrice += ingredient.Product.Price;
+                //        }
+
+                //    }
+                //}
+                return normalPrice;
 
             }
             
@@ -84,32 +99,41 @@ namespace GuldtandMVC_Identity.Models
                 {
                     SearchRecipe = word,
                     LoadIngredientList = true,
+                    LoadRecipeCategory = true,
                     NumberOfRecipes = 1
                 };
-                ProductQuery query = new ProductQuery
-                {
-                    ValidToDate = "2019"
-                };
+                ProductQuery query = new ProductQuery();
+            
 
                 RecipeRepository recipeRepository = new RecipeRepository(db);
                 var recepylist = await recipeRepository.Get(recipequery);
                 ProductRepository productRepository = new ProductRepository(db);
-                var products = await productRepository.Get(new ProductQuery());
+                //var products = await productRepository.Get(new ProductQuery());
                 var listProduct = await query.Execute(db);
+
+                //foreach (var recipe in recepylist)
+                //{
+                //    //take all ingredients in the ingredientlist
+                //    foreach (var ingredient in recipe.IngredientList.Ingredient)
+                //    {
+                //        foreach (var product in listProduct)
+                //        {
+                //            if (product.Name.Contains(ingredient.Name))
+                //            {
+                //                totalPrice += product.Price;
+                //            }
+                //        }
+
+                //    }
+                //}
 
                 foreach (var recipe in recepylist)
                 {
                     //take all ingredients in the ingredientlist
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
-                        foreach (var product in listProduct)
-                        {
-                            if (product.Name.Contains(ingredient.Name))
-                            {
-                                totalPrice += product.Price;
-                            }
-                        }
 
+                        totalPrice += ingredient.Product.Price;
                     }
                 }
                 return totalPrice;
