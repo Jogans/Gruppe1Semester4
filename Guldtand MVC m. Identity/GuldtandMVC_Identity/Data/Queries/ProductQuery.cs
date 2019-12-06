@@ -11,7 +11,7 @@ namespace GuldtandMVC_Identity.Data.Queries
         public bool LoadRetailChain { get; set; } = false;
         public bool LoadProductCategory { get; set; } = false;
         public string SearchName { get; set; } = "";
-        public int NumberOfRecipes { get; set; } = 20;
+        public int NumberOfProducts { get; set; } = 20;
         public string ValidToDate { get; set; } = "";
         public string[] Stores { get; set; } = new string[8];
 
@@ -39,7 +39,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                      && r.ValidTo.ToString().Contains(ValidToDate))
                     .OrderBy(p => p.Price)
                     .Include(r => r.ProductCategory)
-                    .Take(NumberOfRecipes)
+                    .Take(NumberOfProducts)
                     .ToListAsync();
             }
 
@@ -51,7 +51,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                      && !irrelevantStores.Contains(r.RetailChain))
                     .OrderBy(p => p.Price)
                     .Include(r => r.RetailChain)
-                    .Take(NumberOfRecipes)
+                    .Take(NumberOfProducts)
                     .ToListAsync();
             }
             
@@ -64,7 +64,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                     .OrderBy(p => p.Price)
                     .Include(r => r.RetailChain)
                     .Include(r => r.ProductCategory)
-                    .Take(NumberOfRecipes)
+                    .Take(NumberOfProducts)
                     .ToListAsync();
             }
 
@@ -74,7 +74,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                     .Where(r => r.Name.Contains(SearchName)
                      && r.ValidTo.ToString().Contains(ValidToDate))
                     .OrderBy(p => p.Price)
-                    .Take(NumberOfRecipes)
+                    .Take(NumberOfProducts)
                     .ToListAsync();
             }
         }
