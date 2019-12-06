@@ -56,6 +56,7 @@
         methods: {
             LoginHandleErrors: function (response) {
                 if (!response.ok) {
+                    alert("Forkert login eller password")
                     throw Error(response.statusText);
                 }
                 this.LoggedIn = true
