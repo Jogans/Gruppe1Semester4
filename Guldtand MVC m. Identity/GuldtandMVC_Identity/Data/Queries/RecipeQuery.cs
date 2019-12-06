@@ -70,13 +70,16 @@ namespace GuldtandMVC_Identity.Data.Queries
                             return await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
                                 .OrderBy(r => r.Price)
-                                .Include(r => r.IngredientList)
+                                .Include(r => r.IngredientList.Ingredient)
+                                .ThenInclude(i => i.Product)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                         default:
                             return await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
                                 .OrderBy(r => r.Price)
+                                .Include(r => r.IngredientList.Ingredient)
+                                .ThenInclude(i => i.Product)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                     }

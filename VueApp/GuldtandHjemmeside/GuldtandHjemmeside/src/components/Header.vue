@@ -6,14 +6,19 @@
                 <div class="title">
 
                     <router-link to="/"><img src="@/assets/Pics/Guldtand.jpg" alt="Guldtand" tag="button" /></router-link>
-                    <input class="usernameinput" type="text" placeholder="Enter Username" v-model="email" name="uname" required />
-                    <input class="passwordinput" type="password" placeholder="Enter Password" v-model="password" name="psw" required />
-                    <button class="login" @click="created">Login</button>
-                    <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
-                    <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
-                </div>
 
-            </div>
+                    <LoggedIn v-if="checkIfLogin== True">
+                        <input class="usernameinput" type="text" placeholder="Enter Username" v-model="email" name="uname" required />
+                        <input class="passwordinput" type="password" placeholder="Enter Password" v-model="password" name="psw" required />
+                        <button class="login" @click="Login">Login</button>
+                        <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
+
+                        <div v-else>
+                            <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
+                            <button class="logout" @click="Logout">Logout</button>
+                        </div>
+
+                     </div>
             <br style="clear:both" />
             <div class="Buttons2">
                 <router-link to="/SearchBar" class="btn_Top" tag="button">S&#248;g</router-link>
@@ -23,7 +28,10 @@
                 <router-link to="/VegiPage" class="btn_Vegi" tag="button">Vegetar retter</router-link>
                 <router-link to="/Recipe/ShowRecipe" class="btn_Classic" tag="button">Klassiske retter</router-link>
                 <router-link to="/StorePage" class="btn_Store" tag="button">V&#230;lg Butik</router-link>
-                <router-link to="/CreateRecipe" class="btn_CreateRecipe" tag="button">Opret Opskrift</router-link>
+
+                <LoggedIn v-if="checkIfLogin== True">
+                    <router-link to="/CreateRecipe" class="btn_CreateRecipe" tag="button">Opret Opskrift</router-link>
+                    </div>
                 <router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>
 
             </div>
@@ -50,7 +58,32 @@
                 }
                 return this.$router.push(this.$route.query.redirect || '/ProfilePage');
             },
-            created() {
+            getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+},
+
+checkIfLogin() {
+  var user = getCookie("username");
+  if (user != "" && user != null) {
+      return true;
+  } else {
+      return false;
+    }
+  }
+},
+
+            Login() {
                 fetch('https://localhost:44324/api/Account/Login', {
                     method: 'POST',
                     body: JSON.stringify({
