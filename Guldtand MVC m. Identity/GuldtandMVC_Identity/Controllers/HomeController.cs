@@ -69,6 +69,11 @@ namespace GuldtandMVC_Identity.Controllers
 
         }
 
+        public string chooseStoresFromSidebar(string stores)
+        {
+            return stores;
+        }
+
         public Task<double> viewNormalPrice(string words)
         {
             var normalPrice = new HTMLCalculator();
