@@ -24,18 +24,14 @@ namespace GuldtandMVC_Identity.Controllers
             return View("getKategori", str);
         }
 
-
+        [HttpPost]
         public string[] insertAndGetBlacklist(string category)
         {
             var blacklist = new blacklistModel();
             return blacklist.insertandgetBlackList(category);
         }
-        public IActionResult getKategori()
-        {
-            return View("getKategori");
-        }
 
-
+        [HttpPost]
         public string[] getAllCategories()
         {
             var category = new Searching();

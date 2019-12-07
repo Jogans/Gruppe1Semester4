@@ -1,6 +1,7 @@
 <template>
     <div class='bodyTopPage'>
-
+        <br style="clear:both" />
+        <button class="test_btn" @click="smallView">Opdater opskrift med valgte butikker</button>
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
         <br style="clear:both" />
@@ -17,12 +18,13 @@
         data: function () {
             return {
                 info: null,
-                searchParameter: null
+                searchParameter: null,
+                relevantStores: ""
             }
         },
         methods: {
             smallView() {
-                this.$http.get('https://localhost:44324/Home/viewForSmallRecipe?words=', {
+                this.$http.get('https://localhost:44324/Home/viewForSmallRecipe?stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
@@ -31,7 +33,12 @@
         },
         beforeMount() {
             this.smallView()
-        }
+        },
+        Mounted() {
+            this.$root.$on('clickedSaveStores', (stores) => {
+                this.relevantStores = stores;
+            })
+        },
     };
 </script>
 
@@ -42,8 +49,6 @@
         max-width: 65%;
         margin: auto;
     }
-
-
     .textForPrice {
         display: block;
         position: relative;
