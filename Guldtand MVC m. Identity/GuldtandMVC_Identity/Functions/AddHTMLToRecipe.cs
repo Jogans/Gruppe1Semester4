@@ -170,6 +170,7 @@ namespace GuldtandMVC_Identity.Models
             HTMLCalculator NormalPris = new HTMLCalculator();
 
             string[] storeSplit = new string[8];
+            string[] storeSplitfake = new string[8];
 
             if (stores != null)
             {
@@ -180,8 +181,7 @@ namespace GuldtandMVC_Identity.Models
             {
                 RecipeQuery query = new RecipeQuery
                 {
-                    NumberOfRecipes = 5,
-                    Stores = storeSplit
+                    NumberOfRecipes = 5
                 };
 
                 var result = await query.Execute(db);
@@ -200,9 +200,9 @@ namespace GuldtandMVC_Identity.Models
                                   "</a>" +
                                   "<br />" +
                                   "</div>" +
-                                  "Original pris: " + await NormalPris.NormalPrice(recipe.Name) + "kr." + " <br />" +
-                                  "Pris med rabat: " + await RabatPris.TotalPrice(recipe.Name) + "kr." + "<br />" +
-                                  "Laveste mulige pris: " + recipe.Price + "kr." + "<br />" +
+                                  "Original pris: " + await NormalPris.NormalPrice(recipe.Name, storeSplit) + "kr." + " <br />" +
+                                  "Pris med rabat: " + await RabatPris.TotalPrice(recipe.Name, storeSplit) + "kr." + "<br />" +
+                                  "Laveste mulige pris: " + await RabatPris.TotalPrice(recipe.Name, storeSplitfake) + "kr." + "<br />" +
                                   "</div>" +
                                   "</div>";
                 }

@@ -23,16 +23,16 @@
                     </div>
 
                     <div class="butikkerValg2">
-                        <input type="checkbox" id="cb5" v-model="checkedBilka"/>
+                        <input type="checkbox" id="cb5" v-model="checkedBilka" />
                         <label for="cb5"><img src="@/assets/Pics/Bilka.jpg" alt="Bilka" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb6" v-model="checkedAldi"/>
+                        <input type="checkbox" id="cb6" v-model="checkedAldi" />
                         <label for="cb6"><img src="@/assets/Pics/Aldi.png" alt="Aldi" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb7" v-model="checkedKvickly"/>
+                        <input type="checkbox" id="cb7" v-model="checkedKvickly" />
                         <label for="cb7"><img src="@/assets/Pics/Kvickly.png" alt="Kvickly" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb8" v-model="checkedLidl"/>
+                        <input type="checkbox" id="cb8" v-model="checkedLidl" />
                         <label for="cb8"><img src="@/assets/Pics/Lidl.png" alt="Lidl" /></label>
                     </div>
                     <br style="clear:both" />
@@ -147,15 +147,15 @@
 
     .butikkerValg1 {
         display: inline-block;
-        width: 75px;
-        height: 75px;
+        width: 70px;
+        height: 70px;
         position: relative;
     }
 
     .butikkerValg2 {
         display: inline-block;
-        width: 75px;
-        height: 75px;
+        width: 70px;
+        height: 70px;
         position: relative;
     }
 
@@ -182,7 +182,7 @@
         transition: all 150ms ease-in 0s
     }
 
-    .sidebar-backdrop {
+    /*.sidebar-backdrop {
         background-color: rgba(0,0,0,.5);
         width: 100vw;
         height: 100vh;
@@ -190,19 +190,20 @@
         top: 0;
         left: 0;
         cursor: pointer;
-    }
+    }*/
 
     .sidebar-panel {
         overflow-y: auto;
-        background-color: #130f40;
+        /*background-color: #130f40;*/
+        background-color: var(--accent-color);
         position: fixed;
         float: right;
         left: 0;
         top: 0;
-        height: 100vh;
+        height: 100%;
         z-index: 1;
-        padding: 3rem 20px 2rem 20px;
-        width: 200px;
+        padding: 30px 0px 20px 20px;
+        width: 175px;
     }
 
 
@@ -217,17 +218,18 @@
 
     input[type="checkbox"][id^="cb"] {
         display: block;
+        
     }
 
     label {
-        border: 1px;
-        padding: 6px;
+        /*border: 1px;*/
+        /*padding: 6px;*/
         display: block;
         position: relative;
         margin: 2px;
         cursor: pointer;
         margin-right: 10%;
-        outline: 1px solid white;
+        /*outline: 1px solid white;*/
     }
 
         label:before {
@@ -252,6 +254,7 @@
         label img {
             height: 10%;
             width: 45px;
+            transform:scale(0.6);
             transition-duration: 0.2s;
             transform-origin: 50% 50%;
         }
@@ -263,11 +266,11 @@
         :checked + label:before [id^="cb"] {
             content: "\2713";
             background-color: grey;
-            transform: scale(0.6);
+            transform: scale(0.1);
         }
 
         :checked + label img {
-            transform: scale(0.7);
+            transform: scale(1);
             box-shadow: 0 0 2px #333;
             z-index: -1;
         }

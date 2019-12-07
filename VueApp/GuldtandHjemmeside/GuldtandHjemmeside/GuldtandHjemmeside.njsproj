@@ -48,7 +48,7 @@
     </Content>
     <Content Include="src\components\Recipes\BrndendeKrlighed.vue" />
     <Content Include="src\components\Recipes\Hjemmelavetlasagne.vue" />
-    <Content Include="src\components\Recipes\OnePotPastamedchorizo.vue">
+    <Content Include="src\components\Recipes\FlskestegalaMarcus.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\Recipes\PizzaHomemade.vue">

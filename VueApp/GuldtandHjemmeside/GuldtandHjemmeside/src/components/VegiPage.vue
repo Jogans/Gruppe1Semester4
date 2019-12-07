@@ -1,5 +1,5 @@
 <template>
-    <div class="bodyVegiPage">
+    <div class="body">
         <br style="clear:both" />
         <h1>Vegetar fis</h1>
         <button @click="addCategory" style="margin: 10px">Find</button>   
@@ -60,10 +60,10 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-        .bodyVegiPage {
-    width: 100%;
-    max-width: 65%;
-    margin: auto;
-}
+    /*.body{
+        width: 100%;
+        max-width: 65%;
+        margin: auto;
+    }*/
 </style>
 
