@@ -26,7 +26,7 @@
         },
         methods: {
             smallView() {
-                this.$http.get('https://localhost:44324/Home/viewForSmallRecipe?stores=' + this.relevantStores, {
+                this.$http.get('https://localhost:44324/Recipe/viewForSmallRecipe?stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

@@ -86,7 +86,7 @@
 
             },
             searchRecepie() {
-                this.$http.get('https://localhost:44324/Home/viewForSmallRecipeSearch?word=' + this.searchParameter + '&stores=' + this.relevantStores, {
+                this.$http.get('https://localhost:44324/Recipe/viewForSmallRecipeSearch?word=' + this.searchParameter + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
