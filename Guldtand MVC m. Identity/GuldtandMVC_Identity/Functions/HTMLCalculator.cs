@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using GuldtandMVC_Identity.Data;
 using GuldtandMVC_Identity.Functions;
+using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace GuldtandMVC_Identity.Models
 {
@@ -54,6 +55,12 @@ namespace GuldtandMVC_Identity.Models
                 ProductRepository productRepository = new ProductRepository(db);
 
 
+                //var ingredientList = recipeList.Select(i => i.IngredientList.Ingredient).ToList();
+
+
+                //normalPrice = +(double) ingredientList.F;
+
+
                 foreach (var recipe in recipeList)
                 {
                     //take all ingredients in the ingredientlist
@@ -78,7 +85,7 @@ namespace GuldtandMVC_Identity.Models
                 return normalPrice;
 
             }
-            
+
         }
 
 
