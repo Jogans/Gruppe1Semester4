@@ -29,9 +29,9 @@
                     <router-link to="/Recipe/ShowRecipe" class="btn_Classic" tag="button">Klassiske retter</router-link>
                     <router-link to="/StorePage" class="btn_Store" tag="button">V&#230;lg Butik</router-link>
 
-                    <template v-if="LoggedIn">
+                    <!--<template v-if="LoggedIn">-->
                         <router-link to="/CreateRecipe" class="btn_CreateRecipe" tag="button">Opret Opskrift</router-link>
-                    </template>
+                    <!--</template>-->
                     <router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>
 
                 </div>

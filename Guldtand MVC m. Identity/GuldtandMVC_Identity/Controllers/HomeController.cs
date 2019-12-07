@@ -17,21 +17,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GuldtandMVC_Identity.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+       
         public string searchProducts(string words)
         {
             var search = new Searching();
@@ -39,12 +30,13 @@ namespace GuldtandMVC_Identity.Controllers
             return search.searchProductsAndGetHTML(words);
 
         }
-
+        [Authorize]
+        [HttpPost]
         public Task<string> recepieCreateTest(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl)
         {
-            var testCreate = new CreateRecepieFromVue();
+            var createRecepie = new CreateRecepieFromVue();
 
-            return testCreate.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
+            return createRecepie.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
         }
 
         public Task<string> viewASpeceficRecipe(string words)
@@ -86,10 +78,10 @@ namespace GuldtandMVC_Identity.Controllers
             return "";
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }
