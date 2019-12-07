@@ -58,11 +58,11 @@ namespace GuldtandMVC_Identity.Controllers
             return recipe.ShowRecipeFullView(words, stores);
         }
 
-        public Task<string> viewForSmallRecipe()
+        public Task<string> viewForSmallRecipe(string stores)
         {
             var recipe = new AddHTMLToRecipe();
 
-            return recipe.ShowRecipeSmallViewAsync();
+            return recipe.ShowRecipeSmallViewAsync(stores);
         }
 
         public Task<double> viewTotalPrice(string words)

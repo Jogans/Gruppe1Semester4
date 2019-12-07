@@ -92,7 +92,7 @@ namespace GuldtandMVC_Identity.Models
             return initString + bodystring + endString;
         }
 
-        public async Task<string> ShowRecipeSmallViewAsync()
+        public async Task<string> ShowRecipeSmallViewAsync(string stores)
         {
 
             string initString = "" + "<html>";
@@ -128,11 +128,19 @@ namespace GuldtandMVC_Identity.Models
             HTMLCalculator RabatPris = new HTMLCalculator();
             HTMLCalculator NormalPris = new HTMLCalculator();
 
+            string[] storeSplit = new string[8];
+
+            if (stores != null)
+            {
+                storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            }
+
             using (var db = new prj4databaseContext())
             {
                 RecipeQuery query = new RecipeQuery
                 {
-                    NumberOfRecipes = 5
+                    NumberOfRecipes = 5,
+                    Stores = storeSplit
                 };
 
                 var result = await query.Execute(db);
