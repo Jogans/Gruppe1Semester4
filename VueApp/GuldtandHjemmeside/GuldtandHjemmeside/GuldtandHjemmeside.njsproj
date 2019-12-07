@@ -63,9 +63,6 @@
     <Content Include="src\components\SearchBar.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\components\Searchsite.vue">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="src\store.js">
       <SubType>Code</SubType>
     </Content>

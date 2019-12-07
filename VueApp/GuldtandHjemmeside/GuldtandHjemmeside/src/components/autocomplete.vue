@@ -1,5 +1,5 @@
 <template>
-    <div class="autocomplete">
+    <!-- <div class="autocomplete">
         <input type="text"
                @input="onChange"
                v-model="search"
@@ -19,10 +19,12 @@
                 @click="setResult(result)"
                 class="autocomplete-result"
                 :class="{ 'is-active': i === arrowCounter }">
-                {{ result }}
+                { result }}
             </li>
         </ul>
     </div>
+        -->
+    
 </template>
 
 <script>
@@ -61,7 +63,7 @@
                 if (this.isAsync) {
                     this.isLoading = true;
                 } else {
-                    // Let's  our flat array
+                    // Let's flat our array
                     this.filterResults();
                     this.isOpen = true;
                 }
