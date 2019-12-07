@@ -7,7 +7,7 @@
             <input style="height: 32px; width: 704px;" type="text" v-model="searchParameter" placeholder="Search..." required>
             <autocomplete :items="[ 'Apple', 'Banana', 'Orange', 'Mango', 'Pear', 'Peach', 'Grape', 'Tangerine', 'Pineapple']" />
         
-            <script type="text/x-template" id="autocomplete">
+             <script type="text/x-template" id="autocomplete">
                 <div class="autocomplete">
                     <input type="text" @input="onChange" v-model="search" @keyup.down="onArrowDown" @keyup.up="onArrowUp" @keyup.enter="onEnter" />
                     <ul id="autocomplete-results" v-show="isOpen" class="autocomplete-results">
@@ -21,6 +21,7 @@
 
                 </div>
             </script>
+          
 
         </div>
         
