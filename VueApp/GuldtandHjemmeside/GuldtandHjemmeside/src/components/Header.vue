@@ -7,13 +7,13 @@
 
                     <router-link to="/"><img src="@/assets/Pics/Guldtand.jpg" alt="Guldtand" tag="button" /></router-link>
 
-                    <template v-if="checkIfLogin">
+                    <template v-if="!LoggedIn">
                         <input class="usernameinput" type="text" placeholder="Enter Username" v-model="email" name="uname" required />
                         <input class="passwordinput" type="password" placeholder="Enter Password" v-model="password" name="psw" required />
                         <button class="login" @click="Login">Login</button>
                         <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
                     </template>
-                    <template v-if="!checkIfLogin">
+                    <template v-if="LoggedIn">
                         <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
                         <button class="logout" @click="Logout">Logout</button>
                     </template>
@@ -29,7 +29,7 @@
                     <router-link to="/Recipe/ShowRecipe" class="btn_Classic" tag="button">Klassiske retter</router-link>
                     <router-link to="/StorePage" class="btn_Store" tag="button">V&#230;lg Butik</router-link>
 
-                    <template v-if="checkIfLogin">
+                    <template v-if="LoggedIn">
                         <router-link to="/CreateRecipe" class="btn_CreateRecipe" tag="button">Opret Opskrift</router-link>
                     </template>
                     <router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>
@@ -49,41 +49,27 @@
             return {
                 email: null,
                 password: null,
-                info: null
+                info: null,
+                LoggedIn: false
             }
         },
         methods: {
-            HandleErrors: function (response) {
+            LoginHandleErrors: function (response) {
+                if (!response.ok) {
+                    alert("Forkert login eller password")
+                    throw Error(response.statusText);
+                }
+                this.LoggedIn = true
+                return this.$router.push(this.$route.query.redirect || '/ProfilePage');
+            },
+
+            LogoutHandleErrors: function (response) {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-                return this.$router.push(this.$route.query.redirect || '/ProfilePage');
+                this.LoggedIn = false
+                return this.$router.push(this.$route.query.redirect || '/');
             },
-            getCookie(cname) {
-                var name = cname + "=";
-                var decodedCookie = decodeURIComponent(document.cookie);
-                var ca = decodedCookie.split(';');
-                for (var i = 0; i < ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
-            },
-
-            checkIfLogin() {
-                var user = this.getCookie(".AspNet.Consent");
-                if (user != ""){
-                    return true;
-                } else {
-                    return false;
-                }
-            },
-
 
             Login() {
                 fetch('https://localhost:44324/api/Account/Login', {
@@ -95,16 +81,26 @@
                     headers: new Headers({
                         'Content-Type': 'application/json'
                     })
-                }).then(this.HandleErrors)
+                }).then(this.LoginHandleErrors)
                     .then(response => console.log(response))
                     .catch(error => console.log(error));
-                this.checkIfLogin();
             },
+            Logout() {
+                fetch('https://localhost:44324/api/Account/Logout', {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
+                }).then(this.LogoutHandleErrors)
+                    .then(response => console.log(response))
+                    .catch(error => console.log(error));
+            },
+
+
         },
-        beforeMount() {
-            this.checkIfLogin()
-        }
+
     };
+
 
 
 </script>
