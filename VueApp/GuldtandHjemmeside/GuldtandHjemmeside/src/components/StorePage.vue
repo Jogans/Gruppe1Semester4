@@ -5,7 +5,7 @@
 
     <div class="bodyStorePage">
         <br style="clear:both" />
-        <h1>Test søgefelt opskrift</h1>
+        <h1>Test s&#248;gefelt opskrift</h1>
         <div id="StorePage">
             <br style="clear:both" />
             <div class="SearchBar">
