@@ -50,6 +50,13 @@ namespace GuldtandMVC_Identity.Controllers
             return recipe.ShowRecipeFullView(words, stores);
         }
 
+        public Task<string> getShoppingCart(string words, string stores)
+        {
+            var recipe = new AddHTMLToRecipe();
+
+            return recipe.GenerateShoppingCart(words, stores);
+        }
+
         public Task<string> viewForSmallRecipe()
         {
             var recipe = new AddHTMLToRecipe();

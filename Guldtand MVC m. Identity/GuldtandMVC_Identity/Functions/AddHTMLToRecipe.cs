@@ -79,7 +79,59 @@ namespace GuldtandMVC_Identity.Models
                     bodystring += ingrediensstring;
                     bodystring += "</ul>" +
                                   "</div>" +
-                                  "<h3><strong>Indkøbsliste</strong></h3>" +
+                                  "<br style='clear:both' />" +
+                                  "<ul>" +
+                                  "</div>";
+                }
+            }
+            return initString + bodystring + endString;
+        }
+
+        public async Task<string> GenerateShoppingCart(string words, string stores)
+        {
+            string initString = "" +
+                    "<html>";
+            string endString = "</html>";
+
+            string bodystring = "";
+
+            string[] storeSplit = new string[8];
+
+            if (stores != null)
+            {
+                storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            int steps = 1;
+            using (var db = new prj4databaseContext())
+            {
+                RecipeQuery query = new RecipeQuery
+                {
+                    LoadIngredientList = true,
+                    LoadRecipeCategory = true,
+                    SearchRecipe = words,
+                    NumberOfRecipes = 1,
+                    Stores = storeSplit
+
+                };
+                var result = await query.Execute(db);
+
+                foreach (var recipe in result)
+                {
+                    bodystring = "";
+                    string ingrediensstring = "";
+                    bodystring += "<h3><strong>Indkøbsliste</strong></h3>";
+
+                    bodystring += "<ul>";
+                    foreach (var ingredient in recipe.IngredientList.Ingredient)
+                    {
+                        ingrediensstring += "<li class='p6'>" + ingredient.Name + " - " + " Købes i " + ingredient.Product.RetailChain.Name + " for " +
+                                            ingredient.Product.Price + " kr. " + "Test: " + ingredient.Product.Name + "</li>";
+                    }
+
+                    bodystring += ingrediensstring;
+                    bodystring += "</ul>" +
+                                  "</div>" +
                                   "<br style='clear:both' />" +
                                   "<div class='f1'>" +
                                   "<div class='i2'>" +
@@ -91,6 +143,7 @@ namespace GuldtandMVC_Identity.Models
             }
             return initString + bodystring + endString;
         }
+
 
         public async Task<string> ShowRecipeSmallViewAsync()
         {

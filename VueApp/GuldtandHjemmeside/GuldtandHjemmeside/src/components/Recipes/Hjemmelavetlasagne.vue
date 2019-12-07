@@ -4,6 +4,11 @@
         <button class="test_btn" @click="fullView">Opdater opskrift med valgte butikker</button>
         <span v-html="info">{{info}}</span>
         <br style="clear:both" />
+        <button class="test_btn" @click="generateShoppingCart">Generer indkøbsliste</button>
+        <span v-html="info2">{{info2}}</span>
+
+
+        <br style="clear:both" />
 
     </div>
 </template>
@@ -14,6 +19,7 @@
         data: function () {
             return {
                 info: null,
+                info2: null,
                 searchParameter: null,
                 relevantStores: ""
             }
@@ -30,6 +36,15 @@
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
+            },
+            generateShoppingCart() {
+                this.$http.get('https://localhost:44324/Home/getShoppingCart?words=lasa' + '&stores=' + this.relevantStores, {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                }).then(response => (this.info2 = response.data))
+            },
+            updateFunc() {
             }
         },
         mounted() {
