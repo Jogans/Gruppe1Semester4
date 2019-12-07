@@ -1,5 +1,5 @@
 <template>
-    <div class="bodyNewPage">
+    <div class="body">
         <br style="clear:both" />
         <h1>Nye retter</h1>
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
@@ -25,10 +25,11 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-        .bodyNewPage {
-    width: 100%;
-    max-width: 65%;
-    margin: auto;
-}
+        
+    /*.body {
+        width: 100%;
+        max-width: 65%;
+        margin: auto;
+}*/
 </style>
 

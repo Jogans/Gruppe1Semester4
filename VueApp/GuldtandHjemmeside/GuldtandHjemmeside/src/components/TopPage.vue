@@ -1,5 +1,6 @@
 <template>
-    <div class='bodyTopPage'>
+    <div class='body'>
+
         <br style="clear:both" />
         <button class="test_btn" @click="smallView">Opdater opskrift med valgte butikker</button>
         <br style="clear:both" />
@@ -42,11 +43,13 @@
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-    .bodyTopPage {
+    ./*body {
         width: 100%;
         max-width: 65%;
         margin: auto;
-    }
+    }*/
+
+
     .textForPrice {
         display: block;
         position: relative;
