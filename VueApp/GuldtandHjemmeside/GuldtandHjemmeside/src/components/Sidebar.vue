@@ -3,12 +3,8 @@
         <div class="sidebar">
             <transition name="slide">
                 <div v-if="isPanelOpen" class="sidebar-panel">
-
-                    <div class="butikkerValg1">
-                        <button class="test_btn" @click="stores">Test</button>
-                        <br style="clear:both" />
-                        <br style="clear:both" />
-
+                    <p>V&aelig;lg hvilke butikker du vil se tilbud fra:</p>
+                    <div class="butikkerValg">
                         <input type="checkbox" id="cb1" v-model="checkedNetto" />
                         <label for="cb1"><img src="@/assets/Pics/Netto.png" alt="Netto" /></label>
                         <br style="clear:both" />
@@ -21,8 +17,7 @@
                         <input type="checkbox" id="cb4" v-model="checkedFakta" />
                         <label for="cb4"><img src="@/assets/Pics/Fakta.png" alt="Fakta" /></label>
                     </div>
-
-                    <div class="butikkerValg2">
+                    <div class="butikkerValg">
                         <input type="checkbox" id="cb5" v-model="checkedBilka" />
                         <label for="cb5"><img src="@/assets/Pics/Bilka.jpg" alt="Bilka" /></label>
                         <br style="clear:both" />
@@ -35,6 +30,9 @@
                         <input type="checkbox" id="cb8" v-model="checkedLidl" />
                         <label for="cb8"><img src="@/assets/Pics/Lidl.png" alt="Lidl" /></label>
                     </div>
+
+                    <button class="test_btn" @click="stores">Gem butikvalg</button>
+
                     <br style="clear:both" />
 
                     <br style="clear:both" />
@@ -145,17 +143,9 @@
         color: white;
     }
 
-    .butikkerValg1 {
+    .butikkerValg {
         display: inline-block;
-        width: 70px;
-        height: 70px;
-        position: relative;
-    }
-
-    .butikkerValg2 {
-        display: inline-block;
-        width: 70px;
-        height: 70px;
+        width: 75px;
         position: relative;
     }
 
@@ -202,8 +192,9 @@
         top: 0;
         height: 100%;
         z-index: 1;
-        padding: 30px 0px 20px 20px;
+        padding: 30px 20px 20px 20px;
         width: 175px;
+        color: white;
     }
 
 
@@ -214,6 +205,8 @@
 
     li {
         display: inline-block;
+        position:relative;
+        float:left;
     }
 
     input[type="checkbox"][id^="cb"] {
@@ -274,4 +267,10 @@
             box-shadow: 0 0 2px #333;
             z-index: -1;
         }
+
+
+    .test_btn {
+        padding:10px;
+        margin: 20px;
+    }
 </style>
