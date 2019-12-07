@@ -32,7 +32,7 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new prj4databaseContext())
             {
-                RecipeQuery recipequery = new RecipeQuery
+                RecipeQuery recipeQuery = new RecipeQuery
                 {
                     SearchRecipe = word,
                     LoadIngredientList = true,
@@ -48,16 +48,15 @@ namespace GuldtandMVC_Identity.Models
                 var listProduct = await query.Execute(db);
 
                 RecipeRepository recipeRepository = new RecipeRepository(db);
-                var recepylist = await recipeRepository.Get(recipequery);
+                var recipeList = await recipeRepository.Get(recipeQuery);
                 ProductRepository productRepository = new ProductRepository(db);
 
 
-                foreach (var recipe in recepylist)
+                foreach (var recipe in recipeList)
                 {
                     //take all ingredients in the ingredientlist
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
-                        
                         ProductQuery productQuery = new ProductQuery
                         {
                             SearchName = ingredient.Name,
@@ -71,7 +70,6 @@ namespace GuldtandMVC_Identity.Models
                             ingredient.ProductId = product.First().ProductId;
                             normalPrice += ingredient.Product.Price;
                         }
-                      
                     }
                 }
                 return normalPrice;
