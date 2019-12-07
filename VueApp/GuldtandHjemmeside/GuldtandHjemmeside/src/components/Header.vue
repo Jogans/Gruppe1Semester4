@@ -23,19 +23,19 @@
                 </div>
                 <br style="clear:both" />
                 <div class="Buttons2">
-                    <router-link to="/SearchBar" class="btn btnfirst btn_Top" tag="button">S&#248;g</router-link>
-                    <router-link to="/TopPage" class="btn btn_Top" tag="button">Top retter</router-link>
-                    <router-link to="/NewPage" class="btn btn_New" tag="button">Nye retter</router-link>
-                    <router-link to="/SUPage" class="btn btn_Su" tag="button">SU-retter</router-link>
-                    <router-link to="/VegiPage" class="btn btn_Vegi" tag="button">Vegetar retter</router-link>
-                    <router-link to="/Recipe/ShowRecipe" class="btn btn_Classic" tag="button">Klassiske retter</router-link>
-                    <router-link to="/StorePage" class="btn btnlast btn_Store" tag="button">V&#230;lg Butik</router-link>
-                </div>
-                <br style="clear:both" />
-                <div>
+                    <router-link to="/SearchBar" class="btn_Top" tag="button">S&#248;g</router-link>
+                    <router-link to="/TopPage" class="btn_Top" tag="button">Top retter</router-link>
+                    <router-link to="/NewPage" class="btn_New" tag="button">Nye retter</router-link>
+                    <router-link to="/SUPage" class="btn_Su" tag="button">SU-retter</router-link>
+                    <router-link to="/VegiPage" class="btn_Vegi" tag="button">Vegetar retter</router-link>
+                    <router-link to="/Recipe/ShowRecipe" class="btn_Classic" tag="button">Klassiske retter</router-link>
+                    <router-link to="/StorePage" class="btn_Store" tag="button">V&#230;lg Butik</router-link>
+
                     <template v-if="LoggedIn">
                         <router-link to="/CreateRecipe" class="btn_CreateRecipe" tag="button">Opret Opskrift</router-link>
                     </template>
+                    <router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>
+
                 </div>
                 <br style="clear:both" />
             </div>
