@@ -13,7 +13,7 @@ namespace GuldtandMVC_Identity.Models
     {
        
 
-        public async Task<string> ShowRecipeFullView(string words, string stores)
+        public async Task<string> ShowRecipeFullView(string words)
         {
             string initString = "" +
                                 "<html>";
@@ -23,10 +23,6 @@ namespace GuldtandMVC_Identity.Models
 
             string[] storeSplit = new string[8];
 
-            if (stores != null)
-            {
-                storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
-            }
 
             int steps = 1;
             using (var db = new prj4databaseContext())
@@ -37,7 +33,6 @@ namespace GuldtandMVC_Identity.Models
                     LoadRecipeCategory = true,
                     SearchRecipe = words,
                     NumberOfRecipes = 1,
-                    Stores = storeSplit
 
                 };
                 var result = await query.Execute(db);
@@ -71,8 +66,6 @@ namespace GuldtandMVC_Identity.Models
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
                         ingrediensstring += "<li class='p6'>" + ingredient.Amount + ingredient.AmountUnit + " " + ingredient.Name +
-                                            " Købes i - " + ingredient.Product.RetailChain.Name + " for " +
-                                            ingredient.Product.Price + " kr. " + "Test: " + ingredient.Product.Name + " Valid to " + ingredient.Product.ValidTo +
                                             "</li>";
                     }
 
@@ -133,11 +126,7 @@ namespace GuldtandMVC_Identity.Models
                     bodystring += "</ul>" +
                                   "</div>" +
                                   "<br style='clear:both' />" +
-                                  "<div class='f1'>" +
-                                  "<div class='i2'>" +
                                   "<ul>" +
-                                  "</div>" +
-                                  "</div>" +
                                   "</div>";
                 }
             }
@@ -204,9 +193,9 @@ namespace GuldtandMVC_Identity.Models
                                   "</a>" +
                                   "<br />" +
                                   "</div>" +
-                                  //"Original pris: " + recipe.Price + "kr." + "<br />"
-                                  //"Original pris: " + await NormalPris.NormalPrice(recipe.Name) + "kr." +" <br />" +
-                                  //"Pris med rabat: " + await RabatPris.TotalPrice(recipe.Name) + "kr." + "<br />" +
+                                  "Original pris: " + recipe.Price + "kr." + "<br />" +
+                                  "Original pris: " + await NormalPris.NormalPrice(recipe.Name) + "kr." + " <br />" +
+                                  "Pris med rabat: " + await RabatPris.TotalPrice(recipe.Name) + "kr." + "<br />" +
                                   "Laveste mulige pris: " + recipe.Price + "kr." + "<br />" +
                                   "</div>" +
                                   "</div>";

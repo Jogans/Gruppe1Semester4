@@ -42,12 +42,11 @@ namespace GuldtandMVC_Identity.Controllers
             return createRecepie.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
         }
 
-        public Task<string> viewASpeceficRecipe(string words, string stores)
+        public Task<string> viewASpeceficRecipe(string words)
         {
-
             var recipe = new AddHTMLToRecipe();
 
-            return recipe.ShowRecipeFullView(words, stores);
+            return recipe.ShowRecipeFullView(words);
         }
 
         public Task<string> getShoppingCart(string words, string stores)

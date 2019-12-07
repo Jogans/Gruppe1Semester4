@@ -1,7 +1,6 @@
 <template>
     <div class='bodyTopPage'>
         <br style="clear:both" />
-        <button class="test_btn" @click="fullView">Opdater opskrift med valgte butikker</button>
         <span v-html="info">{{info}}</span>
         <br style="clear:both" />
         <button class="test_btn" @click="generateShoppingCart">Generer indkøbsliste</button>
@@ -31,7 +30,7 @@
                 })
             },
             fullView() {
-                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=lighed' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=lighed', {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

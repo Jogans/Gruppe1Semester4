@@ -1,14 +1,10 @@
 <template>
     <div class='bodyTopPage'>
         <br style="clear:both" />
-        <button class="test_btn" @click="fullView">Opdater opskrift med valgte butikker</button>
         <span v-html="info">{{info}}</span>
-        <br style="clear:both" />
         <button class="test_btn" @click="generateShoppingCart">Generer indkøbsliste</button>
         <span v-html="info2">{{info2}}</span>
-
-
-        <br style="clear:both" />
+               <br style="clear:both" />
 
     </div>
 </template>
@@ -17,7 +13,7 @@
     export default {
         name: 'Hjemmelavetlasagne',
         data: function () {
-            return {
+            return { 
                 info: null,
                 info2: null,
                 searchParameter: null,
@@ -31,7 +27,7 @@
                 })
             },
             fullView() {
-                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=lasa' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=lasa', {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
