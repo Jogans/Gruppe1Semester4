@@ -40,8 +40,8 @@
                 }).then(response => (this.info = response.data))
             }
         },
-        mounted() {
-            this.$root.$on('clickedSaveStores', (stores) => {
+        beforeMount() {
+                        this.$root.$on('clickedSaveStores', (stores) => {
                 this.relevantStores = stores;
             })
         }

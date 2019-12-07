@@ -1,6 +1,7 @@
 <template>
     <div class='bodyTopPage'>
         <br style="clear:both" />
+        <button class="test_btn" @click="fullView">Opdater opskrift med valgte butikker</button>
         <span v-html="info">{{info}}</span>
         <br style="clear:both" />
 
@@ -10,26 +11,35 @@
 <script>
     export default {
         name: 'Hjemmelavetlasagne',
-        props: {
-        },
         data: function () {
             return {
                 info: null,
-                searchParameter: null
+                searchParameter: null,
+                relevantStores: ""
             }
         },
         methods: {
+            updateStores() {
+                this.$root.$on('clickedSaveStores', (stores) => {
+                    this.relevantStores = stores;
+                })
+            },
             fullView() {
-                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=lasagne', {
+                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=lasa' + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             }
         },
-        beforeMount() {
+        mounted() {
             this.fullView()
-        }
+        },
+        beforeMount() {
+            this.$root.$on('clickedSaveStores', (stores) => {
+                this.relevantStores = stores;
+            })
+        },
     };
 </script>
 
