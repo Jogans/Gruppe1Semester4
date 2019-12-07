@@ -142,7 +142,7 @@ namespace GuldtandMVC_Identity.Models
                            "<style>" +
 
                            ".viewOfRecepie{" +
-                           "width: 900px;" +
+                           "width: 60%;" +
                            "height: 200px;" +
                            "border: 2px solid;" +
                            "padding: 2px;" +
@@ -193,7 +193,6 @@ namespace GuldtandMVC_Identity.Models
                                   "</a>" +
                                   "<br />" +
                                   "</div>" +
-                                  "Original pris: " + recipe.Price + "kr." + "<br />" +
                                   "Original pris: " + await NormalPris.NormalPrice(recipe.Name) + "kr." + " <br />" +
                                   "Pris med rabat: " + await RabatPris.TotalPrice(recipe.Name) + "kr." + "<br />" +
                                   "Laveste mulige pris: " + recipe.Price + "kr." + "<br />" +
