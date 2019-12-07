@@ -286,7 +286,7 @@
     }
 
     .router-link-exact-active {
-        border-bottom: 5px solid grey;
+        border-bottom: 5px solid var(--accent-color);
     }
 </style>
 
