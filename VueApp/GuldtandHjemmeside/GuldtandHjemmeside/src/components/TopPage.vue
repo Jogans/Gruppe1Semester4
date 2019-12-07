@@ -1,7 +1,6 @@
 <template>
     <div class='body'>
-        <h1>Top retter</h1>
-        <p>Her ses en liste af ugens billigste retter at lave - baseret p&aring;     de aktuelle tilbud i de valgte butikker.</p>
+
         <br style="clear:both" />
         <button class="test_btn" @click="smallView">Opdater opskrift med valgte butikker</button>
         <br style="clear:both" />
