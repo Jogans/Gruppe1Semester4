@@ -5,7 +5,7 @@
 
     <div class="body">
         <br style="clear:both" />
-        <h1>Test søgefelt opskrift</h1>
+        <h1>Test s&#248;gefelt opskrift</h1>
         <div id="StorePage">
             <br style="clear:both" />
             <div class="SearchBar">
@@ -40,8 +40,8 @@
                 }).then(response => (this.info = response.data))
             }
         },
-        mounted() {
-            this.$root.$on('clickedSaveStores', (stores) => {
+        beforeMount() {
+                        this.$root.$on('clickedSaveStores', (stores) => {
                 this.relevantStores = stores;
             })
         }

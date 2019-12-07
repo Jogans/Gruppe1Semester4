@@ -55,7 +55,7 @@
         methods: {
             onChange() {
                 // Let's warn the parent that a change was made
-                this.$emit('input', this.);
+                this.$emit('input', this.search);
 
                 // Database async method call, async t
                 if (this.isAsync) {
