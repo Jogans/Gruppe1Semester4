@@ -1,28 +1,25 @@
 <template>
     <div class="body">
+        <h1>Vegetar retter</h1>
+        <p>Her ses udelukkende retter, som er vegetar-venlige</p>
+
         <br style="clear:both" />
-        <h1>Vegetar fis</h1>
-        <button @click="addCategory" style="margin: 10px">Find</button>   
 
-        <select v-model='selected' id='category' style="margin: 10px">
-        <option v-bind:key="kategoriElement" v-for="kategoriElement in kategori">{{kategoriElement}}</option>
-        </select>
-        <button @click="addToBlackList" style="margin: 10px">Send til blacklist</button><p />
+        <div class="blacklist">
+            <p class="blacklist-p">Blacklist retter der ikke er vegetar-venlige.</p>
+            <button @click="addCategory" style="margin: 10px">Find</button>
 
-        <table border="1">
-            <th>Blacklist</th>
-            <tr v-bind:key="blacklistElement" v-for="blacklistElement in blacklist"><td>{{blacklistElement}}</td></tr><!---->
-        </table>
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
-        Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
+            <select v-model='selected' id='category' style="margin: 10px">
+                <option v-bind:key="kategoriElement" v-for="kategoriElement in kategori">{{kategoriElement}}</option>
+            </select>
+            <button @click="addToBlackList" style="margin: 10px">Send til blacklist</button><p />
+
+            <table class="blacklist-table">
+                <th>Blacklist</th>
+                <tr v-bind:key="blacklistElement" v-for="blacklistElement in blacklist"><td>{{blacklistElement}}</td></tr><!---->
+            </table>
+        </div>
+
     </div>
 </template>
 
@@ -65,5 +62,20 @@
         max-width: 65%;
         margin: auto;
     }*/
+
+
+    .blacklist {
+        border: 1px solid #bebebe;
+        padding: 10px;
+    }
+
+    .blacklist-p {
+        margin-top:0px;
+    }
+
+    .blacklist-table {
+        border: 1px solid #bebebe;
+        padding: 5px 10px;
+    }
 </style>
 
