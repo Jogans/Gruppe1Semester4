@@ -14,6 +14,9 @@
 
     export default { 
         name: 'app',
+        props: {
+            checkedStringProp: String,
+        },
         components: {
             Header,
             Sidebar

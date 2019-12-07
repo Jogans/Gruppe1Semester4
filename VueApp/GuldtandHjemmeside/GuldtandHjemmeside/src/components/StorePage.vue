@@ -11,7 +11,7 @@
             <div class="SearchBar">
                 <input style="height: 32px; width: 704px;" type="text" v-model="searchParameter" placeholder="Search..." required>
             </div>
-            <button class="test_btn" @click="created">Test</button>
+            <button class="test_btn" @click="sendRecipeRequest">Test</button>
             <span v-html="info">{{info}}</span>
 
             <br style="clear:both" />
@@ -23,24 +23,27 @@
 <script>
     export default {
         name: 'StorePage',
-        props: {
-        },
         data: function () {
             return {
                 test: 'Det virker',
                 info: null,
-                searchParameter: null
+                searchParameter: null,
+                relevantStores: ""
             }
         },
-
         methods: {
-            created() {
-                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=' + this.searchParameter, {
+            sendRecipeRequest() {
+                this.$http.post('https://localhost:44324/Home/viewASpeceficRecipe?words=' + this.searchParameter + '&stores=' + this.relevantStores,  {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
-                    },
+                    }
                 }).then(response => (this.info = response.data))
             }
+        },
+        beforeMount() {
+                        this.$root.$on('clickedSaveStores', (stores) => {
+                this.relevantStores = stores;
+            })
         }
     };
 </script>
