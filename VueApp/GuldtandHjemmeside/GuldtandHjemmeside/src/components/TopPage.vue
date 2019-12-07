@@ -33,8 +33,6 @@
         },
         beforeMount() {
             this.smallView()
-        },
-        Mounted() {
             this.$root.$on('clickedSaveStores', (stores) => {
                 this.relevantStores = stores;
             })

@@ -9,7 +9,7 @@ import ClassicPage from './components/ClassicPage.vue';
 import StorePage from './components/StorePage.vue';
 import ProfilePage from './components/ProfilePage.vue';
 import PizzaHomemade from './components/Recipes/PizzaHomemade.vue';
-import OnePotPastamedchorizo from './components/Recipes/OnePotPastamedchorizo.vue';
+import FlskestegalaMarcus from './components/Recipes/FlskestegalaMarcus.vue';
 import BrndendeKrlighed from './components/Recipes/BrndendeKrlighed.vue';
 import Hjemmelavetlasagne from './components/Recipes/Hjemmelavetlasagne.vue';
 import ShowRecipe from './components/Recipes/ShowRecipe.vue';
@@ -34,7 +34,7 @@ const routes = [
     { path: '/CreateUser', component: CreateUser },
     { path: '/CreateRecipe', component: CreateRecipe },
     { path: '/Recepie/PizzaHomemade', component: PizzaHomemade },
-    { path: '/Recepie/OnePotPastamedchorizo', component: OnePotPastamedchorizo },
+    { path: '/Recepie/FlskestegalaMarcus', component: FlskestegalaMarcus },
     { path: '/Recepie/BrndendeKrlighed', component: BrndendeKrlighed },
     { path: '/Recepie/Hjemmelavetlasagne', component: Hjemmelavetlasagne },
     { path: '/Recepie/ShowRecipe', component: ShowRecipe },

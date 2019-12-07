@@ -63,13 +63,13 @@ namespace GuldtandMVC_Identity.Controllers
             return recipe.ShowRecipeSmallViewAsync(stores);
         }
 
-        public Task<double> viewTotalPrice(string words)
-        {
-            var totalPrice = new HTMLCalculator();
+        //public Task<double> viewTotalPrice(string words)
+        //{
+        //    var totalPrice = new HTMLCalculator();
 
-            return totalPrice.TotalPrice(words);
+        //    return totalPrice.TotalPrice(words);
 
-        }
+        //}
 
         public async Task<IActionResult> chooseStoresFromSidebar(string stores)
         {
@@ -87,11 +87,19 @@ namespace GuldtandMVC_Identity.Controllers
             return Ok();
         }
 
-        public Task<double> viewNormalPrice(string words)
+        public Task<string> viewNormalPrice(string words, string stores)
         {
             var normalPrice = new HTMLCalculator();
 
-            return normalPrice.NormalPrice(words);
+            string[] storeSplit = new string[8];
+
+            if (stores != null)
+            {
+                storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            }
+
+
+            return normalPrice.DoAsTold(words, storeSplit);
         }
 
         public string searchRecipesByName(string words)
