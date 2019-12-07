@@ -79,27 +79,27 @@ namespace Guldtand_UnitTests
             }
         }
 
-        [Test]
-        public async Task TestRecipeQuery2()
-        {
-            RecipeQuery testQuery = new RecipeQuery
-            {
-                LoadIngredientList = true,
-                LoadRecipeCategory = true,
-                NumberOfRecipes = 3,
-                SearchRecipe = "marcus"
-            };
-            InsertRecipeDirectionsCategoryIngredients insert = new InsertRecipeDirectionsCategoryIngredients(_context);
-            await insert.insertdataAsync();
+        //[Test]
+        //public async Task TestRecipeQuery2()
+        //{
+        //    RecipeQuery testQuery = new RecipeQuery
+        //    {
+        //        LoadIngredientList = true,
+        //        LoadRecipeCategory = true,
+        //        NumberOfRecipes = 3,
+        //        SearchRecipe = "marcus"
+        //    };
+        //    InsertRecipeDirectionsCategoryIngredients insert = new InsertRecipeDirectionsCategoryIngredients(_context);
+        //    await insert.insertdataAsync();
 
-            var data = await _uut.Get(testQuery);
+        //    var data = await _uut.Get(testQuery);
 
-            Assert.That(data.Count() == 3);
-            foreach (var VARIABLE in data)
-            {
-                _uut.Delete(VARIABLE.RecipeId);
-            }
-        }
+        //    Assert.That(data.Count() == 3);
+        //    foreach (var VARIABLE in data)
+        //    {
+        //        _uut.Delete(VARIABLE.RecipeId);
+        //    }
+        //}
 
         //[Test]
         //public async Task TestRecipeQuery3()

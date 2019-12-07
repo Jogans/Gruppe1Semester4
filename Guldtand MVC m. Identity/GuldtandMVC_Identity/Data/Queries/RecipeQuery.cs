@@ -46,7 +46,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                                     ProductQuery productQuery = new ProductQuery
                                     {
                                         SearchName = ingredient.Name,
-                                        NumberOfRecipes = 1,
+                                        NumberOfProducts = 1,
                                         LoadRetailChain = true,
                                         Stores = Stores
                                     };
@@ -85,7 +85,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                                     ProductQuery productQuery = new ProductQuery
                                     {
                                         SearchName = $"{ingredient.Name}",
-                                        NumberOfRecipes = 1,
+                                        NumberOfProducts = 1,
                                         LoadRetailChain = true,
                                         Stores = Stores
                                     };
@@ -116,7 +116,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                                     ProductQuery productQuery = new ProductQuery
                                     {
                                         SearchName = $"{ingredient.Name}",
-                                        NumberOfRecipes = 1,
+                                        NumberOfProducts = 1,
                                         LoadRetailChain = true
                                     };
                                     var product = await productQuery.Execute(context);

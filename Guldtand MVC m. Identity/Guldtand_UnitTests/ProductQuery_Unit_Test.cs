@@ -20,6 +20,7 @@ namespace Guldtand_UnitTests
         {
             _context = new prj4databaseContext();
             _uut = new ProductQuery();
+            _uut.NumberOfProducts = 10000;
         }
 
         [Test]
@@ -29,7 +30,7 @@ namespace Guldtand_UnitTests
             var products = await _uut.Execute(_context);
             foreach (var product in products)
             {
-                Assert.That(product.ValidTo.Year == 2050);
+                Assert.That(product.ValidTo.Year, Is.EqualTo(2050));
             }
         }
 
@@ -40,7 +41,41 @@ namespace Guldtand_UnitTests
             var products = await _uut.Execute(_context);
             foreach (var product in products)
             {
-                Assert.That(product.ValidTo.Year == 2050);
+                Assert.That(product.ValidTo.Year, Is.EqualTo(2019));
+                Assert.That(product.ValidTo.Month, Is.EqualTo(12));
+                Assert.That(product.ValidTo.Day, Is.EqualTo(04));
+            }
+        }
+
+        [Test]
+        public async Task ExecuteQuery_BannedFoetex_NoProductsFromTheseChainsFound()
+        {
+            _uut.Stores = new string[] { "føtex" };
+            _uut.LoadRetailChain = true;
+
+            var products = await _uut.Execute(_context);
+            foreach (var product in products)
+            {
+                foreach (var store in _uut.Stores)
+                {
+                    Assert.That(product.RetailChain.Name, Is.Not.EqualTo(store));
+                }
+            }
+        }
+
+        [Test]
+        public async Task ExecuteQuery_BannedNettoRemaBilkaAldi_NoProductsFromTheseChainsFound()
+        {
+            _uut.Stores = new string[] {"Netto", "rema", "bilka", "aldi"};
+            _uut.LoadRetailChain = true;
+
+            var products = await _uut.Execute(_context);
+            foreach (var product in products)
+            {
+                foreach (var store in _uut.Stores)
+                {
+                  Assert.That(product.RetailChain.Name, Is.Not.EqualTo(store));
+                }
             }
         }
     }
