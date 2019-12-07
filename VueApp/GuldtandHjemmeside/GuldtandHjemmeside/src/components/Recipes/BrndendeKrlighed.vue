@@ -15,21 +15,27 @@
         data: function () {
             return {
                 info: null,
-                searchParameter: null
+                searchParameter: null,
+                relevantStores: ""
             }
         },
         methods: {
             fullView() {
-                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=lighed', {
+                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=lighed' + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             }
         },
-        beforeMount() {
+        mounted() {
             this.fullView()
-        }
+        },
+        beforeMount() {
+                        this.$root.$on('clickedSaveStores', (stores) => {
+                this.relevantStores = stores;
+            })
+        },
     };
 </script>
 

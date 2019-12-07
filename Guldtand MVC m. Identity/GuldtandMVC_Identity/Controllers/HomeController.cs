@@ -10,8 +10,10 @@ using com.sun.org.apache.xerces.@internal.parsers;
 using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
 using Microsoft.AspNetCore.Identity;
 using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
+using java.net;
 using jdk.nashorn.@internal.ir;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 
@@ -21,6 +23,7 @@ namespace GuldtandMVC_Identity.Controllers
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        public string storesChoosen { get; set; } = "Not set yet ";
 
         public IActionResult Index()
         {
@@ -47,11 +50,12 @@ namespace GuldtandMVC_Identity.Controllers
             return testCreate.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
         }
 
-        public Task<string> viewASpeceficRecipe(string words)
+        public Task<string> viewASpeceficRecipe(string words, string stores)
         {
+
             var recipe = new AddHTMLToRecipe();
 
-            return recipe.ShowRecipeFullView(words);
+            return recipe.ShowRecipeFullView(words, stores);
         }
 
         public Task<string> viewForSmallRecipe()
@@ -69,9 +73,20 @@ namespace GuldtandMVC_Identity.Controllers
 
         }
 
-        public string chooseStoresFromSidebar(string stores)
+        public async Task<IActionResult> chooseStoresFromSidebar(string stores)
         {
-            return stores;
+            HttpContext.Response.Cookies.Append(
+                "sejt",
+                "hej",
+                new CookieOptions()
+                {
+                    Expires = DateTime.Now.AddHours(3),
+                    HttpOnly = false,
+                    Secure = true,
+                    IsEssential = true
+                }
+                );
+            return Ok();
         }
 
         public Task<double> viewNormalPrice(string words)
