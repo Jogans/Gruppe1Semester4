@@ -5,16 +5,20 @@
                 <div v-if="isPanelOpen" class="sidebar-panel">
 
                     <div class="butikkerValg1">
-                        <input type="checkbox" id="cb1" value="Netto" v-model="checkedNetto" />
+                        <button class="test_btn" @click="stores">Test</button>
+                        <br style="clear:both" />
+                        <br style="clear:both" />
+
+                        <input type="checkbox" id="cb1" v-model="checkedNetto" />
                         <label for="cb1"><img src="@/assets/Pics/Netto.png" alt="Netto" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb2" v-model="checkedFoetex"/>
+                        <input type="checkbox" id="cb2" v-model="checkedFoetex" />
                         <label for="cb2"><img src="@/assets/Pics/Foetex.png" alt="Foetex" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb3" v-model="checkedRema"/>
+                        <input type="checkbox" id="cb3" v-model="checkedRema" />
                         <label for="cb3"><img src="@/assets/Pics/Rema.jpg" alt="Rema" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb4" v-model="checkedFakta"/>
+                        <input type="checkbox" id="cb4" v-model="checkedFakta" />
                         <label for="cb4"><img src="@/assets/Pics/Fakta.png" alt="Fakta" /></label>
                     </div>
 
@@ -67,7 +71,6 @@
                         <label for="dish4">Svinek&#248;d</label>
                     </div>
                     <br />
-                    <button class="test_btn" @click="stores">Test</button>
                     <span v-html="info">{{info}}</span>
                 </div>
             </transition>
@@ -78,53 +81,59 @@
 <script>
 
     export default {
-
         data: function () {
             return {
                 isPanelOpen: true,
                 info: null,
-                checkedNetto: null,
                 checkedString: "",
+                checkedNetto: true,
+                checkedFoetex: true,
+                checkedRema: true,
+                checkedFakta: true,
+                checkedBilka: true,
+                checkedAldi: true,
+                checkedKvickly: true,
+                checkedLidl: true,
             }
         },
         methods: {
+            setStores() {
+                this.$store.commit('setStores', { amount: this.createStoreString() })
+            },
             closeSidebarPanel() {
                 this.isPanelOpen = false
             },
             createStoreString() {
                 this.checkedString = "";
-                if (this.checkedNetto == true) {
+                if (this.checkedNetto != true) {
                     this.checkedString += "Netto;";
                 }
-                if (this.checkedFoetex == true) {
+                if (this.checkedFoetex != true) {
                     this.checkedString += "Foetex;";
                 }
-                if (this.checkedRema == true) {
+                if (this.checkedRema != true) {
                     this.checkedString += "Rema;";
                 }
-                if (this.checkedFakta == true) {
+                if (this.checkedFakta != true) {
                     this.checkedString += "Fakta;";
                 }
-                if (this.checkedBilka == true) {
+                if (this.checkedBilka != true) {
                     this.checkedString += "Bilka;";
                 }
-                if (this.checkedAldi == true) {
+                if (this.checkedAldi != true) {
                     this.checkedString += "Aldi;";
                 }
-                if (this.checkedKvickly == true) {
+                if (this.checkedKvickly != true) {
                     this.checkedString += "Kvickly;";
                 }
-                if (this.checkedLidl == true) {
+                if (this.checkedLidl != true) {
                     this.checkedString += "Lidl;";
                 }
                 return this.checkedString;
             },
             stores() {
-                this.$http.get('https://localhost:44324/Home/chooseStoresFromSidebar?stores=' + this.createStoreString(), {
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                }).then(response => (this.info = response.data))
+                this.createStoreString();
+                this.$root.$emit('clickedSaveStores', this.checkedString)
             }
         }
     }
@@ -218,7 +227,7 @@
         margin: 2px;
         cursor: pointer;
         margin-right: 10%;
-        outline: 4px solid white;
+        outline: 1px solid white;
     }
 
         label:before {
