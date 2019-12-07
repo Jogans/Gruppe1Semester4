@@ -52,32 +52,26 @@ namespace GuldtandMVC_Identity.Models
                 ProductRepository productRepository = new ProductRepository(db);
 
 
-                //foreach (var recipe in recepylist)
-                //    {
-                //        //take all ingredients in the ingredientlist
-                //        foreach (var ingredient in recipe.IngredientList.Ingredient)
-                //        {
-                //            foreach (var product in listProduct)
-                //            {
-                //            if (product.Name.Contains(ingredient.Name))
-                //            {
-                //                normalPrice += ingredient.Product.Price;
-                //            }
-                //        }
-
-                //        }
-                //    }
-
                 foreach (var recipe in recepylist)
                 {
                     //take all ingredients in the ingredientlist
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
-                        DateTime dt = DateTime.Parse("2050");
-                        if (ingredient.Product.ValidTo == dt)
+                        
+                        ProductQuery productQuery = new ProductQuery
                         {
+                            SearchName = ingredient.Name,
+                            NumberOfProducts = 1,
+                            LoadRetailChain = true,
+                            ValidToDate = "2050"
+                        };
+                        var product = await productQuery.Execute(db);
+                        if (product.Any())
+                        {
+                            ingredient.ProductId = product.First().ProductId;
                             normalPrice += ingredient.Product.Price;
                         }
+                      
                     }
                 }
                 return normalPrice;
@@ -109,24 +103,8 @@ namespace GuldtandMVC_Identity.Models
                 RecipeRepository recipeRepository = new RecipeRepository(db);
                 var recepylist = await recipeRepository.Get(recipequery);
                 ProductRepository productRepository = new ProductRepository(db);
-                //var products = await productRepository.Get(new ProductQuery());
                 var listProduct = await query.Execute(db);
 
-                //foreach (var recipe in recepylist)
-                //{
-                //    //take all ingredients in the ingredientlist
-                //    foreach (var ingredient in recipe.IngredientList.Ingredient)
-                //    {
-                //        foreach (var product in listProduct)
-                //        {
-                //            if (product.Name.Contains(ingredient.Name))
-                //            {
-                //                totalPrice += product.Price;
-                //            }
-                //        }
-
-                //    }
-                //}
 
                 foreach (var recipe in recepylist)
                 {
@@ -134,7 +112,20 @@ namespace GuldtandMVC_Identity.Models
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
 
-                        totalPrice += ingredient.Product.Price;
+                        ProductQuery productQuery = new ProductQuery
+                        {
+                            SearchName = ingredient.Name,
+                            NumberOfProducts = 1,
+                            LoadRetailChain = true,
+                        };
+                        var product = await productQuery.Execute(db);
+                        if (product.Any())
+                        {
+                            ingredient.ProductId = product.First().ProductId;
+                            totalPrice += ingredient.Product.Price;
+                        }
+
+                        //totalPrice += ingredient.Product.Price;
                     }
                 }
                 return totalPrice;
