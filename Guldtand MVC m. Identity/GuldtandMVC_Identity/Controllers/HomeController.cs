@@ -23,9 +23,8 @@ namespace GuldtandMVC_Identity.Controllers
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-        public string storesChoosen { get; set; } = "Not set yet ";
 
-       
+
         public string searchProducts(string words)
         {
             var search = new Searching();

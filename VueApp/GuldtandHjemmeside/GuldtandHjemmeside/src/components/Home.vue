@@ -8,7 +8,6 @@
         <p>For at se de nyeste retter tilf&oslash;jet til siden - klik  p&aring; 'Nye retter' i menuen.</p>
         <p>For at se vetetarretter - klik  p&aring; 'Vegetar retter' i menuen.</p>
         <p>For at s&oslash;ge efter retter - klik  p&aring; 'S&oslash;g' i menuen.</p>
-
     </div>
 </template>
 
@@ -29,4 +28,3 @@
             margin: auto;
     }*/
 </style>
-
