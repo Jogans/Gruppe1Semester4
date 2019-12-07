@@ -6,35 +6,38 @@
                 <div class="title">
 
                     <router-link to="/"><img src="@/assets/Pics/Guldtand.jpg" alt="Guldtand" tag="button" /></router-link>
-
-                    <template v-if="!LoggedIn">
-                        <input class="usernameinput" type="text" placeholder="Enter Username" v-model="email" name="uname" required />
-                        <input class="passwordinput" type="password" placeholder="Enter Password" v-model="password" name="psw" required />
-                        <button class="login" @click="Login">Login</button>
-                        <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
-                    </template>
-                    <template v-if="LoggedIn">
-                        <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
-                        <button class="logout" @click="Logout">Logout</button>
-                    </template>
+                    <router-link to="/"><h1 class="headerName">GuldTand</h1></router-link>
+                    <div class="loginDiv">
+                        <template v-if="!LoggedIn">
+                            <input class=" input usernameinput" type="text" placeholder="Indtast brugernavn" v-model="email" name="uname" required />
+                            <button class="login" @click="Login">Login</button>
+                            <input class=" input passwordinput" type="password" placeholder="Indtast kodeord" v-model="password" name="psw" required />
+                            <router-link to="/CreateUser" class="create_user" tag="button">Opret bruger</router-link>
+                        </template>
+                        <template v-if="LoggedIn">
+                            <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
+                            <button class="logout" @click="Logout">Logout</button>
+                        </template>
+                    </div>
 
                 </div>
                 <br style="clear:both" />
                 <div class="Buttons2">
-                    <router-link to="/SearchBar" class="btn_Top" tag="button">S&#248;g</router-link>
-                    <router-link to="/TopPage" class="btn_Top" tag="button">Top retter</router-link>
-                    <router-link to="/NewPage" class="btn_New" tag="button">Nye retter</router-link>
-                    <router-link to="/SUPage" class="btn_Su" tag="button">SU-retter</router-link>
-                    <router-link to="/VegiPage" class="btn_Vegi" tag="button">Vegetar retter</router-link>
-                    <router-link to="/Recipe/ShowRecipe" class="btn_Classic" tag="button">Klassiske retter</router-link>
-                    <router-link to="/StorePage" class="btn_Store" tag="button">V&#230;lg Butik</router-link>
-
+                    <router-link to="/SearchBar" class="btn btnfirst btn_Top" tag="button">S&#248;g</router-link>
+                    <router-link to="/TopPage" class="btn btn_Top" tag="button">Top retter</router-link>
+                    <router-link to="/NewPage" class="btn btn_New" tag="button">Nye retter</router-link>
+                    <router-link to="/SUPage" class="btn btn_Su" tag="button">SU-retter</router-link>
+                    <router-link to="/VegiPage" class="btn btn_Vegi" tag="button">Vegetar retter</router-link>
+                    <router-link to="/Recipe/ShowRecipe" class="btn btn_Classic" tag="button">Klassiske retter</router-link>
+                    <router-link to="/StorePage" class="btn btnlast btn_Store" tag="button">V&#230;lg Butik</router-link>
+                </div>
+                <br style="clear:both" />
+                <div>
                     <template v-if="LoggedIn">
                         <router-link to="/CreateRecipe" class="btn_CreateRecipe" tag="button">Opret Opskrift</router-link>
                     </template>
-                    <router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>
-
                 </div>
+                <br style="clear:both" />
             </div>
         </div>
     </keep-alive>
@@ -119,21 +122,29 @@
 
     .header {
         width: 100%;
+        max-width: 65%;
         height: auto;
         background-color: white;
-        max-width: 65%;
         margin: auto;
         position: relative;
     }
 
     .TopPart {
         padding-bottom: 50px;
+        padding-top: 20px;
     }
 
     .title {
         float: left;
         display: block;
         position: relative;
+    }
+
+    .headerName {
+        display:block;
+        position:relative;
+        float:left;
+        padding-left:20px;
     }
 
     .UserBtn {
@@ -143,28 +154,52 @@
         float: right;
     }
 
+    .loginDiv{
+        width:270px;
+        display: block;
+        position:relative;
+        float: right;
+        padding-top:20px;
+    }
+ 
+
+    .input {
+        display: block;
+        position: relative;
+        float: left;
+        border: none;
+        padding: 5px;
+        background-color: #f1f1f1;
+        margin-bottom: 5px;
+    }
+
+        .input:focus {
+            background-color: lightblue;
+            outline: none
+        }
+
+    .usernameinput {
+        
+    }
+
+    .passwordinput {
+        
+    }
+
     .login {
         display: block;
         position: relative;
         float: right;
+        width: 100px;
+        height: 25px;
     }
-
-    .usernameinput {
+    
+    .create_user {
         display: block;
         position: relative;
         float: right;
-    }
-
-    .passwordinput {
-        display: block;
-        position: relative;
-        float: right;
-    }
-
-    .Create_user {
-        display: block;
-        position: relative;
-        float: right;
+        width: 100px;
+        height: 25px;
     }
 
     .MyPage {
@@ -197,159 +232,61 @@
         padding-bottom: 10px;
     }*/
 
-    .btn_Top {
-        background-color: white;
-        border: 2px solid #555555;
+    .btn {
+        border: none;
         color: black;
-        padding: 16px;
+        padding: 15px 20px;
         text-align: center;
         text-decoration: none;
-        border-radius: 15px; /* Laver den runde kant */
         float: left;
-        box-shadow: 0 9px #999;
         display: block;
-        margin: 2px;
-        font-size: 24px;
+        margin: 4px;
+        font-size: 20px;
     }
 
-        .btn_Top a {
-            display: block;
-            padding: 15px 32px;
-        }
+    .btnfirst {
+        margin-left: 0px;;
+    }
 
-        .btn_Top:active {
-            background-color: white;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
+    .btnlast {
+        margin-right: 0px;
+    }
 
+    .btn a {
+        display: block;
+        padding: 15px 32px;
+    }
+
+    .btn:active {
+        /*background-color: white;*/
+        border-bottom: 2px solid#666 ;
+    }
+
+    .btn:hover {
+        cursor:grab;  /* Ændre musen når den holdes over en knap */
+        border-bottom: 5px solid grey;
+    }
+
+    .btn_Top {     
+    }
     .btn_New {
-        background-color: white;
-        border: 2px solid #555555;
-        color: black;
-        padding: 16px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 15px; /* Laver den runde kant */
-        float: left;
-        box-shadow: 0 9px #999;
-        font-size: 24px;
-        margin: 2px;
     }
-
-        .btn_New a {
-            display: block;
-            padding: 15px 32px;
-        }
-
-        .btn_New:active {
-            background-color: white;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-
     .btn_Su {
-        background-color: white;
-        border: 2px solid #555555;
-        color: black;
-        padding: 16px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 15px; /* Laver den runde kant */
-        float: left;
-        box-shadow: 0 9px #999;
-        font-size: 24px;
-        margin: 2px;
     }
-
-        .btn_Su a {
-            display: block;
-            padding: 15px 32px;
-        }
-
-        .btn_Su:active {
-            background-color: white;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-
     .btn_Vegi {
-        background-color: white;
-        border: 2px solid #555555;
-        color: black;
-        padding: 16px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 15px; /* Laver den runde kant */
-        float: left;
-        box-shadow: 0 9px #999;
-        font-size: 24px;
-        margin: 2px;
     }
-
-        .btn_Vegi a {
-            display: block;
-            padding: 15px 32px;
-        }
-
-        .btn_Vegi:active {
-            background-color: white;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-
     .btn_Classic {
-        background-color: white;
-        border: 2px solid #555555;
-        color: black;
-        padding: 16px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 15px; /* Laver den runde kant */
-        float: left;
-        box-shadow: 0 9px #999;
-        font-size: 24px;
-        margin: 2px;
+    }
+    .btn_Store { 
     }
 
-        .btn_Classic a {
-            display: block;
-            padding: 15px 32px;
-        }
-
-        .btn_Classic:active {
-            background-color: white;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-
-    .btn_Store {
-        background-color: white;
-        border: 2px solid #555555;
+    .router-link-active {
         color: black;
-        padding: 16px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 15px; /* Laver den runde kant */
-        float: left;
-        box-shadow: 0 9px #999;
-        font-size: 24px;
-        margin: 2px;
+        text-decoration:none;
     }
 
-        .btn_Store a {
-            display: block;
-            padding: 15px 32px;
-        }
-
-        .btn_Store:active {
-            background-color: white;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-
-    a:hover {
-        cursor: pointer; /* Ændre musen når den holdes over en knap */
+    .router-link-exact-active {
+        border-bottom: 5px solid grey;
     }
 </style>
 

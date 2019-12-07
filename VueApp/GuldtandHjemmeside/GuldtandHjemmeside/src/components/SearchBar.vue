@@ -1,10 +1,8 @@
 <template>
-    <div class="bodySearchBar">
-        <br style="clear:both" />
-        <br style="clear:both" />
+    <div class="body">
         <div class="SearchBar">
             <!-- <typeahead :suggestions="searchoptions" :selection.sync="value"> </typeahead>  -->
-            <input style="height: 32px; width: 704px;" type="text" v-model="searchParameter" placeholder="Search..." required>
+            <input type="text" v-model="searchParameter" placeholder="Indtast en navnet på en opskrift eller en ingrediens" required>
             <autocomplete :items="[ 'Apple', 'Banana', 'Orange', 'Mango', 'Pear', 'Peach', 'Grape', 'Tangerine', 'Pineapple']" />
         
             <script type="text/x-template" id="autocomplete">
@@ -27,8 +25,8 @@
 
 
         <div class="SearchBarBtn">
-            <button class="SearchRecepie" style="height: 32px;" @click="recipemade" type="button">S&#248;g opskrift</button>
-            <button style="height: 32px;" @click="mounted" type="button">S&#248;g ingrediens</button>
+            <button class="SearchBtn" @click="recipemade" type="button">S&#248;g opskrift</button>
+            <button class="SearchBtn" @click="mounted" type="button">S&#248;g ingrediens</button>
             <!--<button style="height: 32px;" @click="$emit('triggerEvent')" type="button">S&#248;g ingrediens</button> -->
         </div>
 
@@ -110,32 +108,43 @@
 
 <style scoped>
     .SearchBar {
+        width: 65%;
+        display: block;
+        position: relative;
         float: left;
-        display: inline-block;
         color: black;
         font-size: 24px;
-        font-family: verdana;
         text-align: left;
-        margin-top: 0px;
-        float: left;
-        margin: 0px;
-        line-height: 40px;
+        margin-right: 30px;
+        margin-top: 7px;
+        /*font-family: verdana;*/
+        /*margin-top: 0px;*/
+        /*margin: 0px;*/
+        /*line-height: 40px;*/
     }
 
-    .SearchBarBtn {
-        float: left;
+    .SearchBar input {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .SearchBtn {
+        width: 14%;
+        height: 42px;
         display: block;
+        position: relative;
+        float: left;
         color: black;
-        font-size: 24px;
+        font-size: 16px;
         float: left;
         margin: 6px;
-        padding-right: 15px;
-        padding-bottom: 10px;
+        /*padding-right: 15px;*/
+        /*padding: 10px 0px;*/
     }
 
-    .bodySearchBar {
+    /*.body {
         width: 100%;
         max-width: 65%;
         margin: auto;
-    }
+    }*/
 </style>

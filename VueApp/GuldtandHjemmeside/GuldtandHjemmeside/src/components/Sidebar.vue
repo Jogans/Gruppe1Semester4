@@ -23,16 +23,16 @@
                     </div>
 
                     <div class="butikkerValg2">
-                        <input type="checkbox" id="cb5" v-model="checkedBilka"/>
+                        <input type="checkbox" id="cb5" v-model="checkedBilka" />
                         <label for="cb5"><img src="@/assets/Pics/Bilka.jpg" alt="Bilka" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb6" v-model="checkedAldi"/>
+                        <input type="checkbox" id="cb6" v-model="checkedAldi" />
                         <label for="cb6"><img src="@/assets/Pics/Aldi.png" alt="Aldi" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb7" v-model="checkedKvickly"/>
+                        <input type="checkbox" id="cb7" v-model="checkedKvickly" />
                         <label for="cb7"><img src="@/assets/Pics/Kvickly.png" alt="Kvickly" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb8" v-model="checkedLidl"/>
+                        <input type="checkbox" id="cb8" v-model="checkedLidl" />
                         <label for="cb8"><img src="@/assets/Pics/Lidl.png" alt="Lidl" /></label>
                     </div>
                     <br style="clear:both" />
@@ -201,7 +201,7 @@
         top: 0;
         height: 100vh;
         z-index: 1;
-        padding: 3rem 20px 2rem 20px;
+        padding: 30px 20px 20px 20px;
         width: 200px;
     }
 

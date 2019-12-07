@@ -1,5 +1,5 @@
 <template>
-    <div class="bodyCreateRecipe">
+    <div class="body">
         <br style="clear:both" />
         <h1>
             Ny Opskrift
@@ -191,11 +191,12 @@
 </script>
 
 <style scoped>
-    .bodyCreateRecipe {
+
+    /*.bodyCreateRecipe {
         width: 100%;
         max-width: 65%;
         margin: auto;
-    }
+    }*/
 
     .btn_addLine {
         margin-left: 50px;

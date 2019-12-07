@@ -1,5 +1,5 @@
 <template>
-    <div class="bodyClassicPage">
+    <div class="body">
         <br style="clear:both" />
         <h1>Fino bambino siden</h1>
         Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst Dette er en masse tekst
@@ -25,10 +25,11 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-        .bodyClassicPage {
-    width: 100%;
-    max-width: 65%;
-    margin: auto;
-}
+
+    /*.bodyClassicPage {
+      width: 100%;
+       max-width: 65%;
+      margin: auto;
+    }*/               
 </style>
 

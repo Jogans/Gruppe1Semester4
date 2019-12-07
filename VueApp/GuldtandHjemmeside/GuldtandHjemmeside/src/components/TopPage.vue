@@ -1,5 +1,5 @@
 <template>
-    <div class='bodyTopPage'>
+    <div class='body'>
 
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
@@ -37,11 +37,11 @@
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-    .bodyTopPage {
+    ./*body {
         width: 100%;
         max-width: 65%;
         margin: auto;
-    }
+    }*/
 
 
     .textForPrice {

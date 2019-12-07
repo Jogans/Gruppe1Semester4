@@ -1,5 +1,5 @@
 <template>
-    <div class="bodyProfilePage">
+    <div class="body">
         <br style="clear:both" />
         <h2>Brugernavn: </h2>
 
@@ -50,20 +50,19 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    .bodyProfilePage {
+    /*.body {
         width: 100%;
         max-width: 65%;
         margin: auto;
-    }
+    }*/
 
-    img{
+    img {
         display: block;
-
-    position: absolute;
-    width: 350px;
-    height: 200px;
+        position: absolute;
+        width: 350px;
+        height: 200px;
 }
-        .viewOfRecepie {
+    .viewOfRecepie {
         width: 900px;
         height: 200px;
         border: 2px solid;
