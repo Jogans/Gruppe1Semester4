@@ -1,7 +1,6 @@
 <template>
     <div class='body'>
 
-        <br style="clear:both" />
         <button class="test_btn" @click="smallView">Opdater opskrift med valgte butikker</button>
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
