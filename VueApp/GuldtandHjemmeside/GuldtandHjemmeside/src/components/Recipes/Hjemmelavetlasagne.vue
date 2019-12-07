@@ -19,7 +19,7 @@
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
         <br style="clear:both" />
-        <button class="test_btn" @click="generateShoppingCart">Generer indkøbsliste</button>
+        <button class="test_btn" @click="generateShoppingCart">Generer indk&oslash;bsliste</button>
         <span v-html="info2">{{info2}}</span>
         <br style="clear:both" />
     </div>

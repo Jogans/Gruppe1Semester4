@@ -31,14 +31,14 @@
                         <label for="cb8"><img src="@/assets/Pics/Lidl.png" alt="Lidl" /></label>
                     </div>
 
-                    <button class="test_btn" @click="stores">Gem butikvalg</button>
+                    <button class="test_btn" @click="stores">Gem butiksvalg</button>
 
                     <br style="clear:both" />
 
                     <br style="clear:both" />
 
                     <div class="antalPersoner">
-                        <select>
+                        <select class="dropDown">
                             <option value="0">Antal Personer:</option>
                             <option value="1">1 Person</option>
                             <option value="2">2 Personer</option>
@@ -53,20 +53,33 @@
 
                         </select>
                     </div>
+                    <br style="clear:both" />
 
                     <div class="CheckboxDishes">
-                        <br style="clear:both" />
-                        <input class="cbox" type="checkbox" id="dish1">
-                        <label for="dish1">Pasta</label>
-                        <br style="clear:both" />
-                        <input class="cbox" type="checkbox" id="dish2">
-                        <label for="dish2">Ris</label>
-                        <br style="clear:both" />
-                        <input class="cbox" type="checkbox" id="dish3">
-                        <label for="dish3">Oksek&#248;d</label>
-                        <br style="clear:both" />
-                        <input class="cbox" type="checkbox" id="dish4">
-                        <label for="dish4">Svinek&#248;d</label>
+                        <p>Hvilke retter &oslash;nsker du?</p>
+
+                        <ul class="dishes-li">
+                            <li>
+                                <input class="cbox" type="checkbox" id="dish1">
+                                <label for="dish1">Pasta</label>
+                            </li>
+                            <li>
+                                <input class="cbox" type="checkbox" id="dish2">
+                                <label for="dish2">Ris</label>
+                            </li>
+                            <li>
+                                <input class="cbox" type="checkbox" id="dish3">
+                                <label for="dish3">Oksek&#248;d</label>
+                            </li>
+                            <li>
+                                <input class="cbox" type="checkbox" id="dish4">
+                                <label for="dish4">Svinek&#248;d</label>
+                            </li>
+                        </ul>
+
+
+
+
                     </div>
                     <br />
                     <span v-html="info">{{info}}</span>
@@ -145,7 +158,8 @@
 
     .butikkerValg {
         display: inline-block;
-        width: 75px;
+        width: 65px;
+        padding-left: 15px;
         position: relative;
     }
 
@@ -194,35 +208,23 @@
         z-index: 1;
         padding: 30px 20px 20px 20px;
         width: 175px;
-        color: white;
+        color: lightgray;
+        font-size:14px;
     }
 
 
-    ul {
-        list-style-type: none;
-        float: right;
-    }
-
-    li {
-        display: inline-block;
-        position:relative;
-        float:left;
-    }
+ 
 
     input[type="checkbox"][id^="cb"] {
         display: block;
-        
     }
 
     label {
-        /*border: 1px;*/
-        /*padding: 6px;*/
         display: block;
         position: relative;
         margin: 2px;
         cursor: pointer;
-        margin-right: 10%;
-        /*outline: 1px solid white;*/
+        /*margin-right: 10%;*/
     }
 
         label:before {
@@ -266,11 +268,52 @@
             transform: scale(1);
             box-shadow: 0 0 2px #333;
             z-index: -1;
+            box-shadow:none;
+
         }
 
 
     .test_btn {
-        padding:10px;
-        margin: 20px;
+        width:125px;
+        padding:6px 10px;
+        margin: 15px 25px;
     }
+
+    .test_btn:hover {
+    }
+
+    .dropDown{
+        width:100%;
+        padding:5px;
+        background-color:#ececec
+    }
+
+    .CheckboxDishes {
+        width:100%;
+        color: lightgray;
+        font-size:14px;
+        
+    }
+
+    .dishes-li {
+        display:block;
+        position:relative;
+        left:0px;
+        width:80%;
+        padding-left:0px;
+        list-style-type:none;
+    }
+
+    .dishes-li li {
+        margin-bottom:10px;
+    }
+
+
+    /*.CheckboxDishes label {
+        padding:5px;
+    }
+
+    .CheckboxDishes .cbox {
+        margin-top:8px;
+    }*/
 </style>
