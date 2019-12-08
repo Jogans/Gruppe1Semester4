@@ -256,13 +256,13 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new prj4databaseContext())
             {
-                RecipeQuery query = new RecipeQuery
+                RecipeQuery recipeQuery = new RecipeQuery
                 {
                     SearchRecipe = word,
                     NumberOfRecipes = 5
                 };
 
-                var result = await query.Execute(db);
+                var result = await recipeQuery.Execute(db);
 
                 foreach (var recipe in result)
                 {
