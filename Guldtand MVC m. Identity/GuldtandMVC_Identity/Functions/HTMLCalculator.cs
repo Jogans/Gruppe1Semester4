@@ -24,6 +24,9 @@ namespace GuldtandMVC_Identity.Models
 {
     public class HTMLCalculator : IHTMLCalculator
     {
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ILogger<LoginModel> _logger;
+
         public async Task<double> NormalPrice(string word, string[] stores)
         {
             Stopwatch watch1 = new Stopwatch();
@@ -48,7 +51,7 @@ namespace GuldtandMVC_Identity.Models
                 };
 
                 RecipeRepository recipeRepository = new RecipeRepository(db);
-                var recepylist = await recipeRepository.Get(recipequery);
+                var recipeList = await recipeRepository.Get(recipeQuery);
 
                 ProductQuery query = new ProductQuery
                 {
@@ -58,13 +61,8 @@ namespace GuldtandMVC_Identity.Models
                 };
                 var listProduct = await query.Execute(db);
 
-               
-                RecipeRepository recipeRepository = new RecipeRepository(db);
-                var recipeList = await recipeRepository.Get(recipeQuery);
-                ProductRepository productRepository = new ProductRepository(db);
-
                 watch1.Stop();
-                Console.WriteLine($"{watch1.Elapsed}");
+                Console.WriteLine($"Lommeregner step 1: {watch1.Elapsed}");
                 watch1.Reset();
                 
                 watch1.Start();
@@ -78,105 +76,106 @@ namespace GuldtandMVC_Identity.Models
                     //take all ingredients in the ingredientlist
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
-                        ProductQuery productQuery = new ProductQuery
-                        {
-                            SearchName = ingredient.Name,
-                            NumberOfProducts = 1,
-                            LoadRetailChain = true,
-                            ValidToDate = "2050",
-                            Stores = stores
-                        };
-                        var product = await productQuery.Execute(db);
-                        if (product.Any())
-                        {
-                            ingredient.ProductId = product.First().ProductId;
-                            normalPrice += ingredient.Product.Price;
+                        //ProductQuery productQuery = new ProductQuery
+                        //{
+                        //    SearchName = ingredient.Name,
+                        //    NumberOfProducts = 1,
+                        //    LoadRetailChain = true,
+                        //    ValidToDate = "2050",
+                        //    Stores = stores
+                        //};
+                        //var product = await productQuery.Execute(db);
+                        //if (product.Any())
+                        //{
+                        normalPrice += ingredient.Product.Price;
+                            //ingredient.ProductId = product.First().ProductId;
+                            //normalPrice += ingredient.Product.Price;
                         }
                     }
                 }
                 watch1.Stop();
-                Console.WriteLine($"{watch1.Elapsed}");
+                Console.WriteLine($"Lommeregner step 2: {watch1.Elapsed}");
                 watch1.Reset();
                 return normalPrice;
 
             }
 
-        }
+        
 
 
 
-        public async Task<string> DoAsTold(string word, string[] stores)
-        {
-            string initString = "" + "<html>";
-            string endString = "</html>";
-            string bodyString = "";
+        //public async Task<string> DoAsTold(string word, string[] stores)
+        //{
+        //    string initString = "" + "<html>";
+        //    string endString = "</html>";
+        //    string bodyString = "";
 
-            double normalPrice = 0;
+        //    double normalPrice = 0;
 
-            using (var db = new prj4databaseContext())
-            {
-                RecipeQuery recipequery = new RecipeQuery
-                {
-                    SearchRecipe = word,
-                    LoadIngredientList = true,
-                    LoadRecipeCategory = true,
-                    NumberOfRecipes = 1,
-                    Stores = stores
+        //    using (var db = new prj4databaseContext())
+        //    {
+        //        RecipeQuery recipequery = new RecipeQuery
+        //        {
+        //            SearchRecipe = word,
+        //            LoadIngredientList = true,
+        //            LoadRecipeCategory = true,
+        //            NumberOfRecipes = 1,
+        //            Stores = stores
 
-                };
-                DateTime validToDateTime = new DateTime(2050,12,1,0,0,0);
+        //        };
+        //        DateTime validToDateTime = new DateTime(2050,12,1,0,0,0);
+
+        //        var recipeList = await recipequery.Execute(db);
+        //        string datestring;
+
+        //        datestring = "2050-12-01 00:00:00.000";
+
+        //        ProductQuery query = new ProductQuery
+        //        {
+        //            ValidToDate = datestring,
+        //            NumberOfProducts = 1,
+        //            Stores = stores
+        //        };
+
+        //        string testString = "";
+
+        //        var listProduct = await query.Execute(db);
+
+        //        ProductRepository productRepository = new ProductRepository(db);
 
 
-                string datestring;
+        //        foreach (var recipe in recipeList)
+        //        {
+        //            //take all ingredients in the ingredientlist
+        //            foreach (var ingredient in recipe.IngredientList.Ingredient)
+        //            {
 
-                datestring = "2050-12-01 00:00:00.000";
+        //                ProductQuery productQuery = new ProductQuery
+        //                {
+        //                    SearchName = ingredient.Name,
+        //                    NumberOfProducts = 1,
+        //                    LoadRetailChain = true,
+        //                    ValidToDate = datestring,
+        //                    Stores = stores
+        //                };
+        //                var product = await productQuery.Execute(db);
+        //                if (product.Any())
+        //                {
+        //                    ingredient.ProductId = product.First().ProductId;
+        //                    normalPrice += ingredient.Product.Price;
+        //                    testString += ingredient.Product.Name + " // " + ingredient.Product.Price + " // " +
+        //                                  ingredient.Product.ValidTo + " // ";
+        //                }
 
-                ProductQuery query = new ProductQuery
-                {
-                    ValidToDate = datestring,
-                    NumberOfProducts = 1,
-                    Stores = stores
-                };
+        //            }
+        //        }
 
-                string testString = "";
+        //        testString += normalPrice;
+        //        return testString;
 
-                var listProduct = await query.Execute(db);
+        //    }
 
-                ProductRepository productRepository = new ProductRepository(db);
-
-
-                foreach (var recipe in recepylist)
-                {
-                    //take all ingredients in the ingredientlist
-                    foreach (var ingredient in recipe.IngredientList.Ingredient)
-                    {
-
-                        ProductQuery productQuery = new ProductQuery
-                        {
-                            SearchName = ingredient.Name,
-                            NumberOfProducts = 1,
-                            LoadRetailChain = true,
-                            ValidToDate = datestring,
-                            Stores = stores
-                        };
-                        var product = await productQuery.Execute(db);
-                        if (product.Any())
-                        {
-                            ingredient.ProductId = product.First().ProductId;
-                            normalPrice += ingredient.Product.Price;
-                            testString += ingredient.Product.Name + " // " + ingredient.Product.Price + " // " +
-                                          ingredient.Product.ValidTo + " // ";
-                        }
-
-                    }
-                }
-
-                testString += normalPrice;
-                return testString;
-
-            }
-
-        }
+        //}
 
 
         public async Task<double> TotalPrice(string word, string[] stores)
@@ -189,7 +188,7 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new prj4databaseContext())
             {
-                RecipeQuery recipequery = new RecipeQuery
+                RecipeQuery recipeQuery = new RecipeQuery
                 {
                     SearchRecipe = word,
                     LoadIngredientList = true,
@@ -198,33 +197,33 @@ namespace GuldtandMVC_Identity.Models
                     Stores = stores
                 };
                 RecipeRepository recipeRepository = new RecipeRepository(db);
-                var recepylist = await recipeRepository.Get(recipequery);
+                var recipeList = await recipeRepository.Get(recipeQuery);
 
                 ProductQuery query = new ProductQuery();
                 ProductRepository productRepository = new ProductRepository(db);
                 var listProduct = await query.Execute(db);
 
 
-                foreach (var recipe in recepylist)
+                foreach (var recipe in recipeList)
                 {
                     //take all ingredients in the ingredientlist
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
 
-                        ProductQuery productQuery = new ProductQuery
-                        {
-                            SearchName = ingredient.Name,
-                            NumberOfProducts = 1,
-                            LoadRetailChain = true,
-                        };
-                        var product = await productQuery.Execute(db);
-                        if (product.Any())
-                        {
-                            ingredient.ProductId = product.First().ProductId;
-                            totalPrice += ingredient.Product.Price;
-                        }
+                        //ProductQuery productQuery = new ProductQuery
+                        //{
+                        //    SearchName = ingredient.Name,
+                        //    NumberOfProducts = 1,
+                        //    LoadRetailChain = true,
+                        //};
+                        //var product = await productQuery.Execute(db);
+                        //if (product.Any())
+                        //{
+                        //    ingredient.ProductId = product.First().ProductId;
+                        //    totalPrice += ingredient.Product.Price;
+                        //}
 
-                        //totalPrice += ingredient.Product.Price;
+                        totalPrice += ingredient.Product.Price;
                     }
                 }
                 return totalPrice;
@@ -233,8 +232,7 @@ namespace GuldtandMVC_Identity.Models
             
             
         }
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
+        
 
     }
 

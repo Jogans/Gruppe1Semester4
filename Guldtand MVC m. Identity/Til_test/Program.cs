@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GuldtandMVC_Identity;
+using GuldtandMVC_Identity.Controllers;
 using GuldtandMVC_Identity.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,13 +16,16 @@ namespace Til_test
         {
             using (var db = new prj4databaseContext())
             {
-                var Stores = new string[] {"Netto", "rema", "bilka", "aldi"};
-                HTMLCalculator calculator = new HTMLCalculator();
-                for (int i = 0; i < 20; i++)
-                {
-                    
-                    var result = await calculator.NormalPrice("lasagne", Stores);
-                }
+                RecipeController ctrl = new RecipeController();
+                var result = await ctrl.viewForSmallRecipeSearch("lasagne", "bilka;aldi;netto");
+
+                //var Stores = new string[] {"Netto", "rema", "bilka", "aldi"};
+                //HTMLCalculator calculator = new HTMLCalculator();
+                //for (int i = 0; i < 20; i++)
+                //{
+
+                //    var result = await calculator.NormalPrice("lasagne", Stores);
+                //}
 
 
                 //RecipeQuery recipeQuery = new RecipeQuery

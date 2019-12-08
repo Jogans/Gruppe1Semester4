@@ -65,20 +65,20 @@ namespace GuldtandMVC_Identity.Controllers
             return Ok();
         }
 
-        public Task<string> viewNormalPrice(string words, string stores)
-        {
-            var normalPrice = new HTMLCalculator();
+        //public Task<string> viewNormalPrice(string words, string stores)
+        //{
+        //    var normalPrice = new HTMLCalculator();
 
-            string[] storeSplit = new string[8];
+        //    string[] storeSplit = new string[8];
 
-            if (stores != null)
-            {
-                storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
-            }
+        //    if (stores != null)
+        //    {
+        //        storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
+        //    }
 
 
-            return normalPrice.DoAsTold(words, storeSplit);
-        }
+        //    return normalPrice.DoAsTold(words, storeSplit);
+        //}
 
         public string searchRecipesByName(string words)
         {
