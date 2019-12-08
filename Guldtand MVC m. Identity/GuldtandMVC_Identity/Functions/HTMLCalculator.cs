@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
@@ -25,12 +26,15 @@ namespace GuldtandMVC_Identity.Models
     {
         public async Task<double> NormalPrice(string word, string[] stores)
         {
+            Stopwatch watch1 = new Stopwatch();
             string initString = "" + "<html>";
             string endString = "</html>";
             string bodyString = "";
             
             double normalPrice = 0;
-
+            
+            watch1.Reset();
+            watch1.Start();
             using (var db = new prj4databaseContext())
             {
                 RecipeQuery recipeQuery = new RecipeQuery
@@ -50,17 +54,21 @@ namespace GuldtandMVC_Identity.Models
                 };
                 var listProduct = await query.Execute(db);
 
+               
                 RecipeRepository recipeRepository = new RecipeRepository(db);
                 var recipeList = await recipeRepository.Get(recipeQuery);
                 ProductRepository productRepository = new ProductRepository(db);
 
-
-                //var ingredientList = recipeList.Select(i => i.IngredientList.Ingredient).ToList();
-
+                watch1.Stop();
+                Console.WriteLine($"{watch1.Elapsed}");
+                watch1.Reset();
+                
+                watch1.Start();
+                //var ingredientList = recipeList.Select(i => i.IngredientList.Ingredient);
 
                 //normalPrice = +(double) ingredientList.F;
 
-
+                
                 foreach (var recipe in recipeList)
                 {
                     //take all ingredients in the ingredientlist
@@ -82,6 +90,9 @@ namespace GuldtandMVC_Identity.Models
                         }
                     }
                 }
+                watch1.Stop();
+                Console.WriteLine($"{watch1.Elapsed}");
+                watch1.Reset();
                 return normalPrice;
 
             }
