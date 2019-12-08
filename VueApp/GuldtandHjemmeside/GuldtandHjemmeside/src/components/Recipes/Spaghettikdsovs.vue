@@ -27,14 +27,14 @@
 
 <script>
     export default {
-        name: 'Kyllingikarry',
+        name: 'Spaghettikdsovs',
         data: function () {
             return {
                 info: null,
                 info2: null,
                 relevantStores: "",
                 count: 4,
-                searchParameter: "Kylling i karry"
+                searchParameter: "spaghet"
             }
         },
         methods: {
@@ -51,7 +51,7 @@
                 }).then(response => (this.info = response.data))
             },
             generateShoppingCart() {
-                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words='+ this.searchParameter + '&stores=' + this.relevantStores, {
+                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words=' + this.searchParameter + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

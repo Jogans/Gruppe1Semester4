@@ -36,10 +36,10 @@ namespace GuldtandMVC_Identity.Controllers
             return recipe.GenerateShoppingCart(words, stores);
         }
 
-        public Task<string> viewForSmallRecipe(string stores)
+        public Task<string> viewForSmallRecipe(string stores, int count)
         {
             var recipe = new AddHTMLToRecipe();
-            return recipe.ShowRecipeSmallViewAsync(stores);
+            return recipe.ShowRecipeSmallViewAsync(stores, count);
         }
 
         public Task<string> viewForSmallRecipeSearch(string word, string stores)
