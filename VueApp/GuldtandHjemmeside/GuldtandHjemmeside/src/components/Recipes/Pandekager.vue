@@ -1,7 +1,7 @@
 <template>
-    <div class='bodyTopPage'>
-        <div class="antalPersoner">
-            <select v-model="antal">
+    <div class='body'>
+        <div class="antalPersoner" >
+            <select v-model="count">
                 <option value="1">1 Person</option>
                 <option value="2">2 Personer</option>
                 <option value="3">3 Personer</option>
@@ -27,7 +27,7 @@
 
 <script>
     export default {
-        name: 'FlskestegalaMarcus',
+        name: 'Pandekager',
         data: function () {
             return {
                 info: null,
@@ -44,14 +44,14 @@
                 })
             },
             fullView() {
-                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=marcus' + '&count=' + this.count, {
+                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=pande' + '&count=' + this.count, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             },
             generateShoppingCart() {
-                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words=lighed' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words=pande' + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

@@ -12,6 +12,8 @@ import FlskestegalaMarcus from './components/Recipes/FlskestegalaMarcus.vue';
 import BrndendeKrlighed from './components/Recipes/BrndendeKrlighed.vue';
 import Hjemmelavetlasagne from './components/Recipes/Hjemmelavetlasagne.vue';
 import Spaghettimedkdsovs from './components/Recipes/Spaghettimedkdsovs.vue';
+import Pandekager from './components/Recipes/Pandekager.vue';
+import Plsehorn from './components/Recipes/Plsehorn.vue';
 import CreateUser from './components/CreateUser.vue';
 import CreateRecipe from './components/CreateRecipe.vue';
 import TestCalculator from './components/TestCalculator.vue';
@@ -36,6 +38,8 @@ const routes = [
     { path: '/Recepie/BrndendeKrlighed', component: BrndendeKrlighed },
     { path: '/Recepie/Hjemmelavetlasagne', component: Hjemmelavetlasagne },
     { path: '/Recepie/Spaghettimedkdsovs', component: Spaghettimedkdsovs },
+    { path: '/Recepie/Pandekager', component: Pandekager },
+    { path: '/Recepie/Plsehorn', component: Plsehorn },
     { path: '/Typeahead', component: Typeahead },
     { path: '/TestCalculator', component: TestCalculator }
 
