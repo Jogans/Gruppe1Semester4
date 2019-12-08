@@ -41,33 +41,6 @@ namespace GuldtandMVC_Identity.Controllers
             return createRecepie.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
         }
 
-        public Task<string> viewASpeceficRecipe(string words, double antal)
-        {
-            var recipe = new AddHTMLToRecipe();
-
-            return recipe.ShowRecipeFullView(words, antal);
-        }
-
-        public Task<string> getShoppingCart(string words, string stores)
-        {
-            var recipe = new AddHTMLToRecipe();
-
-            return recipe.GenerateShoppingCart(words, stores);
-        }
-
-        public Task<string> viewForSmallRecipe(string stores)
-        {
-            var recipe = new AddHTMLToRecipe();
-            return recipe.ShowRecipeSmallViewAsync(stores);
-        }
-
-        public Task<string> viewForSmallRecipeSearch(string word, string stores)
-        {
-            var recipe = new AddHTMLToRecipe();
-
-            return recipe.ShowRecipeSmallViewSearchAsync(word, stores);
-        }
-
         //public Task<double> viewTotalPrice(string words)
         //{
         //    var totalPrice = new HTMLCalculator();
