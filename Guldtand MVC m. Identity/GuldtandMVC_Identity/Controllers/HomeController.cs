@@ -23,9 +23,8 @@ namespace GuldtandMVC_Identity.Controllers
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-        public string storesChoosen { get; set; } = "Not set yet ";
 
-       
+
         public string searchProducts(string words)
         {
             var search = new Searching();
@@ -42,34 +41,13 @@ namespace GuldtandMVC_Identity.Controllers
             return createRecepie.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
         }
 
-        public Task<string> viewASpeceficRecipe(string words)
-        {
-            var recipe = new AddHTMLToRecipe();
+        //public Task<double> viewTotalPrice(string words)
+        //{
+        //    var totalPrice = new HTMLCalculator();
 
-            return recipe.ShowRecipeFullView(words);
-        }
+        //    return totalPrice.TotalPrice(words);
 
-        public Task<string> getShoppingCart(string words, string stores)
-        {
-            var recipe = new AddHTMLToRecipe();
-
-            return recipe.GenerateShoppingCart(words, stores);
-        }
-
-        public Task<string> viewForSmallRecipe()
-        {
-            var recipe = new AddHTMLToRecipe();
-
-            return recipe.ShowRecipeSmallViewAsync();
-        }
-
-        public Task<double> viewTotalPrice(string words)
-        {
-            var totalPrice = new HTMLCalculator();
-
-            return totalPrice.TotalPrice(words);
-
-        }
+        //}
 
         public async Task<IActionResult> chooseStoresFromSidebar(string stores)
         {
@@ -87,11 +65,19 @@ namespace GuldtandMVC_Identity.Controllers
             return Ok();
         }
 
-        public Task<double> viewNormalPrice(string words)
+        public Task<string> viewNormalPrice(string words, string stores)
         {
             var normalPrice = new HTMLCalculator();
 
-            return normalPrice.NormalPrice(words);
+            string[] storeSplit = new string[8];
+
+            if (stores != null)
+            {
+                storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            }
+
+
+            return normalPrice.DoAsTold(words, storeSplit);
         }
 
         public string searchRecipesByName(string words)

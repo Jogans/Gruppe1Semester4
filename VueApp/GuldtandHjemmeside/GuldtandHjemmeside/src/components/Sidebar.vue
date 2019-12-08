@@ -3,12 +3,8 @@
         <div class="sidebar">
             <transition name="slide">
                 <div v-if="isPanelOpen" class="sidebar-panel">
-
-                    <div class="butikkerValg1">
-                        <button class="test_btn" @click="stores">Test</button>
-                        <br style="clear:both" />
-                        <br style="clear:both" />
-
+                    <p>V&aelig;lg hvilke butikker du vil se tilbud fra:</p>
+                    <div class="butikkerValg">
                         <input type="checkbox" id="cb1" v-model="checkedNetto" />
                         <label for="cb1"><img src="@/assets/Pics/Netto.png" alt="Netto" /></label>
                         <br style="clear:both" />
@@ -21,26 +17,28 @@
                         <input type="checkbox" id="cb4" v-model="checkedFakta" />
                         <label for="cb4"><img src="@/assets/Pics/Fakta.png" alt="Fakta" /></label>
                     </div>
-
-                    <div class="butikkerValg2">
-                        <input type="checkbox" id="cb5" v-model="checkedBilka"/>
+                    <div class="butikkerValg">
+                        <input type="checkbox" id="cb5" v-model="checkedBilka" />
                         <label for="cb5"><img src="@/assets/Pics/Bilka.jpg" alt="Bilka" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb6" v-model="checkedAldi"/>
+                        <input type="checkbox" id="cb6" v-model="checkedAldi" />
                         <label for="cb6"><img src="@/assets/Pics/Aldi.png" alt="Aldi" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb7" v-model="checkedKvickly"/>
+                        <input type="checkbox" id="cb7" v-model="checkedKvickly" />
                         <label for="cb7"><img src="@/assets/Pics/Kvickly.png" alt="Kvickly" /></label>
                         <br style="clear:both" />
-                        <input type="checkbox" id="cb8" v-model="checkedLidl"/>
+                        <input type="checkbox" id="cb8" v-model="checkedLidl" />
                         <label for="cb8"><img src="@/assets/Pics/Lidl.png" alt="Lidl" /></label>
                     </div>
+
+                    <button class="test_btn" @click="stores">Gem butiksvalg</button>
+
                     <br style="clear:both" />
 
                     <br style="clear:both" />
 
                     <div class="antalPersoner">
-                        <select>
+                        <select class="dropDown">
                             <option value="0">Antal Personer:</option>
                             <option value="1">1 Person</option>
                             <option value="2">2 Personer</option>
@@ -55,20 +53,33 @@
 
                         </select>
                     </div>
+                    <br style="clear:both" />
 
                     <div class="CheckboxDishes">
-                        <br style="clear:both" />
-                        <input class="cbox" type="checkbox" id="dish1">
-                        <label for="dish1">Pasta</label>
-                        <br style="clear:both" />
-                        <input class="cbox" type="checkbox" id="dish2">
-                        <label for="dish2">Ris</label>
-                        <br style="clear:both" />
-                        <input class="cbox" type="checkbox" id="dish3">
-                        <label for="dish3">Oksek&#248;d</label>
-                        <br style="clear:both" />
-                        <input class="cbox" type="checkbox" id="dish4">
-                        <label for="dish4">Svinek&#248;d</label>
+                        <p>Hvilke retter &oslash;nsker du?</p>
+
+                        <ul class="dishes-li">
+                            <li>
+                                <input class="cbox" type="checkbox" id="dish1">
+                                <label for="dish1">Pasta</label>
+                            </li>
+                            <li>
+                                <input class="cbox" type="checkbox" id="dish2">
+                                <label for="dish2">Ris</label>
+                            </li>
+                            <li>
+                                <input class="cbox" type="checkbox" id="dish3">
+                                <label for="dish3">Oksek&#248;d</label>
+                            </li>
+                            <li>
+                                <input class="cbox" type="checkbox" id="dish4">
+                                <label for="dish4">Svinek&#248;d</label>
+                            </li>
+                        </ul>
+
+
+
+
                     </div>
                     <br />
                     <span v-html="info">{{info}}</span>
@@ -145,17 +156,10 @@
         color: white;
     }
 
-    .butikkerValg1 {
+    .butikkerValg {
         display: inline-block;
-        width: 75px;
-        height: 75px;
-        position: relative;
-    }
-
-    .butikkerValg2 {
-        display: inline-block;
-        width: 75px;
-        height: 75px;
+        width: 65px;
+        padding-left: 15px;
         position: relative;
     }
 
@@ -182,7 +186,7 @@
         transition: all 150ms ease-in 0s
     }
 
-    .sidebar-backdrop {
+    /*.sidebar-backdrop {
         background-color: rgba(0,0,0,.5);
         width: 100vw;
         height: 100vh;
@@ -190,44 +194,37 @@
         top: 0;
         left: 0;
         cursor: pointer;
-    }
+    }*/
 
     .sidebar-panel {
         overflow-y: auto;
-        background-color: #130f40;
+        /*background-color: #130f40;*/
+        background-color: var(--accent-color);
         position: fixed;
         float: right;
         left: 0;
         top: 0;
-        height: 100vh;
+        height: 100%;
         z-index: 1;
-        padding: 3rem 20px 2rem 20px;
-        width: 200px;
+        padding: 30px 20px 20px 20px;
+        width: 175px;
+        color: lightgray;
+        font-size:14px;
     }
 
 
-    ul {
-        list-style-type: none;
-        float: right;
-    }
-
-    li {
-        display: inline-block;
-    }
+ 
 
     input[type="checkbox"][id^="cb"] {
         display: block;
     }
 
     label {
-        border: 1px;
-        padding: 6px;
         display: block;
         position: relative;
         margin: 2px;
         cursor: pointer;
-        margin-right: 10%;
-        outline: 1px solid white;
+        /*margin-right: 10%;*/
     }
 
         label:before {
@@ -252,6 +249,7 @@
         label img {
             height: 10%;
             width: 45px;
+            transform:scale(0.6);
             transition-duration: 0.2s;
             transform-origin: 50% 50%;
         }
@@ -263,12 +261,59 @@
         :checked + label:before [id^="cb"] {
             content: "\2713";
             background-color: grey;
-            transform: scale(0.6);
+            transform: scale(0.1);
         }
 
         :checked + label img {
-            transform: scale(0.7);
+            transform: scale(1);
             box-shadow: 0 0 2px #333;
             z-index: -1;
+            box-shadow:none;
+
         }
+
+
+    .test_btn {
+        width:125px;
+        padding:6px 10px;
+        margin: 15px 25px;
+    }
+
+    .test_btn:hover {
+    }
+
+    .dropDown{
+        width:100%;
+        padding:5px;
+        background-color:#ececec
+    }
+
+    .CheckboxDishes {
+        width:100%;
+        color: lightgray;
+        font-size:14px;
+        
+    }
+
+    .dishes-li {
+        display:block;
+        position:relative;
+        left:0px;
+        width:80%;
+        padding-left:0px;
+        list-style-type:none;
+    }
+
+    .dishes-li li {
+        margin-bottom:10px;
+    }
+
+
+    /*.CheckboxDishes label {
+        padding:5px;
+    }
+
+    .CheckboxDishes .cbox {
+        margin-top:8px;
+    }*/
 </style>

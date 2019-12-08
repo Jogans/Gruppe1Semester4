@@ -3,9 +3,9 @@
 </head>
 <template>
 
-    <div class="bodyStorePage">
+    <div class="body">
         <br style="clear:both" />
-        <h1>Test søgefelt opskrift</h1>
+        <h1>Test s&#248;gefelt opskrift</h1>
         <div id="StorePage">
             <br style="clear:both" />
             <div class="SearchBar">
@@ -51,11 +51,11 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-    .bodyStorePage {
+    /*.body {
         width: 100%;
         max-width: 65%;
         margin: auto;
-    }
+    }*/
     img{
 
     }

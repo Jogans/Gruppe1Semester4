@@ -1,14 +1,27 @@
 <template>
     <div class='bodyTopPage'>
+        <div class="antalPersoner" >
+            <select v-model="antal">
+                <option value="1">1 Person</option>
+                <option value="2">2 Personer</option>
+                <option value="3">3 Personer</option>
+                <option value="4" selected>4 Personer</option>
+                <option value="5">5 Personer</option>
+                <option value="6">6 Personer</option>
+                <option value="7">7 Personer</option>
+                <option value="8">8 Personer</option>
+                <option value="9">9 Personer</option>
+                <option value="10">10 Personer</option>
+            </select>
+        </div>
+        <br style="clear:both" />
+        <button class="test_btn" @click="fullView">Opdater opskrift med personer</button>
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
         <br style="clear:both" />
-        <button class="test_btn" @click="generateShoppingCart">Generer indkøbsliste</button>
+        <button class="test_btn" @click="generateShoppingCart">Generer indk&oslash;bsliste</button>
         <span v-html="info2">{{info2}}</span>
-
-
         <br style="clear:both" />
-
     </div>
 </template>
 
@@ -20,7 +33,8 @@
                 info: null,
                 info2: null,
                 searchParameter: null,
-                relevantStores: ""
+                relevantStores: "",
+                antal: 4
             }
         },
         methods: {
@@ -30,14 +44,14 @@
                 })
             },
             fullView() {
-                this.$http.get('https://localhost:44324/Home/viewASpeceficRecipe?words=lighed', {
+                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=lighed' + '&antal=' + this.antal, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             },
             generateShoppingCart() {
-                this.$http.get('https://localhost:44324/Home/getShoppingCart?words=lighed' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words=lighed' + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

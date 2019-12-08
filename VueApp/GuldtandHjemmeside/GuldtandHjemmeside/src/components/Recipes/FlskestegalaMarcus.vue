@@ -27,9 +27,9 @@
 
 <script>
     export default {
-        name: 'Hjemmelavetlasagne',
+        name: 'FlskestegalaMarcus',
         data: function () {
-            return { 
+            return {
                 info: null,
                 info2: null,
                 searchParameter: null,
@@ -44,14 +44,14 @@
                 })
             },
             fullView() {
-                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=lasa' + '&antal=' + this.antal, {
+                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=marcus' + '&antal=' + this.antal, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             },
             generateShoppingCart() {
-                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words=lasa' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words=lighed' + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

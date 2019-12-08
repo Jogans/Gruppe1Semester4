@@ -13,7 +13,7 @@ namespace GuldtandMVC_Identity.Models
     {
        
 
-        public async Task<string> ShowRecipeFullView(string words)
+        public async Task<string> ShowRecipeFullView(string words, double antal)
         {
             string initString = "" +
                                 "<html>";
@@ -23,6 +23,7 @@ namespace GuldtandMVC_Identity.Models
 
             string[] storeSplit = new string[8];
 
+            antal = antal / 4;
 
             int steps = 1;
             using (var db = new prj4databaseContext())
@@ -46,8 +47,7 @@ namespace GuldtandMVC_Identity.Models
                     "<div class='recepie'>" +
                         "<div class='ingredienser'>" +
                         "<p class='p2'><span class='s1'>" + recipe.CookTime + " min tilberednings tid" +
-                    "<br></span>Til 4 personer</p>" +
-                        "<div class='image'>" +
+                    "<div class='image'>" +
                         "<img src = '" + recipe.ImgSrc + "' height='400' width='700'/>" +
                     "</div>" +
                         "<br style='clear: both' />" +
@@ -65,7 +65,7 @@ namespace GuldtandMVC_Identity.Models
                                   "<ul>";
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
-                        ingrediensstring += "<li class='p6'>" + ingredient.Amount + ingredient.AmountUnit + " " + ingredient.Name +
+                        ingrediensstring += "<li class='p6'>" + (ingredient.Amount * antal) + ingredient.AmountUnit + " " + ingredient.Name +
                                             "</li>";
                     }
 
@@ -133,8 +133,7 @@ namespace GuldtandMVC_Identity.Models
             return initString + bodystring + endString;
         }
 
-
-        public async Task<string> ShowRecipeSmallViewAsync()
+        public async Task<string> ShowRecipeSmallViewAsync(string stores)
         {
 
             string initString = "" + "<html>";
@@ -142,7 +141,7 @@ namespace GuldtandMVC_Identity.Models
                            "<style>" +
 
                            ".viewOfRecepie{" +
-                           "width: 900px;" +
+                           "width: 60%;" +
                            "height: 200px;" +
                            "border: 2px solid;" +
                            "padding: 2px;" +
@@ -170,10 +169,96 @@ namespace GuldtandMVC_Identity.Models
             HTMLCalculator RabatPris = new HTMLCalculator();
             HTMLCalculator NormalPris = new HTMLCalculator();
 
+            string[] storeSplit = new string[8];
+            string[] storeSplitfake = new string[8];
+
+            if (stores != null)
+            {
+                storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            }
+
             using (var db = new prj4databaseContext())
             {
                 RecipeQuery query = new RecipeQuery
                 {
+                    NumberOfRecipes = 5,
+                };
+
+                var result = await query.Execute(db);
+
+                foreach (var recipe in result)
+                {
+                    bodystring += "<div class='viewOfRecepie'>" +
+                                  "<div class='imageOfRecepie'>" +
+                                  "<a href='/#/Recepie/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
+                                  "<img class='img1' src='" + recipe.ImgSrc + "' alt='recpieImg'></a>" +
+                                  "</div>" +
+                                  "<div class='textForPrice'>" +
+                                  "<div style='font-size: 25px;'>" +
+                                  "<a href='/#/Recepie/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
+                                  recipe.Name +
+                                  "</a>" +
+                                  "<br />" +
+                                  "</div>" +
+                                  "Original pris: " + await NormalPris.NormalPrice(recipe.Name, storeSplit) + "kr." + " <br />" +
+                                  "Pris med rabat: " + await RabatPris.TotalPrice(recipe.Name, storeSplit) + "kr." + "<br />" +
+                                  "Laveste mulige pris: " + await RabatPris.TotalPrice(recipe.Name, storeSplitfake) + "kr." + "<br />" +
+                                  "</div>" +
+                                  "</div>";
+                }
+            }
+            return initString + style + bodystring + endString;
+        }
+
+        public async Task<string> ShowRecipeSmallViewSearchAsync(string word, string stores)
+        {
+
+            string initString = "" + "<html>";
+            string style = "<head>" +
+                           "<style>" +
+
+                           ".viewOfRecepie{" +
+                           "width: 60%;" +
+                           "height: 200px;" +
+                           "border: 2px solid;" +
+                           "padding: 2px;" +
+                           "margin: 20px;}" +
+
+                           ".img1{" +
+                           "display: block;" +
+                           "position: absolute;" +
+                           "width: 350px;" +
+                           "height: 200px;}" +
+
+                           ".textForPrice{" +
+                           "display: block;" +
+                           "position: relative;" +
+                           "float: left;" +
+                           "margin-left: 355px;" +
+                           "font-size: 20px;}" +
+
+                           "</style>" +
+                           "</head> ";
+            string endString = "</html>";
+
+            string bodystring = "";
+
+            HTMLCalculator RabatPris = new HTMLCalculator();
+            HTMLCalculator NormalPris = new HTMLCalculator();
+
+            string[] storeSplit = new string[8];
+            string[] storeSplitfake = new string[8];
+
+            if (stores != null)
+            {
+                storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            using (var db = new prj4databaseContext())
+            {
+                RecipeQuery query = new RecipeQuery
+                {
+                    SearchRecipe = word,
                     NumberOfRecipes = 5
                 };
 
@@ -193,10 +278,9 @@ namespace GuldtandMVC_Identity.Models
                                   "</a>" +
                                   "<br />" +
                                   "</div>" +
-                                  "Original pris: " + recipe.Price + "kr." + "<br />" +
-                                  "Original pris: " + await NormalPris.NormalPrice(recipe.Name) + "kr." + " <br />" +
-                                  "Pris med rabat: " + await RabatPris.TotalPrice(recipe.Name) + "kr." + "<br />" +
-                                  "Laveste mulige pris: " + recipe.Price + "kr." + "<br />" +
+                                  "Original pris: " + await NormalPris.NormalPrice(recipe.Name, storeSplit) + "kr." + " <br />" +
+                                  "Pris med rabat: " + await RabatPris.TotalPrice(recipe.Name, storeSplit) + "kr." + "<br />" +
+                                  "Laveste mulige pris: " + await RabatPris.TotalPrice(recipe.Name, storeSplitfake) + "kr." + "<br />" +
                                   "</div>" +
                                   "</div>";
                 }
