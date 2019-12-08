@@ -74,6 +74,7 @@
                         <option value="spsk">spsk</option>
                         <option value="knsp">knsp</option>
                         <option value="stk">stk</option>
+                        <option value="ds">ds</option>
                     </select>
                     <button class="btn_delete" @click="deleteRowIng(indexIng)">Slet</button>
                 </li>
