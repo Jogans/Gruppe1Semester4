@@ -15,7 +15,7 @@
                             <router-link to="/CreateUser" class="create_user" tag="button">Opret bruger</router-link>
                         </template>
                         <template v-if="LoggedIn">
-                            <p> Hej {{username}} </p>
+                            <span>Message: {{ username }}</span>
                             <!--<router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>-->
                             <button class="btn btn-r logout" @click="Logout">Log ud</button>
                         </template>
@@ -57,7 +57,7 @@
                 password: null,
                 info: null,
                 LoggedIn: false,
-                username: "Test"
+                username: null
             }
         },
         methods: {
