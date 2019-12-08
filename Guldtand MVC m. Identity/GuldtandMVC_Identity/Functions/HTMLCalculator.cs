@@ -94,7 +94,7 @@ namespace GuldtandMVC_Identity.Models
             
 
                 RecipeRepository recipeRepository = new RecipeRepository(db);
-                var recepylist = await recipeRepository.Get(recipequery);
+                var recipeList = await recipeRepository.Get(recipequery);
                 ProductRepository productRepository = new ProductRepository(db);
                 var listProduct = await query.Execute(db);
 

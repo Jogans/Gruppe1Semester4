@@ -69,12 +69,12 @@ namespace GuldtandMVC_Identity.Controllers
         {
             var normalPrice = new HTMLCalculator();
 
-        //    string[] storeSplit = new string[8];
+            string[] storeSplit = new string[8];
 
-        //    if (stores != null)
-        //    {
-        //        storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
-        //    }
+            if (stores != null)
+            {
+                storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            }
 
 
             return normalPrice.NormalPrice(words, storeSplit);
