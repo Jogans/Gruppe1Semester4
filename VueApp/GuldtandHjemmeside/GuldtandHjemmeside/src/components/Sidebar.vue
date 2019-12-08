@@ -82,7 +82,6 @@
                     <span v-html="info">{{info}}</span>
                 </div>
             </transition>
-
         </div>
     </keep-alive>
 </template>
