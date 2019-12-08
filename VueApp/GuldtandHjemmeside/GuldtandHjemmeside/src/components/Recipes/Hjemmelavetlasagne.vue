@@ -1,7 +1,7 @@
 <template>
-    <div class='bodyTopPage'>
+    <div class='body'>
         <div class="antalPersoner">
-            <select v-model="antal">
+            <select v-model="count">
                 <option value="1">1 Person</option>
                 <option value="2">2 Personer</option>
                 <option value="3">3 Personer</option>
@@ -34,7 +34,7 @@
                 info2: null,
                 searchParameter: null,
                 relevantStores: "",
-                antal: 4
+                count: 4
             }
         },
         methods: {
@@ -44,7 +44,7 @@
                 })
             },
             fullView() {
-                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=lasa' + '&antal=' + this.antal, {
+                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=lasa' + '&count=' + this.count, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

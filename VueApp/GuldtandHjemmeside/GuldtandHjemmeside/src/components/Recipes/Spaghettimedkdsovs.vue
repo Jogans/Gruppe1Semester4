@@ -1,6 +1,6 @@
 <template>
     <div class='body'>
-        <div class="antalPersoner" >
+        <div class="antalPersoner">
             <select v-model="count">
                 <option value="1">1 Person</option>
                 <option value="2">2 Personer</option>
@@ -27,14 +27,14 @@
 
 <script>
     export default {
-        name: 'BrndendeKrlighed',
+        name: 'Spaghettimedkdsovs',
         data: function () {
             return {
                 info: null,
                 info2: null,
-                searchParameter: null,
                 relevantStores: "",
-                count: 4
+                count: 4,
+                searchParameter: "spaghet"
             }
         },
         methods: {
@@ -44,14 +44,14 @@
                 })
             },
             fullView() {
-                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=lighed' + '&count=' + this.count, {
+                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=' + this.searchParameter + '&count=' + this.count, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             },
             generateShoppingCart() {
-                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words=lighed' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words=' + this.searchParameter + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

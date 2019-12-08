@@ -51,13 +51,13 @@
     <Content Include="src\components\Recipes\FlskestegalaMarcus.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\components\Recipes\PizzaHomemade.vue">
+    <Content Include="src\components\Recipes\Kyllingikarry.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\CreateUser.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\components\Recipes\ShowRecipe.vue">
+    <Content Include="src\components\Recipes\Spaghettimedkdsovs.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\SearchBar.vue">
@@ -68,7 +68,7 @@
     </Content>
     <Content Include="src\components\StorePage.vue" />
     <Content Include="src\components\Header.vue" />
-    <Content Include="src\components\NewPage.vue" />
+    <Content Include="src\components\AllRecipes.vue" />
     <Content Include="src\components\ClassicPage.vue" />
     <Content Include="src\components\ProfilePage.vue" />
     <Content Include="src\components\Test.js">

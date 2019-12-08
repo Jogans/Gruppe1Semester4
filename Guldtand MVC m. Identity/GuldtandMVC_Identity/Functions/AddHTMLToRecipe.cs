@@ -38,6 +38,7 @@ namespace GuldtandMVC_Identity.Models
                 };
                 var result = await query.Execute(db);
 
+
                 foreach (var recipe in result)
                 {
                     bodystring = "";
@@ -133,7 +134,7 @@ namespace GuldtandMVC_Identity.Models
             return initString + bodystring + endString;
         }
 
-        public async Task<string> ShowRecipeSmallViewAsync(string stores)
+        public async Task<string> ShowRecipeSmallViewAsync(string stores, int count)
         {
 
             string initString = "" + "<html>";
@@ -181,7 +182,7 @@ namespace GuldtandMVC_Identity.Models
             {
                 RecipeQuery query = new RecipeQuery
                 {
-                    NumberOfRecipes = 5,
+                    NumberOfRecipes = count,
                 };
 
                 var result = await query.Execute(db);
@@ -256,13 +257,21 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new prj4databaseContext())
             {
-                RecipeQuery recipeQuery = new RecipeQuery
+                RecipeQuery query = new RecipeQuery
                 {
                     SearchRecipe = word,
                     NumberOfRecipes = 5
                 };
 
-                var result = await recipeQuery.Execute(db);
+
+
+                var result = await query.Execute(db);
+
+
+                if (result.Count() == 0)
+                {
+                    return "Ingen opskrift fundet";
+                }
 
                 foreach (var recipe in result)
                 {

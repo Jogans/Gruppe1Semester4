@@ -12,11 +12,8 @@
 
             <label for="psw">
                 <b>Adgangskode</b><br />
-                Adgangskoden skal indeholde mindst et tal, <br />
-                Adgangskoden skal indeholde mindst en karakter med sm&#229; bogstav, <br />
-                Adgangskoden skal indeholde mindst en karakter med stort bogstav, <br />
-                Adgangskoden skal indeholde mindst have en l&#230;ngde p&#229; mindst 6 karakterer, <br />
-                Adgangskoden skal indeholde mindst en unik karakter
+                     Adgangskoden skal indeholde mindst have en l&#230;ngde p&#229; mindst 6 karakterer, <br />
+                
             </label>
 
             <input type="password" v-model="password" placeholder="Skriv Adgangskode" name="psw" required>
@@ -31,7 +28,7 @@
             <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
             <div class="clearfix">
-                <button type="button" class="cancelbtn">Annuler</button>
+                <button type="button" class="cancelbtn">Annuller</button>
                 <button class="signupbtn" @click="created">Tilmeld</button>
             </div>
         </div>
@@ -49,29 +46,35 @@
                 email: null,
                 name: null,
                 password: null,
-                info: null
+                info: null,
+                note: null
             }
         },
         methods: {
             HandleErrors: function (response) {
                 if (!response.ok) {
-                    throw Error(response.statusText);
+                    alert("Registrering af bruger fejlet")
+
+                    throw Error(response.statusText)
+
+
                 }
+                alert("Du har nu oprettet en bruger, som du kan logge ind med")
                 return this.$router.push(this.$route.query.redirect || '/')
-                
-                
+
+
             },
             created() {
-               fetch('https://localhost:44324/api/Account/Register', {
+                fetch('https://localhost:44324/api/Account/Register', {
                     method: 'POST',
-                   body: JSON.stringify({
+                    body: JSON.stringify({
                         Email: this.email,
                         Password: this.password
                     }),
                     headers: new Headers({
                         'Content-Type': 'application/json'
                     })
-               }).then(this.HandleErrors)
+                }).then(this.HandleErrors)
                     .then(response => console.log(response))
                     .catch(error => console.log(error));
             },
