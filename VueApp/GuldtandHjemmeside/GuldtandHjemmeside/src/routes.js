@@ -7,7 +7,7 @@ import VegiPage from './components/VegiPage.vue';
 import ClassicPage from './components/ClassicPage.vue';
 import StorePage from './components/StorePage.vue';
 import ProfilePage from './components/ProfilePage.vue';
-import PizzaHomemade from './components/Recipes/PizzaHomemade.vue';
+import Kyllingikarry from './components/Recipes/Kyllingikarry.vue';
 import FlskestegalaMarcus from './components/Recipes/FlskestegalaMarcus.vue';
 import BrndendeKrlighed from './components/Recipes/BrndendeKrlighed.vue';
 import Hjemmelavetlasagne from './components/Recipes/Hjemmelavetlasagne.vue';
@@ -31,7 +31,7 @@ const routes = [
     { path: '/ProfilePage', component: ProfilePage },
     { path: '/CreateUser', component: CreateUser },
     { path: '/CreateRecipe', component: CreateRecipe },
-    { path: '/Recepie/PizzaHomemade', component: PizzaHomemade },
+    { path: '/Recepie/Kyllingikarry', component: Kyllingikarry },
     { path: '/Recepie/FlskestegalaMarcus', component: FlskestegalaMarcus },
     { path: '/Recepie/BrndendeKrlighed', component: BrndendeKrlighed },
     { path: '/Recepie/Hjemmelavetlasagne', component: Hjemmelavetlasagne },

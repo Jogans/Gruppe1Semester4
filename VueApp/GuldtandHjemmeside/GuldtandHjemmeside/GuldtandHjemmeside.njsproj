@@ -51,7 +51,7 @@
     <Content Include="src\components\Recipes\FlskestegalaMarcus.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\components\Recipes\PizzaHomemade.vue">
+    <Content Include="src\components\Recipes\Kyllingikarry.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\CreateUser.vue">
