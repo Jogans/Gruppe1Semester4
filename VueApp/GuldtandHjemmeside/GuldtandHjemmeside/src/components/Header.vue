@@ -15,6 +15,7 @@
                             <router-link to="/CreateUser" class="create_user" tag="button">Opret bruger</router-link>
                         </template>
                         <template v-if="LoggedIn">
+                            <p> Hej {{username}} </p>
                             <!--<router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>-->
                             <button class="btn btn-r logout" @click="Logout">Log ud</button>
                         </template>
@@ -55,7 +56,8 @@
                 email: null,
                 password: null,
                 info: null,
-                LoggedIn: false
+                LoggedIn: false,
+                username: "Test"
             }
         },
         methods: {
@@ -64,7 +66,8 @@
                     alert("Forkert login eller password")
                     throw Error(response.statusText);
                 }
-                this.LoggedIn = true
+                this.LoggedIn = true,
+                this.getCookie()
                 return this.$router.push(this.$route.query.redirect || '/ProfilePage');
             },
 
@@ -100,9 +103,27 @@
                     .then(response => console.log(response))
                     .catch(error => console.log(error));
             },
+            getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                this.username = c;
+                return this.username;
+            }                  
+
+            },
 
 
-        },
+        
 
     };
 
