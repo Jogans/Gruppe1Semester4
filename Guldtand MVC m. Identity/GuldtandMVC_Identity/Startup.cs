@@ -34,24 +34,23 @@ namespace GuldtandMVC_Identity
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<prj4databaseContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<prj4databaseContext>()
+                .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
                 // Set Password settings.
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = true;
+                options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 6;
-                options.Password.RequiredUniqueChars = 1;
-            });
+                });
 
             services.AddAuthorization(options =>
             {
@@ -61,11 +60,6 @@ namespace GuldtandMVC_Identity
                         .RequireClaim("Admin"));
             });
             services.AddDbContext<prj4databaseContext>();
-
-
-            services.AddIdentityCore<ApplicationUser>()
-                .AddEntityFrameworkStores<prj4databaseContext>()
-                .AddDefaultTokenProviders();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -100,7 +94,8 @@ namespace GuldtandMVC_Identity
             app.UseCors(cors =>
                 cors.AllowAnyOrigin()
                     .AllowAnyMethod()
-                    .AllowAnyHeader());
+                    .AllowAnyHeader()
+                    .AllowCredentials());
 
 
             app.UseAuthentication();

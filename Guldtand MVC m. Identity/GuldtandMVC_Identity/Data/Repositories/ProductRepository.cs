@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using GuldtandMVC_Identity.Data.Queries;
 using Microsoft.EntityFrameworkCore;
@@ -8,58 +7,52 @@ using System.Data;
 
 namespace GuldtandMVC_Identity.Data.Repositories
 {
-    public class ProductRepository : IProductRepository, IDisposable
+    public class ProductRepository : IRepository<Product>, IDisposable
     {
-        private prj4databaseContext context;
+        private readonly prj4databaseContext _context;
 
         public ProductRepository(prj4databaseContext context)
         {
-            this.context = context;
+            this._context = context;
         }
 
-        public async Task<IEnumerable<Product>> GetProducts(IQuery<Product> query)
+        public async Task<IEnumerable<Product>> Get(IQuery<Product> query)
         {
-            return await query.Execute(context);
+            return await query.Execute(_context);
         }
 
-        //public IEnumerable<Product> GetProducts()
-        //{
-        //    return context.Product.ToList();
-        //}
-
-        public void InsertProduct(Product product)
+        public void Insert(Product product)
         {
-            context.Product.Add(product);
+            _context.Product.Add(product);
         }
 
-        public void DeleteProduct(int productId)
+        public void Delete(int productId)
         {
-            Product product = context.Product.Find(productId);
-            context.Product.Remove(product);
+            Product product = _context.Product.Find(productId);
+            _context.Product.Remove(product);
         }
 
-        public void UpdateProduct(Product product)
+        public void Update(Product product)
         {
-            context.Entry(product).State = EntityState.Modified;
+            _context.Entry(product).State = EntityState.Modified;
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
-        private bool disposed = false;
-
+        private bool _disposed = false;
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!this._disposed)
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    _context.Dispose();
                 }
             }
-            this.disposed = true;
+            this._disposed = true;
         }
 
         public void Dispose()

@@ -1,5 +1,5 @@
 <template>
-    <div class="bodyCreateRecipe">
+    <div class="body">
         <br style="clear:both" />
         <h1>
             Ny Opskrift
@@ -40,33 +40,19 @@
 
         <div class="rows1">
             <!--addRow1-->
-            <button @click="addRow1">Tilf&#248;j nyt over punkt</button>
+            <button @click="addRow1">Tilf&#248;j beskrivelse</button>
             <br />
             <br />
-          
+
 
             <ul>
                 <li v-for="(input1, index1) in inputs1" v-bind:key="input1">
-
                     <input type="text" placeholder="..." v-model="input1.one" />
                     <button class="btn_delete" @click="deleteRow1(index1)">Slet</button>
-                    <br />
-                    <br />
-                    
-                    <button @click="addRow2">Tilf&#248;j nyt under punkt</button>
-
-                    <ul>
-                        <br />
-                        <li v-for="(input2, index2) in inputs2" v-bind:key="input2">
-                            <input type="text" placeholder="..." v-model="input2.one" />
-                            <button class="btn_delete" @click="deleteRow2(index2)">Slet</button>
-                        </li>
-                        <br />
-
-                    </ul>
                 </li>
             </ul>
         </div>
+
         <h2>
             Skriv ingredienser:
         </h2>
@@ -75,28 +61,32 @@
             <ul>
                 <li v-for="(inputIng, indexIng) in inputsIng" v-bind:key="inputIng">
 
-                    <select v-model='selected' id='category' style="margin: 10px">
-                        <option v-bind:key="kategoriElement" v-for="kategoriElement in inputIng.one">{{kategoriElement}}</option>
-                    </select>
+                    <input type="text" placeholder="..." v-model="inputIng.one" />
 
                     <input class="unit_text" type="text" v-model="inputIng.two" />
-                        <select class="units" v-bind="unit" id="unit_id">
-                            <option value="g">g</option>
-                            <option value="kg">kg</option>
-                            <option value="ml">ml</option>
-                            <option value="dl">dl</option>
-                            <option value="l">l</option>
-                            <option value="tsk">tsk</option>
-                            <option value="spsk">spsk</option>
-                            <option value="knsp">knsp</option>
-                        </select>
+                    <select class="units" v-bind="unit" v-model="inputIng.three" id="unit_id">
+                        <option value="g">g</option>
+                        <option value="kg">kg</option>
+                        <option value="ml">ml</option>
+                        <option value="dl">dl</option>
+                        <option value="l">l</option>
+                        <option value="tsk">tsk</option>
+                        <option value="spsk">spsk</option>
+                        <option value="knsp">knsp</option>
+                        <option value="stk">stk</option>
+                    </select>
                     <button class="btn_delete" @click="deleteRowIng(indexIng)">Slet</button>
                 </li>
             </ul>
+            <br style="clear:both" />
+            <h2>
+                Tilføj billede
+            </h2>
+            <input type="text" placeholder="Indtast link til billede" v-model="imgUrl" />
         </div>
+        <br style="clear:both" />
 
-        <button class="test_btn" @click="created">Test</button>
-
+        <button class="test_btn" @click="created">Opret opskrift</button>
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
 
@@ -104,56 +94,93 @@
 </template>
 
 <script>
-
     export default {
         name: 'CreateRecepie',
         data: function () {
             return {
                 inputs1: [],
-                inputs2: [],
                 inputsIng: [],
-                inputs4: [],
-                category: "",
+                category: [],
                 info: null,
                 recipeName: null,
                 timeValue: null,
                 ingridiens: null,
+                imgUrl: null,
                 unit: "",
-                selected: ""
+                selected: "",
+                i: 0,
+                m: 0,
+                descriptionString: "",
+                ingridientNameString: "",
+                ingridientAmountString: "",
+                ingridientUnitString: "",
             }
         },
         methods: {
             addCategory() {
-                this.$http.get('https://localhost:44324/kategori/getAllCategories', {
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                }).then(response => (
-                    this.inputsIng.push({
-                        one: response.data
-                    })))
+                this.m++;
+                this.inputsIng.push({
+                    one: null,
+                    two: null,
+                    three: null,
+                })
             },
             addRow1() {
-                this.inputs1.push({
-                    one: ''
-                })
-            },
-            addRow2() {
-                this.inputs2.push({
-                    one: ''
-                })
+                if (this.inputs1.length < 10000) {
+                    this.i++;
+                    this.inputs1.push({
+                        one: null,
+                    })
+                }
             },
             deleteRow1(index1) {
+                this.i--;
                 this.inputs1.splice(index1, 1)
             },
-            deleteRow2(index2) {
-                this.inputs2.splice(index2, 1)
-            },
             deleteRowIng(indexIng) {
+                this.m--;
                 this.inputsIng.splice(indexIng, 1)
             },
+            nameIngridients() {
+                var k = 0;
+                this.ingridientNameString = "";
+                for (k = 0; k < this.m; k++) {
+                    this.ingridientNameString += this.inputsIng[k].one + ";";
+                }
+                return this.ingridientNameString;
+            },
+            amountIngridients() {
+                var k = 0;
+                this.ingridientAmountString = "";
+                for (k = 0; k < this.m; k++) {
+                    this.ingridientAmountString += this.inputsIng[k].two + ";";
+                }
+                return this.ingridientAmountString;
+            },
+            unitIngridients() {
+                var k = 0;
+                this.ingridientUnitString = "";
+                for (k = 0; k < this.m; k++) {
+                    this.ingridientUnitString += this.inputsIng[k].three + ";";
+                }
+                return this.ingridientUnitString;
+            },
+            description() {
+                var j = 0;
+                this.descriptionString = "";
+                for (j = 0; j < this.i; j++) {
+                    this.descriptionString += this.inputs1[j].one + ";";
+                }
+                return this.descriptionString;
+            },
             created() {
-                this.$http.get('https://localhost:44324/Home/recepieCreateTest?name=' + this.recipeName + '&prepareTime=' + this.timeValue + '&unit=' + this.unit, {
+                this.$http.get('https://localhost:44324/Home/recepieCreateTest?name=' + this.recipeName +
+                    '&prepareTime=' + this.timeValue +
+                    '&description=' + this.description() +
+                    '&ingridientName=' + this.nameIngridients() +
+                    '&ingridientAmount=' + this.amountIngridients() +
+                    '&ingridientUnit=' + this.unitIngridients() +
+                    '&imgUrl=' + this.imgUrl, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
@@ -164,11 +191,12 @@
 </script>
 
 <style scoped>
-    .bodyCreateRecipe {
+
+    /*.bodyCreateRecipe {
         width: 100%;
         max-width: 65%;
         margin: auto;
-    }
+    }*/
 
     .btn_addLine {
         margin-left: 50px;

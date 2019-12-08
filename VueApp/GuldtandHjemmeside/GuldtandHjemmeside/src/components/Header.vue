@@ -4,51 +4,44 @@
         <div class="header">
             <div class="TopPart">
                 <div class="title">
+
                     <router-link to="/"><img src="@/assets/Pics/Guldtand.jpg" alt="Guldtand" tag="button" /></router-link>
-                    <button onclick="document.getElementById('id01').style.display='block'" class="Login" style="width:auto" type="button">Login</button>
-                    <router-link to="/CreateUser" class="Create_user" tag="button">Opret bruger</router-link>
-                    <router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>
+                    <router-link to="/"><h1 class="headerName">GuldTand</h1></router-link>
+                    <div class="loginDiv">
+                        <template v-if="!LoggedIn">
+                            <input class="input usernameinput" type="text" placeholder="Indtast brugernavn" v-model="email" name="uname" required />
+                            <button class="login" @click="Login">Login</button>
+                            <input class="input passwordinput" type="password" placeholder="Indtast kodeord" v-model="password" name="psw" required />
+                            <router-link to="/CreateUser" class="create_user" tag="button">Opret bruger</router-link>
+                        </template>
+                        <template v-if="LoggedIn">
+                            <!--<router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>-->
+                            <button class="btn btn-r logout" @click="Logout">Log ud</button>
+                        </template>
+                    </div>
+
                 </div>
+                <br style="clear:both" />
+                <div class="Buttons2">
+                    <router-link to="/" class="btn btnfirst" tag="button">Forside</router-link>
+                    <router-link to="/TopPage" class="btn" tag="button">Top retter</router-link>
+                    <router-link to="/NewPage" class="btn" tag="button">Nye retter</router-link>
+                    <router-link to="/VegiPage" class="btn btn_Vegi" tag="button">Vegetar retter</router-link>
+                    <router-link to="/SearchBar" class="btn" tag="button">S&#248;g</router-link>
+                    <!--<router-link to="/SUPage" class="btn btn_Su" tag="button">SU-retter</router-link>-->
+                    <!--<router-link to="/Recipe/ShowRecipe" class="btn btn_Classic" tag="button">Klassiske retter</router-link>-->
+                    <!--<router-link to="/StorePage" class="btn btn_Store" tag="button">V&#230;lg Butik</router-link>-->
 
-                <div id="id01" class="modal">
-                    <form class="modal-content animate" action="/action_page.php" method="post">
-                        <div class="imcontainer">
-                            <span onclick="document.getElementById('id01').style.display='none'"
-                                  class="close" title="close Modal">&times;</span>
-                        </div>
+                    <template v-if="LoggedIn">
+                        <router-link to="/ProfilePage" class="btn btn-r MyPage" tag="button">Profil</router-link>
+                        <router-link to="/CreateRecipe" class="btn btn-r btn_CreateRecipe" tag="button">Opret Opskrift</router-link>
+                    </template>
 
-                        <div class="container">
-                            <label for="uname"><b>Username</b></label>
-                            <input type="text" placeholder="Enter Username" v-model="email" name="uname" required />
+                    <!--<br style="clear:both" />-->
+                    <router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>
 
-                            <label for="psw"><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" v-model="password" name="psw" required />
-
-                            <button class="modla_login" type="submit">Login</button>
-                            <label>
-                                <input type="checkbox" checked="checked" name="remember" />
-                                Remember me
-                            </label>
-                        </div>
-
-                        <div class="container" style="background-color:#f1f1f1">
-                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                            <span class="psw">Forgot <a href="#">password?</a></span>
-                        </div>
-                    </form>
                 </div>
-            </div>
-            <br style="clear:both" />
-            <div class="Buttons2">
-                <router-link to="/TopPage" class="btn_Top" tag="button">Top retter</router-link>
-                <router-link to="/NewPage" class="btn_New" tag="button">Nye retter</router-link>
-                <router-link to="/SUPage" class="btn_Su" tag="button">SU-retter</router-link>
-                <router-link to="/VegiPage" class="btn_Vegi" tag="button">Vegetar retter</router-link>
-                <router-link to="/Recipe/ShowRecipe" class="btn_Classic" tag="button">Klassiske retter</router-link>
-                <router-link to="/StorePage" class="btn_Store" tag="button">V&#230;lg Butik</router-link>
-                <router-link to="/CreateRecipe" class="btn_CreateRecipe" tag="button">Opret Opskrift</router-link>
-                <router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>
-
+                <br style="clear:both" />
             </div>
         </div>
     </keep-alive>
@@ -63,150 +56,67 @@
             return {
                 email: null,
                 password: null,
-                info: null
-
+                info: null,
+                LoggedIn: false
             }
         },
-                methods: {
-            created() {
-                this.$http.get('https://localhost:44324/Home/loginTest?email=' +this.email+ '&password=' +this.password,  {
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                }).then(response => (this.info = response.data))
+        methods: {
+            LoginHandleErrors: function (response) {
+                if (!response.ok) {
+                    alert("Forkert login eller password")
+                    throw Error(response.statusText);
+                }
+                this.LoggedIn = true
+                return this.$router.push(this.$route.query.redirect || '/ProfilePage');
             },
-        }
-    };
-    // Get the modal
-    var modal = document.getElementById('id01');
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.taget == modal) {
-            modal.style.display = "none";
-        }
-    }
+            LogoutHandleErrors: function (response) {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                this.LoggedIn = false
+                return this.$router.push(this.$route.query.redirect || '/');
+            },
+
+            Login() {
+                fetch('https://localhost:44324/api/Account/Login', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        Email: this.email,
+                        Password: this.password
+                    }),
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
+                }).then(this.LoginHandleErrors)
+                    .then(response => console.log(response))
+                    .catch(error => console.log(error));
+            },
+            Logout() {
+                fetch('https://localhost:44324/api/Account/Logout', {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
+                }).then(this.LogoutHandleErrors)
+                    .then(response => console.log(response))
+                    .catch(error => console.log(error));
+            },
+
+
+        },
+
+    };
+
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-    /* Full width input fields */
-    input[type=text], input[type=password] {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-    }
-
-    /* Set a style for login button in the modal */
-    .modla_login {
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-    }
-
-    button:hover {
-        opacity: 0.8;
-    }
-
-    /* Extra styles for the cancel button */
-    .cancelbtn {
-        width: auto;
-        padding: 10px 18px;
-        background-color: #f44336;
-    }
-
-    /* Conter the and position the close button */
-    .imcontainer {
-        text-align: center;
-        margin: 24px 0 12px 0;
-        position: relative;
-    }
-
-    .container {
-        padding: 16px;
-    }
-
-    span.psw {
-        float: right;
-        padding-top: 16px;
-    }
-
-    /* The Modal (background) */
-    .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        right: 0;
-        top: 0;
-        width: 50%; /* Half width */
-        height: 50%; /* Half height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        padding-top: 60px;
-    }
-
-    /* Modal Contect/Box */
-    .modal-content {
-        background-color: #fefefe;
-        margin: 5% auto 15% auto; /* 5% from the top, 15% from the buttom and centered */
-        border: 1px solid #888;
-        width: 80%; /* Colud be more or less depending on screen size */
-    }
-
-    /* The Close Button (x) */
-    .close {
-        position: absolute;
-        right: 25px;
-        top: 0;
-        color: #000;
-        font-size: 35px;
-        font-weight: bold;
-    }
-
-        .close:hover, .close:focus {
-            color: red;
-            cursor: pointer;
-        }
-
-    /* Add Zoom Animation */
-    .animate {
-        -webkit-animation: animetezoom 0.6s;
-        animation: animatezoom 0.6s
-    }
-
-    @-webkit-keyframes animetezoom {
-        from {
-            -webkit-transform: scale(0)
-        }
-
-        to {
-            -webkit-transform: scale(1)
-        }
-    }
-
-    /* Change styles for span and cancel button on extra small screen */
-    @media screen and (max-width: 300px) {
-        span.psw {
-            display: block;
-            float: none;
-        }
-
-        .cancelbtn {
-            width: 100%;
-        }
-    }
-
     img {
-        position: relative;
+        position: static;
         float: left;
         height: 10%;
         width: 10%;
@@ -216,21 +126,28 @@
 
     .header {
         width: 100%;
+        max-width: 65%;
         height: auto;
         background-color: white;
-        max-width: 65%;
         margin: auto;
         position: relative;
     }
 
     .TopPart {
-        padding-bottom: 50px;
+        padding: 20px 0;
     }
 
     .title {
         float: left;
         display: block;
         position: relative;
+    }
+
+    .headerName {
+        display: block;
+        position: relative;
+        float: left;
+        padding-left: 20px;
     }
 
     .UserBtn {
@@ -240,18 +157,102 @@
         float: right;
     }
 
-    .Login {
+    .btn {
+        border: none;
+        color: black;
+        padding: 15px 20px;
+        text-align: center;
+        text-decoration: none;
+        float: left;
         display: block;
-        position: relative;
+        margin: 4px;
+        font-size: 20px;
+    }
+
+    .btn-r {
         float: right;
     }
 
+    .btnfirst {
+        margin-left: 0px;
+        ;
+    }
 
-    .Create_user {
+    .btnlast {
+        margin-right: 0px;
+    }
+
+    .btn a {
+        display: block;
+        padding: 15px 32px;
+    }
+
+    .btn:active {
+        /*background-color: white;*/
+        border-bottom: 2px solid#666;
+    }
+
+    .btn:hover {
+        cursor: grab; /* Ændre musen når den holdes over en knap */
+        border-bottom: 5px solid grey;
+        /*margin-bottom: -5px;*/
+    }
+
+
+
+    .loginDiv {
+        width: 270px;
         display: block;
         position: relative;
         float: right;
+        padding-top: 20px;
     }
+
+
+    .input {
+        display: block;
+        position: relative;
+        float: left;
+        border: none;
+        padding: 5px;
+        background-color: #f1f1f1;
+        margin-bottom: 5px;
+    }
+
+        .input:focus {
+            background-color: lightblue;
+            outline: none
+        }
+
+    .usernameinput {
+    }
+
+    .passwordinput {
+    }
+
+    .login {
+        display: block;
+        position: relative;
+        float: right;
+        width: 100px;
+        height: 25px;
+    }
+
+    .create_user {
+        display: block;
+        position: relative;
+        float: right;
+        width: 100px;
+        height: 25px;
+    }
+
+    .logout {
+        color: #DF5C40;
+    }
+
+    /*.logout:hover {
+        background-color: #DF5C40;
+    }*/
 
     .MyPage {
         display: block;
@@ -283,159 +284,14 @@
         padding-bottom: 10px;
     }*/
 
-    .btn_Top {
-        background-color: white;
-        border: 2px solid #555555;
+
+    .router-link-active {
         color: black;
-        padding: 16px;
-        text-align: center;
         text-decoration: none;
-        border-radius: 15px; /* Laver den runde kant */
-        float: left;
-        box-shadow: 0 9px #999;
-        display: block;
-        margin: 2px;
-        font-size: 24px;
     }
 
-        .btn_Top a {
-            display: block;
-            padding: 15px 32px;
-        }
-
-        .btn_Top:active {
-            background-color: white;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-
-    .btn_New {
-        background-color: white;
-        border: 2px solid #555555;
-        color: black;
-        padding: 16px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 15px; /* Laver den runde kant */
-        float: left;
-        box-shadow: 0 9px #999;
-        font-size: 24px;
-        margin: 2px;
-    }
-
-        .btn_New a {
-            display: block;
-            padding: 15px 32px;
-        }
-
-        .btn_New:active {
-            background-color: white;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-
-    .btn_Su {
-        background-color: white;
-        border: 2px solid #555555;
-        color: black;
-        padding: 16px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 15px; /* Laver den runde kant */
-        float: left;
-        box-shadow: 0 9px #999;
-        font-size: 24px;
-        margin: 2px;
-    }
-
-        .btn_Su a {
-            display: block;
-            padding: 15px 32px;
-        }
-
-        .btn_Su:active {
-            background-color: white;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-
-    .btn_Vegi {
-        background-color: white;
-        border: 2px solid #555555;
-        color: black;
-        padding: 16px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 15px; /* Laver den runde kant */
-        float: left;
-        box-shadow: 0 9px #999;
-        font-size: 24px;
-        margin: 2px;
-    }
-
-        .btn_Vegi a {
-            display: block;
-            padding: 15px 32px;
-        }
-
-        .btn_Vegi:active {
-            background-color: white;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-
-    .btn_Classic {
-        background-color: white;
-        border: 2px solid #555555;
-        color: black;
-        padding: 16px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 15px; /* Laver den runde kant */
-        float: left;
-        box-shadow: 0 9px #999;
-        font-size: 24px;
-        margin: 2px;
-    }
-
-        .btn_Classic a {
-            display: block;
-            padding: 15px 32px;
-        }
-
-        .btn_Classic:active {
-            background-color: white;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-
-    .btn_Store {
-        background-color: white;
-        border: 2px solid #555555;
-        color: black;
-        padding: 16px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 15px; /* Laver den runde kant */
-        float: left;
-        box-shadow: 0 9px #999;
-        font-size: 24px;
-        margin: 2px;
-    }
-
-        .btn_Store a {
-            display: block;
-            padding: 15px 32px;
-        }
-
-        .btn_Store:active {
-            background-color: white;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-
-    a:hover {
-        cursor: pointer; /* Ændre musen når den holdes over en knap */
+    .router-link-exact-active {
+        border-bottom: 5px solid var(--accent-color);
     }
 </style>
 

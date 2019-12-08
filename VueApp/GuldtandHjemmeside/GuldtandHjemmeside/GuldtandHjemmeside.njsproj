@@ -40,7 +40,15 @@
     <Content Include="src\assets\Pics\Kvickly.png" />
     <Content Include="src\assets\Pics\Lidl.png" />
     <Content Include="src\assets\Pics\Pizza_Picture.jpg" />
+    <Content Include="src\components\autocomplete.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\CreateRecipe.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\Recipes\BrndendeKrlighed.vue" />
+    <Content Include="src\components\Recipes\Hjemmelavetlasagne.vue" />
+    <Content Include="src\components\Recipes\FlskestegalaMarcus.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\Recipes\PizzaHomemade.vue">
@@ -55,7 +63,7 @@
     <Content Include="src\components\SearchBar.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\components\Searchsite.vue">
+    <Content Include="src\store.js">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\StorePage.vue" />
@@ -67,6 +75,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\TestCalculator.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\Typeahead.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\VegiPage.vue" />

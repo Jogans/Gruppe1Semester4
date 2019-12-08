@@ -1,10 +1,12 @@
 <template>
-    <div class='bodyTopPage'>
+    <div class='body'>
+        <h1>Top retter</h1>
+        <p>Her ses en liste af ugens billigste retter at lave - baseret p&aring;     de aktuelle tilbud i de valgte butikker.</p>
         <br style="clear:both" />
-        <h1>Test af lille opskriftvisning</h1>
+        <button class="test_btn" @click="smallView">Opdater opskrift med valgte butikker</button>
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
-
+        <br style="clear:both" />
         <br style="clear:both" />
 
     </div>
@@ -18,33 +20,35 @@
         data: function () {
             return {
                 info: null,
-                searchParameter: null
+                searchParameter: null,
+                relevantStores: ""
             }
         },
         methods: {
-            created() {
-                this.$http.get('https://localhost:44324/Home/viewForSmallRecipe?words=marcus', {
+            smallView() {
+                this.$http.get('https://localhost:44324/Recipe/viewForSmallRecipe?stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
-                }).then(response => (this.info = response.data))
+                }).then(response => this.info = response.data)
             }
         },
         beforeMount() {
-            this.created()
-        }
+            this.smallView()
+            this.$root.$on('clickedSaveStores', (stores) => {
+                this.relevantStores = stores;
+            })
+        },
     };
 </script>
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-    .bodyTopPage {
+    . /*body {
         width: 100%;
         max-width: 65%;
         margin: auto;
-    }
-
-
+    }*/
     .textForPrice {
         display: block;
         position: relative;

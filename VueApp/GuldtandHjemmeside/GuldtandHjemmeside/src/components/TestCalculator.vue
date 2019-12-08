@@ -3,6 +3,7 @@
         <br style="clear:both" />
         <h1>Calculator Test Site</h1>
         <button class="test_btn" @click="created">Test</button>
+        <br style="clear:both" />
         <span v-html="info">{{info}}</span>
 
     </div>
@@ -16,18 +17,24 @@
         data: function () {
             return {
                 info: null,
-                searchParameter: null
+                searchParameter: null,
+                relevantStores: ""
             }
         },
         methods: {
             created() {
-                this.$http.get('https://localhost:44324/Home/viewTotalPrice?words=marcus', {
+                this.$http.get('https://localhost:44324/Home/viewNormalPrice?words=lasa' + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             }
-        }
+        },
+        beforeMount() {
+            this.$root.$on('clickedSaveStores', (stores) => {
+                this.relevantStores = stores;
+            })
+        },
     };
 </script>
 

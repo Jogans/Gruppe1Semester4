@@ -1,21 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
-using com.sun.org.apache.xml.@internal.utils;
-using GuldtandMVC_Identity.Models;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using GuldtandMVC_Identity.Models;
+using java.net;
+using Microsoft.AspNetCore.Http.Internal;
+using Microsoft.AspNetCore.Identity;
+
+
 
 namespace GuldtandMVC_Identity.Controllers
 {
-    public class AccountController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AccountController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -26,9 +34,8 @@ namespace GuldtandMVC_Identity.Controllers
         {
             var newUser = new ApplicationUser
             {
-                UserName = dtoUser.Email,
                 Email = dtoUser.Email,
-                NormalizedUserName = dtoUser.Name,
+                UserName = dtoUser.Email,
             };
             var userCreationResult = await _userManager.CreateAsync(newUser, dtoUser.Password);
             if (userCreationResult.Succeeded)
@@ -43,11 +50,24 @@ namespace GuldtandMVC_Identity.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] DtoUser dtoUser)
         {
+
+
             var passwordSignInResult = await _signInManager.PasswordSignInAsync(dtoUser.Email,
-               dtoUser.Password, isPersistent: false, lockoutOnFailure: false);
+                dtoUser.Password, isPersistent: false, lockoutOnFailure: false);
             if (passwordSignInResult.Succeeded)
             {
-                return Ok();
+                HttpContext.Response.Cookies.Append(
+                    "userName",
+                         dtoUser.Email,
+                         new CookieOptions()
+                         {
+                             Expires = DateTime.Now.AddHours(1),
+                             HttpOnly = false,
+                             Secure = false,
+                             IsEssential = true
+                         }
+                     );
+               return Ok();
             }
             ModelState.AddModelError(string.Empty, "Invalid login");
             return BadRequest(ModelState);
@@ -57,6 +77,13 @@ namespace GuldtandMVC_Identity.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
+
+            Response.Cookies.Delete("userName");
+            //if (HttpContext.Request.Cookies.Keys.Any())
+            //{
+            //    var aCookie = HttpContext.Request.Cookies.Keys.Last();
+            //    HttpContext.Response.Cookies.Delete(aCookie);
+            //}
             return Ok();
         }
 
