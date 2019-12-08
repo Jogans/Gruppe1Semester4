@@ -2,7 +2,7 @@
     <div class="body">
         <div class="SearchBar">
             <!-- <typeahead :suggestions="searchoptions" :selection.sync="value"> </typeahead>  -->
-            <input type="text" v-model="searchParameter" placeholder="Indtast en navnet af en opskrift eller en ingrediens" required>
+            <input type="text" v-model="searchParameter" placeholder="Indtast navnet af en opskrift eller en ingrediens" required>
             <!--<autocomplete :items="[ 'Apple', 'Banana', 'Orange', 'Mango', 'Pear', 'Peach', 'Grape', 'Tangerine', 'Pineapple']" />
 
         <script type="text/x-template" id="autocomplete">

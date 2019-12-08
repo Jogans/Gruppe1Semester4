@@ -31,8 +31,8 @@ namespace GuldtandMVC_Identity.Controllers
             return search.searchProductsAndGetHTML(words);
 
         }
-        [Authorize]
-        [HttpPost]
+        
+
         public Task<string> recepieCreateTest(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl)
         {
             var createRecepie = new CreateRecepieFromVue();

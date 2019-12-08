@@ -80,7 +80,7 @@
             </ul>
             <br style="clear:both" />
             <h2>
-                Tilføj billede
+                Tilf&oslash;j billede
             </h2>
             <input type="text" placeholder="Indtast link til billede" v-model="imgUrl" />
         </div>
