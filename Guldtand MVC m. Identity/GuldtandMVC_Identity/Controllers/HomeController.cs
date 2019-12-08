@@ -5,17 +5,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GuldtandMVC_Identity.Models;
-using iTextSharp.tool.xml.html;
-using com.sun.org.apache.xerces.@internal.parsers;
+
+
 using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
 using Microsoft.AspNetCore.Identity;
-using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
-using java.net;
-using jdk.nashorn.@internal.ir;
+
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Identity;
+
 
 namespace GuldtandMVC_Identity.Controllers
 {
