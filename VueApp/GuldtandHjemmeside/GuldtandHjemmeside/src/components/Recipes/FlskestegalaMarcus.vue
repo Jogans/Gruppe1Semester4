@@ -1,6 +1,8 @@
 <template>
     <div class='bodyTopPage'>
         <div class="antalPersoner">
+            <br style="clear:both" />
+            <br style="clear:both" />
             <select v-model="antal">
                 <option value="1">1 Person</option>
                 <option value="2">2 Personer</option>

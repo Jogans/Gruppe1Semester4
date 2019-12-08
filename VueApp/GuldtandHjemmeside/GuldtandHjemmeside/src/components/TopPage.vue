@@ -1,5 +1,6 @@
 <template>
     <div class='body'>
+        <br style="clear:both" />
         <h1>Top retter</h1>
         <p>Her ses en liste af ugens billigste retter at lave - baseret p&aring;     de aktuelle tilbud i de valgte butikker.</p>
         <br style="clear:both" />
