@@ -9,7 +9,7 @@
                     <router-link to="/"><h1 class="headerName">GuldTand</h1></router-link>
                     <div class="loginDiv">
                         <template v-if="!LoggedIn">
-                            <input class="input usernameinput" type="text" placeholder="Indtast brugernavn" v-model="email" name="uname" required />
+                            <input class="input usernameinput" type="text" placeholder="Indtast email" v-model="email" name="uname" required />
                             <button class="login" @click="Login">Login</button>
                             <input class="input passwordinput" type="password" placeholder="Indtast kodeord" v-model="password" name="psw" required />
                             <router-link to="/CreateUser" class="create_user" tag="button">Opret bruger</router-link>
@@ -25,7 +25,7 @@
                 <div class="Buttons2">
                     <router-link to="/" class="btn btnfirst" tag="button">Forside</router-link>
                     <router-link to="/TopPage" class="btn" tag="button">Top retter</router-link>
-                    <router-link to="/NewPage" class="btn" tag="button">Nye retter</router-link>
+                    <router-link to="/AllRecipes" class="btn" tag="button">Alle retter</router-link>
                     <router-link to="/VegiPage" class="btn btn_Vegi" tag="button">Vegetar retter</router-link>
                     <router-link to="/SearchBar" class="btn" tag="button">S&#248;g</router-link>
                     <!--<router-link to="/SUPage" class="btn btn_Su" tag="button">SU-retter</router-link>-->
@@ -38,7 +38,7 @@
                     </template>
 
                     <!--<br style="clear:both" />-->
-                    <router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>
+                    <!--<router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>-->
 
                 </div>
                 <br style="clear:both" />
@@ -210,6 +210,7 @@
 
 
     .input {
+        width:150px;
         display: block;
         position: relative;
         float: left;
@@ -236,6 +237,7 @@
         float: right;
         width: 100px;
         height: 25px;
+        font-size:12px;
     }
 
     .create_user {
@@ -244,6 +246,8 @@
         float: right;
         width: 100px;
         height: 25px;
+        font-size:12px;
+    
     }
 
     .logout {

@@ -134,7 +134,7 @@ namespace GuldtandMVC_Identity.Models
             return initString + bodystring + endString;
         }
 
-        public async Task<string> ShowRecipeSmallViewAsync(string stores)
+        public async Task<string> ShowRecipeSmallViewAsync(string stores, int count)
         {
 
             string initString = "" + "<html>";
@@ -182,7 +182,7 @@ namespace GuldtandMVC_Identity.Models
             {
                 RecipeQuery query = new RecipeQuery
                 {
-                    NumberOfRecipes = 5,
+                    NumberOfRecipes = count,
                 };
 
                 var result = await query.Execute(db);
