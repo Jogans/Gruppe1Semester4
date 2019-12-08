@@ -37,7 +37,7 @@
 
                     <br style="clear:both" />
 
-                    <div class="antalPersoner">
+                    <!--<div class="antalPersoner">
                         <select class="dropDown">
                             <option value="0">Antal Personer:</option>
                             <option value="1">1 Person</option>
@@ -53,9 +53,9 @@
 
                         </select>
                     </div>
-                    <br style="clear:both" />
+                    <br style="clear:both" />-->
 
-                    <div class="CheckboxDishes">
+                    <!--<div class="CheckboxDishes">
                         <p>Hvilke retter &oslash;nsker du?</p>
 
                         <ul class="dishes-li">
@@ -76,11 +76,8 @@
                                 <label for="dish4">Svinek&#248;d</label>
                             </li>
                         </ul>
+                    </div>-->
 
-
-
-
-                    </div>
                     <br />
                     <span v-html="info">{{info}}</span>
                 </div>
