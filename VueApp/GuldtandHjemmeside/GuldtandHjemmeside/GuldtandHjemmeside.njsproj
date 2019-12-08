@@ -46,6 +46,8 @@
     <Content Include="src\components\CreateRecipe.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\components\Recipes\Plsehorn.vue" />
+    <Content Include="src\components\Recipes\Pandekager.vue" />
     <Content Include="src\components\Recipes\BrndendeKrlighed.vue" />
     <Content Include="src\components\Recipes\Hjemmelavetlasagne.vue" />
     <Content Include="src\components\Recipes\FlskestegalaMarcus.vue">

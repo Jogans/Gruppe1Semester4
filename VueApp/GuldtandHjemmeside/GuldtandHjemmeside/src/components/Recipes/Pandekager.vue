@@ -1,8 +1,6 @@
 <template>
     <div class='body'>
-        <div class="antalPersoner">
-            <br style="clear:both" />
-            <br style="clear:both" />
+        <div class="antalPersoner" >
             <select v-model="count">
                 <option value="1">1 Person</option>
                 <option value="2">2 Personer</option>
@@ -29,7 +27,7 @@
 
 <script>
     export default {
-        name: 'BrndendeKrlighed',
+        name: 'Pandekager',
         data: function () {
             return {
                 info: null,
@@ -46,14 +44,14 @@
                 })
             },
             fullView() {
-                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/viewASpeceficRecipe?words=lighed' + '&count=' + this.count, {
+                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=pande' + '&count=' + this.count, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             },
             generateShoppingCart() {
-                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/getShoppingCart?words=lighed' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words=pande' + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
