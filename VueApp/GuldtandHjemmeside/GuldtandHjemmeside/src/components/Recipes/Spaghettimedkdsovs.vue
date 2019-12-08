@@ -1,5 +1,5 @@
 <template>
-    <div class='bodyTopPage'>
+    <div class='body'>
         <div class="antalPersoner">
             <select v-model="count">
                 <option value="1">1 Person</option>
