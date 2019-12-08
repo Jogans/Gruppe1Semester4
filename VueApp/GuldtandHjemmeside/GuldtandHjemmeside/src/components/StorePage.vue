@@ -33,7 +33,7 @@
         },
         methods: {
             sendRecipeRequest() {
-                this.$http.post('http://nyguldtand.azurewebsites.net/Home/viewASpeceficRecipe?words=' + this.searchParameter + '&stores=' + this.relevantStores,  {
+                this.$http.post('https://nyguldtand.azurewebsites.net/Home/viewASpeceficRecipe?words=' + this.searchParameter + '&stores=' + this.relevantStores,  {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     }

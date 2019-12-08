@@ -27,7 +27,7 @@
         },
         methods: {
             smallView() {
-                this.$http.get('http://nyguldtand.azurewebsites.net/Recipe/viewForSmallRecipe?stores=' + this.relevantStores + '&count=3', {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/viewForSmallRecipe?stores=' + this.relevantStores + '&count=3', {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

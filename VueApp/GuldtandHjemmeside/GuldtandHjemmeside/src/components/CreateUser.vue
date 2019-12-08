@@ -63,7 +63,7 @@
 
             },
             RegisterUser() {
-                fetch('http://nyguldtand.azurewebsites.net/api/Account/Register', {
+                fetch('https://nyguldtand.azurewebsites.net/api/Account/Register', {
                     method: 'POST',
                     body: JSON.stringify({
                         Email: this.email,

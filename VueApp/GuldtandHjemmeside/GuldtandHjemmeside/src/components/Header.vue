@@ -77,7 +77,7 @@
             },
 
             Login() {
-                fetch('http://nyguldtand.azurewebsites.net/api/Account/Login', {
+                fetch('https://nyguldtand.azurewebsites.net/api/Account/Login', {
                     method: 'POST',
                     body: JSON.stringify({
                         Email: this.email,
@@ -91,7 +91,7 @@
                     .catch(error => console.log(error));
             },
             Logout() {
-                fetch('http://nyguldtand.azurewebsites.net/api/Account/Logout', {
+                fetch('https://nyguldtand.azurewebsites.net/api/Account/Logout', {
                     method: 'POST',
                     headers: new Headers({
                         'Content-Type': 'application/json'

@@ -73,7 +73,7 @@
                 //this.$router.push({ name: 'Searchsite' })
                 //this.$router.go({ path: 'Searchsite' })
 
-                this.$http.get('http://nyguldtand.azurewebsites.net/Home/searchProducts?words=' + this.searchParameter, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Home/searchProducts?words=' + this.searchParameter, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
@@ -82,7 +82,7 @@
 
             },
             searchRecepie() {
-                this.$http.get('http://nyguldtand.azurewebsites.net/Recipe/viewForSmallRecipeSearch?word=' + this.searchParameter + '&stores=' + this.relevantStores, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/viewForSmallRecipeSearch?word=' + this.searchParameter + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
