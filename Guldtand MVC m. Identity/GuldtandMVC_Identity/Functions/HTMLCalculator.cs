@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
@@ -98,7 +99,7 @@ namespace GuldtandMVC_Identity.Models
                 var listProduct = await query.Execute(db);
 
 
-                foreach (var recipe in recepylist)
+                foreach (var recipe in recipeList)
                 {
                     //take all ingredients in the ingredientlist
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
@@ -109,7 +110,7 @@ namespace GuldtandMVC_Identity.Models
                 return totalPrice;
             }
         }
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
+        
+
     }
 }

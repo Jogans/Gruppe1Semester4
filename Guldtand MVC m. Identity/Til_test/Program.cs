@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GuldtandMVC_Identity;
+using GuldtandMVC_Identity.Controllers;
+using GuldtandMVC_Identity.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Til_test
@@ -14,21 +16,34 @@ namespace Til_test
         {
             using (var db = new prj4databaseContext())
             {
-                RecipeQuery recipeQuery = new RecipeQuery
-                {
-                    SearchRecipe = "lasagne",
-                    LoadIngredientList = true,
-                    Stores = new string[] {"Netto", "rema", "bilka", "aldi"}
-                };
-                var recipes = await recipeQuery.Execute(db);
-                foreach (var recipe in recipes)
-                {
-                    Console.WriteLine($"{recipe.Name}");
-                    foreach (var ingredient in recipe.IngredientList.Ingredient)
-                    {
-                        Console.WriteLine($"{ingredient.Name} - {ingredient.Product.Name} - {ingredient.Product.Price} - {ingredient.Product.RetailChain.Name}");
-                    }
-                }
+                RecipeController ctrl = new RecipeController();
+                var result = await ctrl.viewForSmallRecipeSearch("lasagne", "bilka;aldi;netto");
+
+                //var Stores = new string[] {"Netto", "rema", "bilka", "aldi"};
+                //HTMLCalculator calculator = new HTMLCalculator();
+                //for (int i = 0; i < 20; i++)
+                //{
+
+                //    var result = await calculator.NormalPrice("lasagne", Stores);
+                //}
+
+
+                //RecipeQuery recipeQuery = new RecipeQuery
+                //{
+
+                //            SearchRecipe = "lasagne",
+                //            LoadIngredientList = true,
+                //            Stores = new string[] {"Netto", "rema", "bilka", "aldi"}
+                //        };
+                //        var recipes = await recipeQuery.Execute(db);
+                //        foreach (var recipe in recipes)
+                //        {
+                //            Console.WriteLine($"{recipe.Name}");
+                //            foreach (var ingredient in recipe.IngredientList.Ingredient)
+                //            {
+                //                Console.WriteLine($"{ingredient.Name} - {ingredient.Product.Name} - {ingredient.Product.Price} - {ingredient.Product.RetailChain.Name}");
+                //            }
+                //        }
 
 
                 //ProductQuery query = new ProductQuery
@@ -120,25 +135,25 @@ namespace Til_test
                 //db.SaveChanges();
             }
 
-            //using (var context = new prj4databaseContext())
-            //{
-            //    insert insert = new insert(context);
-            //    await insert.insertdataAsync();
-            //    RecipeRepository repo = new RecipeRepository(context);
-            //    RecipeQuery query = new RecipeQuery
-            //    {
-            //        LoadIngredientList = true,
-            //        LoadRecipeCategory = true,
-            //        SearchRecipe = ""
-            //    };
-            //    var opskrifter = await repo.GetRecipes(query);
+    //using (var context = new prj4databaseContext())
+    //{
+    //    insert insert = new insert(context);
+    //    await insert.insertdataAsync();
+    //    RecipeRepository repo = new RecipeRepository(context);
+    //    RecipeQuery query = new RecipeQuery
+    //    {
+    //        LoadIngredientList = true,
+    //        LoadRecipeCategory = true,
+    //        SearchRecipe = ""
+    //    };
+    //    var opskrifter = await repo.GetRecipes(query);
 
-            //    foreach (var opskrift in opskrifter.Where(o => o.Name.Contains("marcus")))
-            //    {
-            //        System.Console.WriteLine($"{opskrift.Name}");
-            //        Console.WriteLine($"{opskrift.Price}");
-            //    }
-            //}
-        }
+    //    foreach (var opskrift in opskrifter.Where(o => o.Name.Contains("marcus")))
+    //    {
+    //        System.Console.WriteLine($"{opskrift.Name}");
+    //        Console.WriteLine($"{opskrift.Price}");
+    //    }
+    //}
+}
     }
 }

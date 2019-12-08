@@ -9,6 +9,7 @@ using GuldtandMVC_Identity.Data.Repositories;
 using GuldtandMVC_Identity.Models;
 using NUnit.Framework;
 using sun.security.pkcs10;
+using NSubstitute;
 
 
 namespace Guldtand_UnitTests
@@ -16,17 +17,22 @@ namespace Guldtand_UnitTests
     [TestFixture]
     public class CalculatorUnitTest
     {
+        public IQuery<Product> _ProductQuery;
+        public IQuery<Recipe> _RecipeQuesry;
+        public Product _Product;
         private HTMLCalculator _uut;
         
         [SetUp]
         public void Setup()
         {
-            
+            _ProductQuery = Substitute.For<IQuery<Product>>();
+            _RecipeQuesry = Substitute.For<IQuery<Recipe>>();
+            _Product = Substitute.For<Product>();
             _uut = new HTMLCalculator();
         }
 
         [Test]
-        public async  Task TestTotalPrice(string word)
+        public async  Task TestTotalPrice()
         {
             //forventet udregning
             //normalpris kun tages med hvis den er validto over 2049.didnotrecieve kald.
@@ -37,6 +43,12 @@ namespace Guldtand_UnitTests
             //    Assert.That(products.CompareTo(20) == 20);
             //}
 
+            //double p1 = _Product.Price = 25;
+            //double p2 = _Product.Price = 45;
+
+            //double totalprice = 0;
+            //totalprice = p1 + p2;
+            
         }
 
         [Test]
@@ -60,6 +72,7 @@ namespace Guldtand_UnitTests
             //forventet udregning
             //normalpris kun tages med hvis den er validto over 2049. didnotrecieve kald.
             var word = "ovnbagt pasta";
+
             //int productLifeTime = Int32.Parse(_query.ValidToDate);
             Assert.That(word.Contains("pasta"));
             
