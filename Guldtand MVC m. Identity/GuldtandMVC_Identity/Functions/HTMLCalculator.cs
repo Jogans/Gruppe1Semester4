@@ -40,6 +40,10 @@ namespace GuldtandMVC_Identity.Models
                     NumberOfRecipes = 1, 
                     
                 };
+
+                RecipeRepository recipeRepository = new RecipeRepository(db);
+                var recepylist = await recipeRepository.Get(recipequery);
+
                 ProductQuery query = new ProductQuery
                 {
                     ValidToDate = "2050",
@@ -47,8 +51,6 @@ namespace GuldtandMVC_Identity.Models
                 };
                 var listProduct = await query.Execute(db);
 
-                RecipeRepository recipeRepository = new RecipeRepository(db);
-                var recepylist = await recipeRepository.Get(recipequery);
                 ProductRepository productRepository = new ProductRepository(db);
 
 
@@ -97,11 +99,10 @@ namespace GuldtandMVC_Identity.Models
                     LoadRecipeCategory = true,
                     NumberOfRecipes = 1
                 };
-                ProductQuery query = new ProductQuery();
-            
-
                 RecipeRepository recipeRepository = new RecipeRepository(db);
                 var recepylist = await recipeRepository.Get(recipequery);
+
+                ProductQuery query = new ProductQuery();
                 ProductRepository productRepository = new ProductRepository(db);
                 var listProduct = await query.Execute(db);
 
