@@ -34,7 +34,7 @@
                 info2: null,
                 searchParameter: null,
                 relevantStores: "",
-                antal: 4
+                count: 4
             }
         },
         methods: {
@@ -44,7 +44,7 @@
                 })
             },
             fullView() {
-                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=lighed' + '&antal=' + this.antal, {
+                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=lighed' + '&count=' + this.count, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

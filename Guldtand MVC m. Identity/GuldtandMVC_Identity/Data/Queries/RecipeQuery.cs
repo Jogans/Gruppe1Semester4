@@ -16,6 +16,8 @@ namespace GuldtandMVC_Identity.Data.Queries
         public int NumberOfRecipes { get; set; } = 20;
         public string[] Stores { get; set; } = new string[8];
 
+        public string ValidToDate { get; set; } = "";
+
         public async Task<IEnumerable<Recipe>> Execute(prj4databaseContext context)
         {
             var relevantRecipes = await context.Set<Ingredient>()
@@ -48,7 +50,8 @@ namespace GuldtandMVC_Identity.Data.Queries
                                         SearchName = ingredient.Name,
                                         NumberOfProducts = 1,
                                         LoadRetailChain = true,
-                                        Stores = Stores
+                                        Stores = Stores,
+                                        ValidToDate = ValidToDate
                                     };
                                     var product = await productQuery.Execute(context);
                                     if (product.Any())
@@ -87,7 +90,8 @@ namespace GuldtandMVC_Identity.Data.Queries
                                         SearchName = $"{ingredient.Name}",
                                         NumberOfProducts = 1,
                                         LoadRetailChain = true,
-                                        Stores = Stores
+                                        Stores = Stores,
+                                        ValidToDate = ValidToDate
                                     };
                                     var product = await productQuery.Execute(context);
                                     if (product.Any())

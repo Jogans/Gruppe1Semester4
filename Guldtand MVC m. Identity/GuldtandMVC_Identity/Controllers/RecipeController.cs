@@ -22,11 +22,11 @@ namespace GuldtandMVC_Identity.Controllers
     public class RecipeController : ControllerBase
     {
 
-        public Task<string> viewASpeceficRecipe(string words, double antal)
+        public Task<string> viewASpeceficRecipe(string words, double count)
         {
             var recipe = new AddHTMLToRecipe();
 
-            return recipe.ShowRecipeFullView(words, antal);
+            return recipe.ShowRecipeFullView(words, count);
         }
 
         public Task<string> getShoppingCart(string words, string stores)

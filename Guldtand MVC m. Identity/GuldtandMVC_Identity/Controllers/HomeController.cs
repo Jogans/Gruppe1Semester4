@@ -65,7 +65,7 @@ namespace GuldtandMVC_Identity.Controllers
             return Ok();
         }
 
-        public Task<string> viewNormalPrice(string words, string stores)
+        public Task<double> viewNormalPrice(string words, string stores)
         {
             var normalPrice = new HTMLCalculator();
 
@@ -77,7 +77,7 @@ namespace GuldtandMVC_Identity.Controllers
             }
 
 
-            return normalPrice.DoAsTold(words, storeSplit);
+            return normalPrice.NormalPrice(words, storeSplit);
         }
 
         public string searchRecipesByName(string words)

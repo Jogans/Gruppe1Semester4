@@ -22,11 +22,9 @@
 
         </div>
 
-
-
         <div class="SearchBarBtn">
             <button class="SearchBtn" @click="searchRecepie" type="button">S&#248;g opskrift</button>
-            <button class="SearchBtn" @click="mounted" type="button">S&#248;g ingrediens</button>
+            <button class="SearchBtn" @click="searchIngredient" type="button">S&#248;g ingrediens</button>
             <!--<button style="height: 32px;" @click="$emit('triggerEvent')" type="button">S&#248;g ingrediens</button> -->
         </div>
 
@@ -70,10 +68,8 @@
                  value: ''
              }*/
         },
-
-
         methods: {
-            mounted() {
+            searchIngredient() {
                 //this.$router.push({ name: 'Searchsite' })
                 //this.$router.go({ path: 'Searchsite' })
 
