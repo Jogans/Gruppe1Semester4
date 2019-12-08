@@ -38,6 +38,7 @@ namespace GuldtandMVC_Identity.Models
                 };
                 var result = await query.Execute(db);
 
+
                 foreach (var recipe in result)
                 {
                     bodystring = "";
@@ -262,7 +263,15 @@ namespace GuldtandMVC_Identity.Models
                     NumberOfRecipes = 5
                 };
 
+
+
                 var result = await query.Execute(db);
+
+
+                if (result.Count() == 0)
+                {
+                    return "Ingen opskrift fundet";
+                }
 
                 foreach (var recipe in result)
                 {

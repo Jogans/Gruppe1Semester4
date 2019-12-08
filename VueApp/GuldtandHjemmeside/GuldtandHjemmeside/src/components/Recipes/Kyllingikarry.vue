@@ -27,14 +27,15 @@
 
 <script>
     export default {
-        name: 'Hjemmelavetlasagne',
+        name: 'Kyllingikarry',
         data: function () {
-            return { 
+            return {
                 info: null,
                 info2: null,
                 searchParameter: null,
                 relevantStores: "",
-                count: 4
+                count: 4,
+                searchParameter: "Kylling i karry"
             }
         },
         methods: {
@@ -44,14 +45,14 @@
                 })
             },
             fullView() {
-                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=lasa' + '&count=' + this.count, {
+                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=' + this.searchParameter + '&count=' + this.count, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             },
             generateShoppingCart() {
-                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words=lasa' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words='+ this.searchParameter + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
