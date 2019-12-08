@@ -146,6 +146,7 @@
         position: relative;
         float: left;
         padding-left: 20px;
+        text-size-adjust: 80%;
     }
 
     .UserBtn {
