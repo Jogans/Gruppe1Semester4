@@ -23,7 +23,7 @@
         },
         methods: {
             created() {
-                this.$http.get('https://localhost:44324/Home/viewNormalPrice?words=lasa' + '&stores=' + this.relevantStores, {
+                this.$http.get('http://nyguldtand.azurewebsites.net/Home/viewNormalPrice?words=lasa' + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

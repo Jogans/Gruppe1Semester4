@@ -120,7 +120,7 @@ namespace GuldtandMVC_Identity.Models
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
                         ingrediensstring += "<li class='p6'>" + ingredient.Name + " - " + " Købes i " + ingredient.Product.RetailChain.Name + " for " +
-                                            ingredient.Product.Price + " kr. " + "Test: " + ingredient.Product.Name + "</li>";
+                                            ingredient.Product.Price + " kr. " + "</li>";
                     }
 
                     bodystring += ingrediensstring;
