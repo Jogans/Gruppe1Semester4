@@ -1,7 +1,7 @@
 <template>
-    <div class='bodyTopPage'>
+    <div class='body'>
         <div class="antalPersoner">
-            <select v-model="antal">
+            <select v-model="count">
                 <option value="1">1 Person</option>
                 <option value="2">2 Personer</option>
                 <option value="3">3 Personer</option>
