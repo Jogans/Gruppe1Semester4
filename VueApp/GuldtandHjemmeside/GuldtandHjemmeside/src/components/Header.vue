@@ -38,7 +38,7 @@
                     </template>
 
                     <!--<br style="clear:both" />-->
-                    <router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>
+                    <!--<router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>-->
 
                 </div>
                 <br style="clear:both" />
