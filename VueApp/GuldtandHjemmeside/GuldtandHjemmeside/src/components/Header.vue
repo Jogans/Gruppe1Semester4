@@ -39,9 +39,7 @@
 
                     <!--<br style="clear:both" />-->
                     <!--<router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>-->
-
                 </div>
-                <br style="clear:both" />
             </div>
         </div>
     </keep-alive>
@@ -79,7 +77,7 @@
             },
 
             Login() {
-                fetch('https://localhost:44324/api/Account/Login', {
+                fetch('https://nyguldtand.azurewebsites.net/api/Account/Login', {
                     method: 'POST',
                     body: JSON.stringify({
                         Email: this.email,
@@ -93,7 +91,7 @@
                     .catch(error => console.log(error));
             },
             Logout() {
-                fetch('https://localhost:44324/api/Account/Logout', {
+                fetch('https://nyguldtand.azurewebsites.net/api/Account/Logout', {
                     method: 'POST',
                     headers: new Headers({
                         'Content-Type': 'application/json'

@@ -120,7 +120,7 @@ namespace GuldtandMVC_Identity.Models
                     foreach (var ingredient in recipe.IngredientList.Ingredient)
                     {
                         ingrediensstring += "<li class='p6'>" + ingredient.Name + " - " + " Købes i " + ingredient.Product.RetailChain.Name + " for " +
-                                            ingredient.Product.Price + " kr. " + "Test: " + ingredient.Product.Name + "</li>";
+                                            ingredient.Product.Price + " kr. " + "</li>";
                     }
 
                     bodystring += ingrediensstring;
@@ -167,8 +167,7 @@ namespace GuldtandMVC_Identity.Models
 
             string bodystring = "";
 
-            HTMLCalculator RabatPris = new HTMLCalculator();
-            HTMLCalculator NormalPris = new HTMLCalculator();
+            HTMLCalculator calculator = new HTMLCalculator();
 
             string[] storeSplit = new string[8];
             string[] storeSplitfake = new string[8];
@@ -189,6 +188,16 @@ namespace GuldtandMVC_Identity.Models
 
                 foreach (var recipe in result)
                 {
+                    double originalPrice = await calculator.NormalPrice(recipe.Name, storeSplit);
+                    double salePrice = await calculator.TotalPrice(recipe.Name, storeSplit);
+                    double lowestPrice = await calculator.TotalPrice(recipe.Name, storeSplitfake);
+
+                    RecipeRepository recipeRepository = new RecipeRepository(db);
+                    recipe.Price = originalPrice;
+                    recipe.SavingsAbsolute = salePrice;
+                    recipeRepository.Update(recipe);
+                    recipeRepository.Save();
+
                     bodystring += "<div class='viewOfRecepie'>" +
                                   "<div class='imageOfRecepie'>" +
                                   "<a href='/#/Recepie/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
@@ -201,9 +210,9 @@ namespace GuldtandMVC_Identity.Models
                                   "</a>" +
                                   "<br />" +
                                   "</div>" +
-                                  "Original pris: " + await NormalPris.NormalPrice(recipe.Name, storeSplit) + "kr." + " <br />" +
-                                  "Pris med rabat: " + await RabatPris.TotalPrice(recipe.Name, storeSplit) + "kr." + "<br />" +
-                                  "Laveste mulige pris: " + await RabatPris.TotalPrice(recipe.Name, storeSplitfake) + "kr." + "<br />" +
+                                  "Original pris: " + originalPrice + "kr." + " <br />" +
+                                  "Pris med rabat: " + salePrice + "kr." + "<br />" +
+                                  "Laveste mulige pris: " + lowestPrice + "kr." + "<br />" +
                                   "</div>" +
                                   "</div>";
                 }
@@ -244,8 +253,7 @@ namespace GuldtandMVC_Identity.Models
 
             string bodystring = "";
 
-            HTMLCalculator RabatPris = new HTMLCalculator();
-            HTMLCalculator NormalPris = new HTMLCalculator();
+            HTMLCalculator calculator = new HTMLCalculator();
 
             string[] storeSplit = new string[8];
             string[] storeSplitfake = new string[8];
@@ -275,6 +283,11 @@ namespace GuldtandMVC_Identity.Models
 
                 foreach (var recipe in result)
                 {
+                    double originalPrice = await calculator.NormalPrice(recipe.Name, storeSplit);
+                    double salePrice = await calculator.TotalPrice(recipe.Name, storeSplit);
+                    double lowestPrice = await calculator.TotalPrice(recipe.Name, storeSplitfake);
+
+
                     bodystring += "<div class='viewOfRecepie'>" +
                                   "<div class='imageOfRecepie'>" +
                                   "<a href='/#/Recepie/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
@@ -287,9 +300,9 @@ namespace GuldtandMVC_Identity.Models
                                   "</a>" +
                                   "<br />" +
                                   "</div>" +
-                                  "Original pris: " + await NormalPris.NormalPrice(recipe.Name, storeSplit) + "kr." + " <br />" +
-                                  "Pris med rabat: " + await RabatPris.TotalPrice(recipe.Name, storeSplit) + "kr." + "<br />" +
-                                  "Laveste mulige pris: " + await RabatPris.TotalPrice(recipe.Name, storeSplitfake) + "kr." + "<br />" +
+                                  "Original pris: " + originalPrice + "kr." + " <br />" +
+                                  "Pris med rabat: " + salePrice + "kr." + "<br />" +
+                                  "Laveste mulige pris: " + lowestPrice + "kr." + "<br />" +
                                   "</div>" +
                                   "</div>";
                 }

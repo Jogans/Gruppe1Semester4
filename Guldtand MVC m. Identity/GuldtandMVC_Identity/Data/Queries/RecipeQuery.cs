@@ -37,7 +37,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                                     .ThenInclude(i => i.Product)
                                 .Include(r => r.RecipeCategory)
                                 .Include(r => r.Directions)
-                                .OrderBy(r => r.Price)
+                                .OrderBy(r => r.SavingsAbsolute)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                             IngredientRepository ingredientRepository1 = new IngredientRepository(context);
@@ -77,7 +77,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                                 .Include(r => r.IngredientList.Ingredient)
                                 .ThenInclude(i => i.Product)
                                 .Include(r => r.Directions)
-                                .OrderBy(r => r.Price)
+                                .OrderBy(r => r.SavingsAbsolute)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                             IngredientRepository ingredientRepository2 = new IngredientRepository(context);
@@ -109,7 +109,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                                 .Include(r => r.IngredientList.Ingredient)
                                 .ThenInclude(i => i.Product)
                                 .Include(r => r.Directions)
-                                .OrderBy(r => r.Price)
+                                .OrderBy(r => r.SavingsAbsolute)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                             IngredientRepository ingredientRepository6 = new IngredientRepository(context);
@@ -142,7 +142,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
                                 .Include(r => r.RecipeCategory)
                                 .Include(r => r.Directions)
-                                .OrderBy(r => r.Price)
+                                .OrderBy(r => r.SavingsAbsolute)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                             return recipes3;
@@ -150,7 +150,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                             var recipes4 = await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
                                 .Include(r => r.Directions)
-                                .OrderBy(r => r.Price)
+                                .OrderBy(r => r.SavingsAbsolute)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                             return recipes4;
@@ -158,7 +158,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                             var recipes7 = await context.Set<Recipe>()
                                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
                                 .Include(r => r.Directions)
-                                .OrderBy(r => r.Price)
+                                .OrderBy(r => r.SavingsAbsolute)
                                 .Take(NumberOfRecipes)
                                 .ToListAsync();
                             return recipes7;
@@ -167,7 +167,7 @@ namespace GuldtandMVC_Identity.Data.Queries
                     var recipes8 = await context.Set<Recipe>()
                         .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
                         .Include(r => r.Directions)
-                        .OrderBy(r => r.Price)
+                        .OrderBy(r => r.SavingsAbsolute)
                         .Take(NumberOfRecipes)
                         .ToListAsync();
                     return recipes8;
@@ -175,7 +175,7 @@ namespace GuldtandMVC_Identity.Data.Queries
             var recipes5 = await context.Set<Recipe>()
                 .Where(r => r.Name.Contains(SearchRecipe) && relevantRecipes.Contains(r.RecipeId))
                 .Include(r => r.Directions)
-                .OrderBy(r => r.Price)
+                .OrderBy(r => r.SavingsAbsolute)
                 .Take(NumberOfRecipes)
                 .ToListAsync();
             return recipes5;

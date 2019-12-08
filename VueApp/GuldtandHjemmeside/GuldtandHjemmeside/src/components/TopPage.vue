@@ -1,5 +1,6 @@
 <template>
     <div class='body'>
+        <br style="clear:both" />
         <h1>Top retter</h1>
         <p>Her ses en liste af ugens billigste retter at lave - baseret p&aring;     de aktuelle tilbud i de valgte butikker.</p>
         <br style="clear:both" />
@@ -26,7 +27,7 @@
         },
         methods: {
             smallView() {
-                this.$http.get('https://localhost:44324/Recipe/viewForSmallRecipe?stores=' + this.relevantStores + '&count=3', {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/viewForSmallRecipe?stores=' + this.relevantStores + '&count=3', {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

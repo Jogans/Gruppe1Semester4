@@ -175,7 +175,7 @@
                 return this.descriptionString;
             },
             created() {
-                this.$http.get('https://localhost:44324/Home/recepieCreateTest?name=' + this.recipeName +
+                this.$http.get('https://nyguldtand.azurewebsites.net/Home/recepieCreateTest?name=' + this.recipeName +
                     '&prepareTime=' + this.timeValue +
                     '&description=' + this.description() +
                     '&ingridientName=' + this.nameIngridients() +
