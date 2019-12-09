@@ -33,11 +33,11 @@ namespace GuldtandMVC_Identity.Controllers
         }
         
 
-        public Task<string> recepieCreateTest(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl)
+        public Task<string> recipeCreateTest(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl)
         {
-            var createRecepie = new CreateRecepieFromVue();
+            var createRecipe = new CreateRecipeFromVue();
 
-            return createRecepie.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
+            return createRecipe.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
         }
 
         //public Task<double> viewTotalPrice(string words)

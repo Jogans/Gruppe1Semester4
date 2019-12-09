@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace GuldtandMVC_Identity.Models
 {
-    public class CreateRecepieFromVue
+    public class CreateRecipeFromVue
     {
 
         public string HTMLToRecipe(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl)

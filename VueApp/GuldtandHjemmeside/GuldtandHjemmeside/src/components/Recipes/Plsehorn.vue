@@ -46,14 +46,14 @@
                 })
             },
             fullView() {
-                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=horn' + '&count=' + this.count, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/viewASpeceficRecipe?words=horn' + '&count=' + this.count, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             },
             generateShoppingCart() {
-                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words=horn' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/getShoppingCart?words=horn' + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

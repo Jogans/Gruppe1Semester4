@@ -45,7 +45,7 @@ namespace GuldtandMVC_Identity.Models
                     string ingrediensstring = "";
                     string directionsstring = "";
                     bodystring += "<h1>" + recipe.Name + "</h1>" +
-                    "<div class='recepie'>" +
+                    "<div class='recipe'>" +
                         "<div class='ingredienser'>" +
                         "<p class='p2'><span class='s1'>" + recipe.CookTime + " min tilberednings tid" +
                     "<div class='image'>" +
@@ -141,7 +141,7 @@ namespace GuldtandMVC_Identity.Models
             string style = "<head>" +
                            "<style>" +
 
-                           ".viewOfRecepie{" +
+                           ".viewOfRecipe{" +
                            "width: 60%;" +
                            "height: 200px;" +
                            "border: 2px solid;" +
@@ -198,14 +198,14 @@ namespace GuldtandMVC_Identity.Models
                     recipeRepository.Update(recipe);
                     recipeRepository.Save();
 
-                    bodystring += "<div class='viewOfRecepie'>" +
-                                  "<div class='imageOfRecepie'>" +
-                                  "<a href='/#/Recepie/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
+                    bodystring += "<div class='viewOfRecipe'>" +
+                                  "<div class='imageOfRecipe'>" +
+                                  "<a href='/#/Recipe/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
                                   "<img class='img1' src='" + recipe.ImgSrc + "' alt='recpieImg'></a>" +
                                   "</div>" +
                                   "<div class='textForPrice'>" +
                                   "<div style='font-size: 25px;'>" +
-                                  "<a href='/#/Recepie/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
+                                  "<a href='/#/Recipe/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
                                   recipe.Name +
                                   "</a>" +
                                   "<br />" +
@@ -227,7 +227,7 @@ namespace GuldtandMVC_Identity.Models
             string style = "<head>" +
                            "<style>" +
 
-                           ".viewOfRecepie{" +
+                           ".viewOfRecipe{" +
                            "width: 60%;" +
                            "height: 200px;" +
                            "border: 2px solid;" +
@@ -288,14 +288,14 @@ namespace GuldtandMVC_Identity.Models
                     double lowestPrice = await calculator.TotalPrice(recipe.Name, storeSplitfake);
 
 
-                    bodystring += "<div class='viewOfRecepie'>" +
-                                  "<div class='imageOfRecepie'>" +
-                                  "<a href='/#/Recepie/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
+                    bodystring += "<div class='viewOfRecipe'>" +
+                                  "<div class='imageOfRecipe'>" +
+                                  "<a href='/#/Recipe/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
                                   "<img class='img1' src='" + recipe.ImgSrc + "' alt='recpieImg'></a>" +
                                   "</div>" +
                                   "<div class='textForPrice'>" +
                                   "<div style='font-size: 25px;'>" +
-                                  "<a href='/#/Recepie/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
+                                  "<a href='/#/Recipe/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
                                   recipe.Name +
                                   "</a>" +
                                   "<br />" +

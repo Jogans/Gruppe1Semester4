@@ -21,9 +21,9 @@
             <label for="psw-repeat"><b>Gentag Adgangskode</b></label>
     <input type="password" placeholder="Gentag Adgangskode" name="psw-repeat" required>
 
-            <label>
+            <!--<label>
                 <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Husk mig
-            </label>
+            </label>-->
 
             <div class="clearfix">
                 <router-link to="/" class="cancelbtn" tag="button">Annuller</router-link>

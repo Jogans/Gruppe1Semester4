@@ -1,9 +1,7 @@
 <template>
     <div class="body">
         <br style="clear:both" />
-        <h2>Brugernavn: </h2>
-
-        <button class="resetPassword">&#230;ndre adgangskode</button>
+          <!--<button class="resetPassword">&#230;ndre adgangskode</button>-->
         <br style="clear:both" />
         <div class="Pref">
             <h2>Indstillinger</h2>
