@@ -44,17 +44,17 @@ namespace GuldtandMVC_Identity.Models
                     ValidToDate = "2050"
 
                 };
-                ProductQuery query = new ProductQuery
+                ProductQuery productQuery = new ProductQuery
                 {
                     ValidToDate = "2050",
                     NumberOfProducts = 1,
                     Stores = stores
                 };
-                var listProduct = await query.Execute(db);
+                ProductRepository productRepository = new ProductRepository(db);
+                var listProduct = await productRepository.Get(productQuery);
 
                 RecipeRepository recipeRepository = new RecipeRepository(db);
                 var recipeList = await recipeRepository.Get(recipeQuery);
-                ProductRepository productRepository = new ProductRepository(db);
 
 
 

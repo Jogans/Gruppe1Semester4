@@ -45,14 +45,8 @@ namespace GuldtandMVC_Identity.Controllers
         public Task<string> viewForSmallRecipeSearch(string word, string stores)
         {
             var recipe = new AddHTMLToRecipe();
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
             Task<string> result = recipe.ShowRecipeSmallViewSearchAsync(word, stores);
-            watch.Stop();
-            Console.WriteLine($"Færdig med viewforsmall {watch.Elapsed}");
             return result;
         }
-
-
     }
 }
