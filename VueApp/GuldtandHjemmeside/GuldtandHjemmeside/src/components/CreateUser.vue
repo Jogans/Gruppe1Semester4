@@ -52,10 +52,7 @@
             HandleErrors: function (response) {
                 if (!response.ok) {
                     alert("Registrering af bruger fejlet")
-
                     throw Error(response.statusText)
-
-
                 }
                 alert("Du har nu oprettet en bruger, som du kan logge ind med")
                 return this.$router.push(this.$route.query.redirect || '/')

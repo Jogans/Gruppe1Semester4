@@ -4,7 +4,7 @@
         <h1>Alle retter</h1>
         <p>Her ses alle retter tilf&oslash;jet til siden</p>
         <br style="clear:both" />
-        <button class="test_btn" @click="smallView">Opdater opskrift med valgte butikker</button>
+        <button class="test_btn" @click="smallView">Opdater visning med valgte butikker</button>
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
         <br style="clear:both" />

@@ -66,6 +66,7 @@ namespace GuldtandMVC_Identity.Models
                         normalPrice += ingredient.Product.Price;
                     }
                 }
+                normalPrice = Math.Round(normalPrice);
                 return normalPrice;
 
             }
@@ -107,6 +108,7 @@ namespace GuldtandMVC_Identity.Models
                         totalPrice += ingredient.Product.Price;
                     }
                 }
+                totalPrice = Math.Round(totalPrice);
                 return totalPrice;
             }
         }

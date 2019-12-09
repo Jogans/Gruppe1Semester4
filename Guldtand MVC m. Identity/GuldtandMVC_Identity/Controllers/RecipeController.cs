@@ -53,6 +53,12 @@ namespace GuldtandMVC_Identity.Controllers
             return result;
         }
 
+        public Task<string> recipeCreate(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl)
+        {
+            var createRecipe = new CreateRecipeFromVue();
+
+            return createRecipe.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
+        }
 
     }
 }
