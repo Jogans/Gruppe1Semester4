@@ -15,7 +15,7 @@
                             <router-link to="/CreateUser" class="create_user" tag="button">Opret bruger</router-link>
                         </template>
                         <template v-if="LoggedIn">
-                            <span>Message: {{ username }}</span>
+                            <span><strong>Hej: {{ username }}</strong></span>
                             <!--<router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>-->
                             <button class="btn btn-r logout" @click="Logout">Log ud</button>
                         </template>
@@ -103,8 +103,8 @@
                     .then(response => console.log(response))
                     .catch(error => console.log(error));
             },
-            getCookie(cname) {
-                var name = cname + "=";
+            getCookie() {
+                var name;
                 var decodedCookie = decodeURIComponent(document.cookie);
                 var ca = decodedCookie.split(';');
                 for (var i = 0; i < ca.length; i++) {
