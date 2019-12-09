@@ -270,10 +270,8 @@ namespace GuldtandMVC_Identity.Models
                     SearchRecipe = word,
                     NumberOfRecipes = 5
                 };
-
-
-
-                var result = await query.Execute(db);
+                RecipeRepository recipeRepository = new RecipeRepository(db);
+                var result = await recipeRepository.Get(query);
 
 
                 if (result.Count() == 0)
