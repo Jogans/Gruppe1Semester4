@@ -9,13 +9,13 @@
                     <router-link to="/"><h1 class="headerName">GuldTand</h1></router-link>
                     <div class="loginDiv">
                         <template v-if="!LoggedIn">
-                            <input class="input usernameinput" type="text" placeholder="Indtast email" v-model="email" name="uname" required />
+                            <input class="input usernameinput" type="text" placeholder="Indtast brugernavn" v-model="email" name="uname" required />
                             <button class="login" @click="Login">Login</button>
                             <input class="input passwordinput" type="password" placeholder="Indtast kodeord" v-model="password" name="psw" required />
                             <router-link to="/CreateUser" class="create_user" tag="button">Opret bruger</router-link>
                         </template>
                         <template v-if="LoggedIn">
-                            <span><strong>Hej: {{ username }}</strong></span>
+                            <span><strong>Hej {{ username }}</strong></span>
                             <!--<router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>-->
                             <button class="btn btn-r logout" @click="Logout">Log ud</button>
                         </template>

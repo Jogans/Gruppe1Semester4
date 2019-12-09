@@ -5,8 +5,8 @@
             <p> Udfyld venligst denne formular for at oprette en konto.</p>
             <hr>
 
-            <label for="email"><b>Email</b></label>
-            <input type="text" v-model="email" placeholder="Skriv Email" name="email" required>
+            <label for="username"><b>Brugernavn</b></label>
+            <input type="text" v-model="username" placeholder="Skriv Brugernavn" name="username" required>
 
 
 
@@ -41,7 +41,7 @@
         },
         data: function () {
             return {
-                email: null,
+                username: null,
                 name: null,
                 password: null,
                 info: null,
@@ -66,7 +66,7 @@
                 fetch('https://nyguldtand.azurewebsites.net/api/Account/Register', {
                     method: 'POST',
                     body: JSON.stringify({
-                        Email: this.email,
+                        Email: this.username,
                         Password: this.password
                     }),
                     headers: new Headers({
