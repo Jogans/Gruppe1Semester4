@@ -1,30 +1,11 @@
 <template>
     <div class="body">
         <br style="clear:both" />
-        <h2>Brugernavn: </h2>
-
-        <button class="resetPassword">&#230;ndre adgangskode</button>
+          <!--<button class="resetPassword">&#230;ndre adgangskode</button>-->
         <br style="clear:both" />
         <div class="Pref">
             <h2>Indstillinger</h2>
             For at &#230;ndre indstillinger i forhold til butikker bruges sidebaren til venstre.
-        </div>
-        <div class="DishesMade">
-            <h2>Retter oprettet af dig:</h2>
-            <div class="viewOfRecepie">
-                <div class="imageOfRecepie">
-                    <img src="@/assets/Pics/Pizza_Picture.jpg" />
-                </div>
-                <div class="textForPrice">
-                    <div style="font-size: 25px;">
-                        {{recepie.name}} <br />
-                    </div>
-                    Original pris: {{recepie.priceOrginal}}kr. <br />
-                    Pris med rabat: {{recepie.priceDiscount}}kr. <br />
-                    Laveste mulige pris: {{recepie.priceLowest}}kr. <br />
-
-                </div>
-            </div>
         </div>
     </div>
 </template>
@@ -35,13 +16,6 @@
         data() {
             return {
                 recepie: {
-                    pic: '@/assets/Pics/Pizza_Picture.jpg',
-                    name: 'Hjemmelavet pizza med tomatsovs, peperoni og ost',
-                    priceOrginal: '50',
-                    priceDiscount: '35',
-                    priceLowest: '35',
-                    alt: 'Pizza',
-                    info: 'Bla bla?'
                 }
             }
         }

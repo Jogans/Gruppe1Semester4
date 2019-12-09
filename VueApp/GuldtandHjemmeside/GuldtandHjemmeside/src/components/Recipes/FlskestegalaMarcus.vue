@@ -1,6 +1,8 @@
 <template>
     <div class='bodyTopPage'>
         <div class="antalPersoner">
+            <br style="clear:both" />
+            <br style="clear:both" />
             <select v-model="antal">
                 <option value="1">1 Person</option>
                 <option value="2">2 Personer</option>
@@ -44,14 +46,14 @@
                 })
             },
             fullView() {
-                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=marcus' + '&count=' + this.count, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/viewASpeceficRecipe?words=marcus' + '&count=' + this.count, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             },
             generateShoppingCart() {
-                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words=lighed' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/getShoppingCart?words=lighed' + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
@@ -73,10 +75,5 @@
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-    .bodyTopPage {
-        width: 100%;
-        max-width: 65%;
-        margin: auto;
-    }
 </style>
 

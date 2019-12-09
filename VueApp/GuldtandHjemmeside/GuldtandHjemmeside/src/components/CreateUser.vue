@@ -5,18 +5,15 @@
             <p> Udfyld venligst denne formular for at oprette en konto.</p>
             <hr>
 
-            <label for="email"><b>Email</b></label>
-            <input type="text" v-model="email" placeholder="Skriv Email" name="email" required>
+            <label for="username"><b>Brugernavn</b></label>
+            <input type="text" v-model="username" placeholder="Skriv Brugernavn" name="username" required>
 
 
 
             <label for="psw">
                 <b>Adgangskode</b><br />
-                Adgangskoden skal indeholde mindst et tal, <br />
-                Adgangskoden skal indeholde mindst en karakter med sm&#229; bogstav, <br />
-                Adgangskoden skal indeholde mindst en karakter med stort bogstav, <br />
-                Adgangskoden skal indeholde mindst have en l&#230;ngde p&#229; mindst 6 karakterer, <br />
-                Adgangskoden skal indeholde mindst en unik karakter
+                     Adgangskoden skal mindst have en l&#230;ngde p&#229; 6 karakterer <br />
+                
             </label>
 
             <input type="password" v-model="password" placeholder="Skriv Adgangskode" name="psw" required>
@@ -24,15 +21,13 @@
             <label for="psw-repeat"><b>Gentag Adgangskode</b></label>
     <input type="password" placeholder="Gentag Adgangskode" name="psw-repeat" required>
 
-            <label>
+            <!--<label>
                 <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Husk mig
-            </label>
-
-            <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+            </label>-->
 
             <div class="clearfix">
-                <button type="button" class="cancelbtn">Annuler</button>
-                <button class="signupbtn" @click="created">Tilmeld</button>
+                <router-link to="/" class="cancelbtn" tag="button">Annuller</router-link>
+                <button class="signupbtn" @click="RegisterUser">Tilmeld</button>
             </div>
         </div>
     </div>
@@ -46,32 +41,38 @@
         },
         data: function () {
             return {
-                email: null,
+                username: null,
                 name: null,
                 password: null,
-                info: null
+                info: null,
+                note: null
             }
         },
         methods: {
             HandleErrors: function (response) {
                 if (!response.ok) {
-                    throw Error(response.statusText);
+                    alert("Registrering af bruger fejlet")
+
+                    throw Error(response.statusText)
+
+
                 }
+                alert("Du har nu oprettet en bruger, som du kan logge ind med")
                 return this.$router.push(this.$route.query.redirect || '/')
-                
-                
+
+
             },
-            created() {
-               fetch('https://localhost:44324/api/Account/Register', {
+            RegisterUser() {
+                fetch('https://nyguldtand.azurewebsites.net/api/Account/Register', {
                     method: 'POST',
-                   body: JSON.stringify({
-                        Email: this.email,
+                    body: JSON.stringify({
+                        Email: this.username,
                         Password: this.password
                     }),
                     headers: new Headers({
                         'Content-Type': 'application/json'
                     })
-               }).then(this.HandleErrors)
+                }).then(this.HandleErrors)
                     .then(response => console.log(response))
                     .catch(error => console.log(error));
             },

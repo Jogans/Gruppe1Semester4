@@ -29,14 +29,14 @@
 
 <script>
     export default {
-        name: 'BrndendeKrlighed',
+        name: 'Kyllingikarry',
         data: function () {
             return {
                 info: null,
                 info2: null,
-                searchParameter: null,
                 relevantStores: "",
-                count: 4
+                count: 4,
+                searchParameter: "Kylling i karry"
             }
         },
         methods: {
@@ -46,14 +46,14 @@
                 })
             },
             fullView() {
-                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/viewASpeceficRecipe?words=lighed' + '&count=' + this.count, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/viewASpeceficRecipe?words=' + this.searchParameter + '&count=' + this.count, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             },
             generateShoppingCart() {
-                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/getShoppingCart?words=lighed' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/getShoppingCart?words='+ this.searchParameter + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

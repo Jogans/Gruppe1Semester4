@@ -61,6 +61,11 @@ namespace GuldtandMVC_Identity
             });
             services.AddDbContext<prj4databaseContext>();
 
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+                options.HttpsPort = 5001;
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

@@ -1,7 +1,9 @@
 <template>
-    <div class='bodyTopPage'>
+    <div class='body'>
         <div class="antalPersoner">
-            <select v-model="antal">
+            <br style="clear:both" />
+            <br style="clear:both" />
+            <select v-model="count">
                 <option value="1">1 Person</option>
                 <option value="2">2 Personer</option>
                 <option value="3">3 Personer</option>
@@ -34,7 +36,7 @@
                 info2: null,
                 searchParameter: null,
                 relevantStores: "",
-                antal: 4
+                count: 4
             }
         },
         methods: {
@@ -44,14 +46,14 @@
                 })
             },
             fullView() {
-                this.$http.get('https://localhost:44324/Recipe/viewASpeceficRecipe?words=lasa' + '&antal=' + this.antal, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/viewASpeceficRecipe?words=lasa' + '&count=' + this.count, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             },
             generateShoppingCart() {
-                this.$http.get('https://localhost:44324/Recipe/getShoppingCart?words=lasa' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/getShoppingCart?words=lasa' + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
@@ -73,10 +75,5 @@
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-    .bodyTopPage {
-        width: 100%;
-        max-width: 65%;
-        margin: auto;
-    }
 </style>
 

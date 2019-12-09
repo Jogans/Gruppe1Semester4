@@ -15,6 +15,7 @@
                             <router-link to="/CreateUser" class="create_user" tag="button">Opret bruger</router-link>
                         </template>
                         <template v-if="LoggedIn">
+                            <span><strong>Hej {{ username }}</strong></span>
                             <!--<router-link to="/ProfilePage" class="MyPage" tag="button">Profile</router-link>-->
                             <button class="btn btn-r logout" @click="Logout">Log ud</button>
                         </template>
@@ -25,8 +26,8 @@
                 <div class="Buttons2">
                     <router-link to="/" class="btn btnfirst" tag="button">Forside</router-link>
                     <router-link to="/TopPage" class="btn" tag="button">Top retter</router-link>
-                    <router-link to="/NewPage" class="btn" tag="button">Nye retter</router-link>
-                    <router-link to="/VegiPage" class="btn btn_Vegi" tag="button">Vegetar retter</router-link>
+                    <router-link to="/AllRecipes" class="btn" tag="button">Alle retter</router-link>
+                    <!--<router-link to="/VegiPage" class="btn btn_Vegi" tag="button">Vegetar retter</router-link>-->
                     <router-link to="/SearchBar" class="btn" tag="button">S&#248;g</router-link>
                     <!--<router-link to="/SUPage" class="btn btn_Su" tag="button">SU-retter</router-link>-->
                     <!--<router-link to="/Recipe/ShowRecipe" class="btn btn_Classic" tag="button">Klassiske retter</router-link>-->
@@ -38,10 +39,8 @@
                     </template>
 
                     <!--<br style="clear:both" />-->
-                    <router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>
-
+                    <!--<router-link to="/TestCalculator" class="btn_TestCalculator" tag="button">Calculator Test</router-link>-->
                 </div>
-                <br style="clear:both" />
             </div>
         </div>
     </keep-alive>
@@ -57,7 +56,8 @@
                 email: null,
                 password: null,
                 info: null,
-                LoggedIn: false
+                LoggedIn: false,
+                username: null
             }
         },
         methods: {
@@ -66,7 +66,8 @@
                     alert("Forkert login eller password")
                     throw Error(response.statusText);
                 }
-                this.LoggedIn = true
+                this.LoggedIn = true,
+                this.getCookie()
                 return this.$router.push(this.$route.query.redirect || '/ProfilePage');
             },
 
@@ -79,7 +80,7 @@
             },
 
             Login() {
-                fetch('https://localhost:44324/api/Account/Login', {
+                fetch('https://nyguldtand.azurewebsites.net/api/Account/Login', {
                     method: 'POST',
                     body: JSON.stringify({
                         Email: this.email,
@@ -93,7 +94,7 @@
                     .catch(error => console.log(error));
             },
             Logout() {
-                fetch('https://localhost:44324/api/Account/Logout', {
+                fetch('https://nyguldtand.azurewebsites.net/api/Account/Logout', {
                     method: 'POST',
                     headers: new Headers({
                         'Content-Type': 'application/json'
@@ -102,9 +103,27 @@
                     .then(response => console.log(response))
                     .catch(error => console.log(error));
             },
+            getCookie() {
+                var name;
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split('=');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                this.username = c;
+                return this.username;
+            }                  
+
+            },
 
 
-        },
+        
 
     };
 
@@ -148,6 +167,7 @@
         position: relative;
         float: left;
         padding-left: 20px;
+        text-size-adjust: 80%;
     }
 
     .UserBtn {
@@ -210,6 +230,7 @@
 
 
     .input {
+        width:150px;
         display: block;
         position: relative;
         float: left;
@@ -236,6 +257,7 @@
         float: right;
         width: 100px;
         height: 25px;
+        font-size:12px;
     }
 
     .create_user {
@@ -244,6 +266,8 @@
         float: right;
         width: 100px;
         height: 25px;
+        font-size:12px;
+    
     }
 
     .logout {

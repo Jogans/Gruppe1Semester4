@@ -2,7 +2,7 @@
     <div class="body">
         <div class="SearchBar">
             <!-- <typeahead :suggestions="searchoptions" :selection.sync="value"> </typeahead>  -->
-            <input type="text" v-model="searchParameter" placeholder="Indtast en navnet af en opskrift eller en ingrediens" required>
+            <input type="text" v-model="searchParameter" placeholder="Indtast navnet af en opskrift eller en ingrediens" required>
             <!--<autocomplete :items="[ 'Apple', 'Banana', 'Orange', 'Mango', 'Pear', 'Peach', 'Grape', 'Tangerine', 'Pineapple']" />
 
         <script type="text/x-template" id="autocomplete">
@@ -73,7 +73,7 @@
                 //this.$router.push({ name: 'Searchsite' })
                 //this.$router.go({ path: 'Searchsite' })
 
-                this.$http.get('https://localhost:44324/Home/searchProducts?words=' + this.searchParameter, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Home/searchProducts?words=' + this.searchParameter, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
@@ -82,7 +82,7 @@
 
             },
             searchRecepie() {
-                this.$http.get('https://localhost:44324/Recipe/viewForSmallRecipeSearch?word=' + this.searchParameter + '&stores=' + this.relevantStores, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/viewForSmallRecipeSearch?word=' + this.searchParameter + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

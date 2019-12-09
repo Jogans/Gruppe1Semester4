@@ -74,13 +74,14 @@
                         <option value="spsk">spsk</option>
                         <option value="knsp">knsp</option>
                         <option value="stk">stk</option>
+                        <option value="ds">ds</option>
                     </select>
                     <button class="btn_delete" @click="deleteRowIng(indexIng)">Slet</button>
                 </li>
             </ul>
             <br style="clear:both" />
             <h2>
-                Tilføj billede
+                Tilf&oslash;j billede
             </h2>
             <input type="text" placeholder="Indtast link til billede" v-model="imgUrl" />
         </div>
@@ -174,7 +175,7 @@
                 return this.descriptionString;
             },
             created() {
-                this.$http.get('https://localhost:44324/Home/recepieCreateTest?name=' + this.recipeName +
+                this.$http.get('https://nyguldtand.azurewebsites.net/Home/recipeCreateTest?name=' + this.recipeName +
                     '&prepareTime=' + this.timeValue +
                     '&description=' + this.description() +
                     '&ingridientName=' + this.nameIngridients() +

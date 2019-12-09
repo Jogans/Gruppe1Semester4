@@ -90,13 +90,13 @@ namespace GuldtandMVC_Identity.Models
                     NumberOfRecipes = 1,
                     Stores = stores
                 };
-                ProductQuery query = new ProductQuery();
+                ProductQuery produckQuery = new ProductQuery();
             
 
                 RecipeRepository recipeRepository = new RecipeRepository(db);
                 var recipeList = await recipeRepository.Get(recipequery);
                 ProductRepository productRepository = new ProductRepository(db);
-                var listProduct = await query.Execute(db);
+                var listProduct = await produckQuery.Execute(db);
 
 
                 foreach (var recipe in recipeList)
