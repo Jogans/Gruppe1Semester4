@@ -72,10 +72,27 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new prj4databaseContext())
             {
+
                 //take all ingredients in the ingredientlist
                 foreach (var ingredient in recipe.IngredientList.Ingredient)
                 {
-                    totalPrice += ingredient.Product.Price;
+
+                    ProductQuery productQuery = new ProductQuery
+                    {
+                        NumberOfProducts = 1,
+                        Stores = stores,
+                        SearchName = ingredient.Name
+                    };
+                    ProductRepository productRepository = new ProductRepository(db);
+                    var listProduct = await productRepository.Get(productQuery);
+
+                    foreach (var product in listProduct)
+                    {
+                        if (product.Name != null)
+                        {
+                            totalPrice += product.Price;
+                        }
+                    }
                 }
 
                 totalPrice = Math.Round(totalPrice);
