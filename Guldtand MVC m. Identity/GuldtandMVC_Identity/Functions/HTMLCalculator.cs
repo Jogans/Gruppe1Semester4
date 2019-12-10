@@ -47,7 +47,7 @@ namespace GuldtandMVC_Identity.Models
                     {
                         if (product.Name != null)
                         {
-                            normalPrice += ingredient.Product.Price;
+                            normalPrice += product.Price;
                         }
                     }
                 }
