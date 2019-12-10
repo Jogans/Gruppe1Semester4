@@ -179,22 +179,22 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new prj4databaseContext())
             {
+                RecipeRepository recipeRepository = new RecipeRepository(db);
+
                 RecipeQuery query = new RecipeQuery
                 {
                     NumberOfRecipes = count,
                     LoadIngredientList = true,
-                    
                 };
 
-                var recipeQuery = await query.Execute(db);
+                var recipeQuery = await recipeRepository.Get(query);
 
                 foreach (var recipe in recipeQuery)
                 {
-                    double originalPrice = await calculator.NormalPrice(recipeQuery.ToList(), recipe.Name, storeSplit);
-                    double salePrice = await calculator.TotalPrice(recipeQuery.ToList(), recipe.Name, storeSplit);
-                    double lowestPrice = await calculator.TotalPrice(recipeQuery.ToList(), recipe.Name, storeSplitfake);
+                    double originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit);
+                    double salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit);
+                    double lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake);
 
-                    RecipeRepository recipeRepository = new RecipeRepository(db);
                     recipe.Price = originalPrice;
                     recipe.SavingsAbsolute = salePrice;
                     recipeRepository.Update(recipe);
@@ -273,8 +273,11 @@ namespace GuldtandMVC_Identity.Models
                     NumberOfRecipes = 5,
                     LoadIngredientList = true,
                 };
+
                 RecipeRepository recipeRepository = new RecipeRepository(db);
+
                 var recipeQuery = await recipeRepository.Get(query);
+
 
 
                 if (recipeQuery.Count() == 0)
