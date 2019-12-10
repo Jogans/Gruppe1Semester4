@@ -8,8 +8,8 @@ namespace GuldtandMVC_Identity.Functions
 {
     public interface IHTMLCalculator
     {
-        Task<double> NormalPrice(string word, string[] stores);
+        Task<double> NormalPrice(IEnumerable<Recipe> recipeList, string word, string[] stores);
 
-        Task<double> TotalPrice(string word, string[] stores);
+        Task<double> TotalPrice(IEnumerable<Recipe> recipeList, string word, string[] stores);
     }
 }

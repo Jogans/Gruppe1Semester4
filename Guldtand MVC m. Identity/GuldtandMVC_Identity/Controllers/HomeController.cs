@@ -31,22 +31,6 @@ namespace GuldtandMVC_Identity.Controllers
             return search.searchProductsAndGetHTML(words);
 
         }
-        
-        [Authorize]
-        public Task<string> recipeCreateTest(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl)
-        {
-            var createRecipe = new CreateRecipeFromVue();
-
-            return createRecipe.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
-        }
-
-        //public Task<double> viewTotalPrice(string words)
-        //{
-        //    var totalPrice = new HTMLCalculator();
-
-        //    return totalPrice.TotalPrice(words);
-
-        //}
 
         public async Task<IActionResult> chooseStoresFromSidebar(string stores)
         {
@@ -62,21 +46,6 @@ namespace GuldtandMVC_Identity.Controllers
                 }
                 );
             return Ok();
-        }
-
-        public Task<double> viewNormalPrice(string words, string stores)
-        {
-            var normalPrice = new HTMLCalculator();
-
-            string[] storeSplit = new string[8];
-
-            if (stores != null)
-            {
-                storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
-            }
-
-
-            return normalPrice.NormalPrice(words, storeSplit);
         }
 
         public string searchRecipesByName(string words)

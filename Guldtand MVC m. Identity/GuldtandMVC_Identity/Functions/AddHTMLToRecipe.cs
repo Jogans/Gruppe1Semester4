@@ -184,13 +184,13 @@ namespace GuldtandMVC_Identity.Models
                     NumberOfRecipes = count,
                 };
 
-                var result = await query.Execute(db);
+                var recipeQuery = await query.Execute(db);
 
-                foreach (var recipe in result)
+                foreach (var recipe in recipeQuery)
                 {
-                    double originalPrice = await calculator.NormalPrice(recipe.Name, storeSplit);
-                    double salePrice = await calculator.TotalPrice(recipe.Name, storeSplit);
-                    double lowestPrice = await calculator.TotalPrice(recipe.Name, storeSplitfake);
+                    double originalPrice = await calculator.NormalPrice(recipeQuery, recipe.Name, storeSplit);
+                    double salePrice = await calculator.TotalPrice(recipeQuery, recipe.Name, storeSplit);
+                    double lowestPrice = await calculator.TotalPrice(recipeQuery, recipe.Name, storeSplitfake);
 
                     RecipeRepository recipeRepository = new RecipeRepository(db);
                     recipe.Price = originalPrice;
@@ -270,22 +270,20 @@ namespace GuldtandMVC_Identity.Models
                     SearchRecipe = word,
                     NumberOfRecipes = 5
                 };
+                RecipeRepository recipeRepository = new RecipeRepository(db);
+                var recipeQuery = await recipeRepository.Get(query);
 
 
-
-                var result = await query.Execute(db);
-
-
-                if (result.Count() == 0)
+                if (recipeQuery.Count() == 0)
                 {
                     return "Ingen opskrift fundet";
                 }
 
-                foreach (var recipe in result)
+                foreach (var recipe in recipeQuery)
                 {
-                    double originalPrice = await calculator.NormalPrice(recipe.Name, storeSplit);
-                    double salePrice = await calculator.TotalPrice(recipe.Name, storeSplit);
-                    double lowestPrice = await calculator.TotalPrice(recipe.Name, storeSplitfake);
+                    double originalPrice = await calculator.NormalPrice(recipeQuery, recipe.Name, storeSplit);
+                    double salePrice = await calculator.TotalPrice(recipeQuery, recipe.Name, storeSplit);
+                    double lowestPrice = await calculator.TotalPrice(recipeQuery, recipe.Name, storeSplitfake);
 
 
                     bodystring += "<div class='viewOfRecipe'>" +
