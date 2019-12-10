@@ -30,22 +30,22 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new prj4databaseContext())
             {
-
-                ProductQuery productQuery = new ProductQuery
-                {
-                    ValidToDate = "2050",
-                    NumberOfProducts = 1,
-                    Stores = stores
-                };
-                ProductRepository productRepository = new ProductRepository(db);
-                var listProduct = await productRepository.Get(productQuery);
-                
                 //take all ingredients in the ingredientlist
                 foreach (var ingredient in recipe.IngredientList.Ingredient)
                 {
+                    ProductQuery productQuery = new ProductQuery
+                    {
+                        ValidToDate = "2050",
+                        NumberOfProducts = 1,
+                        Stores = stores,
+                        SearchName = ingredient.Name
+                    };
+                    ProductRepository productRepository = new ProductRepository(db);
+                    var listProduct = await productRepository.Get(productQuery);
+
                     foreach (var product in listProduct)
                     {
-                        if (product.Name.Contains(ingredient.Name))
+                        if (product.Name != null)
                         {
                             normalPrice += ingredient.Product.Price;
                         }
