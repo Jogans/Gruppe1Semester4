@@ -43,11 +43,18 @@ namespace GuldtandMVC_Identity.Models
                     ProductRepository productRepository = new ProductRepository(db);
                     var listProduct = await productRepository.Get(productQuery);
 
-                    foreach (var product in listProduct)
+                    if (listProduct.Count() == 0)
                     {
-                        if (product.Name != null)
+                        normalPrice += ingredient.Product.Price;
+                    }
+                    else
+                    {
+                        foreach (var product in listProduct)
                         {
-                            normalPrice += product.Price;
+                            if (product.Name != null)
+                            {
+                                normalPrice += product.Price;
+                            }
                         }
                     }
                 }
