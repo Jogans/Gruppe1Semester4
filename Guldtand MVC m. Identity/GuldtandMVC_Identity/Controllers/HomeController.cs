@@ -32,7 +32,7 @@ namespace GuldtandMVC_Identity.Controllers
 
         }
         
-
+        [Authorize]
         public Task<string> recipeCreateTest(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl)
         {
             var createRecipe = new CreateRecipeFromVue();

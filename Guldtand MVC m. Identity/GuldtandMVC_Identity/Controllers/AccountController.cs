@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Identity;
 
 
-
 namespace GuldtandMVC_Identity.Controllers
 {
     [Route("api/[controller]")]
