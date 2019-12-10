@@ -24,7 +24,7 @@ namespace GuldtandMVC_Identity.Models
 {
     public class HTMLCalculator : IHTMLCalculator
     {
-        public async Task<double> NormalPrice(List<Recipe> recipeList, string word, string[] stores)
+        public async Task<double> NormalPrice(Recipe recipe, string word, string[] stores)
         {
             double normalPrice = 0;
 
@@ -39,15 +39,14 @@ namespace GuldtandMVC_Identity.Models
                 };
                 ProductRepository productRepository = new ProductRepository(db);
                 var listProduct = await productRepository.Get(productQuery);
-                
-                foreach (var recipe in recipeList)
+
+
+                //take all ingredients in the ingredientlist
+                foreach (var ingredient in recipe.IngredientList.Ingredient)
                 {
-                    //take all ingredients in the ingredientlist
-                    foreach (var ingredient in recipe.IngredientList.Ingredient)
-                    {
-                        normalPrice += ingredient.Product.Price;
-                    }
+                    normalPrice += ingredient.Product.Price;
                 }
+
                 normalPrice = Math.Round(normalPrice);
                 return normalPrice;
 
@@ -55,7 +54,7 @@ namespace GuldtandMVC_Identity.Models
 
         }
         
-        public async Task<double> TotalPrice(List<Recipe> recipeList, string word, string[] stores)
+        public async Task<double> TotalPrice(Recipe recipe, string word, string[] stores)
         {
             double totalPrice = 0;
 
@@ -66,14 +65,13 @@ namespace GuldtandMVC_Identity.Models
                 ProductRepository productRepository = new ProductRepository(db);
                 var listProduct = await produckQuery.Execute(db);
 
-                foreach (var recipe in recipeList)
+
+                //take all ingredients in the ingredientlist
+                foreach (var ingredient in recipe.IngredientList.Ingredient)
                 {
-                    //take all ingredients in the ingredientlist
-                    foreach (var ingredient in recipe.IngredientList.Ingredient)
-                    {
-                        totalPrice += ingredient.Product.Price;
-                    }
+                    totalPrice += ingredient.Product.Price;
                 }
+
                 totalPrice = Math.Round(totalPrice);
                 return totalPrice;
             }

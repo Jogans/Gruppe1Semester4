@@ -284,9 +284,9 @@ namespace GuldtandMVC_Identity.Models
 
                 foreach (var recipe in recipeQuery)
                 {
-                    double originalPrice = await calculator.NormalPrice(recipeQuery.ToList(), recipe.Name, storeSplit);
-                    double salePrice = await calculator.TotalPrice(recipeQuery.ToList(), recipe.Name, storeSplit);
-                    double lowestPrice = await calculator.TotalPrice(recipeQuery.ToList(), recipe.Name, storeSplitfake);
+                    double originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit);
+                    double salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit);
+                    double lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake);
 
 
                     bodystring += "<div class='viewOfRecipe'>" +
