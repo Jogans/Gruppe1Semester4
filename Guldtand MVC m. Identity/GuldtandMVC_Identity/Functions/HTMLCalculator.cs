@@ -39,12 +39,17 @@ namespace GuldtandMVC_Identity.Models
                 };
                 ProductRepository productRepository = new ProductRepository(db);
                 var listProduct = await productRepository.Get(productQuery);
-
-
+                
                 //take all ingredients in the ingredientlist
                 foreach (var ingredient in recipe.IngredientList.Ingredient)
                 {
-                    normalPrice += ingredient.Product.Price;
+                    foreach (var product in listProduct)
+                    {
+                        if (product.Name.Contains(ingredient.Name))
+                        {
+                            normalPrice += ingredient.Product.Price;
+                        }
+                    }
                 }
 
                 normalPrice = Math.Round(normalPrice);
@@ -60,12 +65,6 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new prj4databaseContext())
             {
-                ProductQuery produckQuery = new ProductQuery();
-
-                ProductRepository productRepository = new ProductRepository(db);
-                var listProduct = await produckQuery.Execute(db);
-
-
                 //take all ingredients in the ingredientlist
                 foreach (var ingredient in recipe.IngredientList.Ingredient)
                 {
