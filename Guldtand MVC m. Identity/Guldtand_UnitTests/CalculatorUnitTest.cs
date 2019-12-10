@@ -32,34 +32,34 @@ namespace Guldtand_UnitTests
         }
 
 
-        [TestCase("Lasange")]
-        [TestCase("Pandekager")]
-        [TestCase("Pølsehorn")]
-        [TestCase("Brændende Kærlighed")]
-        [TestCase("Spaghetti med kødsovs")]
-        [TestCase("Kylling i karry")]
-        [TestCase("Hjemmelavet lasagne")]
-        public async  Task TestTotalPriceEqualToOrSmallerThenNormalPrice(string name)
-        {
-            string[] empty = new string[8];
-            double resultTotal = await _uut.TotalPrice(name, empty);
-            double resultNormal = await _uut.NormalPrice(name, empty);
-            Assert.That(true, Is.EqualTo(resultTotal <= resultNormal));
-        }
+        //[TestCase("Lasange")]
+        //[TestCase("Pandekager")]
+        //[TestCase("Pølsehorn")]
+        //[TestCase("Brændende Kærlighed")]
+        //[TestCase("Spaghetti med kødsovs")]
+        //[TestCase("Kylling i karry")]
+        //[TestCase("Hjemmelavet lasagne")]
+        //public async  Task TestTotalPriceEqualToOrSmallerThenNormalPrice(string name)
+        //{
+        //    string[] empty = new string[8];
+        //    double resultTotal = await _uut.TotalPrice(name, empty);
+        //    double resultNormal = await _uut.NormalPrice(name, empty);
+        //    Assert.That(true, Is.EqualTo(resultTotal <= resultNormal));
+        //}
 
-        [TestCase("Lasange")]
-        [TestCase("Pandekager")]
-        [TestCase("Pølsehorn")]
-        [TestCase("Brændende Kærlighed")]
-        [TestCase("Spaghetti med kødsovs")]
-        [TestCase("Kylling i karry")]
-        [TestCase("Hjemmelavet lasagne")]
-        public async Task TestNormalPrice(string name)
-        {
-            string[] empty = new string[8];
-            double resultTotal = await _uut.TotalPrice(name, empty);
-            double resultNormal = await _uut.NormalPrice(name, empty);
-            Assert.That(true, Is.EqualTo(resultNormal >= resultTotal));
-        }
+        //[TestCase("Lasange")]
+        //[TestCase("Pandekager")]
+        //[TestCase("Pølsehorn")]
+        //[TestCase("Brændende Kærlighed")]
+        //[TestCase("Spaghetti med kødsovs")]
+        //[TestCase("Kylling i karry")]
+        //[TestCase("Hjemmelavet lasagne")]
+        //public async Task TestNormalPrice(string name)
+        //{
+        //    string[] empty = new string[8];
+        //    double resultTotal = await _uut.TotalPrice(name, empty);
+        //    double resultNormal = await _uut.NormalPrice(name, empty);
+        //    Assert.That(true, Is.EqualTo(resultNormal >= resultTotal));
+        //}
     }
 }

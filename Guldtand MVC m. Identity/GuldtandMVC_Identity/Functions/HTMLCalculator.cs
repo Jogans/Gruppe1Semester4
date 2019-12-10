@@ -24,7 +24,7 @@ namespace GuldtandMVC_Identity.Models
 {
     public class HTMLCalculator : IHTMLCalculator
     {
-        public async Task<double> NormalPrice(string word, string[] stores)
+        public async Task<double> NormalPrice(IEnumerable<Recipe> recipeList, string word, string[] stores)
         {
             string initString = "" + "<html>";
             string endString = "</html>";
@@ -34,16 +34,7 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new prj4databaseContext())
             {
-                RecipeQuery recipeQuery = new RecipeQuery
-                {
-                    SearchRecipe = word,
-                    LoadIngredientList = true,
-                    LoadRecipeCategory = true,
-                    NumberOfRecipes = 1,
-                    Stores = stores,
-                    ValidToDate = "2050"
 
-                };
                 ProductQuery productQuery = new ProductQuery
                 {
                     ValidToDate = "2050",
@@ -52,12 +43,7 @@ namespace GuldtandMVC_Identity.Models
                 };
                 ProductRepository productRepository = new ProductRepository(db);
                 var listProduct = await productRepository.Get(productQuery);
-
-                RecipeRepository recipeRepository = new RecipeRepository(db);
-                var recipeList = await recipeRepository.Get(recipeQuery);
-
-
-
+                
                 foreach (var recipe in recipeList)
                 {
                     //take all ingredients in the ingredientlist
@@ -73,7 +59,7 @@ namespace GuldtandMVC_Identity.Models
 
         }
         
-        public async Task<double> TotalPrice(string word, string[] stores)
+        public async Task<double> TotalPrice(IEnumerable<Recipe> recipeList, string word, string[] stores)
         {
             string initString = "" + "<html>";
             string endString = "</html>";
@@ -83,22 +69,10 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new prj4databaseContext())
             {
-                RecipeQuery recipequery = new RecipeQuery
-                {
-                    SearchRecipe = word,
-                    LoadIngredientList = true,
-                    LoadRecipeCategory = true,
-                    NumberOfRecipes = 1,
-                    Stores = stores
-                };
                 ProductQuery produckQuery = new ProductQuery();
-            
 
-                RecipeRepository recipeRepository = new RecipeRepository(db);
-                var recipeList = await recipeRepository.Get(recipequery);
                 ProductRepository productRepository = new ProductRepository(db);
                 var listProduct = await produckQuery.Execute(db);
-
 
                 foreach (var recipe in recipeList)
                 {
