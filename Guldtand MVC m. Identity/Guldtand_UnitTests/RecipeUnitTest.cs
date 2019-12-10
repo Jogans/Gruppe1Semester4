@@ -18,10 +18,17 @@ namespace Guldtand_UnitTests
     public class RecipeUnitTest
     {
         private AddHTMLToRecipe _uut;
-        
+        private prj4databaseContext _context;
+        public IQuery<Product> _ProductQuery;
+        public IQuery<Recipe> _RecipeQuesry;
+        public Product _Product;
+
         [SetUp]
-        public void Setup()
+        public void Setup() 
         {
+            _ProductQuery = Substitute.For<IQuery<Product>>();
+            _RecipeQuesry = Substitute.For<IQuery<Recipe>>();
+            _Product = Substitute.For<Product>();
             _uut = new AddHTMLToRecipe();
         }
 

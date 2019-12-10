@@ -56,6 +56,5 @@ namespace GuldtandMVC_Identity.Controllers
 
             return createRecipe.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
         }
-
     }
 }
