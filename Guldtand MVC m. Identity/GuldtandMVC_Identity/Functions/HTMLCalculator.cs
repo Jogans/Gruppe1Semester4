@@ -24,12 +24,8 @@ namespace GuldtandMVC_Identity.Models
 {
     public class HTMLCalculator : IHTMLCalculator
     {
-        public async Task<double> NormalPrice(IEnumerable<Recipe> recipeList, string word, string[] stores)
+        public async Task<double> NormalPrice(List<Recipe> recipeList, string word, string[] stores)
         {
-            string initString = "" + "<html>";
-            string endString = "</html>";
-            string bodyString = "";
-            
             double normalPrice = 0;
 
             using (var db = new prj4databaseContext())
@@ -59,12 +55,8 @@ namespace GuldtandMVC_Identity.Models
 
         }
         
-        public async Task<double> TotalPrice(IEnumerable<Recipe> recipeList, string word, string[] stores)
+        public async Task<double> TotalPrice(List<Recipe> recipeList, string word, string[] stores)
         {
-            string initString = "" + "<html>";
-            string endString = "</html>";
-            string bodyString = "";
-
             double totalPrice = 0;
 
             using (var db = new prj4databaseContext())
