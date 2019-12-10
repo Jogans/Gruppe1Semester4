@@ -38,16 +38,13 @@ namespace GuldtandMVC_Identity.Models
                         ValidToDate = "2050",
                         NumberOfProducts = 1,
                         Stores = stores,
-                        SearchName = ingredient.Name
+                        SearchName = ingredient.Name,
+                        LoadRetailChain = true
                     };
                     ProductRepository productRepository = new ProductRepository(db);
                     var listProduct = await productRepository.Get(productQuery);
 
-                    if (listProduct.Count() == 0)
-                    {
-                        normalPrice += ingredient.Product.Price;
-                    }
-                    else
+                    if (listProduct.Any())
                     {
                         foreach (var product in listProduct)
                         {
@@ -56,6 +53,10 @@ namespace GuldtandMVC_Identity.Models
                                 normalPrice += product.Price;
                             }
                         }
+                    }
+                    else
+                    {
+                        normalPrice += ingredient.Product.Price;
                     }
                 }
 
@@ -81,17 +82,18 @@ namespace GuldtandMVC_Identity.Models
                     {
                         NumberOfProducts = 1,
                         Stores = stores,
-                        SearchName = ingredient.Name
+                        SearchName = ingredient.Name,
+                        LoadRetailChain = true
                     };
                     ProductRepository productRepository = new ProductRepository(db);
                     var listProduct = await productRepository.Get(productQuery);
-
-                    foreach (var product in listProduct)
+                    if (listProduct.Any())
                     {
-                        if (product.Name != null)
-                        {
-                            totalPrice += product.Price;
-                        }
+                        totalPrice += listProduct.First().Price;
+                    }
+                    else
+                    {
+                        totalPrice += ingredient.Product.Price;
                     }
                 }
 
