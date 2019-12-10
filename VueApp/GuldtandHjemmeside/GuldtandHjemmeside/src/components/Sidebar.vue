@@ -116,7 +116,7 @@
                     this.checkedString += "Netto;";
                 }
                 if (this.checkedFoetex != true) {
-                    this.checkedString += "Foetex;";
+                    this.checkedString += "Føtex;";
                 }
                 if (this.checkedRema != true) {
                     this.checkedString += "Rema;";
