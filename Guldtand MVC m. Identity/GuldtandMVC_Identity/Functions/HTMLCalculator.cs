@@ -58,7 +58,6 @@ namespace GuldtandMVC_Identity.Models
                         }
                     }
                 }
-
                 normalPrice = Math.Round(normalPrice);
                 return normalPrice;
 

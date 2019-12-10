@@ -189,16 +189,36 @@ namespace GuldtandMVC_Identity.Models
 
                 var recipeQuery = await recipeRepository.Get(query);
 
+
+
                 foreach (var recipe in recipeQuery)
                 {
-                    double originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit);
-                    double salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit);
-                    double lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake);
+                    double originalPrice = 0;
+                    double salePrice = 0;
+                    double lowestPrice = 0;
+                    if (stores == null)
+                    {
+                        if (recipe.Price != null)
+                        {
+                            originalPrice = (double) recipe.Price;
+                        }
+                        if (recipe.SavingsAbsolute != null)
+                        {
+                            salePrice = (double)recipe.SavingsAbsolute;
+                            lowestPrice = (double)recipe.SavingsAbsolute;
+                        }
+                    }
+                    else
+                    {
+                        originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit);
+                        salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit);
+                        lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake);
+                    }
 
-                    recipe.Price = originalPrice;
-                    recipe.SavingsAbsolute = salePrice;
-                    recipeRepository.Update(recipe);
-                    recipeRepository.Save();
+                    //recipe.Price = originalPrice;
+                    //recipe.SavingsAbsolute = salePrice;
+                    //recipeRepository.Update(recipe);
+                    //recipeRepository.Save();
 
                     bodystring += "<div class='viewOfRecipe'>" +
                                   "<div class='imageOfRecipe'>" +
@@ -287,9 +307,27 @@ namespace GuldtandMVC_Identity.Models
 
                 foreach (var recipe in recipeQuery)
                 {
-                    double originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit);
-                    double salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit);
-                    double lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake);
+                    double originalPrice = 0;
+                    double salePrice = 0;
+                    double lowestPrice = 0;
+                    if (stores == null)
+                    {
+                        if (recipe.Price != null)
+                        {
+                            originalPrice = (double)recipe.Price;
+                        }
+                        if (recipe.SavingsAbsolute != null)
+                        {
+                            salePrice = (double)recipe.SavingsAbsolute;
+                            lowestPrice = (double)recipe.SavingsAbsolute;
+                        }
+                    }
+                    else
+                    {
+                        originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit);
+                        salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit);
+                        lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake);
+                    }
 
 
                     bodystring += "<div class='viewOfRecipe'>" +
