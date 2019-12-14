@@ -6,9 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using com.sun.org.apache.bcel.@internal.generic;
 using GuldtandMVC_Identity.Data;
-using jdk.nashorn.@internal.ir;
 using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
 using Microsoft.AspNetCore.Identity;
 using GuldtandMVC_Identity.Data.Queries;
@@ -28,6 +26,7 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new Prj4databaseContext())
             {
+                ProductRepository productRepository = new ProductRepository(db);
                 //take all ingredients in the ingredientlist
                 foreach (var ingredient in recipe.IngredientList.Ingredient)
                 {
@@ -39,9 +38,7 @@ namespace GuldtandMVC_Identity.Models
                         SearchName = ingredient.Name,
                         LoadRetailChain = true
                     };
-                    ProductRepository productRepository = new ProductRepository(db);
                     var listProduct = await productRepository.Get(productQuery);
-                    productRepository.Dispose();
                     if (listProduct.Any())
                     {
                         foreach (var product in listProduct)
@@ -57,6 +54,7 @@ namespace GuldtandMVC_Identity.Models
                         normalPrice += ingredient.Product.Price;
                     }
                 }
+                productRepository.Dispose();
                 normalPrice = Math.Round(normalPrice);
                 return normalPrice;
 
@@ -70,6 +68,7 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new Prj4databaseContext())
             {
+                ProductRepository productRepository = new ProductRepository(db);
 
                 //take all ingredients in the ingredientlist
                 foreach (var ingredient in recipe.IngredientList.Ingredient)
@@ -82,9 +81,8 @@ namespace GuldtandMVC_Identity.Models
                         SearchName = ingredient.Name,
                         LoadRetailChain = true
                     };
-                    ProductRepository productRepository = new ProductRepository(db);
                     var listProduct = await productRepository.Get(productQuery);
-                    productRepository.Dispose();
+
                     if (listProduct.Any())
                     {
                         totalPrice += listProduct.First().Price;
@@ -93,8 +91,8 @@ namespace GuldtandMVC_Identity.Models
                     {
                         totalPrice += ingredient.Product.Price;
                     }
-                    
                 }
+                productRepository.Dispose();
                 totalPrice = Math.Round(totalPrice);
                 return totalPrice;
             }

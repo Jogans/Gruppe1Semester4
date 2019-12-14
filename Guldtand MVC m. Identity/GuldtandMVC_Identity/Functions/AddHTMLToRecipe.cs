@@ -32,8 +32,12 @@ namespace GuldtandMVC_Identity.Models
                     NumberOfRecipes = 1,
 
                 };
-                var result = await query.Execute(db);
 
+                RecipeRepository recipeRepository = new RecipeRepository(db);
+
+                var result = await recipeRepository.Get(query);
+
+                recipeRepository.Dispose();
 
                 foreach (var recipe in result)
                 {
@@ -94,6 +98,7 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new Prj4databaseContext())
             {
+
                 RecipeQuery query = new RecipeQuery
                 {
                     LoadIngredientList = true,
@@ -103,7 +108,13 @@ namespace GuldtandMVC_Identity.Models
                     Stores = storeSplit
 
                 };
-                var result = await query.Execute(db);
+
+                RecipeRepository recipeRepository = new RecipeRepository(db);
+
+                var result = await recipeRepository.Get(query);
+
+                recipeRepository.Dispose();
+
 
                 foreach (var recipe in result)
                 {
@@ -174,7 +185,6 @@ namespace GuldtandMVC_Identity.Models
 
             using (var db = new Prj4databaseContext())
             {
-                RecipeRepository recipeRepository = new RecipeRepository(db);
 
                 RecipeQuery query = new RecipeQuery
                 {
@@ -182,11 +192,12 @@ namespace GuldtandMVC_Identity.Models
                     LoadIngredientList = true,
                 };
 
-                var recipeQuery = await recipeRepository.Get(query);
+                RecipeRepository recipeRepository = new RecipeRepository(db);
+
+                var result = await recipeRepository.Get(query);
                 recipeRepository.Dispose();
 
-
-                foreach (var recipe in recipeQuery)
+                foreach (var recipe in result)
                 {
                     double originalPrice = 0;
                     double salePrice = 0;
@@ -195,7 +206,7 @@ namespace GuldtandMVC_Identity.Models
                     {
                         if (recipe.Price != null)
                         {
-                            originalPrice = (double) recipe.Price;
+                            originalPrice = (double)recipe.Price;
                         }
                         if (recipe.SavingsAbsolute != null)
                         {
@@ -287,7 +298,6 @@ namespace GuldtandMVC_Identity.Models
 
                 var recipeQuery = await recipeRepository.Get(query);
                 recipeRepository.Dispose();
-
 
                 if (recipeQuery.Count() == 0)
                 {
