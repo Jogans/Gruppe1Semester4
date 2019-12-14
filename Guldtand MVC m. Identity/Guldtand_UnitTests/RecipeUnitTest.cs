@@ -11,12 +11,12 @@ namespace Guldtand_UnitTests
     [TestFixture]
     public class RecipeUnitTest
     {
-        private AddHTMLToRecipe _uut;
+        private AddHtmlToRecipe _uut;
 
         [SetUp]
         public void Setup() 
         {
-            _uut = new AddHTMLToRecipe();
+            _uut = new AddHtmlToRecipe();
         }
 
         [TestCase("Lasagne", "<html>")] //HTML start tag
@@ -25,11 +25,11 @@ namespace Guldtand_UnitTests
         [TestCase("Lasagne", "Lasagne")] //Recipe name included
         [TestCase("Brændende Kærlighed", "Brændende Kærlighed")] //Recipe name included
         [TestCase("Pandekager", "Pandekager")] //Recipe name included
-        public async Task TestForReturningHTMLCodeFromFunctionShowFullRecipe(string searchWord, string htmlExpected)
+        public async Task TestForReturningHtmlCodeFromFunctionShowFullRecipe(string searchWord, string htmlExpected)
         {
-            Task<string> resultString = _uut.ShowRecipeFullView(searchWord, 4);
+            var resultString = await _uut.ShowRecipeFullView(searchWord, 4);
 
-            StringAssert.Contains(htmlExpected, resultString.Result);
+            StringAssert.Contains(htmlExpected, resultString);
         }
 
         [TestCase("<html>")] //HTML start tag
@@ -39,13 +39,13 @@ namespace Guldtand_UnitTests
         [TestCase("Brændende Kærlighed")] //Recipe name included
         [TestCase( "Pandekager")] //Recipe name included
         [TestCase("<style>")] //Css included
-        public async Task TestForReturningHTMLCodeFromFunctionShowSmallRecipeAllStoresAllRecipes(string htmlExpected)
+        public async Task TestForReturningHtmlCodeFromFunctionShowSmallRecipeAllStoresAllRecipes(string htmlExpected)
         {
             string allStores = "";
 
-            Task<string> resultString = _uut.ShowRecipeSmallViewAsync(allStores, 20);
+            var resultString = await _uut.ShowRecipeSmallViewAsync(allStores, 20);
 
-            StringAssert.Contains(htmlExpected, resultString.Result);
+            StringAssert.Contains(htmlExpected, resultString);
         }
 
 

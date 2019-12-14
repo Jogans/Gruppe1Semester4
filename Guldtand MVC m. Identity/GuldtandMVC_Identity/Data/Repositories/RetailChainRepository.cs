@@ -8,9 +8,9 @@ namespace GuldtandMVC_Identity.Data.Repositories
 {
     public class RetailChainRepository : IRepository<RetailChain>, IDisposable
     {
-        private readonly prj4databaseContext _context;
+        private readonly Prj4databaseContext _context;
 
-        public RetailChainRepository(prj4databaseContext context)
+        public RetailChainRepository(Prj4databaseContext context)
         {
             this._context = context;
         }

@@ -6,7 +6,7 @@ using GuldtandMVC_Identity.Models;
 
 namespace GuldtandMVC_Identity.Functions
 {
-    public interface IHTMLCalculator
+    public interface IHtmlCalculator
     {
         Task<double> NormalPrice(Recipe recipe, string word, string[] stores);
 

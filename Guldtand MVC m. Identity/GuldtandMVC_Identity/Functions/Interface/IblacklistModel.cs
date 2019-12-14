@@ -1,7 +1,7 @@
 ﻿namespace GuldtandMVC_Identity.Functions
 {
-    public interface IblacklistModel
+    public interface IBlacklistModel
     {
-        string[] insertandgetBlackList(string category);
+        string[] InsertandgetBlackList(string category);
     }
 }

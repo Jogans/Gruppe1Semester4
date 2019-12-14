@@ -8,9 +8,9 @@ namespace GuldtandMVC_Identity.Data.Repositories
 {
     public class IngredientRepository : IRepository<Ingredient>, IDisposable
     {
-        private readonly prj4databaseContext _context;
+        private readonly Prj4databaseContext _context;
 
-        public IngredientRepository(prj4databaseContext context)
+        public IngredientRepository(Prj4databaseContext context)
         {
             this._context = context;
         }

@@ -15,7 +15,7 @@ namespace GuldtandMVC_Identity.Models
             JObject jo = JObject.Parse(json);
             var array = (JArray)jo["adverts"];
            
-            using (var db = new prj4databaseContext())
+            using (var db = new Prj4databaseContext())
             {
                 foreach (JObject data in array.Children<JObject>())
                 {
@@ -93,9 +93,11 @@ namespace GuldtandMVC_Identity.Models
 
                         db.SaveChanges();
 
-                        var vk = new ProductCategory();
-                        vk.ProductId = vare.ProductId;
-                        vk.CategoryName = kategori;
+                        var vk = new ProductCategory
+                        {
+                            ProductId = vare.ProductId, 
+                            CategoryName = kategori
+                        };
                         db.ProductCategory.Add(vk);
 
                         db.SaveChanges();

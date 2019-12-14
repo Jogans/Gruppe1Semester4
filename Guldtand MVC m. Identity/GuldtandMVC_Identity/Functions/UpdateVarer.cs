@@ -10,7 +10,7 @@ namespace GuldtandMVC_Identity.Models
     {
         public static void Update()
         {
-            using (var db = new prj4databaseContext())
+            using (var db = new Prj4databaseContext())
             {
                 db.ProductCategory.RemoveRange(db.ProductCategory.Where(pc => pc.Product.ValidTo < DateTime.UtcNow));
                 db.Product.RemoveRange(db.Product.Where(p => p.ValidTo < DateTime.UtcNow));

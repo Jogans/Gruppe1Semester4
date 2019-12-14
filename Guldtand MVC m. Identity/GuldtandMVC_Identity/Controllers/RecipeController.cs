@@ -21,27 +21,27 @@ namespace GuldtandMVC_Identity.Controllers
 
         public Task<string> ViewASpeceficRecipe(string words, double count)
         {
-            var recipe = new AddHTMLToRecipe();
+            var recipe = new AddHtmlToRecipe();
 
             return recipe.ShowRecipeFullView(words, count);
         }
 
         public Task<string> GetShoppingCart(string words, string stores)
         {
-            var recipe = new AddHTMLToRecipe();
+            var recipe = new AddHtmlToRecipe();
 
             return recipe.GenerateShoppingCart(words, stores);
         }
 
         public Task<string> ViewForSmallRecipe(string stores, int count)
         {
-            var recipe = new AddHTMLToRecipe();
+            var recipe = new AddHtmlToRecipe();
             return recipe.ShowRecipeSmallViewAsync(stores, count);
         }
 
         public Task<string> ViewForSmallRecipeSearch(string word, string stores)
         {
-            var recipe = new AddHTMLToRecipe();
+            var recipe = new AddHtmlToRecipe();
             Task<string> result = recipe.ShowRecipeSmallViewSearchAsync(word, stores);
             return result;
         }

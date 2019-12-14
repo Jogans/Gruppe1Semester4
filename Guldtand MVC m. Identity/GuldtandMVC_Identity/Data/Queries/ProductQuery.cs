@@ -17,7 +17,7 @@ namespace GuldtandMVC_Identity.Data.Queries
 
 
 
-        public async Task<IEnumerable<Product>> Execute(prj4databaseContext context)
+        public async Task<IEnumerable<Product>> Execute(Prj4databaseContext context)
         {
             List<RetailChain> irrelevantStores = new List<RetailChain>();
             foreach (var store in Stores)

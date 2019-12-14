@@ -7,6 +7,6 @@ namespace GuldtandMVC_Identity.Data.Queries
 {
     public interface IQuery<T>
     {
-         Task<IEnumerable<T>> Execute(prj4databaseContext context);
+         Task<IEnumerable<T>> Execute(Prj4databaseContext context);
     }
 }

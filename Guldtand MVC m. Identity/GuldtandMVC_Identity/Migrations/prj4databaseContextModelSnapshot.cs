@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GuldtandMVC_Identity.Migrations
 {
-    [DbContext(typeof(prj4databaseContext))]
-    partial class prj4databaseContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(Prj4databaseContext))]
+    partial class Prj4databaseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

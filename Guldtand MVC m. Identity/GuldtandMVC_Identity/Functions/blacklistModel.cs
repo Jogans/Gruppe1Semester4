@@ -7,16 +7,16 @@ using GuldtandMVC_Identity.Functions;
 
 namespace GuldtandMVC_Identity.Models
 {
-    public class blacklistModel : IblacklistModel
+    public class BlacklistModel : IBlacklistModel
     {
-        public blacklistModel()
+        public BlacklistModel()
         {
 
         }
 
-        public string[] insertandgetBlackList(string category)
+        public string[] InsertandgetBlackList(string category)
         {
-            using (var db = new prj4databaseContext())
+            using (var db = new Prj4databaseContext())
             {
                 if (!db.Blacklist.Any(b => b.Category.Equals(category)))
                 {

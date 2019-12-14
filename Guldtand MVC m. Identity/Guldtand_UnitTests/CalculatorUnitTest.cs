@@ -17,21 +17,21 @@ namespace Guldtand_UnitTests
     [TestFixture]
     public class CalculatorUnitTest
     {
-        public IQuery<Product> _ProductQuery;
-        public IQuery<Recipe> _RecipeQuesry;
-        public Recipe _Recipe;
-        public Product _Product;
-        private HTMLCalculator _uut;
-        public prj4databaseContext _db;
+        public IQuery<Product> ProductQuery;
+        public IQuery<Recipe> RecipeQuesry;
+        public Recipe Recipe;
+        public Product Product;
+        private HtmlCalculator _uut;
+        public Prj4databaseContext Db;
         
         [SetUp]
         public void Setup()
         {
-            _ProductQuery = Substitute.For<IQuery<Product>>();
-            _RecipeQuesry = Substitute.For<IQuery<Recipe>>();
-            _Product = Substitute.For<Product>();
-            _uut = new HTMLCalculator();
-            _db = new prj4databaseContext();
+            ProductQuery = Substitute.For<IQuery<Product>>();
+            RecipeQuesry = Substitute.For<IQuery<Recipe>>();
+            Product = Substitute.For<Product>();
+            _uut = new HtmlCalculator();
+            Db = new Prj4databaseContext();
         }
 
 
@@ -51,7 +51,7 @@ namespace Guldtand_UnitTests
                 NumberOfRecipes = 1,
             };
 
-            var recipe = await recipeQuery.Execute(_db);
+            var recipe = await recipeQuery.Execute(Db);
 
             string[] empty = new string[8];
             double resultTotal = await _uut.TotalPrice(recipe.First(), name, empty);
@@ -75,7 +75,7 @@ namespace Guldtand_UnitTests
                 NumberOfRecipes = 1,
             };
 
-            var recipe = await recipeQuery.Execute(_db);
+            var recipe = await recipeQuery.Execute(Db);
 
             string[] empty = new string[8];
             double resultTotal = await _uut.TotalPrice(recipe.First(), name, empty);

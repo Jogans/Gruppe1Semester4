@@ -10,7 +10,7 @@ using GuldtandMVC_Identity.Functions;
 
 namespace GuldtandMVC_Identity.Models
 {
-    public class AddHTMLToRecipe : IAddHTMLToRecipe
+    public class AddHtmlToRecipe : IAddHtmlToRecipe
     {
         public async Task<string> ShowRecipeFullView(string words, double antal)
         {
@@ -20,11 +20,9 @@ namespace GuldtandMVC_Identity.Models
 
             string bodystring = "";
 
-            string[] storeSplit = new string[8];
+            antal /= 4;
 
-            antal = antal / 4;
-
-            using (var db = new prj4databaseContext())
+            using (var db = new Prj4databaseContext())
             {
                 RecipeQuery query = new RecipeQuery
                 {
@@ -94,7 +92,7 @@ namespace GuldtandMVC_Identity.Models
                 storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
             }
 
-            using (var db = new prj4databaseContext())
+            using (var db = new Prj4databaseContext())
             {
                 RecipeQuery query = new RecipeQuery
                 {
@@ -164,7 +162,7 @@ namespace GuldtandMVC_Identity.Models
 
             string bodystring = "";
 
-            HTMLCalculator calculator = new HTMLCalculator();
+            HtmlCalculator calculator = new HtmlCalculator();
 
             string[] storeSplit = new string[8];
             string[] storeSplitfake = new string[8];
@@ -174,7 +172,7 @@ namespace GuldtandMVC_Identity.Models
                 storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
             }
 
-            using (var db = new prj4databaseContext())
+            using (var db = new Prj4databaseContext())
             {
                 RecipeRepository recipeRepository = new RecipeRepository(db);
 
@@ -185,7 +183,7 @@ namespace GuldtandMVC_Identity.Models
                 };
 
                 var recipeQuery = await recipeRepository.Get(query);
-
+                recipeRepository.Dispose();
 
 
                 foreach (var recipe in recipeQuery)
@@ -266,7 +264,7 @@ namespace GuldtandMVC_Identity.Models
 
             string bodystring = "";
 
-            HTMLCalculator calculator = new HTMLCalculator();
+            HtmlCalculator calculator = new HtmlCalculator();
 
             string[] storeSplit = new string[8];
             string[] storeSplitfake = new string[8];
@@ -276,7 +274,7 @@ namespace GuldtandMVC_Identity.Models
                 storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
             }
 
-            using (var db = new prj4databaseContext())
+            using (var db = new Prj4databaseContext())
             {
                 RecipeQuery query = new RecipeQuery
                 {
@@ -288,7 +286,7 @@ namespace GuldtandMVC_Identity.Models
                 RecipeRepository recipeRepository = new RecipeRepository(db);
 
                 var recipeQuery = await recipeRepository.Get(query);
-
+                recipeRepository.Dispose();
 
 
                 if (recipeQuery.Count() == 0)

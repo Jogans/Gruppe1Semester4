@@ -39,7 +39,7 @@ namespace GuldtandMVC_Identity
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<prj4databaseContext>()
+                .AddEntityFrameworkStores<Prj4databaseContext>()
                 .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
@@ -60,7 +60,7 @@ namespace GuldtandMVC_Identity
                         .RequireClaim("Admin"));
             });
 
-            services.AddDbContext<prj4databaseContext>();
+            services.AddDbContext<Prj4databaseContext>();
             //services.AddDbContext<prj4databaseContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("GuldtandDatabase")));
 

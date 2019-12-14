@@ -1,11 +1,11 @@
-﻿namespace GuldtandMVC_Identity.Functions
-{
-    public interface ISearching
-    {
-        string[] getCategoryList();
+﻿//namespace GuldtandMVC_Identity.Functions
+//{
+//    public interface ISearching
+//    {
+//        string[] getCategoryList();
 
-        string getCategoriesAsHTML();
+//        string getCategoriesAsHTML();
 
-        string searchProductsAndGetHTML(string words);
-    }
-}
+//        string searchProductsAndGetHTML(string words);
+//    }
+//}

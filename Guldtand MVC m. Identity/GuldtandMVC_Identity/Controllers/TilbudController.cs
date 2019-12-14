@@ -9,25 +9,23 @@ namespace GuldtandMVC_Identity.Controllers
 {
     public class VareJson
     {
-        public string tekst { get; set; }
+        public string Tekst { get; set; }
     }
 
     
     
-        public class tilbudController : Controller
+        public class TilbudController : Controller
         {
             // GET: /<controller>/
 
             [HttpPost]
             public void AddVare([Bind("tekst")]VareJson vare)
             {
-                ParseVarer.InsertVare(vare.tekst);
+                ParseVarer.InsertVare(vare.Tekst);
             }
 
-            public void update(int kode)
+            public void Update(int kode)
             {
-                var au = new ApplicationUser();
-
                 if (kode == 5555)
                     UpdateVarer.Update();
             }

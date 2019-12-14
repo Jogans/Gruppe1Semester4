@@ -2,7 +2,7 @@
 
 namespace GuldtandMVC_Identity.Functions
 {
-    public interface IAddHTMLToRecipe
+    public interface IAddHtmlToRecipe
     {
         Task<string> ShowRecipeFullView(string words, double antal);
 

@@ -11,16 +11,15 @@ using NUnit.Framework;
 
 namespace Guldtand_UnitTests
 {
-    class ProductQuery_Unit_Test
+    class ProductQueryUnitTest
     {
         private ProductQuery _uut;
-        private prj4databaseContext _context;
+        private Prj4databaseContext _context;
         [SetUp]
         public void SetUp()
         {
-            _context = new prj4databaseContext();
-            _uut = new ProductQuery();
-            _uut.NumberOfProducts = 10000;
+            _context = new Prj4databaseContext();
+            _uut = new ProductQuery {NumberOfProducts = 10000};
         }
 
         [Test]

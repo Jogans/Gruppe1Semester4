@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace GuldtandMVC_Identity
 {
-    public partial class prj4databaseContext : IdentityDbContext
+    public partial class Prj4databaseContext : IdentityDbContext
     {
-        public prj4databaseContext()
+        public Prj4databaseContext()
         {
         }
 
-        public prj4databaseContext(DbContextOptions<prj4databaseContext> options)
+        public Prj4databaseContext(DbContextOptions<Prj4databaseContext> options)
             : base(options)
         {
         }

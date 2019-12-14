@@ -11,16 +11,15 @@ using NUnit.Framework;
 
 namespace Guldtand_UnitTests
 {
-    class RecipeQuery_Unit_Test
+    class RecipeQueryUnitTest
     {
         private RecipeQuery _uut;
-        private prj4databaseContext _context;
+        private Prj4databaseContext _context;
         [SetUp]
         public void SetUp()
         {
-            _context = new prj4databaseContext();
-            _uut = new RecipeQuery();
-            _uut.LoadIngredientList = true;
+            _context = new Prj4databaseContext();
+            _uut = new RecipeQuery {LoadIngredientList = true};
         }
 
         [Test]
@@ -74,10 +73,10 @@ namespace Guldtand_UnitTests
         {
             _uut.SearchIngredient = "Løg";
             var recipesList = await _uut.Execute(_context);
-            bool result = false;
+
             foreach (var recipe in recipesList)
             {
-                result = false;
+                bool result = false;
                 foreach (var ingredient in recipe.IngredientList.Ingredient)
                 {
                     if (ingredient.Name == "Løg")

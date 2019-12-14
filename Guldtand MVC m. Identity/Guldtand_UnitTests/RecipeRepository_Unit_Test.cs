@@ -9,14 +9,14 @@ using NUnit.Framework;
 
 namespace Guldtand_UnitTests
 {
-    public class RecipeRepository_Unit_Test
+    public class RecipeRepositoryUnitTest
     {
         private RecipeRepository _uut;
-        private prj4databaseContext _context;
+        private Prj4databaseContext _context;
         [SetUp]
         public void SetUp()
         {
-            _context = new prj4databaseContext();
+            _context = new Prj4databaseContext();
             _uut = new RecipeRepository(_context);
         }
 

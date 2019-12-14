@@ -14,7 +14,7 @@ namespace GuldtandMVC_Identity.Models
     public class CreateRecipeFromVue : ICreateRecepieFromVue
     {
 
-        public string HTMLToRecipe(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl)
+        public string HtmlToRecipe(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl)
         {
 
             string initString = "" +
@@ -59,7 +59,6 @@ namespace GuldtandMVC_Identity.Models
             string[] amountSplit = ingridientAmount.Split(';', StringSplitOptions.RemoveEmptyEntries);
             string[] unitSplit = ingridientUnit.Split(';', StringSplitOptions.RemoveEmptyEntries);
             int sizeIngridient = nameSplit.Length;
-            var ingridients = new Ingredient[sizeIngridient];
 
             for (int i = 0; i < sizeIngridient; i++)
             {
@@ -76,7 +75,7 @@ namespace GuldtandMVC_Identity.Models
 
         public async Task<string> CreateRecipeToDatabase(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl)
         {
-            using (var db = new prj4databaseContext())
+            using (var db = new Prj4databaseContext())
             {
                 RecipeQuery recipeQuery = new RecipeQuery
                 {
@@ -98,6 +97,7 @@ namespace GuldtandMVC_Identity.Models
                 RecipeRepository recipeRepository = new RecipeRepository(db);
                 recipeRepository.Insert(recipe);
                 recipeRepository.Save();
+                recipeRepository.Dispose();
 
                 string[] descriptionData = description.Split(';', StringSplitOptions.RemoveEmptyEntries);
                 int sizeDescription = descriptionData.Length;
@@ -113,7 +113,7 @@ namespace GuldtandMVC_Identity.Models
                     directionsRepository.Insert(direc);
                 }
                 directionsRepository.Save();
-
+                directionsRepository.Dispose();
                 var ingredientLists = new IngredientList
                 {
                     RecipeId = recipe.RecipeId,
@@ -121,7 +121,7 @@ namespace GuldtandMVC_Identity.Models
                 IngredientListRepository ingredientListRepository = new IngredientListRepository(db);
                 ingredientListRepository.Insert(ingredientLists);
                 ingredientListRepository.Save();
-
+                ingredientListRepository.Dispose();
                 string[] nameSplit = ingridientName.Split(';', StringSplitOptions.RemoveEmptyEntries);
                 string[] amountSplit = ingridientAmount.Split(';', StringSplitOptions.RemoveEmptyEntries);
                 string[] unitSplit = ingridientUnit.Split(';', StringSplitOptions.RemoveEmptyEntries);
@@ -132,8 +132,7 @@ namespace GuldtandMVC_Identity.Models
 
                 for (int i = 0; i < sizeIngridient; i++)
                 {
-                    double amountDouble = 0;
-                    double.TryParse(amountSplit[i], out amountDouble);
+                    double.TryParse(amountSplit[i], out var amountDouble);
                     ingridients[i] = new Ingredient
                     {
                         Name = nameSplit[i],
@@ -150,8 +149,9 @@ namespace GuldtandMVC_Identity.Models
                     ingredientRepository.Insert(ingridient);
                 }
                 ingredientRepository.Save();
+                ingredientRepository.Dispose();
 
-                return HTMLToRecipe(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
+                return HtmlToRecipe(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
             }
         }
     }

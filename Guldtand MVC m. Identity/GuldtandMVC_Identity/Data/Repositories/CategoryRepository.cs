@@ -9,9 +9,9 @@ namespace GuldtandMVC_Identity.Data.Repositories
 {
     public class CategoryRepository : IRepository<Category>, IDisposable
     {
-        private readonly prj4databaseContext _context;
+        private readonly Prj4databaseContext _context;
 
-        public CategoryRepository(prj4databaseContext context)
+        public CategoryRepository(Prj4databaseContext context)
         {
             this._context = context;
         }

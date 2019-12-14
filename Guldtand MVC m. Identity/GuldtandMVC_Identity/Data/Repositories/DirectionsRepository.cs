@@ -9,9 +9,9 @@ namespace GuldtandMVC_Identity.Data.Repositories
 {
     public class DirectionsRepository : IRepository<Directions>, IDisposable
     {
-        private readonly prj4databaseContext _context;
+        private readonly Prj4databaseContext _context;
 
-        public DirectionsRepository(prj4databaseContext context)
+        public DirectionsRepository(Prj4databaseContext context)
         {
             this._context = context;
         }

@@ -20,13 +20,13 @@ using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace GuldtandMVC_Identity.Models
 {
-    public class HTMLCalculator : IHTMLCalculator
+    public class HtmlCalculator : IHtmlCalculator
     {
         public async Task<double> NormalPrice(Recipe recipe, string word, string[] stores)
         {
             double normalPrice = 0;
 
-            using (var db = new prj4databaseContext())
+            using (var db = new Prj4databaseContext())
             {
                 //take all ingredients in the ingredientlist
                 foreach (var ingredient in recipe.IngredientList.Ingredient)
@@ -41,7 +41,7 @@ namespace GuldtandMVC_Identity.Models
                     };
                     ProductRepository productRepository = new ProductRepository(db);
                     var listProduct = await productRepository.Get(productQuery);
-
+                    productRepository.Dispose();
                     if (listProduct.Any())
                     {
                         foreach (var product in listProduct)
@@ -68,7 +68,7 @@ namespace GuldtandMVC_Identity.Models
         {
             double totalPrice = 0;
 
-            using (var db = new prj4databaseContext())
+            using (var db = new Prj4databaseContext())
             {
 
                 //take all ingredients in the ingredientlist
@@ -84,6 +84,7 @@ namespace GuldtandMVC_Identity.Models
                     };
                     ProductRepository productRepository = new ProductRepository(db);
                     var listProduct = await productRepository.Get(productQuery);
+                    productRepository.Dispose();
                     if (listProduct.Any())
                     {
                         totalPrice += listProduct.First().Price;
@@ -92,8 +93,8 @@ namespace GuldtandMVC_Identity.Models
                     {
                         totalPrice += ingredient.Product.Price;
                     }
+                    
                 }
-
                 totalPrice = Math.Round(totalPrice);
                 return totalPrice;
             }

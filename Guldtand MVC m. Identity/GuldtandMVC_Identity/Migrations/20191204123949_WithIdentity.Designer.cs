@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GuldtandMVC_Identity.Migrations
 {
-    [DbContext(typeof(prj4databaseContext))]
+    [DbContext(typeof(Prj4databaseContext))]
     [Migration("20191204123949_WithIdentity")]
     partial class WithIdentity
     {
