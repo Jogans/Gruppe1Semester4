@@ -3,14 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GuldtandMVC_Identity;
-using GuldtandMVC_Identity.Data.Queries;
-using GuldtandMVC_Identity.Data.Repositories;
 using GuldtandMVC_Identity.Models;
 using NUnit.Framework;
-using sun.security.pkcs10;
-using NSubstitute;
-
 
 namespace Guldtand_UnitTests
 {
@@ -18,17 +12,10 @@ namespace Guldtand_UnitTests
     public class RecipeUnitTest
     {
         private AddHTMLToRecipe _uut;
-        private prj4databaseContext _context;
-        public IQuery<Product> _ProductQuery;
-        public IQuery<Recipe> _RecipeQuesry;
-        public Product _Product;
 
         [SetUp]
         public void Setup() 
         {
-            _ProductQuery = Substitute.For<IQuery<Product>>();
-            _RecipeQuesry = Substitute.For<IQuery<Recipe>>();
-            _Product = Substitute.For<Product>();
             _uut = new AddHTMLToRecipe();
         }
 

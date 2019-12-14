@@ -195,7 +195,6 @@
 
     .btnfirst {
         margin-left: 0px;
-        ;
     }
 
     .btnlast {
@@ -208,17 +207,13 @@
     }
 
     .btn:active {
-        /*background-color: white;*/
         border-bottom: 2px solid#666;
     }
 
     .btn:hover {
-        cursor: grab; /* Ændre musen når den holdes over en knap */
+        cursor: grab;
         border-bottom: 5px solid grey;
-        /*margin-bottom: -5px;*/
     }
-
-
 
     .loginDiv {
         width: 270px;
@@ -245,12 +240,6 @@
             outline: none
         }
 
-    .usernameinput {
-    }
-
-    .passwordinput {
-    }
-
     .login {
         display: block;
         position: relative;
@@ -274,40 +263,11 @@
         color: #DF5C40;
     }
 
-    /*.logout:hover {
-        background-color: #DF5C40;
-    }*/
-
     .MyPage {
         display: block;
         position: relative;
         float: right;
     }
-
-    /*.SearchBar {
-        float: left;
-        display: inline-block;
-        color: black;
-        font-size: 24px;
-        font-family: verdana;
-        text-align: left;
-        margin-top: 0px;
-        float: left;
-        margin: 0px;
-        line-height: 40px;
-    }
-
-    .SearchBarBtn {
-        float: left;
-        display: block;
-        color: black;
-        font-size: 24px;
-        float: left;
-        margin: 6px;
-        padding-right: 15px;
-        padding-bottom: 10px;
-    }*/
-
 
     .router-link-active {
         color: black;

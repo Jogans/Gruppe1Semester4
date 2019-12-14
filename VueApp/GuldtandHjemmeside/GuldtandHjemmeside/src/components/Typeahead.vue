@@ -91,9 +91,9 @@
     
 </script>
 <style>
-    .typeaheadhome {
+    /*.typeaheadhome {
         width: 100%;
         max-width: 65%;
         margin: auto;
-    }
+    }*/
 </style>

@@ -49,8 +49,6 @@ namespace GuldtandMVC_Identity.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] DtoUser dtoUser)
         {
-
-
             var passwordSignInResult = await _signInManager.PasswordSignInAsync(dtoUser.Email,
                 dtoUser.Password, isPersistent: false, lockoutOnFailure: false);
             if (passwordSignInResult.Succeeded)
@@ -78,11 +76,6 @@ namespace GuldtandMVC_Identity.Controllers
             await _signInManager.SignOutAsync();
 
             Response.Cookies.Delete("userName");
-            //if (HttpContext.Request.Cookies.Keys.Any())
-            //{
-            //    var aCookie = HttpContext.Request.Cookies.Keys.Last();
-            //    HttpContext.Response.Cookies.Delete(aCookie);
-            //}
             return Ok();
         }
 

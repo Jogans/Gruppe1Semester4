@@ -53,9 +53,6 @@
      }
 
      #app {
-         /*width:100%;
-         max-width: 65%;
-         padding-left:15%;*/
          font-family: "Avenir", Helvetica, Arial, sans-serif;
          -webkit-font-smoothing: antialiased;
          -moz-osx-font-smoothing: grayscale;

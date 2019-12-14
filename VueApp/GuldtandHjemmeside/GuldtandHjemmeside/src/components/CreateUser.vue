@@ -8,22 +8,15 @@
             <label for="username"><b>Brugernavn</b></label>
             <input type="text" v-model="username" placeholder="Skriv Brugernavn" name="username" required>
 
-
-
             <label for="psw">
                 <b>Adgangskode</b><br />
                      Adgangskoden skal mindst have en l&#230;ngde p&#229; 6 karakterer <br />
-                
             </label>
 
             <input type="password" v-model="password" placeholder="Skriv Adgangskode" name="psw" required>
 
             <label for="psw-repeat"><b>Gentag Adgangskode</b></label>
     <input type="password" placeholder="Gentag Adgangskode" name="psw-repeat" required>
-
-            <!--<label>
-                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Husk mig
-            </label>-->
 
             <div class="clearfix">
                 <router-link to="/" class="cancelbtn" tag="button">Annuller</router-link>

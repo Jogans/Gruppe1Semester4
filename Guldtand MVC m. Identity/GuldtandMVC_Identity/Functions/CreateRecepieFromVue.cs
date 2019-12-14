@@ -4,13 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using GuldtandMVC_Identity.Data.Queries;
 using GuldtandMVC_Identity.Data.Repositories;
+using GuldtandMVC_Identity.Functions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace GuldtandMVC_Identity.Models
 {
-    public class CreateRecipeFromVue
+    public class CreateRecipeFromVue : ICreateRecepieFromVue
     {
 
         public string HTMLToRecipe(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl)

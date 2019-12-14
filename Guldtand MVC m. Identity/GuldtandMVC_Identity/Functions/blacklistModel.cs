@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GuldtandMVC_Identity.Functions;
 
 namespace GuldtandMVC_Identity.Models
 {
-    public class blacklistModel
+    public class blacklistModel : IblacklistModel
     {
         public blacklistModel()
         {
@@ -15,10 +16,6 @@ namespace GuldtandMVC_Identity.Models
 
         public string[] insertandgetBlackList(string category)
         {
-            string initString = "<table border='1'><th>Blacklist</th>";
-            string bodyString = "";
-            string endString = "</table>";
-
             using (var db = new prj4databaseContext())
             {
                 if (!db.Blacklist.Any(b => b.Category.Equals(category)))
@@ -29,12 +26,7 @@ namespace GuldtandMVC_Identity.Models
 
                 var blacklist = (from c in db.Blacklist select c.Category).ToArray();
                 return blacklist;
-
-               
-
             }
-            
-
         }
     }
 }

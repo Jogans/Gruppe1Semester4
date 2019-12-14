@@ -59,7 +59,9 @@ namespace GuldtandMVC_Identity
                     policyBuilder => policyBuilder
                         .RequireClaim("Admin"));
             });
-            services.AddDbContext<prj4databaseContext>();
+
+            services.AddDbContext<prj4databaseContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("GuldtandDatabase")));
 
             services.AddHttpsRedirection(options =>
             {

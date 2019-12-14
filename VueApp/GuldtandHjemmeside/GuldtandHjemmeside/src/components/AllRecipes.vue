@@ -24,7 +24,7 @@
         },
         methods: {
             smallView() {
-                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/viewForSmallRecipe?stores=' + this.relevantStores+ '&count=20', {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/ViewForSmallRecipe?stores=' + this.relevantStores+ '&count=20', {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
@@ -42,11 +42,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-        /*.body {
-            width: 100%;
-            max-width: 65%;
-            margin: auto;
-    }*/
 </style>
 

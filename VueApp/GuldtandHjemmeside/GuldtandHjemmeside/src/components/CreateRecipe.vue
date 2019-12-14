@@ -16,8 +16,6 @@
         <h2>
             V&#230;lg forberedelses tid
         </h2>
-
-
         <div class="prepareTime">
             <select v-model='timeValue' id="time">
                 <option value="0">Forberedelse tid</option>
@@ -37,9 +35,7 @@
             Skriv fremgangsm&#229;de:
         </h2>
 
-
         <div class="rows1">
-            <!--addRow1-->
             <button @click="addRow1">Tilf&#248;j beskrivelse</button>
             <br />
             <br />
@@ -175,7 +171,7 @@
                 return this.descriptionString;
             },
             created() {
-                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/recipeCreate?name=' + this.recipeName +
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/RecipeCreate?name=' + this.recipeName +
                     '&prepareTime=' + this.timeValue +
                     '&description=' + this.description() +
                     '&ingridientName=' + this.nameIngridients() +
@@ -192,12 +188,6 @@
 </script>
 
 <style scoped>
-
-    /*.bodyCreateRecipe {
-        width: 100%;
-        max-width: 65%;
-        margin: auto;
-    }*/
 
     .btn_addLine {
         margin-left: 50px;

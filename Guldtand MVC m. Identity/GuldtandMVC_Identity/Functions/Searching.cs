@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GuldtandMVC_Identity.Data;
+using GuldtandMVC_Identity.Functions;
 
 namespace GuldtandMVC_Identity.Models
 {
-    public class Searching
+    public class Searching : ISearching
     {
-
         public string[] getCategoryList()
         {
             using (var db = new prj4databaseContext())
@@ -20,11 +20,9 @@ namespace GuldtandMVC_Identity.Models
         }
         public string getCategoriesAsHTML()
         {
-            //
             string initString = "<select v-model='kategoriParameter' id='category'>";
             string bodyString = "";
 
-            //string[] categoryArray;
             using (var db = new prj4databaseContext())
             {
                 var categoryList = (from c in db.Category select c.CategoryName).ToList();

@@ -46,14 +46,14 @@
                 })
             },
             fullView() {
-                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/viewASpeceficRecipe?words=lighed' + '&count=' + this.count, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/ViewASpeceficRecipe?words=lighed' + '&count=' + this.count, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
                 }).then(response => (this.info = response.data))
             },
             generateShoppingCart() {
-                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/getShoppingCart?words=lighed' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/GetShoppingCart?words=lighed' + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

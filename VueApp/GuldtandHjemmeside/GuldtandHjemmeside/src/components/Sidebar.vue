@@ -36,48 +36,6 @@
                     <br style="clear:both" />
 
                     <br style="clear:both" />
-
-                    <!--<div class="antalPersoner">
-                        <select class="dropDown">
-                            <option value="0">Antal Personer:</option>
-                            <option value="1">1 Person</option>
-                            <option value="2">2 Personer</option>
-                            <option value="3">3 Personer</option>
-                            <option value="4">4 Personer</option>
-                            <option value="5">5 Personer</option>
-                            <option value="6">6 Personer</option>
-                            <option value="7">7 Personer</option>
-                            <option value="8">8 Personer</option>
-                            <option value="9">9 Personer</option>
-                            <option value="10">10 Personer</option>
-
-                        </select>
-                    </div>
-                    <br style="clear:both" />-->
-
-                    <!--<div class="CheckboxDishes">
-                        <p>Hvilke retter &oslash;nsker du?</p>
-
-                        <ul class="dishes-li">
-                            <li>
-                                <input class="cbox" type="checkbox" id="dish1">
-                                <label for="dish1">Pasta</label>
-                            </li>
-                            <li>
-                                <input class="cbox" type="checkbox" id="dish2">
-                                <label for="dish2">Ris</label>
-                            </li>
-                            <li>
-                                <input class="cbox" type="checkbox" id="dish3">
-                                <label for="dish3">Oksek&#248;d</label>
-                            </li>
-                            <li>
-                                <input class="cbox" type="checkbox" id="dish4">
-                                <label for="dish4">Svinek&#248;d</label>
-                            </li>
-                        </ul>
-                    </div>-->
-
                     <br />
                     <span v-html="info">{{info}}</span>
                 </div>
@@ -182,19 +140,8 @@
         transition: all 150ms ease-in 0s
     }
 
-    /*.sidebar-backdrop {
-        background-color: rgba(0,0,0,.5);
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        cursor: pointer;
-    }*/
-
     .sidebar-panel {
         overflow-y: auto;
-        /*background-color: #130f40;*/
         background-color: var(--accent-color);
         position: fixed;
         float: right;
@@ -208,9 +155,6 @@
         font-size:14px;
     }
 
-
- 
-
     input[type="checkbox"][id^="cb"] {
         display: block;
     }
@@ -220,7 +164,6 @@
         position: relative;
         margin: 2px;
         cursor: pointer;
-        /*margin-right: 10%;*/
     }
 
         label:before {
@@ -268,7 +211,6 @@
 
         }
 
-
     .test_btn {
         width:125px;
         padding:6px 10px;
@@ -303,13 +245,4 @@
     .dishes-li li {
         margin-bottom:10px;
     }
-
-
-    /*.CheckboxDishes label {
-        padding:5px;
-    }
-
-    .CheckboxDishes .cbox {
-        margin-top:8px;
-    }*/
 </style>

@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GuldtandMVC_Identity\GuldtandMVC_Identity.csproj" />
-    <ProjectReference Include="..\Til_test\Til_test.csproj" />
   </ItemGroup>
 
 </Project>

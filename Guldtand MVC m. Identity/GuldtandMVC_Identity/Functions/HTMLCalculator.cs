@@ -11,12 +11,10 @@ using GuldtandMVC_Identity.Data;
 using jdk.nashorn.@internal.ir;
 using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
 using Microsoft.AspNetCore.Identity;
-using GuldtandMVC_Identity.Areas.Identity.Pages.Account;
 using GuldtandMVC_Identity.Data.Queries;
 using GuldtandMVC_Identity.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using GuldtandMVC_Identity.Data;
 using GuldtandMVC_Identity.Functions;
 using Remotion.Linq.Parsing.Structure.IntermediateModel;
 

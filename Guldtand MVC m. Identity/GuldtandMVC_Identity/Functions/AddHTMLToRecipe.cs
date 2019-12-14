@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 using GuldtandMVC_Identity.Data;
 using GuldtandMVC_Identity.Data.Queries;
 using GuldtandMVC_Identity.Data.Repositories;
+using GuldtandMVC_Identity.Functions;
 
 namespace GuldtandMVC_Identity.Models
 {
-    public class AddHTMLToRecipe
+    public class AddHTMLToRecipe : IAddHTMLToRecipe
     {
-       
-
         public async Task<string> ShowRecipeFullView(string words, double antal)
         {
             string initString = "" +
@@ -25,7 +24,6 @@ namespace GuldtandMVC_Identity.Models
 
             antal = antal / 4;
 
-            int steps = 1;
             using (var db = new prj4databaseContext())
             {
                 RecipeQuery query = new RecipeQuery
@@ -96,7 +94,6 @@ namespace GuldtandMVC_Identity.Models
                 storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
             }
 
-            int steps = 1;
             using (var db = new prj4databaseContext())
             {
                 RecipeQuery query = new RecipeQuery
@@ -215,11 +212,6 @@ namespace GuldtandMVC_Identity.Models
                         lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake);
                     }
 
-                    //recipe.Price = originalPrice;
-                    //recipe.SavingsAbsolute = salePrice;
-                    //recipeRepository.Update(recipe);
-                    //recipeRepository.Save();
-
                     bodystring += "<div class='viewOfRecipe'>" +
                                   "<div class='imageOfRecipe'>" +
                                   "<a href='/#/Recipe/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
@@ -268,7 +260,6 @@ namespace GuldtandMVC_Identity.Models
                            "float: left;" +
                            "margin-left: 355px;" +
                            "font-size: 20px;}" +
-
                            "</style>" +
                            "</head> ";
             string endString = "</html>";

@@ -1,4 +1,5 @@
 using System;
+using GuldtandMVC_Identity.Functions;
 
 namespace GuldtandMVC_Identity.Models
 {

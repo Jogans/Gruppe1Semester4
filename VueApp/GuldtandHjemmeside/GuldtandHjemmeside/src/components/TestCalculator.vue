@@ -5,7 +5,6 @@
         <button class="test_btn" @click="created">Test</button>
         <br style="clear:both" />
         <span v-html="info">{{info}}</span>
-
     </div>
 </template>
 
@@ -23,7 +22,7 @@
         },
         methods: {
             created() {
-                this.$http.get('https://nyguldtand.azurewebsites.net/Home/viewNormalPrice?words=lasa' + '&stores=' + this.relevantStores, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Home/ViewNormalPrice?words=lasa' + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },

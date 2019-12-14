@@ -6,7 +6,6 @@ using GuldtandMVC_Identity;
 using GuldtandMVC_Identity.Data;
 using GuldtandMVC_Identity.Data.Queries;
 using NUnit.Framework;
-using Til_test;
 
 namespace Guldtand_UnitTests
 {

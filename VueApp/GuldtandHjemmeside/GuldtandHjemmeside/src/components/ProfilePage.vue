@@ -1,7 +1,6 @@
 <template>
     <div class="body">
         <br style="clear:both" />
-          <!--<button class="resetPassword">&#230;ndre adgangskode</button>-->
         <br style="clear:both" />
         <div class="Pref">
             <h2>Indstillinger</h2>
@@ -24,12 +23,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    /*.body {
-        width: 100%;
-        max-width: 65%;
-        margin: auto;
-    }*/
-
     img {
         display: block;
         position: absolute;

@@ -24,7 +24,6 @@
 
         <div class="SearchBarBtn">
             <button class="SearchBtn" @click="searchRecepie" type="button">S&#248;g opskrift</button>
-            <button class="SearchBtn" @click="searchIngredient" type="button">S&#248;g ingrediens</button>
             <!--<button style="height: 32px;" @click="$emit('triggerEvent')" type="button">S&#248;g ingrediens</button> -->
         </div>
 
@@ -69,20 +68,8 @@
              }*/
         },
         methods: {
-            searchIngredient() {
-                //this.$router.push({ name: 'Searchsite' })
-                //this.$router.go({ path: 'Searchsite' })
-
-                this.$http.get('https://nyguldtand.azurewebsites.net/Home/searchProducts?words=' + this.searchParameter, {
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                }).then(response => (this.info2 = response.data))
-                //this.$router.push('/Searchsite');
-
-            },
             searchRecepie() {
-                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/viewForSmallRecipeSearch?word=' + this.searchParameter + '&stores=' + this.relevantStores, {
+                this.$http.get('https://nyguldtand.azurewebsites.net/Recipe/ViewForSmallRecipeSearch?word=' + this.searchParameter + '&stores=' + this.relevantStores, {
                     headers: {
                         'Access-Control-Allow-Origin': '*',
                     },
@@ -111,10 +98,6 @@
         text-align: left;
         margin-right: 30px;
         margin-top: 7px;
-        /*font-family: verdana;*/
-        /*margin-top: 0px;*/
-        /*margin: 0px;*/
-        /*line-height: 40px;*/
     }
 
         .SearchBar input {
@@ -132,13 +115,5 @@
         font-size: 16px;
         float: left;
         margin: 6px;
-        /*padding-right: 15px;*/
-        /*padding: 10px 0px;*/
     }
-
-    /*.body {
-        width: 100%;
-        max-width: 65%;
-        margin: auto;
-    }*/
 </style>

@@ -19,8 +19,10 @@ namespace Guldtand_UnitTests
     {
         public IQuery<Product> _ProductQuery;
         public IQuery<Recipe> _RecipeQuesry;
+        public Recipe _Recipe;
         public Product _Product;
         private HTMLCalculator _uut;
+        public prj4databaseContext _db;
         
         [SetUp]
         public void Setup()
@@ -29,37 +31,56 @@ namespace Guldtand_UnitTests
             _RecipeQuesry = Substitute.For<IQuery<Recipe>>();
             _Product = Substitute.For<Product>();
             _uut = new HTMLCalculator();
+            _db = new prj4databaseContext();
         }
 
 
-        //[TestCase("Lasange")]
-        //[TestCase("Pandekager")]
-        //[TestCase("Pølsehorn")]
-        //[TestCase("Brændende Kærlighed")]
-        //[TestCase("Spaghetti med kødsovs")]
-        //[TestCase("Kylling i karry")]
-        //[TestCase("Hjemmelavet lasagne")]
-        //public async  Task TestTotalPriceEqualToOrSmallerThenNormalPrice(string name)
-        //{
-        //    string[] empty = new string[8];
-        //    double resultTotal = await _uut.TotalPrice(name, empty);
-        //    double resultNormal = await _uut.NormalPrice(name, empty);
-        //    Assert.That(true, Is.EqualTo(resultTotal <= resultNormal));
-        //}
+        [TestCase("Hjemmelavet Lasagne")]
+        [TestCase("Pandekager")]
+        [TestCase("Pølsehorn")]
+        [TestCase("Brændende Kærlighed")]
+        [TestCase("Spaghetti med kødsovs")]
+        [TestCase("Kylling i karry")]
+        [TestCase("Hjemmelavet lasagne")]
+        public async Task TestTotalPriceEqualToOrSmallerThenNormalPrice(string name)
+        {
+            RecipeQuery recipeQuery = new RecipeQuery
+            {
+                SearchRecipe = name,
+                LoadIngredientList = true,
+                NumberOfRecipes = 1,
+            };
 
-        //[TestCase("Lasange")]
-        //[TestCase("Pandekager")]
-        //[TestCase("Pølsehorn")]
-        //[TestCase("Brændende Kærlighed")]
-        //[TestCase("Spaghetti med kødsovs")]
-        //[TestCase("Kylling i karry")]
-        //[TestCase("Hjemmelavet lasagne")]
-        //public async Task TestNormalPrice(string name)
-        //{
-        //    string[] empty = new string[8];
-        //    double resultTotal = await _uut.TotalPrice(name, empty);
-        //    double resultNormal = await _uut.NormalPrice(name, empty);
-        //    Assert.That(true, Is.EqualTo(resultNormal >= resultTotal));
-        //}
+            var recipe = await recipeQuery.Execute(_db);
+
+            string[] empty = new string[8];
+            double resultTotal = await _uut.TotalPrice(recipe.First(), name, empty);
+            double resultNormal = await _uut.NormalPrice(recipe.First(), name, empty);
+            Assert.That(true, Is.EqualTo(resultTotal <= resultNormal));
+        }
+
+        [TestCase("Hjemmelavet Lasagne")]
+        [TestCase("Pandekager")]
+        [TestCase("Pølsehorn")]
+        [TestCase("Brændende Kærlighed")]
+        [TestCase("Spaghetti med kødsovs")]
+        [TestCase("Kylling i karry")]
+        [TestCase("Hjemmelavet lasagne")]
+        public async Task TestNormalPrice(string name)
+        {
+            RecipeQuery recipeQuery = new RecipeQuery
+            {
+                SearchRecipe = name,
+                LoadIngredientList = true,
+                NumberOfRecipes = 1,
+            };
+
+            var recipe = await recipeQuery.Execute(_db);
+
+            string[] empty = new string[8];
+            double resultTotal = await _uut.TotalPrice(recipe.First(), name, empty);
+            double resultNormal = await _uut.NormalPrice(recipe.First(), name, empty);
+            Assert.That(true, Is.EqualTo(resultNormal >= resultTotal));
+        }
     }
 }

@@ -71,10 +71,7 @@ namespace GuldtandMVC_Identity.Models
                                 break;
                         }
 
-                        //foreach (var unwantedCategory in Unwanted)
-                        //{
-                        //    vare.UnwantedBool = kategori == unwantedCategory;
-                        //}
+
 
                     }
 
@@ -82,11 +79,8 @@ namespace GuldtandMVC_Identity.Models
                     //******************//
                     //Check if name and store already exists
 
-
                     //filter based on Black list
                     if (db.Blacklist.Where(b => b.Category.Equals(kategori)).Any()) continue;
-
-                    //if (vare.UnwantedBool != false) continue;
 
                     if (!db.Product.Any(v => v.Name == vare.Name && v.RetailChainId == vare.RetailChainId))
                     {
