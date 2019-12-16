@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestPlatform.Common.Utilities;
 using NUnit.Framework;
 using System;
+using System.Data.SqlClient;
 
 namespace Guldtand_UnitTests
 {
@@ -18,7 +19,15 @@ namespace Guldtand_UnitTests
         public void Setup()
         {
             _uut = new AddHtmlToRecipe();
-            _context = new Prj4databaseContext();
+            string ConnectionString = "Data Source=prj4-server.database.windows.net;Initial Catalog=prj4-database;User ID=maloudt;Password=Mldt1160";
+
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            conn.Open();
+
+            var options = new DbContextOptionsBuilder<Prj4databaseContext>()
+                .UseSqlServer(conn).Options;
+
+            _context = new Prj4databaseContext(options);
         }
 
         [TestCase("Lasagne", "<html>")] //HTML start tag
