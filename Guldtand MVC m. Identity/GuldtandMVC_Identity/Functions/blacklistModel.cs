@@ -1,8 +1,4 @@
-﻿using GuldtandMVC_Identity.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using GuldtandMVC_Identity.Functions;
 
 namespace GuldtandMVC_Identity.Models
@@ -16,17 +12,14 @@ namespace GuldtandMVC_Identity.Models
 
         public string[] InsertandgetBlackList(string category, Prj4databaseContext context)
         {
-            using (var db = context)
+            if (!context.Blacklist.Any(b => b.Category.Equals(category)))
             {
-                if (!db.Blacklist.Any(b => b.Category.Equals(category)))
-                {
-                    db.Blacklist.Add(new Blacklist { Category = category });
-                    db.SaveChanges();
-                }
-
-                var blacklist = (from c in db.Blacklist select c.Category).ToArray();
-                return blacklist;
+                context.Blacklist.Add(new Blacklist { Category = category });
+                context.SaveChanges();
             }
+
+            var blacklist = (from c in context.Blacklist select c.Category).ToArray();
+            return blacklist;
         }
     }
 }

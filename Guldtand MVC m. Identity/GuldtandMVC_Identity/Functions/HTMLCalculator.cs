@@ -24,78 +24,68 @@ namespace GuldtandMVC_Identity.Models
         {
             double normalPrice = 0;
 
-            using (var db = context)
+            ProductRepository productRepository = new ProductRepository(context);
+            //take all ingredients in the ingredientlist
+            foreach (var ingredient in recipe.IngredientList.Ingredient)
             {
-                ProductRepository productRepository = new ProductRepository(db);
-                //take all ingredients in the ingredientlist
-                foreach (var ingredient in recipe.IngredientList.Ingredient)
+                ProductQuery productQuery = new ProductQuery
                 {
-                    ProductQuery productQuery = new ProductQuery
+                    ValidToDate = "2050",
+                    NumberOfProducts = 1,
+                    Stores = stores,
+                    SearchName = ingredient.Name,
+                    LoadRetailChain = true
+                };
+                var listProduct = await productRepository.Get(productQuery);
+                if (listProduct.Any())
+                {
+                    foreach (var product in listProduct)
                     {
-                        ValidToDate = "2050",
-                        NumberOfProducts = 1,
-                        Stores = stores,
-                        SearchName = ingredient.Name,
-                        LoadRetailChain = true
-                    };
-                    var listProduct = await productRepository.Get(productQuery);
-                    if (listProduct.Any())
-                    {
-                        foreach (var product in listProduct)
+                        if (product.Name != null)
                         {
-                            if (product.Name != null)
-                            {
-                                normalPrice += product.Price;
-                            }
+                            normalPrice += product.Price;
                         }
                     }
-                    else
-                    {
-                        normalPrice += ingredient.Product.Price;
-                    }
                 }
-                normalPrice = Math.Round(normalPrice);
-                return normalPrice;
-
+                else
+                {
+                    normalPrice += ingredient.Product.Price;
+                }
             }
-
+            normalPrice = Math.Round(normalPrice);
+            return normalPrice;
         }
-        
+
         public async Task<double> TotalPrice(Recipe recipe, string word, string[] stores, Prj4databaseContext context)
         {
             double totalPrice = 0;
 
-            using (var db = context)
+            ProductRepository productRepository = new ProductRepository(context);
+
+            //take all ingredients in the ingredientlist
+            foreach (var ingredient in recipe.IngredientList.Ingredient)
             {
-                ProductRepository productRepository = new ProductRepository(db);
 
-                //take all ingredients in the ingredientlist
-                foreach (var ingredient in recipe.IngredientList.Ingredient)
+                ProductQuery productQuery = new ProductQuery
                 {
+                    NumberOfProducts = 1,
+                    Stores = stores,
+                    SearchName = ingredient.Name,
+                    LoadRetailChain = true
+                };
+                var listProduct = await productRepository.Get(productQuery);
 
-                    ProductQuery productQuery = new ProductQuery
-                    {
-                        NumberOfProducts = 1,
-                        Stores = stores,
-                        SearchName = ingredient.Name,
-                        LoadRetailChain = true
-                    };
-                    var listProduct = await productRepository.Get(productQuery);
-
-                    if (listProduct.Any())
-                    {
-                        totalPrice += listProduct.First().Price;
-                    }
-                    else
-                    {
-                        totalPrice += ingredient.Product.Price;
-                    }
+                if (listProduct.Any())
+                {
+                    totalPrice += listProduct.First().Price;
                 }
-                totalPrice = Math.Round(totalPrice);
-                return totalPrice;
+                else
+                {
+                    totalPrice += ingredient.Product.Price;
+                }
             }
+            totalPrice = Math.Round(totalPrice);
+            return totalPrice;
         }
-        
-
     }
 }

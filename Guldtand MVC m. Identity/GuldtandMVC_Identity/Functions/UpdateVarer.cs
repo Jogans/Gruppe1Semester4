@@ -1,8 +1,5 @@
-﻿using GuldtandMVC_Identity.Data;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace GuldtandMVC_Identity.Models
 {
@@ -10,12 +7,9 @@ namespace GuldtandMVC_Identity.Models
     {
         public static void Update(Prj4databaseContext context)
         {
-            using (var db = context)
-            {
-                db.ProductCategory.RemoveRange(db.ProductCategory.Where(pc => pc.Product.ValidTo < DateTime.UtcNow));
-                db.Product.RemoveRange(db.Product.Where(p => p.ValidTo < DateTime.UtcNow));
-                db.SaveChanges();
-            }
+            context.ProductCategory.RemoveRange(context.ProductCategory.Where(pc => pc.Product.ValidTo < DateTime.UtcNow));
+            context.Product.RemoveRange(context.Product.Where(p => p.ValidTo < DateTime.UtcNow));
+            context.SaveChanges();
         }
     }
 }

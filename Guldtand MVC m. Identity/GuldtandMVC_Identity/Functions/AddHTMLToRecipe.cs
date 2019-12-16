@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using GuldtandMVC_Identity.Data;
 using GuldtandMVC_Identity.Data.Queries;
 using GuldtandMVC_Identity.Data.Repositories;
 using GuldtandMVC_Identity.Functions;
@@ -22,59 +19,56 @@ namespace GuldtandMVC_Identity.Models
 
             antal /= 4;
 
-            using (var db = context)
+            RecipeQuery query = new RecipeQuery
             {
-                RecipeQuery query = new RecipeQuery
+                LoadIngredientList = true,
+                LoadRecipeCategory = true,
+                SearchRecipe = words,
+                NumberOfRecipes = 1,
+
+            };
+
+            RecipeRepository recipeRepository = new RecipeRepository(context);
+
+            var result = await recipeRepository.Get(query);
+
+            foreach (var recipe in result)
+            {
+                bodystring = "";
+                string ingrediensstring = "";
+                string directionsstring = "";
+                bodystring += "<h1>" + recipe.Name + "</h1>" +
+                "<div class='recipe'>" +
+                    "<div class='ingredienser'>" +
+                    "<p class='p2'><span class='s1'>" + recipe.CookTime + " min tilberednings tid" +
+                "<div class='image'>" +
+                    "<img src = '" + recipe.ImgSrc + "' height='400' width='700'/>" +
+                "</div>" +
+                    "<br style='clear: both' />" +
+                    "<h3 class='p3'><strong>Fremgangsmåde</strong></h3>" +
+                "<div class='i1'>" + "<ul>";
+
+                foreach (var direction in recipe.Directions)
                 {
-                    LoadIngredientList = true,
-                    LoadRecipeCategory = true,
-                    SearchRecipe = words,
-                    NumberOfRecipes = 1,
-
-                };
-
-                RecipeRepository recipeRepository = new RecipeRepository(db);
-
-                var result = await recipeRepository.Get(query);
-
-                foreach (var recipe in result)
-                {
-                    bodystring = "";
-                    string ingrediensstring = "";
-                    string directionsstring = "";
-                    bodystring += "<h1>" + recipe.Name + "</h1>" +
-                    "<div class='recipe'>" +
-                        "<div class='ingredienser'>" +
-                        "<p class='p2'><span class='s1'>" + recipe.CookTime + " min tilberednings tid" +
-                    "<div class='image'>" +
-                        "<img src = '" + recipe.ImgSrc + "' height='400' width='700'/>" +
-                    "</div>" +
-                        "<br style='clear: both' />" +
-                        "<h3 class='p3'><strong>Fremgangsmåde</strong></h3>" +
-                    "<div class='i1'>" + "<ul>";
-
-                    foreach (var direction in recipe.Directions)
-                    {
-                        directionsstring += "<li class='p5'>" + direction.Description + "</li>";
-                    }
-
-                    bodystring += directionsstring;
-                    bodystring += "</ul>" +
-                                  "<h3><strong>Ingredienser</strong></h3>" +
-                                  "<ul>";
-                    foreach (var ingredient in recipe.IngredientList.Ingredient)
-                    {
-                        ingrediensstring += "<li class='p6'>" + (ingredient.Amount * antal) + ingredient.AmountUnit + " " + ingredient.Name +
-                                            "</li>";
-                    }
-
-                    bodystring += ingrediensstring;
-                    bodystring += "</ul>" +
-                                  "</div>" +
-                                  "<br style='clear:both' />" +
-                                  "<ul>" +
-                                  "</div>";
+                    directionsstring += "<li class='p5'>" + direction.Description + "</li>";
                 }
+
+                bodystring += directionsstring;
+                bodystring += "</ul>" +
+                              "<h3><strong>Ingredienser</strong></h3>" +
+                              "<ul>";
+                foreach (var ingredient in recipe.IngredientList.Ingredient)
+                {
+                    ingrediensstring += "<li class='p6'>" + (ingredient.Amount * antal) + ingredient.AmountUnit + " " + ingredient.Name +
+                                        "</li>";
+                }
+
+                bodystring += ingrediensstring;
+                bodystring += "</ul>" +
+                              "</div>" +
+                              "<br style='clear:both' />" +
+                              "<ul>" +
+                              "</div>";
             }
             return initString + bodystring + endString;
         }
@@ -94,43 +88,39 @@ namespace GuldtandMVC_Identity.Models
                 storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
             }
 
-            using (var db = context)
+            RecipeQuery query = new RecipeQuery
             {
+                LoadIngredientList = true,
+                LoadRecipeCategory = true,
+                SearchRecipe = words,
+                NumberOfRecipes = 1,
+                Stores = storeSplit
 
-                RecipeQuery query = new RecipeQuery
+            };
+
+            RecipeRepository recipeRepository = new RecipeRepository(context);
+
+            var result = await recipeRepository.Get(query);
+
+            foreach (var recipe in result)
+            {
+                bodystring = "";
+                string ingrediensstring = "";
+                bodystring += "<h3><strong>Indkøbsliste</strong></h3>";
+
+                bodystring += "<ul>";
+                foreach (var ingredient in recipe.IngredientList.Ingredient)
                 {
-                    LoadIngredientList = true,
-                    LoadRecipeCategory = true,
-                    SearchRecipe = words,
-                    NumberOfRecipes = 1,
-                    Stores = storeSplit
-
-                };
-
-                RecipeRepository recipeRepository = new RecipeRepository(db);
-
-                var result = await recipeRepository.Get(query);
-
-                foreach (var recipe in result)
-                {
-                    bodystring = "";
-                    string ingrediensstring = "";
-                    bodystring += "<h3><strong>Indkøbsliste</strong></h3>";
-
-                    bodystring += "<ul>";
-                    foreach (var ingredient in recipe.IngredientList.Ingredient)
-                    {
-                        ingrediensstring += "<li class='p6'>" + ingredient.Name + " - " + " Købes i " + ingredient.Product.RetailChain.Name + " for " +
-                                            ingredient.Product.Price + " kr. " + "</li>";
-                    }
-
-                    bodystring += ingrediensstring;
-                    bodystring += "</ul>" +
-                                  "</div>" +
-                                  "<br style='clear:both' />" +
-                                  "<ul>" +
-                                  "</div>";
+                    ingrediensstring += "<li class='p6'>" + ingredient.Name + " - " + " Købes i " + ingredient.Product.RetailChain.Name + " for " +
+                                        ingredient.Product.Price + " kr. " + "</li>";
                 }
+
+                bodystring += ingrediensstring;
+                bodystring += "</ul>" +
+                              "</div>" +
+                              "<br style='clear:both' />" +
+                              "<ul>" +
+                              "</div>";
             }
             return initString + bodystring + endString;
         }
@@ -178,61 +168,58 @@ namespace GuldtandMVC_Identity.Models
                 storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
             }
 
-            using (var db = context)
+
+            RecipeQuery query = new RecipeQuery
             {
+                NumberOfRecipes = count,
+                LoadIngredientList = true,
+            };
 
-                RecipeQuery query = new RecipeQuery
+            RecipeRepository recipeRepository = new RecipeRepository(context);
+
+            var result = await recipeRepository.Get(query);
+
+            foreach (var recipe in result)
+            {
+                double originalPrice = 0;
+                double salePrice = 0;
+                double lowestPrice = 0;
+                if (stores == null)
                 {
-                    NumberOfRecipes = count,
-                    LoadIngredientList = true,
-                };
-
-                RecipeRepository recipeRepository = new RecipeRepository(db);
-
-                var result = await recipeRepository.Get(query);
-
-                foreach (var recipe in result)
-                {
-                    double originalPrice = 0;
-                    double salePrice = 0;
-                    double lowestPrice = 0;
-                    if (stores == null)
+                    if (recipe.Price != null)
                     {
-                        if (recipe.Price != null)
-                        {
-                            originalPrice = (double)recipe.Price;
-                        }
-                        if (recipe.SavingsAbsolute != null)
-                        {
-                            salePrice = (double)recipe.SavingsAbsolute;
-                            lowestPrice = (double)recipe.SavingsAbsolute;
-                        }
+                        originalPrice = (double)recipe.Price;
                     }
-                    else
+                    if (recipe.SavingsAbsolute != null)
                     {
-                        originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit, context);
-                        salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit, context);
-                        lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake, context);
+                        salePrice = (double)recipe.SavingsAbsolute;
+                        lowestPrice = (double)recipe.SavingsAbsolute;
                     }
-
-                    bodystring += "<div class='viewOfRecipe'>" +
-                                  "<div class='imageOfRecipe'>" +
-                                  "<a href='/#/Recipe/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
-                                  "<img class='img1' src='" + recipe.ImgSrc + "' alt='recpieImg'></a>" +
-                                  "</div>" +
-                                  "<div class='textForPrice'>" +
-                                  "<div style='font-size: 25px;'>" +
-                                  "<a href='/#/Recipe/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
-                                  recipe.Name +
-                                  "</a>" +
-                                  "<br />" +
-                                  "</div>" +
-                                  "Original pris: " + originalPrice + "kr." + " <br />" +
-                                  "Pris med rabat: " + salePrice + "kr." + "<br />" +
-                                  "Laveste mulige pris: " + lowestPrice + "kr." + "<br />" +
-                                  "</div>" +
-                                  "</div>";
                 }
+                else
+                {
+                    originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit, context);
+                    salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit, context);
+                    lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake, context);
+                }
+
+                bodystring += "<div class='viewOfRecipe'>" +
+                              "<div class='imageOfRecipe'>" +
+                              "<a href='/#/Recipe/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
+                              "<img class='img1' src='" + recipe.ImgSrc + "' alt='recpieImg'></a>" +
+                              "</div>" +
+                              "<div class='textForPrice'>" +
+                              "<div style='font-size: 25px;'>" +
+                              "<a href='/#/Recipe/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
+                              recipe.Name +
+                              "</a>" +
+                              "<br />" +
+                              "</div>" +
+                              "Original pris: " + originalPrice + "kr." + " <br />" +
+                              "Pris med rabat: " + salePrice + "kr." + "<br />" +
+                              "Laveste mulige pris: " + lowestPrice + "kr." + "<br />" +
+                              "</div>" +
+                              "</div>";
             }
             return initString + style + bodystring + endString;
         }
@@ -279,70 +266,66 @@ namespace GuldtandMVC_Identity.Models
                 storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
             }
 
-            using (var db = context)
+            RecipeQuery query = new RecipeQuery
             {
-                RecipeQuery query = new RecipeQuery
+                SearchRecipe = word,
+                NumberOfRecipes = 5,
+                LoadIngredientList = true,
+            };
+
+            RecipeRepository recipeRepository = new RecipeRepository(context);
+
+            var recipeQuery = await recipeRepository.Get(query);
+
+            if (recipeQuery.Count() == 0)
+            {
+                return "Ingen opskrift fundet";
+            }
+
+            foreach (var recipe in recipeQuery)
+            {
+                double originalPrice = 0;
+                double salePrice = 0;
+                double lowestPrice = 0;
+                if (stores == null)
                 {
-                    SearchRecipe = word,
-                    NumberOfRecipes = 5,
-                    LoadIngredientList = true,
-                };
-
-                RecipeRepository recipeRepository = new RecipeRepository(db);
-
-                var recipeQuery = await recipeRepository.Get(query);
-
-                if (recipeQuery.Count() == 0)
+                    if (recipe.Price != null)
+                    {
+                        originalPrice = (double)recipe.Price;
+                    }
+                    if (recipe.SavingsAbsolute != null)
+                    {
+                        salePrice = (double)recipe.SavingsAbsolute;
+                        lowestPrice = (double)recipe.SavingsAbsolute;
+                    }
+                }
+                else
                 {
-                    return "Ingen opskrift fundet";
+                    originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit, context);
+                    salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit, context);
+                    lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake, context);
                 }
 
-                foreach (var recipe in recipeQuery)
-                {
-                    double originalPrice = 0;
-                    double salePrice = 0;
-                    double lowestPrice = 0;
-                    if (stores == null)
-                    {
-                        if (recipe.Price != null)
-                        {
-                            originalPrice = (double)recipe.Price;
-                        }
-                        if (recipe.SavingsAbsolute != null)
-                        {
-                            salePrice = (double)recipe.SavingsAbsolute;
-                            lowestPrice = (double)recipe.SavingsAbsolute;
-                        }
-                    }
-                    else
-                    {
-                        originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit, context);
-                        salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit, context);
-                        lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake, context);
-                    }
 
-
-                    bodystring += "<div class='viewOfRecipe'>" +
-                                  "<div class='imageOfRecipe'>" +
-                                  "<a href='/#/Recipe/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
-                                  "<img class='img1' src='" + recipe.ImgSrc + "' alt='recpieImg'></a>" +
-                                  "</div>" +
-                                  "<div class='textForPrice'>" +
-                                  "<div style='font-size: 25px;'>" +
-                                  "<a href='/#/Recipe/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
-                                  recipe.Name +
-                                  "</a>" +
-                                  "<br />" +
-                                  "</div>" +
-                                  "Original pris: " + originalPrice + "kr." + " <br />" +
-                                  "Pris med rabat: " + salePrice + "kr." + "<br />" +
-                                  "Laveste mulige pris: " + lowestPrice + "kr." + "<br />" +
-                                  "</div>" +
-                                  "</div>";
-                }
+                bodystring += "<div class='viewOfRecipe'>" +
+                              "<div class='imageOfRecipe'>" +
+                              "<a href='/#/Recipe/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
+                              "<img class='img1' src='" + recipe.ImgSrc + "' alt='recpieImg'></a>" +
+                              "</div>" +
+                              "<div class='textForPrice'>" +
+                              "<div style='font-size: 25px;'>" +
+                              "<a href='/#/Recipe/" + recipe.Name.Replace(" ", string.Empty).Replace("æ", string.Empty).Replace("ø", string.Empty).Replace("å", string.Empty) + "'>" +
+                              recipe.Name +
+                              "</a>" +
+                              "<br />" +
+                              "</div>" +
+                              "Original pris: " + originalPrice + "kr." + " <br />" +
+                              "Pris med rabat: " + salePrice + "kr." + "<br />" +
+                              "Laveste mulige pris: " + lowestPrice + "kr." + "<br />" +
+                              "</div>" +
+                              "</div>";
             }
             return initString + style + bodystring + endString;
         }
-
     }
 }

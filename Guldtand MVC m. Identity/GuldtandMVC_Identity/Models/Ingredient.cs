@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace GuldtandMVC_Identity
+﻿namespace GuldtandMVC_Identity
 {
     public partial class Ingredient
     {

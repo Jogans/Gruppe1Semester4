@@ -75,80 +75,77 @@ namespace GuldtandMVC_Identity.Models
 
         public async Task<string> CreateRecipeToDatabase(string name, int prepareTime, string description, string ingridientName, string ingridientAmount, string ingridientUnit, string imgUrl, Prj4databaseContext context)
         {
-            using (var db = context)
+            RecipeQuery recipeQuery = new RecipeQuery
             {
-                RecipeQuery recipeQuery = new RecipeQuery
-                {
-                    SearchRecipe = name
-                };
-                var queryResult = await recipeQuery.Execute(db);
-                if (queryResult.Any())
-                {
-                    return "Opskrift findes allerede";
-                }
-                Recipe recipe = new Recipe
-                {
-                    Name = name,
-                    CookTime = prepareTime,
-                    ImgSrc = imgUrl,
-                    Servings = 4
-                };
-
-                RecipeRepository recipeRepository = new RecipeRepository(db);
-                recipeRepository.Insert(recipe);
-                recipeRepository.Save();
-
-                string[] descriptionData = description.Split(';', StringSplitOptions.RemoveEmptyEntries);
-                int sizeDescription = descriptionData.Length;
-                var directions = new Directions[sizeDescription];
-                for (int i = 0; i < sizeDescription; i++)
-                {
-                    directions[i] = new Directions {Description = descriptionData[i], RecipeId = recipe.RecipeId};
-                }
-
-                DirectionsRepository directionsRepository = new DirectionsRepository(db);
-                foreach (var direc in directions)
-                {
-                    directionsRepository.Insert(direc);
-                }
-                directionsRepository.Save();
-                var ingredientLists = new IngredientList
-                {
-                    RecipeId = recipe.RecipeId,
-                };
-                IngredientListRepository ingredientListRepository = new IngredientListRepository(db);
-                ingredientListRepository.Insert(ingredientLists);
-                ingredientListRepository.Save();
-                string[] nameSplit = ingridientName.Split(';', StringSplitOptions.RemoveEmptyEntries);
-                string[] amountSplit = ingridientAmount.Split(';', StringSplitOptions.RemoveEmptyEntries);
-                string[] unitSplit = ingridientUnit.Split(';', StringSplitOptions.RemoveEmptyEntries);
-                int sizeIngridient = nameSplit.Length;
-                var ingridients = new Ingredient[sizeIngridient];
-                var produkt = await db.Set<Product>().Where(p => p.Name.Contains("a")).Take(1).ToListAsync();
-
-
-                for (int i = 0; i < sizeIngridient; i++)
-                {
-                    double.TryParse(amountSplit[i], out var amountDouble);
-                    ingridients[i] = new Ingredient
-                    {
-                        Name = nameSplit[i],
-                        Amount = amountDouble,
-                        AmountUnit = unitSplit[i],
-                        ProductId = produkt[0].ProductId,
-                        IngredientListId = ingredientLists.IngredientListId
-                    };
-                }
-                IngredientRepository ingredientRepository = new IngredientRepository(db);
-
-                foreach (var ingridient in ingridients)
-                {
-                    ingredientRepository.Insert(ingridient);
-                }
-                ingredientRepository.Save();
-
-                return HtmlToRecipe(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
+                SearchRecipe = name
+            };
+            var queryResult = await recipeQuery.Execute(context);
+            if (queryResult.Any())
+            {
+                return "Opskrift findes allerede";
             }
+            Recipe recipe = new Recipe
+            {
+                Name = name,
+                CookTime = prepareTime,
+                ImgSrc = imgUrl,
+                Servings = 4
+            };
+
+            RecipeRepository recipeRepository = new RecipeRepository(context);
+            recipeRepository.Insert(recipe);
+            recipeRepository.Save();
+
+            string[] descriptionData = description.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            int sizeDescription = descriptionData.Length;
+            var directions = new Directions[sizeDescription];
+            for (int i = 0; i < sizeDescription; i++)
+            {
+                directions[i] = new Directions { Description = descriptionData[i], RecipeId = recipe.RecipeId };
+            }
+
+            DirectionsRepository directionsRepository = new DirectionsRepository(context);
+            foreach (var direc in directions)
+            {
+                directionsRepository.Insert(direc);
+            }
+            directionsRepository.Save();
+            var ingredientLists = new IngredientList
+            {
+                RecipeId = recipe.RecipeId,
+            };
+            IngredientListRepository ingredientListRepository = new IngredientListRepository(context);
+            ingredientListRepository.Insert(ingredientLists);
+            ingredientListRepository.Save();
+            string[] nameSplit = ingridientName.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            string[] amountSplit = ingridientAmount.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            string[] unitSplit = ingridientUnit.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            int sizeIngridient = nameSplit.Length;
+            var ingridients = new Ingredient[sizeIngridient];
+            var produkt = await context.Set<Product>().Where(p => p.Name.Contains("a")).Take(1).ToListAsync();
+
+
+            for (int i = 0; i < sizeIngridient; i++)
+            {
+                double.TryParse(amountSplit[i], out var amountDouble);
+                ingridients[i] = new Ingredient
+                {
+                    Name = nameSplit[i],
+                    Amount = amountDouble,
+                    AmountUnit = unitSplit[i],
+                    ProductId = produkt[0].ProductId,
+                    IngredientListId = ingredientLists.IngredientListId
+                };
+            }
+            IngredientRepository ingredientRepository = new IngredientRepository(context);
+
+            foreach (var ingridient in ingridients)
+            {
+                ingredientRepository.Insert(ingridient);
+            }
+            ingredientRepository.Save();
+
+            return HtmlToRecipe(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
         }
     }
 }
