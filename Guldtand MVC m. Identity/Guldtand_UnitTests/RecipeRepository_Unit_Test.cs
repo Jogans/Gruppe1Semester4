@@ -18,7 +18,6 @@ namespace Guldtand_UnitTests
         [SetUp]
         public void SetUp()
         {
-            _uut = new RecipeRepository(_context);
 
             string ConnectionString = "Data Source=prj4-server.database.windows.net;Initial Catalog=prj4-database;User ID=maloudt;Password=Mldt1160";
 
@@ -29,6 +28,7 @@ namespace Guldtand_UnitTests
                 .UseSqlServer(conn).Options;
 
             _context = new Prj4databaseContext(options);
+            _uut = new RecipeRepository(_context);
         }
 
         [Test]
