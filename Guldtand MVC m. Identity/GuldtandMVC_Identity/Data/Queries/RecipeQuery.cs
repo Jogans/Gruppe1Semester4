@@ -58,7 +58,6 @@ namespace GuldtandMVC_Identity.Data.Queries
                     }
                 }
                 ingredientRepository.Save();
-                ingredientRepository.Dispose();
                 return recipes;
             }
             else if (LoadIngredientList && !LoadRecipeCategory)
@@ -93,7 +92,6 @@ namespace GuldtandMVC_Identity.Data.Queries
                     }
                 }
                 ingredientRepository.Save();
-                ingredientRepository.Dispose();
                 return recipes;
             }
             else if (!LoadIngredientList && LoadRecipeCategory)

@@ -8,9 +8,9 @@ namespace GuldtandMVC_Identity.Models
 {
     public class UpdateVarer
     {
-        public static void Update()
+        public static void Update(Prj4databaseContext context)
         {
-            using (var db = new Prj4databaseContext())
+            using (var db = context)
             {
                 db.ProductCategory.RemoveRange(db.ProductCategory.Where(pc => pc.Product.ValidTo < DateTime.UtcNow));
                 db.Product.RemoveRange(db.Product.Where(p => p.ValidTo < DateTime.UtcNow));

@@ -12,7 +12,7 @@ namespace GuldtandMVC_Identity.Models
 {
     public class AddHtmlToRecipe : IAddHtmlToRecipe
     {
-        public async Task<string> ShowRecipeFullView(string words, double antal)
+        public async Task<string> ShowRecipeFullView(string words, double antal, Prj4databaseContext context)
         {
             string initString = "" +
                                 "<html>";
@@ -22,7 +22,7 @@ namespace GuldtandMVC_Identity.Models
 
             antal /= 4;
 
-            using (var db = new Prj4databaseContext())
+            using (var db = context)
             {
                 RecipeQuery query = new RecipeQuery
                 {
@@ -36,8 +36,6 @@ namespace GuldtandMVC_Identity.Models
                 RecipeRepository recipeRepository = new RecipeRepository(db);
 
                 var result = await recipeRepository.Get(query);
-
-                recipeRepository.Dispose();
 
                 foreach (var recipe in result)
                 {
@@ -81,7 +79,7 @@ namespace GuldtandMVC_Identity.Models
             return initString + bodystring + endString;
         }
 
-        public async Task<string> GenerateShoppingCart(string words, string stores)
+        public async Task<string> GenerateShoppingCart(string words, string stores, Prj4databaseContext context)
         {
             string initString = "" +
                     "<html>";
@@ -96,7 +94,7 @@ namespace GuldtandMVC_Identity.Models
                 storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
             }
 
-            using (var db = new Prj4databaseContext())
+            using (var db = context)
             {
 
                 RecipeQuery query = new RecipeQuery
@@ -112,9 +110,6 @@ namespace GuldtandMVC_Identity.Models
                 RecipeRepository recipeRepository = new RecipeRepository(db);
 
                 var result = await recipeRepository.Get(query);
-
-                recipeRepository.Dispose();
-
 
                 foreach (var recipe in result)
                 {
@@ -140,7 +135,7 @@ namespace GuldtandMVC_Identity.Models
             return initString + bodystring + endString;
         }
 
-        public async Task<string> ShowRecipeSmallViewAsync(string stores, int count)
+        public async Task<string> ShowRecipeSmallViewAsync(string stores, int count, Prj4databaseContext context)
         {
 
             string initString = "" + "<html>";
@@ -183,7 +178,7 @@ namespace GuldtandMVC_Identity.Models
                 storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
             }
 
-            using (var db = new Prj4databaseContext())
+            using (var db = context)
             {
 
                 RecipeQuery query = new RecipeQuery
@@ -195,7 +190,6 @@ namespace GuldtandMVC_Identity.Models
                 RecipeRepository recipeRepository = new RecipeRepository(db);
 
                 var result = await recipeRepository.Get(query);
-                recipeRepository.Dispose();
 
                 foreach (var recipe in result)
                 {
@@ -216,9 +210,9 @@ namespace GuldtandMVC_Identity.Models
                     }
                     else
                     {
-                        originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit);
-                        salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit);
-                        lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake);
+                        originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit, context);
+                        salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit, context);
+                        lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake, context);
                     }
 
                     bodystring += "<div class='viewOfRecipe'>" +
@@ -243,7 +237,7 @@ namespace GuldtandMVC_Identity.Models
             return initString + style + bodystring + endString;
         }
 
-        public async Task<string> ShowRecipeSmallViewSearchAsync(string word, string stores)
+        public async Task<string> ShowRecipeSmallViewSearchAsync(string word, string stores, Prj4databaseContext context)
         {
 
             string initString = "" + "<html>";
@@ -285,7 +279,7 @@ namespace GuldtandMVC_Identity.Models
                 storeSplit = stores.Split(';', StringSplitOptions.RemoveEmptyEntries);
             }
 
-            using (var db = new Prj4databaseContext())
+            using (var db = context)
             {
                 RecipeQuery query = new RecipeQuery
                 {
@@ -297,7 +291,6 @@ namespace GuldtandMVC_Identity.Models
                 RecipeRepository recipeRepository = new RecipeRepository(db);
 
                 var recipeQuery = await recipeRepository.Get(query);
-                recipeRepository.Dispose();
 
                 if (recipeQuery.Count() == 0)
                 {
@@ -323,9 +316,9 @@ namespace GuldtandMVC_Identity.Models
                     }
                     else
                     {
-                        originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit);
-                        salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit);
-                        lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake);
+                        originalPrice = await calculator.NormalPrice(recipe, recipe.Name, storeSplit, context);
+                        salePrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplit, context);
+                        lowestPrice = await calculator.TotalPrice(recipe, recipe.Name, storeSplitfake, context);
                     }
 
 

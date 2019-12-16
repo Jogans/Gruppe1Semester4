@@ -60,9 +60,8 @@ namespace GuldtandMVC_Identity
                         .RequireClaim("Admin"));
             });
 
-            services.AddDbContext<Prj4databaseContext>();
-            //services.AddDbContext<prj4databaseContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("GuldtandDatabase")));
+            services.AddDbContext<Prj4databaseContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("GuldtandDatabase")));
 
             services.AddHttpsRedirection(options =>
             {

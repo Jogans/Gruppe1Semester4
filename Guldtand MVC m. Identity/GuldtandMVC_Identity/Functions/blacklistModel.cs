@@ -14,9 +14,9 @@ namespace GuldtandMVC_Identity.Models
 
         }
 
-        public string[] InsertandgetBlackList(string category)
+        public string[] InsertandgetBlackList(string category, Prj4databaseContext context)
         {
-            using (var db = new Prj4databaseContext())
+            using (var db = context)
             {
                 if (!db.Blacklist.Any(b => b.Category.Equals(category)))
                 {

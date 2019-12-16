@@ -15,31 +15,37 @@ namespace GuldtandMVC_Identity.Controllers
 {
     public class RecipeController : ControllerBase
     {
+        private Prj4databaseContext _context;
+
+        public RecipeController(Prj4databaseContext context)
+        {
+            _context = context;
+        }
 
         public Task<string> ViewASpeceficRecipe(string words, double count)
         {
             var recipe = new AddHtmlToRecipe();
 
-            return recipe.ShowRecipeFullView(words, count);
+            return recipe.ShowRecipeFullView(words, count, _context);
         }
 
         public Task<string> GetShoppingCart(string words, string stores)
         {
             var recipe = new AddHtmlToRecipe();
 
-            return recipe.GenerateShoppingCart(words, stores);
+            return recipe.GenerateShoppingCart(words, stores, _context);
         }
 
         public Task<string> ViewForSmallRecipe(string stores, int count)
         {
             var recipe = new AddHtmlToRecipe();
-            return recipe.ShowRecipeSmallViewAsync(stores, count);
+            return recipe.ShowRecipeSmallViewAsync(stores, count, _context);
         }
 
         public Task<string> ViewForSmallRecipeSearch(string word, string stores)
         {
             var recipe = new AddHtmlToRecipe();
-            Task<string> result = recipe.ShowRecipeSmallViewSearchAsync(word, stores);
+            Task<string> result = recipe.ShowRecipeSmallViewSearchAsync(word, stores, _context);
             return result;
         }
 
@@ -48,7 +54,7 @@ namespace GuldtandMVC_Identity.Controllers
         {
             var createRecipe = new CreateRecipeFromVue();
 
-            return createRecipe.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl);
+            return createRecipe.CreateRecipeToDatabase(name, prepareTime, description, ingridientName, ingridientAmount, ingridientUnit, imgUrl, _context);
         }
     }
 }

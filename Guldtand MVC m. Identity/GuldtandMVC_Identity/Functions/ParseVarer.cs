@@ -10,12 +10,12 @@ namespace GuldtandMVC_Identity.Models
     public class ParseVarer
     {
 
-        public static void InsertVare(string json)
+        public static void InsertVare(string json, Prj4databaseContext context)
         {
             JObject jo = JObject.Parse(json);
             var array = (JArray)jo["adverts"];
            
-            using (var db = new Prj4databaseContext())
+            using (var db = context)
             {
                 foreach (JObject data in array.Children<JObject>())
                 {

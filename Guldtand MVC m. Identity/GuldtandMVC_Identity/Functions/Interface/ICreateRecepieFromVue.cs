@@ -8,6 +8,6 @@ namespace GuldtandMVC_Identity.Functions
             string ingridientAmount, string ingridientUnit, string imgUrl);
 
         Task<string> CreateRecipeToDatabase(string name, int prepareTime, string description, string ingridientName,
-            string ingridientAmount, string ingridientUnit, string imgUrl);
+            string ingridientAmount, string ingridientUnit, string imgUrl, Prj4databaseContext context);
     }
 }

@@ -20,11 +20,11 @@ namespace GuldtandMVC_Identity.Models
 {
     public class HtmlCalculator : IHtmlCalculator
     {
-        public async Task<double> NormalPrice(Recipe recipe, string word, string[] stores)
+        public async Task<double> NormalPrice(Recipe recipe, string word, string[] stores, Prj4databaseContext context)
         {
             double normalPrice = 0;
 
-            using (var db = new Prj4databaseContext())
+            using (var db = context)
             {
                 ProductRepository productRepository = new ProductRepository(db);
                 //take all ingredients in the ingredientlist
@@ -54,7 +54,6 @@ namespace GuldtandMVC_Identity.Models
                         normalPrice += ingredient.Product.Price;
                     }
                 }
-                productRepository.Dispose();
                 normalPrice = Math.Round(normalPrice);
                 return normalPrice;
 
@@ -62,11 +61,11 @@ namespace GuldtandMVC_Identity.Models
 
         }
         
-        public async Task<double> TotalPrice(Recipe recipe, string word, string[] stores)
+        public async Task<double> TotalPrice(Recipe recipe, string word, string[] stores, Prj4databaseContext context)
         {
             double totalPrice = 0;
 
-            using (var db = new Prj4databaseContext())
+            using (var db = context)
             {
                 ProductRepository productRepository = new ProductRepository(db);
 
@@ -92,7 +91,6 @@ namespace GuldtandMVC_Identity.Models
                         totalPrice += ingredient.Product.Price;
                     }
                 }
-                productRepository.Dispose();
                 totalPrice = Math.Round(totalPrice);
                 return totalPrice;
             }

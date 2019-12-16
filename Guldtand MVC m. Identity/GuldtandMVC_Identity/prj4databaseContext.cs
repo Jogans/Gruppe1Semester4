@@ -6,12 +6,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace GuldtandMVC_Identity
 {
-    public partial class Prj4databaseContext : IdentityDbContext
+    public partial class Prj4databaseContext : IdentityDbContext<ApplicationUser>
     {
-        public Prj4databaseContext()
-        {
-        }
-
         public Prj4databaseContext(DbContextOptions<Prj4databaseContext> options)
             : base(options)
         {
@@ -30,15 +26,6 @@ namespace GuldtandMVC_Identity
         public virtual DbSet<RetailChain> RetailChain { get; set; }
 
         public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=prj4-server.database.windows.net;Initial Catalog=prj4-database;User ID=maloudt;Password=Mldt1160");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

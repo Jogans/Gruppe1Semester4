@@ -2,6 +2,6 @@
 {
     public interface IBlacklistModel
     {
-        string[] InsertandgetBlackList(string category);
+        string[] InsertandgetBlackList(string category, Prj4databaseContext context);
     }
 }
