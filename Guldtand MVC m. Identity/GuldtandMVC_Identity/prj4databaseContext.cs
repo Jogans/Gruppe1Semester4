@@ -13,6 +13,10 @@ namespace GuldtandMVC_Identity
         {
         }
 
+        public Prj4databaseContext()
+        {
+        }
+
         public virtual DbSet<Blacklist> Blacklist { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Directions> Directions { get; set; }

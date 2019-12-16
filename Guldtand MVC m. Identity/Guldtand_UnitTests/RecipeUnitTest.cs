@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using GuldtandMVC_Identity;
 using GuldtandMVC_Identity.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestPlatform.Common.Utilities;
 using NUnit.Framework;
+using System;
 
 namespace Guldtand_UnitTests
 {
@@ -12,11 +12,13 @@ namespace Guldtand_UnitTests
     public class RecipeUnitTest
     {
         private AddHtmlToRecipe _uut;
+        private Prj4databaseContext _context;
 
         [SetUp]
-        public void Setup() 
+        public void Setup()
         {
             _uut = new AddHtmlToRecipe();
+            _context = new Prj4databaseContext();
         }
 
         [TestCase("Lasagne", "<html>")] //HTML start tag
@@ -27,7 +29,7 @@ namespace Guldtand_UnitTests
         [TestCase("Pandekager", "Pandekager")] //Recipe name included
         public async Task TestForReturningHtmlCodeFromFunctionShowFullRecipe(string searchWord, string htmlExpected)
         {
-            var resultString = await _uut.ShowRecipeFullView(searchWord, 4);
+            var resultString = await _uut.ShowRecipeFullView(searchWord, 4, _context);
 
             StringAssert.Contains(htmlExpected, resultString);
         }
@@ -43,7 +45,7 @@ namespace Guldtand_UnitTests
         {
             string allStores = "";
 
-            var resultString = await _uut.ShowRecipeSmallViewAsync(allStores, 20);
+            var resultString = await _uut.ShowRecipeSmallViewAsync(allStores, 20, _context);
 
             StringAssert.Contains(htmlExpected, resultString);
         }

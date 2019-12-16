@@ -53,8 +53,8 @@ namespace Guldtand_UnitTests
             var recipe = await recipeQuery.Execute(Db);
 
             string[] empty = new string[8];
-            double resultTotal = await _uut.TotalPrice(recipe.First(), name, empty);
-            double resultNormal = await _uut.NormalPrice(recipe.First(), name, empty);
+            double resultTotal = await _uut.TotalPrice(recipe.First(), name, empty, Db);
+            double resultNormal = await _uut.NormalPrice(recipe.First(), name, empty, Db);
             Assert.That(true, Is.EqualTo(resultTotal <= resultNormal));
         }
 
@@ -77,8 +77,8 @@ namespace Guldtand_UnitTests
             var recipe = await recipeQuery.Execute(Db);
 
             string[] empty = new string[8];
-            double resultTotal = await _uut.TotalPrice(recipe.First(), name, empty);
-            double resultNormal = await _uut.NormalPrice(recipe.First(), name, empty);
+            double resultTotal = await _uut.TotalPrice(recipe.First(), name, empty, Db);
+            double resultNormal = await _uut.NormalPrice(recipe.First(), name, empty, Db);
             Assert.That(true, Is.EqualTo(resultNormal >= resultTotal));
         }
     }
